@@ -67,15 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db          = getDB();
         $respondidas = $_SESSION['respondidas'] ?? [];
 
-        $placeholders = count($respondidas) ? implode(',', array_fill(0, count($respondidas), '?')) : '0';
-        $sql = "SELECT q.*, c.nome AS categoria_nome
-                FROM questoes q
-                JOIN categorias c ON c.id = q.categoria_id
-                WHERE q.id NOT IN ($placeholders)
-                ORDER BY RAND()
-                LIMIT 1";
-        $stmt = $db->prepare($sql);
-        $stmt->execute($respondidas ?: [0]);
+        if (empty($respondidas)) {
+            $sql = "SELECT q.*, c.nome AS categoria_nome
+                    FROM questoes q
+                    JOIN categorias c ON c.id = q.categoria_id
+                    ORDER BY RAND()
+                    LIMIT 1";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+        } else {
+            $placeholders = implode(',', array_fill(0, count($respondidas), '?'));
+            $sql = "SELECT q.*, c.nome AS categoria_nome
+                    FROM questoes q
+                    JOIN categorias c ON c.id = q.categoria_id
+                    WHERE q.id NOT IN ($placeholders)
+                    ORDER BY RAND()
+                    LIMIT 1";
+            $stmt = $db->prepare($sql);
+            $stmt->execute($respondidas);
+        }
         $questao = $stmt->fetch();
 
         if (!$questao) {
