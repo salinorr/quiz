@@ -34,6 +34,18 @@ function getDB(): PDO {
 // ============================================================
 session_start();
 
+// Categorias disponíveis para renderização da tela inicial (GET)
+function getCategorias(): array {
+    $db = getDB();
+    return $db->query(
+        "SELECT c.id, c.nome, c.descricao, COUNT(q.id) AS total
+         FROM categorias c
+         LEFT JOIN questoes q ON q.categoria_id = c.id
+         GROUP BY c.id
+         ORDER BY c.id"
+    )->fetchAll();
+}
+
 // ============================================================
 // AÇÕES (AJAX / POST)
 // ============================================================
@@ -47,13 +59,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['erro' => 'Nome muito curto.']);
             exit;
         }
+
+        // Valida categorias selecionadas
+        $cats = array_map('intval', (array)($_POST['categorias'] ?? []));
+        $cats = array_values(array_filter($cats, fn($id) => $id > 0));
+        if (empty($cats)) {
+            echo json_encode(['erro' => 'Selecione pelo menos uma legislação.']);
+            exit;
+        }
+        // Verifica se os IDs existem no banco
         $db = getDB();
+        $ph = implode(',', array_fill(0, count($cats), '?'));
+        $stmt = $db->prepare("SELECT id FROM categorias WHERE id IN ($ph)");
+        $stmt->execute($cats);
+        $cats = array_column($stmt->fetchAll(), 'id');
+        if (empty($cats)) {
+            echo json_encode(['erro' => 'Categorias inválidas.']);
+            exit;
+        }
+
         $stmt = $db->prepare("INSERT INTO sessoes (nome_usuario) VALUES (?)");
         $stmt->execute([$nome]);
         $sessaoId = $db->lastInsertId();
-        $_SESSION['sessao_id']  = $sessaoId;
-        $_SESSION['nome']       = htmlspecialchars($nome);
+        $_SESSION['sessao_id']   = $sessaoId;
+        $_SESSION['nome']        = htmlspecialchars($nome);
         $_SESSION['respondidas'] = [];
+        $_SESSION['categorias']  = $cats;
         echo json_encode(['ok' => true, 'sessao_id' => $sessaoId, 'nome' => $_SESSION['nome']]);
         exit;
     }
@@ -66,25 +97,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $db          = getDB();
         $respondidas = $_SESSION['respondidas'] ?? [];
+        $categorias  = $_SESSION['categorias']  ?? [];
+
+        // Monta filtro de categorias
+        $catWhere  = '';
+        $catParams = [];
+        if (!empty($categorias)) {
+            $catPh    = implode(',', array_fill(0, count($categorias), '?'));
+            $catWhere = " AND q.categoria_id IN ($catPh)";
+            $catParams = $categorias;
+        }
 
         if (empty($respondidas)) {
             $sql = "SELECT q.*, c.nome AS categoria_nome
                     FROM questoes q
                     JOIN categorias c ON c.id = q.categoria_id
+                    WHERE 1=1 $catWhere
                     ORDER BY RAND()
                     LIMIT 1";
             $stmt = $db->prepare($sql);
-            $stmt->execute();
+            $stmt->execute($catParams);
         } else {
-            $placeholders = implode(',', array_fill(0, count($respondidas), '?'));
+            $notPh = implode(',', array_fill(0, count($respondidas), '?'));
             $sql = "SELECT q.*, c.nome AS categoria_nome
                     FROM questoes q
                     JOIN categorias c ON c.id = q.categoria_id
-                    WHERE q.id NOT IN ($placeholders)
+                    WHERE q.id NOT IN ($notPh) $catWhere
                     ORDER BY RAND()
                     LIMIT 1";
             $stmt = $db->prepare($sql);
-            $stmt->execute($respondidas);
+            $stmt->execute(array_merge($respondidas, $catParams));
         }
         $questao = $stmt->fetch();
 
@@ -319,6 +361,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: .82rem;
             font-weight: 600;
         }
+
+        /* ================================================
+           SELEÇÃO DE CATEGORIAS
+        ================================================ */
+        .cats-titulo {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--verde);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .cats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        @media (max-width: 520px) { .cats-grid { grid-template-columns: 1fr; } }
+
+        .cat-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 14px;
+            border: 2px solid #c8e6c9;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+            text-align: left;
+            user-select: none;
+        }
+        .cat-label:hover { border-color: var(--verde-md); background: #f0faf3; }
+        .cat-label.selecionada { border-color: var(--verde-md); background: #e8f5e9; }
+        .cat-label input[type="checkbox"] { display: none; }
+
+        .cat-check {
+            width: 22px; height: 22px;
+            border: 2px solid #b0bec5;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: 13px;
+            transition: var(--transition);
+            margin-top: 1px;
+        }
+        .cat-label.selecionada .cat-check {
+            background: var(--verde-md);
+            border-color: var(--verde-md);
+            color: white;
+        }
+        .cat-info { flex: 1; }
+        .cat-nome { font-size: .88rem; font-weight: 700; color: var(--texto); line-height: 1.3; }
+        .cat-sub  { font-size: .75rem; color: #666; margin-top: 2px; }
+        .cat-total {
+            font-size: .72rem;
+            background: #e8f5e9;
+            color: var(--verde);
+            border-radius: 20px;
+            padding: 2px 8px;
+            margin-top: 5px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .cat-label.selecionada .cat-total { background: var(--verde-md); color: white; }
+
+        .cats-acoes {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .btn-link {
+            background: none; border: none; padding: 0;
+            font-size: .78rem; color: var(--verde-md);
+            cursor: pointer; text-decoration: underline;
+        }
+        .total-selecionado {
+            font-size: .82rem;
+            color: #555;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .total-selecionado strong { color: var(--verde); }
 
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; font-weight: 600; margin-bottom: 7px; color: var(--verde); }
@@ -657,14 +784,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="tela-inicio" class="card">
         <span class="escudo-grande">🎖️</span>
         <h2>Quiz de Legislações da PMRR</h2>
-        <p>Teste seus conhecimentos nas legislações da Polícia Militar de Roraima. Responda quantas questões quiser e receba feedback detalhado em cada resposta!</p>
+        <p>Selecione as legislações que deseja treinar e responda quantas questões quiser!</p>
 
-        <div class="badges">
-            <span class="badge">📋 Portaria 1717/2023 – EFM</span>
-            <span class="badge">📱 Portaria 685/2024 – Redes Sociais</span>
-            <span class="badge">⚖️ LC 194/2012 – Estatuto Militar</span>
-            <span class="badge">🎖️ Lei 963/2014 – Código de Ética</span>
+        <p class="cats-titulo">📚 Escolha as legislações:</p>
+        <div class="cats-acoes">
+            <button class="btn-link" onclick="toggleTodas(true)">Marcar todas</button>
+            <span style="color:#ccc">|</span>
+            <button class="btn-link" onclick="toggleTodas(false)">Desmarcar todas</button>
         </div>
+        <div class="cats-grid" id="cats-grid">
+<?php
+$icones = ['📋','📱','⚖️','🎖️'];
+foreach (getCategorias() as $i => $cat):
+    $icone = $icones[$i] ?? '📄';
+    $label = htmlspecialchars($cat['nome']);
+    $sub   = htmlspecialchars($cat['descricao'] ?? '');
+    $total = (int)$cat['total'];
+    $id    = (int)$cat['id'];
+?>
+            <label class="cat-label selecionada" id="cat-lbl-<?= $id ?>" onclick="toggleCat(<?= $id ?>)">
+                <input type="checkbox" id="cat-<?= $id ?>" value="<?= $id ?>" checked>
+                <div class="cat-check">✓</div>
+                <div class="cat-info">
+                    <div class="cat-nome"><?= $icone ?> <?= $label ?></div>
+                    <div class="cat-sub"><?= $sub ?></div>
+                    <span class="cat-total"><?= $total ?> questões</span>
+                </div>
+            </label>
+<?php endforeach; ?>
+        </div>
+        <p class="total-selecionado" id="total-selecionado"></p>
 
         <div class="input-group">
             <label for="nome-input">👤 Seu nome completo</label>
@@ -774,6 +923,47 @@ let numQuestao  = 0;
 let respondendo = false;
 
 // ============================================================
+// SELEÇÃO DE CATEGORIAS
+// ============================================================
+function toggleCat(id) {
+    const cb  = document.getElementById('cat-' + id);
+    const lbl = document.getElementById('cat-lbl-' + id);
+    cb.checked = !cb.checked;
+    lbl.classList.toggle('selecionada', cb.checked);
+    atualizarTotalSelecionado();
+}
+
+function toggleTodas(marcar) {
+    document.querySelectorAll('#cats-grid input[type="checkbox"]').forEach(cb => {
+        cb.checked = marcar;
+        document.getElementById('cat-lbl-' + cb.value).classList.toggle('selecionada', marcar);
+    });
+    atualizarTotalSelecionado();
+}
+
+function getCatsSelecionadas() {
+    return [...document.querySelectorAll('#cats-grid input[type="checkbox"]:checked')]
+        .map(cb => cb.value);
+}
+
+function atualizarTotalSelecionado() {
+    const checks = [...document.querySelectorAll('#cats-grid input[type="checkbox"]:checked')];
+    const total  = checks.reduce((s, cb) => {
+        const span = cb.closest('.cat-label').querySelector('.cat-total');
+        return s + parseInt(span?.textContent ?? '0');
+    }, 0);
+    const el = document.getElementById('total-selecionado');
+    if (checks.length === 0) {
+        el.innerHTML = '<span style="color:#c62828">⚠️ Selecione pelo menos uma legislação.</span>';
+    } else {
+        el.innerHTML = `<strong>${total} questões</strong> disponíveis em <strong>${checks.length}</strong> legislação(ões) selecionada(s)`;
+    }
+}
+
+// Inicializa o contador ao carregar
+document.addEventListener('DOMContentLoaded', atualizarTotalSelecionado);
+
+// ============================================================
 // INICIAR QUIZ
 // ============================================================
 async function iniciarQuiz() {
@@ -783,7 +973,13 @@ async function iniciarQuiz() {
         return;
     }
 
-    const resp = await post({ acao: 'iniciar', nome });
+    const cats = getCatsSelecionadas();
+    if (cats.length === 0) {
+        alert('Selecione pelo menos uma legislação para treinar.');
+        return;
+    }
+
+    const resp = await post({ acao: 'iniciar', nome, categorias: cats });
     if (resp.erro) { alert(resp.erro); return; }
 
     sessaoId    = resp.sessao_id;
@@ -1015,6 +1211,7 @@ function reiniciar() {
     document.getElementById('hdr-acertos').textContent = '0';
     document.getElementById('hdr-erros').textContent   = '0';
     document.getElementById('hdr-total').textContent   = '0';
+    atualizarTotalSelecionado();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1043,7 +1240,13 @@ function escHtml(str) {
 
 async function post(data) {
     const fd = new FormData();
-    Object.entries(data).forEach(([k,v]) => fd.append(k, v));
+    Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(v)) {
+            v.forEach(item => fd.append(k + '[]', item));
+        } else {
+            fd.append(k, v);
+        }
+    });
     try {
         const r = await fetch(window.location.href, { method: 'POST', body: fd });
         return await r.json();
