@@ -623,7 +623,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="logo-shield">🛡️</div>
     <div>
         <h1>Quiz PMRR – Legislações Militares</h1>
-        <p>Portaria 1717/2023 · Portaria 685/2024 · LC 194/2012</p>
+        <p>Portaria 1717/2023 · Portaria 685/2024 · LC 194/2012 · Lei 963/2014</p>
     </div>
     <div id="placar-header">
         <div class="pl-item acertos">
@@ -647,12 +647,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="tela-inicio" class="card">
         <span class="escudo-grande">🎖️</span>
         <h2>Quiz de Legislações da PMRR</h2>
-        <p>Teste seus conhecimentos nas três legislações da Polícia Militar de Roraima. Responda quantas questões quiser e receba feedback detalhado em cada resposta!</p>
+        <p>Teste seus conhecimentos nas legislações da Polícia Militar de Roraima. Responda quantas questões quiser e receba feedback detalhado em cada resposta!</p>
 
         <div class="badges">
             <span class="badge">📋 Portaria 1717/2023 – EFM</span>
             <span class="badge">📱 Portaria 685/2024 – Redes Sociais</span>
             <span class="badge">⚖️ LC 194/2012 – Estatuto Militar</span>
+            <span class="badge">🎖️ Lei 963/2014 – Código de Ética</span>
         </div>
 
         <div class="input-group">

@@ -1,6 +1,7 @@
 # Configuração local com credenciais (NUNCA commitar)
 config.php
 install.php
+install2.php
 
 # Arquivos do sistema
 .DS_Store
