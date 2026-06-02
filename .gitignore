@@ -1,0 +1,7 @@
+# Configuração local com credenciais (NUNCA commitar)
+config.php
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+*.log
