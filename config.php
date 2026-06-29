@@ -1,6 +1,5 @@
 <?php
-// Este arquivo lê as credenciais do .env
-// Copie .env.example para .env e preencha com seus dados
+// Carrega variáveis do .env
 $envFile = __DIR__ . '/.env';
 if (!file_exists($envFile)) {
     die('Arquivo .env não encontrado. Copie .env.example para .env e preencha as credenciais.');

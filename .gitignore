@@ -1,5 +1,5 @@
 # Credenciais (NUNCA commitar)
-config.php
+.env
 
 # Áudios (muito grandes para GitHub)
 audios/

@@ -4,6 +4,9 @@
 // ============================================================
 declare(strict_types=1);
 date_default_timezone_set('America/Boa_Vista');
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . '/logs/php_errors.log');
+error_reporting(E_ALL);
 require_once __DIR__ . '/config.php';
 
 // ── Conexão ─────────────────────────────────────────────────
@@ -1011,6 +1014,21 @@ main{width:100%;padding:0;margin:0;flex:1;}
 </style>
 </head>
 <body>
+<script>
+window.onerror = function(msg, url, line, col, err) {
+    var d = document.createElement('div');
+    d.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#ff0;color:#c00;padding:10px;font-family:monospace;font-size:13px;white-space:pre-wrap;max-height:40vh;overflow:auto;border-bottom:3px solid #c00';
+    d.textContent = 'JS ERROR: ' + msg + '\nLinha: ' + line + ' Col: ' + col + '\nArquivo: ' + url + '\n' + (err && err.stack ? err.stack : '');
+    document.body.prepend(d);
+    return false;
+};
+window.addEventListener('unhandledrejection', function(e) {
+    var d = document.createElement('div');
+    d.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#ff0;color:#c00;padding:10px;font-family:monospace;font-size:13px;white-space:pre-wrap;max-height:40vh;overflow:auto;border-bottom:3px solid #c00';
+    d.textContent = 'JS PROMISE ERROR: ' + (e.reason && e.reason.message ? e.reason.message : e.reason) + '\n' + (e.reason && e.reason.stack ? e.reason.stack : '');
+    document.body.prepend(d);
+});
+</script>
 
 <!-- HEADER -->
 <header>
