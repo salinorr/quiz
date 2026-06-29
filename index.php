@@ -392,7 +392,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($sessaoId <= 0) { echo json_encode(['erro' => 'Sessão inválida.']); exit; }
         restoreSessaoByID($sessaoId);
         if (empty($_SESSION['sessao_id'])) { echo json_encode(['erro' => 'Sessão não encontrada ou já finalizada.']); exit; }
-        echo json_encode(['ok' => true, 'sessao_id' => $sessaoId]);
+        $db = getDB();
+        $stmt = $db->prepare("SELECT total_respondidas, total_acertos, total_erros, tipo, numero_tentativa FROM sessoes WHERE id=?");
+        $stmt->execute([$sessaoId]);
+        $info = $stmt->fetch();
+        echo json_encode([
+            'ok' => true, 'sessao_id' => $sessaoId,
+            'respondidas' => (int)($info['total_respondidas'] ?? 0),
+            'total_acertos' => (int)($info['total_acertos'] ?? 0),
+            'total_erros' => (int)($info['total_erros'] ?? 0),
+            'tipo' => $info['tipo'] ?? 'quiz',
+            'tentativa' => (int)($info['numero_tentativa'] ?? 1),
+            'total_questoes' => $_SESSION['total_questoes'] ?? 0,
+        ]);
         exit;
     }
 
@@ -2155,13 +2167,20 @@ async function confirmarRetomada() {
     const resp = await post({ acao: 'escolher_sessao', sessao_id: pickId });
     if (resp.erro) { await modalAlert(resp.erro, '❌'); return; }
 
-    sessaoId = pickId;
+    sessaoId      = pickId;
+    numQuestao    = resp.respondidas || 0;
+    totalQuestoes = resp.total_questoes || 0;
+    tipoSessao    = resp.tipo || 'quiz';
+    numTentativa  = resp.tentativa || 1;
     const ret = document.getElementById('tela-retomada');
     if (ret) ret.remove();
     document.getElementById('tela-inicio').style.display = 'none';
     document.getElementById('tela-quiz').style.display = 'block';
     const ph = document.getElementById('placar-header');
     if (ph) ph.style.display = 'flex';
+    const tqEl = document.getElementById('hdr-total-questoes');
+    if (tqEl) tqEl.textContent = totalQuestoes;
+    atualizarPlacar({ total_acertos: resp.total_acertos, total_erros: resp.total_erros, total_respondidas: resp.respondidas });
     proximaQuestao();
 }
 
