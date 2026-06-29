@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create .env
+        run: echo "${{ secrets.DOT_ENV }}" > .env
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -21,3 +24,4 @@ jobs:
             **/.git*
             **/.git*/**
             **/config.sample.php
+            **/.env.example
