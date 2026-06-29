@@ -2355,9 +2355,17 @@ async function responder(letra, opcaoEl) {
     if (resp.erro) { await modalAlert(resp.erro, '❌'); respondendo = false; return; }
 
     atualizarPlacar(resp.contadores);
-    bloquearOpcoes();
-    marcarResposta(resp.resposta_usuario, resp.resposta_correta, resp.acertou);
-    mostrarFeedback(resp);
+
+    if (tipoSessao === 'prova') {
+        opcaoEl.style.background = resp.acertou ? '#c8e6c9' : '#ffcdd2';
+        opcaoEl.style.borderColor = resp.acertou ? '#2e7d47' : '#c62828';
+        await new Promise(r => setTimeout(r, 400));
+        proximaQuestao();
+    } else {
+        bloquearOpcoes();
+        marcarResposta(resp.resposta_usuario, resp.resposta_correta, resp.acertou);
+        mostrarFeedback(resp);
+    }
 }
 
 function bloquearOpcoes() {
