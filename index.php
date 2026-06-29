@@ -702,6 +702,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // ============================================================
+// GET — Logout via link (sem depender de JavaScript)
+// ============================================================
+if (isset($_GET['logout']) && isLogado()) {
+    $db = getDB();
+    $db->prepare("UPDATE militares SET session_token=NULL WHERE id=?")->execute([militar()['id']]);
+    session_destroy();
+    header('Location: ?p=inicio');
+    exit;
+}
+
+// ============================================================
 // GET — Determinar página
 // ============================================================
 $page = $_GET['p'] ?? 'inicio';
@@ -1013,7 +1024,7 @@ main{width:100%;padding:0;margin:0;flex:1;}
     <?php if (isLogado()): ?>
     <div class="hdr-nav">
         <span style="color:rgba(255,255,255,.9);font-size:.85rem">Bem vindo,&nbsp;<strong><?= e(militar()['nome_guerra']) ?></strong></span>
-        <button class="btn-hdr danger" onclick="fazerLogout()">Sair</button>
+        <a href="?logout=1" class="btn-hdr danger" style="text-decoration:none">Sair</a>
     </div>
     <?php endif; ?>
 </header>
@@ -1157,7 +1168,7 @@ main{width:100%;padding:0;margin:0;flex:1;}
         <h3>⏳ Cadastro em análise</h3>
         <p>Olá, <strong><?= e(militar()['nome_guerra']) ?></strong>!</p>
         <p style="margin-top:8px">Seu cadastro está sendo verificado pelo administrador.<br>Você receberá acesso assim que for aprovado.</p>
-        <button onclick="fazerLogout()" class="btn btn-outline" style="margin-top:20px">Sair</button>
+        <a href="?logout=1" class="btn btn-outline" style="margin-top:20px;display:inline-block;text-decoration:none">Sair</a>
     </div>
 </div>
 
