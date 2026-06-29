@@ -1677,9 +1677,9 @@ window.openSessionsExist = true;
         $isProva = stripos($c['nome'], 'prova') !== false;
         $catTipo = $isProva ? 'prova' : 'quiz';
     ?>
-        <label class="cat-label sel" id="cat-lbl-<?= (int)$c['id'] ?>" data-tipo="<?= $catTipo ?>" onclick="toggleCat(<?= (int)$c['id'] ?>)">
-            <input type="checkbox" id="cat-<?= (int)$c['id'] ?>" value="<?= (int)$c['id'] ?>" checked>
-            <div class="cat-check">✓</div>
+        <label class="cat-label <?= $isProva ? '' : 'sel' ?>" id="cat-lbl-<?= (int)$c['id'] ?>" data-tipo="<?= $catTipo ?>" onclick="toggleCat(<?= (int)$c['id'] ?>)">
+            <input type="checkbox" id="cat-<?= (int)$c['id'] ?>" value="<?= (int)$c['id'] ?>" <?= $isProva ? '' : 'checked' ?>>
+            <div class="cat-check"><?= $isProva ? '' : '✓' ?></div>
             <div class="cat-info">
                 <div class="cat-nome"><?= e($c['nome']) ?></div>
                 <div class="cat-sub"><?= e($c['descricao'] ?? '') ?></div>
@@ -2186,16 +2186,23 @@ function selecionarModo(modo) {
     });
     const rb = document.querySelector('[name=modo][value="'+modo+'"]');
     if (rb) rb.checked = true;
-    // Mostrar/ocultar categorias conforme modo
+    const acoes = document.querySelector('.cats-acoes');
+    if (acoes) acoes.style.display = modo === 'prova' ? 'none' : '';
     document.querySelectorAll('#cats-grid .cat-label').forEach(lbl => {
         const tipo    = lbl.dataset.tipo || 'quiz';
         const visivel = tipo === modo;
         lbl.style.display = visivel ? '' : 'none';
         const cb  = lbl.querySelector('input[type=checkbox]');
         const chk = lbl.querySelector('.cat-check');
-        if (cb)  cb.checked = visivel;
-        lbl.classList.toggle('sel', visivel);
-        if (chk) chk.textContent = visivel ? '✓' : '';
+        if (modo === 'prova') {
+            if (cb) cb.checked = false;
+            lbl.classList.remove('sel');
+            if (chk) chk.textContent = '';
+        } else {
+            if (cb) cb.checked = visivel;
+            lbl.classList.toggle('sel', visivel);
+            if (chk) chk.textContent = visivel ? '✓' : '';
+        }
     });
     atualizarTotalSelecionado();
 }
@@ -2204,10 +2211,25 @@ function toggleCat(id) {
     const cb  = document.getElementById('cat-'+id);
     const lbl = document.getElementById('cat-lbl-'+id);
     if (!cb || !lbl) return;
-    cb.checked = !cb.checked;
-    lbl.classList.toggle('sel', cb.checked);
-    const chk = lbl.querySelector('.cat-check');
-    if (chk) chk.textContent = cb.checked ? '✓' : '';
+    if (tipoSessao === 'prova') {
+        document.querySelectorAll('#cats-grid .cat-label').forEach(l => {
+            if (l.style.display === 'none') return;
+            const c = l.querySelector('input[type=checkbox]');
+            const k = l.querySelector('.cat-check');
+            if (c) c.checked = false;
+            l.classList.remove('sel');
+            if (k) k.textContent = '';
+        });
+        cb.checked = true;
+        lbl.classList.add('sel');
+        const chk = lbl.querySelector('.cat-check');
+        if (chk) chk.textContent = '✓';
+    } else {
+        cb.checked = !cb.checked;
+        lbl.classList.toggle('sel', cb.checked);
+        const chk = lbl.querySelector('.cat-check');
+        if (chk) chk.textContent = cb.checked ? '✓' : '';
+    }
     atualizarTotalSelecionado();
 }
 
