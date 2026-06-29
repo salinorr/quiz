@@ -117,7 +117,7 @@ VALUES
  'Sim, pois o ingresso no CHO ocorre exclusivamente por mérito intelectual em prova interna, reprovando automaticamente quem não tem diploma civil.',
  'Sim, pois a condição de "ouvinte" permite que ela seja promovida a 2º Tenente ganhando 50% do subsídio.',
  'B',
- 'Conforme o Art. 22, §17 da LC 194/2012, o ingresso no CHO exige, no ato da matrícula, a comprovação de Curso Superior reconhecido ou autorizado pelo MEC. Como Joana possui apenas o Ensino Médio, ela não atende ao requisito indispensável para matrícula regular.',
+ 'Conforme o Art. 22, §17 da LC 194/2012, o ingresso no CHO exige, no ato da matrícula, a comprovação de Curso Superior reconhecido ou autorizado pelo MEC. Como Joana possui apenas o Ensino Médio, ela não atende ao requisito indispensável para matrícula regular.\n\n📌 Justificativa 2 — Debate sobre Portaria vs Lei: A Portaria que criou a figura do \"ouvinte\" NÃO contraria a Lei — pelo contrário, ela obedece à Lei. Pelo Princípio da Hierarquia das Normas, uma Portaria jamais pode se sobrepor a uma Lei Complementar. A corporação criou a condição de \"ouvinte\" justamente para NÃO matricular de forma regular quem não tem diploma superior. Na prática, a Subtenente Joana como ouvinte: (1) Não está oficialmente matriculada como aluna do CHO; (2) Não adquire as prerrogativas de aluno oficial; (3) Não será promovida a 2º Tenente QEO ao final do curso. A exigência da Lei prevalece: um Subtenente apenas com Ensino Médio NÃO preenche os requisitos para ingressar no CHO e ser promovido.',
  'Art. 22, §17, LC 194/2012',
  'dificil'),
 
