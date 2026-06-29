@@ -1,9 +1,15 @@
-# Configuração local com credenciais (NUNCA commitar)
+# Credenciais (NUNCA commitar)
 config.php
+
+# Áudios (muito grandes para GitHub)
+audios/
+
+# Arquivos de desenvolvimento/debug
+debug.php
 install.php
 install2.php
 
-# Arquivos do sistema
+# Sistema
 .DS_Store
 Thumbs.db
 *.log
