@@ -3,6 +3,7 @@
 // QUIZ PMRR v2 — Sistema com autenticação e histórico
 // ============================================================
 declare(strict_types=1);
+date_default_timezone_set('America/Boa_Vista');
 require_once __DIR__ . '/config.php';
 
 // ── Conexão ─────────────────────────────────────────────────
@@ -16,6 +17,7 @@ function getDB(): PDO {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ]);
+            $pdo->exec("SET time_zone = '-04:00'");
         } catch (PDOException $e) {
             die('<div style="color:red;padding:20px;font-family:monospace">Erro de conexão: ' . htmlspecialchars($e->getMessage()) . '</div>');
         }
@@ -41,39 +43,12 @@ function ensureSessionTokenColumn(): void {
     $done = true;
 }
 
-// ── Auto-login via cookie "lembrar-me" ───────────────────────
-function tryRememberLogin(): void {
-    if (isset($_SESSION['militar'])) return;
-    if ($_SERVER['REQUEST_METHOD'] === 'POST')  return;
-    $cookie = $_COOKIE['quiz_remember'] ?? '';
-    if (strlen($cookie) !== 64) return;
-    $db   = getDB();
-    $stmt = $db->prepare("SELECT * FROM militares WHERE remember_token=? AND remember_expires > NOW() AND status='aprovado' LIMIT 1");
-    $stmt->execute([$cookie]);
-    $m = $stmt->fetch();
-    if (!$m) {
-        setcookie('quiz_remember', '', time()-3600, '/', '', true, true);
-        return;
-    }
-    $token = bin2hex(random_bytes(32));
-    $db->prepare("UPDATE militares SET session_token=? WHERE id=?")->execute([$token, $m['id']]);
-    session_regenerate_id(true);
-    $_SESSION['militar'] = [
-        'id'            => $m['id'],
-        'nome_completo' => $m['nome_completo'],
-        'nome_guerra'   => $m['nome_guerra'],
-        'email'         => $m['email'],
-        'matricula'     => $m['matricula'],
-        'status'        => $m['status'],
-        'is_admin'      => (bool) $m['is_admin'],
-        'token'         => $token,
-    ];
-}
+// ── "Lembrar-me" agora é apenas client-side (localStorage) ───
+// Não faz auto-login — só preenche o campo de e-mail.
 
 // ── Sessão ───────────────────────────────────────────────────
 session_start();
 ensureSessionTokenColumn();
-tryRememberLogin();
 
 function militar(): ?array {
     return $_SESSION['militar'] ?? null;
@@ -96,7 +71,6 @@ function verifySessionToken(): void {
     $isPost   = $_SERVER['REQUEST_METHOD'] === 'POST';
 
     $expirar = function(string $msg, string $param = 'kicked') use ($isPost, $loginUrl): void {
-        setcookie('quiz_remember', '', time()-3600, '/', '', true, true);
         session_destroy();
         if ($isPost) {
             header('Content-Type: application/json; charset=utf-8');
@@ -299,13 +273,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $token = bin2hex(random_bytes(32));
         $db->prepare("UPDATE militares SET session_token=?, last_activity=NOW(), current_page='inicio' WHERE id=?")->execute([$token, $m['id']]);
 
-        // Lembrar-me: cookie de 30 dias
-        if (!empty($_POST['lembrar'])) {
-            $remToken = bin2hex(random_bytes(32));
-            $db->prepare("UPDATE militares SET remember_token=?, remember_expires=DATE_ADD(NOW(), INTERVAL 30 DAY) WHERE id=?")->execute([$remToken, $m['id']]);
-            setcookie('quiz_remember', $remToken, time() + 30*24*3600, '/', '', true, true);
-        }
-
         session_regenerate_id(true);
         $_SESSION['militar'] = [
             'id'            => $m['id'],
@@ -324,9 +291,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ── Logout ───────────────────────────────────────────
     if ($acao === 'logout') {
         if (isset($_SESSION['militar']['id'])) {
-            getDB()->prepare("UPDATE militares SET session_token=NULL, remember_token=NULL, remember_expires=NULL WHERE id=?")->execute([$_SESSION['militar']['id']]);
+            getDB()->prepare("UPDATE militares SET session_token=NULL WHERE id=?")->execute([$_SESSION['militar']['id']]);
         }
-        setcookie('quiz_remember', '', time()-3600, '/', '', true, true);
         session_destroy();
         echo json_encode(['ok' => true]); exit;
     }
@@ -372,7 +338,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $m    = $stmt->fetch();
         if (!$m) { echo json_encode(['erro' => 'Link expirado ou inválido. Solicite um novo.']); exit; }
         $hash = password_hash($senha, PASSWORD_ARGON2ID);
-        $db->prepare("UPDATE militares SET senha_hash=?, reset_token=NULL, reset_expires=NULL, session_token=NULL, remember_token=NULL WHERE id=?")->execute([$hash, $m['id']]);
+        $db->prepare("UPDATE militares SET senha_hash=?, reset_token=NULL, reset_expires=NULL, session_token=NULL WHERE id=?")->execute([$hash, $m['id']]);
         echo json_encode(['ok' => true, 'msg' => 'Senha redefinida! Faça login com a nova senha.']);
         exit;
     }
@@ -1125,7 +1091,7 @@ main{width:100%;padding:0;margin:0;flex:1;}
         <div style="display:flex;align-items:center;justify-content:space-between;margin:10px 0 16px">
             <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.82rem;color:#555;user-select:none">
                 <input type="checkbox" id="login-lembrar" style="width:16px;height:16px;accent-color:var(--verde-md)">
-                Lembrar-me por 30 dias
+                Lembrar meu e-mail
             </label>
             <a href="#" onclick="mostraTab('esqueci');return false" style="color:var(--verde-md);font-size:.82rem">Esqueci minha senha</a>
         </div>
@@ -1758,9 +1724,10 @@ function mostraTab(tab) {
 async function fazerLogin() {
     const email   = (document.getElementById('login-email')?.value || '').trim();
     const senha   = document.getElementById('login-senha')?.value || '';
-    const lembrar = document.getElementById('login-lembrar')?.checked ? '1' : '';
-    const resp    = await post({ acao:'login', email, senha, lembrar });
+    const lembrar = document.getElementById('login-lembrar')?.checked;
+    const resp    = await post({ acao:'login', email, senha });
     if (resp.erro) { mostrarMsg('err', resp.erro); return; }
+    if (lembrar) { localStorage.setItem('quiz_email', email); } else { localStorage.removeItem('quiz_email'); }
     window.location.href = resp.status === 'aprovado' ? '?p=inicio' : window.location.pathname;
 }
 
@@ -1804,8 +1771,9 @@ async function fazerCadastro() {
 }
 
 async function fazerLogout() {
-    await post({ acao:'logout' });
-    window.location.href = '?p=inicio';
+    localStorage.removeItem('quiz_email');
+    try { await fetch(window.location.pathname + '?p=inicio', { method:'POST', body: new URLSearchParams({ acao:'logout' }) }); } catch(e) {}
+    window.location.replace(window.location.pathname + '?p=inicio&logout=1');
 }
 
 function mostrarMsg(tipo, texto) {
@@ -2171,6 +2139,10 @@ function atualizarTotalSelecionado() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const savedEmail = localStorage.getItem('quiz_email');
+    const loginEmail = document.getElementById('login-email');
+    const loginLembrar = document.getElementById('login-lembrar');
+    if (savedEmail && loginEmail) { loginEmail.value = savedEmail; if (loginLembrar) loginLembrar.checked = true; }
     if (document.getElementById('total-selecionado')) {
         const params = new URLSearchParams(window.location.search);
         const modo   = params.get('modo');
