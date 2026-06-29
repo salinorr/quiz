@@ -2083,11 +2083,10 @@ function continuarQuiz() {
     confirmarRetomada();
 }
 
-function novoQuiz() {
-    // Finalizar todas as sessões abertas e começar nova
+async function novoQuiz() {
     const toRemove = [...document.querySelectorAll('.open-session-item')].map(el => parseInt(el.dataset.id));
     if (toRemove.length > 0 && !await modalConfirm('Encerrar todas as sessões em aberto e começar uma nova?', '🔄')) return;
-    post({ acao: 'finalizar_sessoes', 'ids': toRemove }).then(() => {
+    await post({ acao: 'finalizar_sessoes', 'ids': toRemove }).then(() => {
         sessaoId = null;
         window.location.href = '?p=inicio';
     });
