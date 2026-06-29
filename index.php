@@ -4,6 +4,7 @@
 // ============================================================
 declare(strict_types=1);
 date_default_timezone_set('America/Boa_Vista');
+ini_set('display_errors', '0');
 ini_set('log_errors', '1');
 ini_set('error_log', __DIR__ . '/logs/php_errors.log');
 error_reporting(E_ALL);
@@ -2439,8 +2440,8 @@ async function post(data) {
         }
         return json;
     } catch(e) {
-        console.error(e);
-        return { erro: 'Erro de comunicação com o servidor.' };
+        console.error('post() error:', e);
+        return { erro: 'Erro de comunicação: ' + (e.message || e) };
     }
 }
 </script>
