@@ -21,7 +21,8 @@ function getDB(): PDO {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ]);
-            $pdo->exec("SET time_zone = '-04:00'");
+            $offset = (new \DateTime())->format('P');
+            $pdo->exec("SET time_zone = '{$offset}'");
         } catch (PDOException $e) {
             die('<div style="color:red;padding:20px;font-family:monospace">Erro de conexão: ' . htmlspecialchars($e->getMessage()) . '</div>');
         }
@@ -321,9 +322,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $subject = 'Recuperação de Senha — Quiz PMRR';
             $body    = "Olá, {$m['nome_guerra']}!\n\nClique no link para redefinir sua senha (válido por 1 hora):\n\n{$link}\n\nSe não solicitou, ignore este e-mail.\n\nQuiz PMRR — Legislações Militares de Roraima";
             $headers = "From: noreply@cacresportes.com.br\r\nContent-Type: text/plain; charset=UTF-8";
-            @mail($email, $subject, $body, $headers);
+            try { @mail($email, $subject, $body, $headers); } catch (\Throwable $e) { error_log('mail() falhou: ' . $e->getMessage()); }
         }
-        // Sempre retornar sucesso (não revelar se e-mail existe)
         echo json_encode(['ok' => true, 'msg' => 'Se o e-mail estiver cadastrado, você receberá as instruções em breve.']);
         exit;
     }
@@ -642,6 +642,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $upd = $db->prepare($sqlUpd);
         $upd->execute($sus);
         echo json_encode(['ok'=>true,'rejected'=>count($sus),'ids'=>$sus]);
+        exit;
+    }
+
+    // ── Admin: alterar senha de usuário ────────────────────
+    if ($acao === 'admin_alterar_senha' && isAdmin()) {
+        $id    = (int)($_POST['id'] ?? 0);
+        $nova  = $_POST['nova_senha'] ?? '';
+        if ($id <= 0)          { echo json_encode(['erro' => 'ID inválido.']); exit; }
+        if (strlen($nova) < 6) { echo json_encode(['erro' => 'Senha deve ter no mínimo 6 caracteres.']); exit; }
+        $db   = getDB();
+        $hash = password_hash($nova, PASSWORD_ARGON2ID);
+        $db->prepare("UPDATE militares SET senha_hash=?, session_token=NULL WHERE id=?")->execute([$hash, $id]);
+        echo json_encode(['ok' => true, 'msg' => 'Senha alterada com sucesso.']);
         exit;
     }
 
@@ -1256,7 +1269,7 @@ window.addEventListener('unhandledrejection', function(e) {
     <?php else: ?>
     <div style="overflow-x:auto">
     <table class="admin-tabela">
-        <thead><tr><th>Nome</th><th>Guerra</th><th>Matrícula</th><th>E-mail</th><th>Aprovado em</th></tr></thead>
+        <thead><tr><th>Nome</th><th>Guerra</th><th>Matrícula</th><th>E-mail</th><th>Aprovado em</th><th>Ações</th></tr></thead>
         <tbody>
         <?php foreach($aprovados as $m): ?>
         <tr>
@@ -1265,6 +1278,7 @@ window.addEventListener('unhandledrejection', function(e) {
             <td><code><?= e($m['matricula']) ?></code></td>
             <td><?= e($m['email']) ?></td>
             <td><?= $m['approved_at'] ? date('d/m/Y', strtotime($m['approved_at'])) : '—' ?></td>
+            <td><button class="btn-aprovar" onclick="alterarSenhaAdmin(<?= (int)$m['id'] ?>, '<?= e($m['nome_guerra']) ?>')" style="font-size:.75rem;padding:4px 8px">🔑 Senha</button></td>
         </tr>
         <?php endforeach; ?>
         </tbody>
@@ -2031,6 +2045,18 @@ async function carregarOnline() {
     carregarOnline();
     setInterval(carregarOnline, 15000);
 })();
+
+async function alterarSenhaAdmin(id, nome) {
+    const nova = prompt('Nova senha para ' + nome + ' (mínimo 6 caracteres):');
+    if (!nova || nova.length < 6) { if (nova !== null) await modalAlert('Senha deve ter no mínimo 6 caracteres.', '⚠️'); return; }
+    if (!await modalConfirm('Alterar a senha de <strong>' + escHtml(nome) + '</strong>?', '🔑')) return;
+    const res = await post({ acao: 'admin_alterar_senha', id, nova_senha: nova });
+    if (res && res.ok) {
+        await modalAlert(res.msg, '✅');
+    } else {
+        await modalAlert('Erro: ' + (res.erro || 'falha'), '❌');
+    }
+}
 
 async function detectAndRejectSuspects() {
     if (!await modalConfirm('Detectar cadastros suspeitos (domínios descartáveis / matrícula inválida) e rejeitá-los?', '🕵️')) return;
