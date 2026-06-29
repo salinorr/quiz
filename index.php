@@ -899,6 +899,8 @@ main{width:100%;padding:0;margin:0;flex:1;}
 .form-group label{display:block;font-weight:600;margin-bottom:6px;color:var(--verde);font-size:.88rem;}
 .form-group input{width:100%;padding:11px 14px;border:2px solid #c8e6c9;border-radius:8px;font-size:.95rem;transition:var(--tr);}
 .form-group input:focus{outline:none;border-color:var(--verde-md);box-shadow:0 0 0 3px rgba(46,125,71,.15);}
+.toggle-senha{position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:1.1rem;user-select:none;opacity:.6;transition:opacity .2s;}
+.toggle-senha:hover{opacity:1;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(max-width:520px){.form-row{grid-template-columns:1fr;}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;border:none;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;transition:var(--tr);text-decoration:none;}
@@ -1129,11 +1131,17 @@ window.addEventListener('unhandledrejection', function(e) {
     <div id="msg-reset-err" class="msg-err"></div>
     <div class="form-group">
         <label>Nova Senha (mín. 8 chars)</label>
-        <input type="password" id="reset-senha" placeholder="••••••••">
+        <div style="position:relative">
+            <input type="password" id="reset-senha" placeholder="••••••••" style="padding-right:40px">
+            <span class="toggle-senha" onclick="toggleSenha('reset-senha',this)">👁️</span>
+        </div>
     </div>
     <div class="form-group">
         <label>Confirmar Nova Senha</label>
-        <input type="password" id="reset-confirma" placeholder="••••••••">
+        <div style="position:relative">
+            <input type="password" id="reset-confirma" placeholder="••••••••" style="padding-right:40px">
+            <span class="toggle-senha" onclick="toggleSenha('reset-confirma',this)">👁️</span>
+        </div>
     </div>
     <button class="btn btn-primary" style="width:100%" onclick="resetarSenha('<?= e($resetToken) ?>')">
         🔒 Salvar Nova Senha
@@ -1163,7 +1171,10 @@ window.addEventListener('unhandledrejection', function(e) {
         </div>
         <div class="form-group">
             <label>Senha</label>
-            <input type="password" id="login-senha" placeholder="••••••••" autocomplete="current-password">
+            <div style="position:relative">
+                <input type="password" id="login-senha" placeholder="••••••••" autocomplete="current-password" style="padding-right:40px">
+                <span class="toggle-senha" onclick="toggleSenha('login-senha',this)">👁️</span>
+            </div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin:10px 0 16px">
             <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.82rem;color:#555;user-select:none">
@@ -1214,11 +1225,17 @@ window.addEventListener('unhandledrejection', function(e) {
         <div class="form-row">
             <div class="form-group">
                 <label>Senha (mín. 8 chars)</label>
-                <input type="password" id="cad-senha" placeholder="••••••••">
+                <div style="position:relative">
+                    <input type="password" id="cad-senha" placeholder="••••••••" style="padding-right:40px">
+                    <span class="toggle-senha" onclick="toggleSenha('cad-senha',this)">👁️</span>
+                </div>
             </div>
             <div class="form-group">
                 <label>Confirmar Senha</label>
-                <input type="password" id="cad-confirma" placeholder="••••••••">
+                <div style="position:relative">
+                    <input type="password" id="cad-confirma" placeholder="••••••••" style="padding-right:40px">
+                    <span class="toggle-senha" onclick="toggleSenha('cad-confirma',this)">👁️</span>
+                </div>
             </div>
         </div>
         <button class="btn btn-primary" style="width:100%;" onclick="fazerCadastro()">📝 Solicitar Cadastro</button>
@@ -1752,6 +1769,14 @@ window.openSessionsExist = true;
 </main>
 
 <script>
+function toggleSenha(id, btn) {
+    const inp = document.getElementById(id);
+    if (!inp) return;
+    const show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    btn.textContent = show ? '🙈' : '👁️';
+}
+
 // Estado global
 let sessaoId    = <?= !empty($_SESSION['sessao_id']) ? json_encode($_SESSION['sessao_id']) : 'null' ?>;
 let nomeUsuario = '';
