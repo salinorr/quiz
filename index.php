@@ -141,6 +141,39 @@ function getOpenSessions(): array {
     return $stmt->fetchAll();
 }
 
+function sendEmail(string $to, string $subject, string $body): bool {
+    if (!SMTP_HOST || !SMTP_USER) return false;
+    $socket = @stream_socket_client('ssl://' . SMTP_HOST . ':' . SMTP_PORT, $errno, $errstr, 10);
+    if (!$socket) { error_log("SMTP connect failed: $errstr ($errno)"); return false; }
+    $read = function() use ($socket) { return fgets($socket, 512); };
+    $send = function(string $cmd) use ($socket, $read) {
+        fwrite($socket, $cmd . "\r\n");
+        return $read();
+    };
+    $read();
+    $send('EHLO ' . ($_SERVER['HTTP_HOST'] ?? 'quiz.local'));
+    $resp = '';
+    while (strpos($resp, '250 ') !== 0) $resp = $read();
+    $send('AUTH LOGIN');
+    $send(base64_encode(SMTP_USER));
+    $resp = $send(base64_encode(SMTP_PASS));
+    if (strpos($resp, '235') !== 0) { error_log("SMTP auth failed: $resp"); fclose($socket); return false; }
+    $send('MAIL FROM:<' . SMTP_FROM . '>');
+    $send('RCPT TO:<' . $to . '>');
+    $send('DATA');
+    $headers  = "From: " . SMTP_FROM_NAME . " <" . SMTP_FROM . ">\r\n";
+    $headers .= "To: <{$to}>\r\n";
+    $headers .= "Subject: {$subject}\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $headers .= "Date: " . date('r') . "\r\n";
+    $headers .= "\r\n" . $body . "\r\n.";
+    $resp = $send($headers);
+    $send('QUIT');
+    fclose($socket);
+    return strpos($resp, '250') === 0;
+}
+
 function restoreSessaoByID(int $sessaoId): void {
     $db = getDB();
     $stmt = $db->prepare(
@@ -321,8 +354,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $link = 'https://' . $host . $path . '?p=reset&token=' . $rToken;
             $subject = 'Recuperação de Senha — Quiz PMRR';
             $body    = "Olá, {$m['nome_guerra']}!\n\nClique no link para redefinir sua senha (válido por 1 hora):\n\n{$link}\n\nSe não solicitou, ignore este e-mail.\n\nQuiz PMRR — Legislações Militares de Roraima";
-            $headers = "From: noreply@cacresportes.com.br\r\nContent-Type: text/plain; charset=UTF-8";
-            try { @mail($email, $subject, $body, $headers); } catch (\Throwable $e) { error_log('mail() falhou: ' . $e->getMessage()); }
+            if (!sendEmail($email, $subject, $body)) {
+                error_log("Falha ao enviar e-mail de recuperacao para: $email");
+            }
         }
         echo json_encode(['ok' => true, 'msg' => 'Se o e-mail estiver cadastrado, você receberá as instruções em breve.']);
         exit;
