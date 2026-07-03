@@ -1550,52 +1550,88 @@ if (is_dir($slidesDir)) {
 </div>
 
 <?php elseif ($page === 'audios' && isAprovado()): // ── ÁUDIOS ──
+$choDir   = __DIR__ . '/audios/cho parte 2/';
+$choItens = [];
+if (is_dir($choDir)) {
+    foreach (glob($choDir . '*.m4a') as $f) {
+        $base = basename($f);
+        if (preg_match('/^(\d+)\.\s*(.+)\.m4a$/ui', $base, $mt)) {
+            $choItens[] = ['num'=>(int)$mt[1], 'nome'=>trim($mt[2]), 'file'=>$base];
+        }
+    }
+    usort($choItens, fn($a, $b) => $a['num'] <=> $b['num']);
+}
+
 $audiosCatalog = [
-  ['titulo'=>'Estatuto dos Militares','lei'=>'LC nº 194/2012','emoji'=>'📗','cor'=>'#1a5c2e','cor_lt'=>'#e8f5e9',
-   'modulos'=>[
-    ['mod'=>1,'arts'=>'1 ao 21',   'file'=>'Módulo_1_(1_21)_-_Estatuto_dos_Militares.m4a'],
-    ['mod'=>2,'arts'=>'22 ao 37',  'file'=>'Módulo_2_(22_37)_-_Estatuto_dos_Militares.m4a'],
-    ['mod'=>3,'arts'=>'38 ao 58',  'file'=>'Módulo_3_(38_58)_-_Estatuto_dos_Militares.m4a'],
-    ['mod'=>4,'arts'=>'59 ao 99',  'file'=>'Módulo_4_(59_99)_-_Estatuto_dos_Militares.m4a'],
-    ['mod'=>5,'arts'=>'100 ao 161','file'=>'Módulo_5_(100_161)_-_Estatuto_dos_Militares.m4a'],
+  ['titulo'=>'Estatuto dos Militares','lei'=>'LC nº 194/2012','emoji'=>'📗','cor'=>'#1a5c2e','cor_lt'=>'#e8f5e9','dir'=>'',
+   'itens'=>[
+    ['badge'=>'Módulo 1','titulo'=>'Arts. 1 ao 21',   'file'=>'Módulo_1_(1_21)_-_Estatuto_dos_Militares.m4a'],
+    ['badge'=>'Módulo 2','titulo'=>'Arts. 22 ao 37',  'file'=>'Módulo_2_(22_37)_-_Estatuto_dos_Militares.m4a'],
+    ['badge'=>'Módulo 3','titulo'=>'Arts. 38 ao 58',  'file'=>'Módulo_3_(38_58)_-_Estatuto_dos_Militares.m4a'],
+    ['badge'=>'Módulo 4','titulo'=>'Arts. 59 ao 99',  'file'=>'Módulo_4_(59_99)_-_Estatuto_dos_Militares.m4a'],
+    ['badge'=>'Módulo 5','titulo'=>'Arts. 100 ao 161','file'=>'Módulo_5_(100_161)_-_Estatuto_dos_Militares.m4a'],
   ]],
-  ['titulo'=>'Código de Ética (CEDM/RR)','lei'=>'Lei nº 963/2014','emoji'=>'📘','cor'=>'#1565c0','cor_lt'=>'#e3f2fd',
-   'modulos'=>[
-    ['mod'=>1,'arts'=>'1 ao 25', 'file'=>'Módulo_1_(1_25)_-_Código_de_Ética.m4a'],
-    ['mod'=>2,'arts'=>'26 ao 40','file'=>'Módulo_2_(26_40)_-_Código_de_Ética.m4a'],
-    ['mod'=>3,'arts'=>'41 ao 65','file'=>'Módulo_3_(41_65)_-_Código_de_Ética.m4a'],
-    ['mod'=>4,'arts'=>'66 ao 88','file'=>'Módulo_4_(66_88)_-_Código_de_Ética.m4a'],
-    ['mod'=>5,'arts'=>'89 ao 102','file'=>'Módulo_5_(89_102)_-_Código_de_Ética.m4a'],
+  ['titulo'=>'Código de Ética (CEDM/RR)','lei'=>'Lei nº 963/2014','emoji'=>'📘','cor'=>'#1565c0','cor_lt'=>'#e3f2fd','dir'=>'',
+   'itens'=>[
+    ['badge'=>'Módulo 1','titulo'=>'Arts. 1 ao 25', 'file'=>'Módulo_1_(1_25)_-_Código_de_Ética.m4a'],
+    ['badge'=>'Módulo 2','titulo'=>'Arts. 26 ao 40','file'=>'Módulo_2_(26_40)_-_Código_de_Ética.m4a'],
+    ['badge'=>'Módulo 3','titulo'=>'Arts. 41 ao 65','file'=>'Módulo_3_(41_65)_-_Código_de_Ética.m4a'],
+    ['badge'=>'Módulo 4','titulo'=>'Arts. 66 ao 88','file'=>'Módulo_4_(66_88)_-_Código_de_Ética.m4a'],
+    ['badge'=>'Módulo 5','titulo'=>'Arts. 89 ao 102','file'=>'Módulo_5_(89_102)_-_Código_de_Ética.m4a'],
   ]],
-  ['titulo'=>'Especial','lei'=>'Atualizações do Estatuto','emoji'=>'🔔','cor'=>'#e65100','cor_lt'=>'#fff3e0',
-   'modulos'=>[
-    ['mod'=>null,'arts'=>'Tempo de Promoção','file'=>'Mudanças_no_Estatuto_sobre_tempo_de_promoção.m4a'],
+  ['titulo'=>'Especial','lei'=>'Atualizações do Estatuto','emoji'=>'🔔','cor'=>'#e65100','cor_lt'=>'#fff3e0','dir'=>'',
+   'itens'=>[
+    ['badge'=>'🔔 Especial','titulo'=>'Tempo de Promoção','file'=>'Mudanças_no_Estatuto_sobre_tempo_de_promoção.m4a'],
   ]],
+  ['titulo'=>'Disciplinas CHO','lei'=>count($choItens).' disciplinas complementares','emoji'=>'📚','cor'=>'#6a1b9a','cor_lt'=>'#f3e5f5','dir'=>'cho parte 2/',
+   'itens'=>array_map(fn($it) => [
+      'badge'=>str_pad((string)$it['num'], 2, '0', STR_PAD_LEFT),
+      'titulo'=>$it['nome'],
+      'file'=>$it['file'],
+   ], $choItens)],
 ];
 ?>
-<div class="card" style="max-width:860px;margin:0 auto">
-    <div style="text-align:center;margin-bottom:28px">
+<div class="card" style="max-width:900px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:24px">
         <span style="font-size:48px;display:block;margin-bottom:8px">🎧</span>
         <h2 style="color:var(--verde);font-size:1.5rem">Áudios das Legislações PMRR</h2>
         <p style="color:#666;margin-top:6px;font-size:.9rem">Ouça no navegador ou faça download para estudar offline.</p>
     </div>
-<?php foreach($audiosCatalog as $g): ?>
-    <div style="margin-bottom:32px">
-        <div style="display:flex;align-items:center;gap:10px;background:<?= e($g['cor_lt']) ?>;border-left:5px solid <?= e($g['cor']) ?>;border-radius:0 10px 10px 0;padding:12px 18px;margin-bottom:16px">
+
+    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px">
+    <?php foreach ($audiosCatalog as $i => $g): ?>
+        <button type="button" class="audios-tab-btn" onclick="audiosTab(<?= $i ?>, this)"
+                data-cor="<?= e($g['cor']) ?>"
+                style="display:flex;align-items:center;gap:6px;border:2px solid <?= e($g['cor']) ?>;background:<?= $i===0 ? e($g['cor']) : '#fff' ?>;color:<?= $i===0 ? '#fff' : e($g['cor']) ?>;border-radius:999px;padding:8px 16px;font-size:.85rem;font-weight:700;cursor:pointer;transition:var(--tr)">
+            <span><?= $g['emoji'] ?></span><?= e($g['titulo']) ?>
+            <span style="background:rgba(0,0,0,.15);border-radius:999px;padding:1px 7px;font-size:.72rem"><?= count($g['itens']) ?></span>
+        </button>
+    <?php endforeach; ?>
+    </div>
+
+<?php foreach ($audiosCatalog as $i => $g): ?>
+    <div id="audios-painel-<?= $i ?>" class="audios-painel" style="<?= $i===0 ? '' : 'display:none' ?>">
+        <div style="display:flex;align-items:center;gap:10px;background:<?= e($g['cor_lt']) ?>;border-left:5px solid <?= e($g['cor']) ?>;border-radius:0 10px 10px 0;padding:12px 18px;margin-bottom:14px">
             <span style="font-size:1.4rem"><?= $g['emoji'] ?></span>
             <div>
                 <div style="font-weight:700;color:<?= e($g['cor']) ?>"><?= e($g['titulo']) ?></div>
                 <div style="font-size:.78rem;color:#666"><?= e($g['lei']) ?></div>
             </div>
         </div>
+        <?php if (count($g['itens']) > 6): ?>
+        <input type="text" placeholder="🔎 Buscar disciplina..." oninput="audiosFiltrar(<?= $i ?>, this)"
+               style="width:100%;box-sizing:border-box;padding:10px 14px;border:2px solid <?= e($g['cor_lt']) ?>;border-radius:10px;margin-bottom:14px;font-size:.85rem;outline:none">
+        <?php endif; ?>
+        <?php if (empty($g['itens'])): ?>
+        <p style="color:#888;text-align:center;padding:30px">Nenhum áudio encontrado.</p>
+        <?php else: ?>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px">
-        <?php foreach($g['modulos'] as $m): $url = 'audios/'.rawurlencode($m['file']); ?>
-        <div style="background:#fff;border:2px solid <?= e($g['cor_lt']) ?>;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.07)">
+        <?php foreach ($g['itens'] as $m): $url = 'audios/'.rawurlencode($g['dir']).rawurlencode($m['file']); ?>
+        <div class="audios-card" data-nome="<?= e(mb_strtolower($m['badge'].' '.$m['titulo'], 'UTF-8')) ?>"
+             style="background:#fff;border:2px solid <?= e($g['cor_lt']) ?>;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.07)">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-                <span style="background:<?= e($g['cor']) ?>;color:#fff;border-radius:7px;padding:3px 10px;font-size:.73rem;font-weight:700;white-space:nowrap">
-                    <?= $m['mod'] ? 'Módulo '.(int)$m['mod'] : '🔔 Especial' ?>
-                </span>
-                <span style="font-size:.82rem;color:#555;font-weight:600"><?= $m['mod'] ? 'Arts. '.e($m['arts']) : e($m['arts']) ?></span>
+                <span style="background:<?= e($g['cor']) ?>;color:#fff;border-radius:7px;padding:3px 10px;font-size:.73rem;font-weight:700;white-space:nowrap"><?= e($m['badge']) ?></span>
+                <span style="font-size:.82rem;color:#555;font-weight:600;overflow-wrap:break-word"><?= e($m['titulo']) ?></span>
             </div>
             <audio controls style="width:100%;height:36px;margin-bottom:10px" preload="none">
                 <source src="<?= e($url) ?>" type="audio/mp4">
@@ -1608,9 +1644,28 @@ $audiosCatalog = [
         </div>
         <?php endforeach; ?>
         </div>
+        <?php endif; ?>
     </div>
 <?php endforeach; ?>
 </div>
+<script>
+function audiosTab(idx, btn) {
+    document.querySelectorAll('.audios-painel').forEach(function (p) { p.style.display = 'none'; });
+    document.getElementById('audios-painel-' + idx).style.display = '';
+    document.querySelectorAll('.audios-tab-btn').forEach(function (b) {
+        b.style.background = '#fff';
+        b.style.color = b.getAttribute('data-cor');
+    });
+    btn.style.background = btn.getAttribute('data-cor');
+    btn.style.color = '#fff';
+}
+function audiosFiltrar(idx, input) {
+    var q = input.value.toLowerCase().trim();
+    document.querySelectorAll('#audios-painel-' + idx + ' .audios-card').forEach(function (c) {
+        c.style.display = (!q || c.getAttribute('data-nome').indexOf(q) !== -1) ? '' : 'none';
+    });
+}
+</script>
 
 <?php else: // ── QUIZ / INÍCIO ─────────────────────────────── ?>
 
