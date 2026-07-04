@@ -886,6 +886,7 @@ if ($page === 'reset' && strlen($resetToken) === 64) {
   --amarelo:#f9a825;--vermelho:#c62828;--vermelho-lt:#ef9a9a;
   --cinza-bg:#f4f6f8;--branco:#ffffff;--texto:#1e2b1f;
   --sombra:0 4px 24px rgba(0,0,0,.12);--radius:14px;--tr:.25s ease;
+  --hdr-h:56px;
 }
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cinza-bg);color:var(--texto);min-height:100vh;display:flex;flex-direction:column;}
 header{width:100%;background:linear-gradient(135deg,var(--verde) 0%,var(--verde-md) 100%);color:#fff;padding:10px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 3px 16px rgba(0,0,0,.25);position:sticky;top:0;z-index:100;min-height:56px;}
@@ -937,7 +938,7 @@ main{width:100%;padding:0;margin:0;flex:1;}
 .pendente-aviso h3{color:#8d5500;margin-bottom:8px;}
 /* Layout sidebar colapsável */
 .layout{display:flex;min-height:calc(100vh - 56px);}
-.sidebar{width:210px;flex-shrink:0;background:var(--branco);border-right:1px solid #e0e0e0;padding:16px 10px;transition:width .25s ease,padding .25s ease;overflow:hidden;position:sticky;top:56px;height:calc(100vh - 56px);z-index:50;}
+.sidebar{width:210px;flex-shrink:0;background:var(--branco);border-right:1px solid #e0e0e0;padding:16px 10px;transition:width .25s ease,padding .25s ease;overflow:hidden;position:sticky;top:var(--hdr-h);height:calc(100vh - var(--hdr-h));z-index:50;}
 .sidebar.collapsed{width:56px;padding:16px 6px;}
 .sidebar .menu{display:flex;flex-direction:column;gap:4px}
 .sidebar .menu a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--verde-md);font-weight:700;font-size:.85rem;transition:var(--tr);white-space:nowrap;overflow:hidden;}
@@ -949,11 +950,11 @@ main{width:100%;padding:0;margin:0;flex:1;}
 .content{flex:1;min-width:0;padding:24px 28px 60px;}
 .menu-overlay{display:none;}
 @media(max-width:768px){
-  .sidebar{position:fixed;top:56px;left:-260px;width:240px;height:calc(100vh - 56px);box-shadow:4px 0 24px rgba(0,0,0,.15);transition:left .3s ease;overflow-y:auto;border-right:none;}
+  .sidebar{position:fixed;top:var(--hdr-h);left:-260px;width:240px;height:calc(100vh - var(--hdr-h));box-shadow:4px 0 24px rgba(0,0,0,.15);transition:left .3s ease;overflow-y:auto;border-right:none;}
   .sidebar.open{left:0}
   .sidebar.collapsed{width:240px;padding:16px 10px;}
   .sidebar.collapsed .menu a .label{opacity:1;width:auto;}
-  .menu-overlay.open{display:block;position:fixed;inset:0;top:56px;background:rgba(0,0,0,.4);z-index:49}
+  .menu-overlay.open{display:block;position:fixed;inset:0;top:var(--hdr-h);background:rgba(0,0,0,.4);z-index:49}
   .content{padding:16px 14px 60px;}
 }
 /* Categorias */
@@ -1626,7 +1627,7 @@ $audiosCatalog = [
         <p style="color:#888;text-align:center;padding:30px">Nenhum áudio encontrado.</p>
         <?php else: ?>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px">
-        <?php foreach ($g['itens'] as $m): $url = 'audios/'.rawurlencode($g['dir']).rawurlencode($m['file']); ?>
+        <?php foreach ($g['itens'] as $m): $dirEnc = implode('/', array_map('rawurlencode', explode('/', $g['dir']))); $url = 'audios/'.$dirEnc.rawurlencode($m['file']); ?>
         <div class="audios-card" data-nome="<?= e(mb_strtolower($m['badge'].' '.$m['titulo'], 'UTF-8')) ?>"
              style="background:#fff;border:2px solid <?= e($g['cor_lt']) ?>;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.07)">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
@@ -2691,7 +2692,15 @@ function toggleSidebar() {
         localStorage.setItem('sidebar_collapsed', sb.classList.contains('collapsed') ? '1' : '0');
     }
 }
+function syncHeaderHeight() {
+    const hdr = document.querySelector('header');
+    if (!hdr) return;
+    document.documentElement.style.setProperty('--hdr-h', hdr.offsetHeight + 'px');
+}
+window.addEventListener('load', syncHeaderHeight);
+window.addEventListener('resize', syncHeaderHeight);
 (function(){
+    syncHeaderHeight();
     const sb = document.getElementById('sidebar-nav');
     if (!sb) return;
     if (window.innerWidth > 768 && localStorage.getItem('sidebar_collapsed') === '1') {
