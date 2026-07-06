@@ -1,7 +1,7 @@
 # Base de Conhecimento -- Legislacao Militar de Roraima
 
 **Documento de referencia para criacao de questoes do Quiz PMRR**
-Ultima atualizacao: 2026-06-26
+Ultima atualizacao: 2026-07-06
 
 ---
 
@@ -13,6 +13,7 @@ Ultima atualizacao: 2026-06-26
 4. [Tabela de Prazos e Numeros-Chave](#4-tabela-de-prazos-e-numeros-chave)
 5. [Distincoes Conceituais Criticas](#5-distincoes-conceituais-criticas)
 6. [Competencias -- Quem Faz o Que](#6-competencias----quem-faz-o-que)
+7. [Justica Militar Estadual (JME)](#7-justica-militar-estadual-jme)
 
 ---
 
@@ -921,6 +922,59 @@ Enquanto nao entrar em vigor a lei de Promocao de Oficiais e Pracas:
 
 ### Assembleia Legislativa
 - Aprova as leis complementares e ordinarias que regem o Estatuto e o CEDM
+
+---
+
+## 7. Justica Militar Estadual (JME)
+
+**Fontes principais**: CRFB/1988 art. 5, XXXVII e XXXVIII; art. 92; art. 122; art. 125, §§3, 4 e 5 (redacao dada pela EC n. 45/2004); Codigo Penal Militar -- CPM (Decreto-Lei n. 1.001/1969), arts. 9 e 10; Codigo de Processo Penal Militar -- CPPM (Decreto-Lei n. 1.002/1969), arts. 400 a 403; Lei n. 8.457/1992 (Lei de Organizacao Judiciaria Militar da Uniao -- usada por simetria/analogia para a estrutura dos Conselhos nos estados sem legislacao propria equivalente); Sumulas STJ ns. 53, 78 e 90; Constituicao do Estado de Roraima, art. 83; Lei n. 13.491/2017 (ampliou o rol de crimes militares).
+
+### 7.1 Natureza Juridica e Historico
+- A Justica Militar **nao e tribunal de excecao** (vedado pelo art. 5, XXXVII, CRFB): e justica especializada, prevista como orgao do Poder Judiciario no art. 92, VI, CRFB.
+- Marco inaugural: **Conselho Supremo Militar e de Justica**, criado por Alvara de Dom Joao VI em **abril de 1808** -- tribunal superior mais antigo do Brasil.
+- Evolucao do nome do orgao de cupula federal: Conselho Supremo Militar e de Justica (1808) -> Supremo Tribunal Militar (CF/1934) -> Superior Tribunal Militar -- STM (CF/1946, nome mantido ate hoje).
+- A JM Federal (JMF) foi incorporada ao Poder Judiciario pela CF/1934; a JM Estadual (JME) so alcancou o mesmo status na **CF/1946**.
+- Termo "castrense": origem no **latim** *castrensis* (relativo ao acampamento/exercito), nao no grego.
+
+### 7.2 Competencia -- Art. 125, §§3, 4 e 5, CRFB (redacao da EC n. 45/2004)
+- **§3**: lei estadual pode criar a JME, mediante proposta do Tribunal de Justica. 1a instancia: Juizes de Direito do Juizo Militar + Conselhos de Justica. 2a instancia: o proprio Tribunal de Justica (TJ) ou, nos estados com **efetivo militar superior a 20 mil integrantes**, um Tribunal de Justica Militar (TJM) proprio.
+  - TJM proprio existe apenas em **SP, MG e RS**.
+  - Onde nao ha TJM (ex.: Roraima, Rio de Janeiro, Paraiba), o **TJ comum do estado** exerce a 2a instancia da JME.
+  - Acima do TJ/TJM: **STJ** (recurso especial, art. 105, III) e **STF** (recurso extraordinario, art. 102, III) -- nunca o STM, que so revisa decisoes da Justica Militar da Uniao.
+- **§4**: compete a JME processar e julgar (i) militares dos Estados nos **crimes militares definidos em lei** e (ii) **acoes judiciais contra atos disciplinares militares** (competencia civel, incluida pela EC 45/2004) -- **ressalvada a competencia do Tribunal do Juri quando a vitima for civil** em crime doloso contra a vida. Cabe ao tribunal competente decidir sobre perda do posto/patente (oficiais) e da graduacao (pracas).
+- **§5**: compete ao **Juiz de Direito do Juizo Militar**, **singularmente**, julgar (i) crimes militares cometidos **contra civis** e (ii) as **acoes judiciais contra atos disciplinares militares**; ao **Conselho de Justica**, sob presidencia do Juiz de Direito, julgar os **demais crimes militares** (praticados contra outros militares ou contra a administracao militar).
+- **Civis nunca sao julgados pela JME**: quem comete crime contra instituicoes militares estaduais e civil, ou reformado/reserva nas hipoteses do art. 9, III, CPM, vai para a **Justica Comum Estadual** (Sumula 53/STJ: *"Compete a Justica Comum Estadual processar e julgar civil acusado de pratica de crime contra instituicoes militares estaduais."*). Isso contrasta com a JM Federal, que julga civis em certas hipoteses.
+- **Sumula 78/STJ**: *"Compete a Justica Militar processar e julgar policial de corporacao estadual, ainda que o delito tenha sido praticado em outra unidade federativa."* -- competencia fixada pela corporacao do agente (ratione personae/institucional), nao pelo local do crime.
+- A JMF (Uniao) **nao tem** a competencia civel sobre atos disciplinares que a EC 45/2004 deu a JME -- distincao importante entre as duas Justicas Militares.
+
+### 7.3 Tipicidade e Categorias de Crime Militar (CPM, arts. 9 e 10)
+- Criterio adotado pelo legislador: **ratione legis** -- a lei nao define crime militar por um conceito abstrato, apenas **enumera** as hipoteses (art. 9).
+- Exige-se **dupla tipicidade**: tipicidade **direta** (fato previsto no CPM ou, apos a Lei 13.491/2017, tambem na legislacao penal comum) e tipicidade **indireta** (o fato se enquadra em uma das hipoteses dos arts. 9 ou 10 do CPM).
+- **Crimes propriamente militares**: previstos **exclusivamente** no CPM, sem correspondente na lei comum (ex.: motim, deserção, abandono de posto).
+- **Crimes impropriamente militares**: previstos tanto no CPM quanto na lei penal comum, mas praticados nas condicoes do art. 9 (ex.: furto, lesao corporal cometidos por militar contra militar).
+- **Crimes militares por extensao**: categoria consolidada apos a **Lei n. 13.491/2017**, que alterou o art. 9, II -- passam a ser militares crimes previstos **apenas na legislacao penal comum** (nao no CPM), como tortura (Lei 9.455/97), desde que praticados nas condicoes do inciso II. Antes da lei, esses crimes eram julgados pela Justica Comum.
+- Art. 9, II, CPM (crimes de ativa contra ativa e situacoes assemelhadas) **nao exige** que o militar esteja em servico no momento do fato -- basta a condicao de militar da ativa contra militar da ativa (alinea "a").
+- **"Cochilo do legislador"** (expressao de Ronaldo Roth): decadas em que o CPM/CPPM (ambos de 1969) ficaram sem atualizacao relevante, "a reboque" da legislacao penal comum, ate a Lei 13.491/2017 modernizar o rol de crimes militares.
+
+### 7.4 Conselhos de Justica -- Sistema de Escabinato
+- **Escabinato**: composicao mista que une o **Juiz de Direito** (togado, tecnico) aos **Juizes Militares** (oficiais, sorteados dentre a corporacao) -- nao se confunde com o Tribunal do Juri (jurados civis).
+- **Conselho Permanente de Justica (CPJ)**: julga **pracas** (exceto quando em concurso de agentes com oficial). Composicao renovada por **sorteio a cada trimestre**; e "permanente" porque tem existencia continua, mas seus membros militares sao rotativos.
+- **Conselho Especial de Justica (CEJ)**: julga **oficiais** (e pracas em concurso de agentes com oficiais, por atracao). E constituido **ad hoc** para cada processo especifico e se dissolve apos o julgamento.
+- Composicao padrao de ambos: **1 Juiz de Direito + 4 Juizes Militares** (oficiais sorteados), respeitada a hierarquia (presidencia cabe ao oficial de posto mais alto ou mais antigo entre os sorteados, quando nao presidido pelo Juiz de Direito conforme o caso).
+- **Identidade fisica do juiz**: o STM entende que o principio **nao se aplica** rigidamente aos Conselhos, dada a especialidade da Justica Militar (rotatividade do CPJ a cada trimestre); parte da doutrina (Rodrigo Foureaux) critica essa posicao, apontando risco a ampla defesa quando o juiz que sentencia nao acompanhou toda a instrucao.
+- O oficial-juiz presta **compromisso legal** de julgar segundo a lei e a prova dos autos (art. 400, CPPM) e fica **dispensado do servico** na organizacao militar de origem nos dias de sessao (por analogia ao art. 26 da Lei 8.457/92); nao ha vitaliciamento nem remuneracao adicional pelo exercicio da funcao, e o vinculo dele permanece com o Poder Executivo (a corporacao), nao com o Judiciario.
+
+### 7.5 Estrutura no Estado de Roraima
+- Roraima **nao possui TJM proprio** (efetivo abaixo de 20 mil integrantes) -- a **2a instancia** da JME/RR e exercida pelo **Tribunal de Justica de Roraima (TJRR)**.
+- Constituicao do Estado de Roraima, **art. 83**: a Justica Militar estadual, organizada na forma da lei de organizacao judiciaria, tem como orgao de **1a instancia** os **Conselhos de Justica** e os **Juizes de Direito do Juizo Militar** (Juizes Auditores); os juizes militares (togados) tem as mesmas garantias, prerrogativas, vencimentos e impedimentos dos demais magistrados estaduais de 1a instancia.
+- A JME esta presente, ao menos como estrutura de competencia, em **todas as 27 Unidades Federativas** do Brasil (mesmo sem TJM proprio, o Juiz de Direito do Juizo Militar e o TJ comum exercem a jurisdicao militar estadual).
+
+### 7.6 Pontos-Chave para Elaboracao de Questoes (JME)
+- Nao confundir **JMF (Uniao)** -- julga civis, no STM -- com **JME (Estados)** -- nunca julga civis, sem STM, com TJ/TJM na 2a instancia.
+- Nao confundir **§4 (Conselho de Justica -- crimes contra militares/administracao)** com **§5 (Juiz de Direito singular -- crimes contra civis e acoes disciplinares civeis)**.
+- CPJ = pracas, trimestral, rotativo. CEJ = oficiais, ad hoc, dissolvido apos o caso. Armadilha classica: trocar essas duas caracteristicas.
+- Sumula 53 = civil que comete crime contra a PM/CBM vai para a Justica Comum. Sumula 78 = competencia territorial fixada pela corporacao do policial, nao pelo local do crime.
+- "Crime militar por extensao" so existe apos a Lei 13.491/2017 e refere-se a crimes **exclusivos da lei comum** (nao do CPM) praticados nas condicoes do art. 9, II.
 
 ---
 

@@ -959,14 +959,6 @@ main{width:100%;padding:0;margin:0;flex:1;}
 }
 /* Categorias */
 .section-titulo{font-size:.78rem;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
-.modo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
-@media(max-width:500px){.modo-grid{grid-template-columns:1fr;}}
-.modo-label{display:flex;align-items:flex-start;gap:12px;padding:14px;border:2px solid #c8e6c9;border-radius:10px;cursor:pointer;transition:var(--tr);background:#fff;}
-.modo-label:hover,.modo-label.sel{border-color:var(--verde-md);background:#e8f5e9;}
-.modo-label input[type=radio]{display:none;}
-.modo-radio{width:20px;height:20px;border:2px solid #b0bec5;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:var(--tr);}
-.modo-label.sel .modo-radio{background:var(--verde-md);border-color:var(--verde-md);}
-.modo-label.sel .modo-radio::after{content:'';width:8px;height:8px;background:#fff;border-radius:50%;display:block;}
 .cats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
 @media(max-width:500px){.cats-grid{grid-template-columns:1fr;}}
 .cat-label{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:2px solid #c8e6c9;border-radius:10px;cursor:pointer;transition:var(--tr);background:#fff;}
@@ -1713,47 +1705,35 @@ window.openSessionsExist = true;
 <?php endif; ?>
 
 <!-- TELA INICIAL -->
+<?php
+$modoAtual   = $modoParam === 'prova' ? 'prova' : 'quiz';
+$categoriasModo = array_values(array_filter($categorias, function($c) use ($modoAtual) {
+    $isProva = stripos($c['nome'], 'prova') !== false;
+    return $modoAtual === 'prova' ? $isProva : !$isProva;
+}));
+?>
 <div id="tela-inicio" class="card">
     <div style="text-align:center;margin-bottom:24px">
-        <span style="font-size:52px;display:block;margin-bottom:8px">🎖️</span>
-        <h2 style="color:var(--verde);font-size:1.5rem">Quiz de Legislações da PMRR</h2>
-        <p style="color:#666;margin-top:6px">Selecione o modo e as legislações que deseja treinar.</p>
+        <span style="font-size:52px;display:block;margin-bottom:8px"><?= $modoAtual === 'prova' ? '🎯' : '📚' ?></span>
+        <h2 style="color:var(--verde);font-size:1.5rem"><?= $modoAtual === 'prova' ? 'Provas da PMRR' : 'Quiz de Legislações da PMRR' ?></h2>
+        <p style="color:#666;margin-top:6px"><?= $modoAtual === 'prova'
+            ? 'Selecione a prova que deseja realizar. Questões revisadas com gabarito e justificativa.'
+            : 'Selecione as legislações que deseja estudar. Perguntas aleatórias com feedback imediato.' ?></p>
     </div>
 
-    <p class="section-titulo">🎯 Modo</p>
-    <div class="modo-grid">
-        <label class="modo-label sel" id="modo-lbl-quiz" onclick="selecionarModo('quiz')">
-            <input type="radio" name="modo" value="quiz" checked>
-            <div class="modo-radio"></div>
-            <div>
-                <div style="font-weight:700;font-size:.88rem">📚 Quiz Livre</div>
-                <div style="font-size:.75rem;color:#666;margin-top:2px">Questões aleatórias com feedback imediato. Estude no seu ritmo.</div>
-            </div>
-        </label>
-        <label class="modo-label" id="modo-lbl-prova" onclick="selecionarModo('prova')">
-            <input type="radio" name="modo" value="prova">
-            <div class="modo-radio"></div>
-            <div>
-                <div style="font-weight:700;font-size:.88rem">🎯 Prova</div>
-                <div style="font-size:.75rem;color:#666;margin-top:2px">Questões revisadas com gabarito e justificativa. Simule a avaliação.</div>
-            </div>
-        </label>
-    </div>
-
-    <p class="section-titulo">📚 Legislações</p>
+    <p class="section-titulo"><?= $modoAtual === 'prova' ? '🎯 Provas' : '📚 Legislações' ?></p>
+    <?php if ($modoAtual === 'quiz'): ?>
     <div class="cats-acoes">
         <button class="btn-link" onclick="toggleTodas(true)">Marcar todas</button>
         <span style="color:#ccc">|</span>
         <button class="btn-link" onclick="toggleTodas(false)">Desmarcar todas</button>
     </div>
+    <?php endif; ?>
     <div class="cats-grid" id="cats-grid">
-    <?php foreach($categorias as $c):
-        $isProva = stripos($c['nome'], 'prova') !== false;
-        $catTipo = $isProva ? 'prova' : 'quiz';
-    ?>
-        <label class="cat-label <?= $isProva ? '' : 'sel' ?>" id="cat-lbl-<?= (int)$c['id'] ?>" data-tipo="<?= $catTipo ?>" onclick="toggleCat(<?= (int)$c['id'] ?>)">
-            <input type="checkbox" id="cat-<?= (int)$c['id'] ?>" value="<?= (int)$c['id'] ?>" <?= $isProva ? '' : 'checked' ?>>
-            <div class="cat-check"><?= $isProva ? '' : '✓' ?></div>
+    <?php foreach($categoriasModo as $c): ?>
+        <label class="cat-label <?= $modoAtual === 'quiz' ? 'sel' : '' ?>" id="cat-lbl-<?= (int)$c['id'] ?>" onclick="toggleCat(<?= (int)$c['id'] ?>)">
+            <input type="checkbox" id="cat-<?= (int)$c['id'] ?>" value="<?= (int)$c['id'] ?>" <?= $modoAtual === 'quiz' ? 'checked' : '' ?>>
+            <div class="cat-check"><?= $modoAtual === 'quiz' ? '✓' : '' ?></div>
             <div class="cat-info">
                 <div class="cat-nome"><?= e($c['nome']) ?></div>
                 <div class="cat-sub"><?= e($c['descricao'] ?? '') ?></div>
@@ -1765,6 +1745,9 @@ window.openSessionsExist = true;
     <p class="total-selecionado" id="total-selecionado"></p>
     <button class="btn btn-primary" style="width:100%" onclick="iniciarQuiz()">🚀 Iniciar</button>
 </div>
+<script>
+const MODO_ATUAL = <?= json_encode($modoAtual) ?>;
+</script>
 
 <!-- TELA QUIZ -->
 <div id="tela-quiz" style="display:none">
@@ -2259,42 +2242,13 @@ async function novoQuiz() {
     });
 }
 
-// ── MODO / CATEGORIAS ─────────────────────────────────────────
-function selecionarModo(modo) {
-    tipoSessao = modo;
-    ['quiz','prova'].forEach(m => {
-        document.getElementById('modo-lbl-'+m)?.classList.toggle('sel', m === modo);
-    });
-    const rb = document.querySelector('[name=modo][value="'+modo+'"]');
-    if (rb) rb.checked = true;
-    const acoes = document.querySelector('.cats-acoes');
-    if (acoes) acoes.style.display = modo === 'prova' ? 'none' : '';
-    document.querySelectorAll('#cats-grid .cat-label').forEach(lbl => {
-        const tipo    = lbl.dataset.tipo || 'quiz';
-        const visivel = tipo === modo;
-        lbl.style.display = visivel ? '' : 'none';
-        const cb  = lbl.querySelector('input[type=checkbox]');
-        const chk = lbl.querySelector('.cat-check');
-        if (modo === 'prova') {
-            if (cb) cb.checked = false;
-            lbl.classList.remove('sel');
-            if (chk) chk.textContent = '';
-        } else {
-            if (cb) cb.checked = visivel;
-            lbl.classList.toggle('sel', visivel);
-            if (chk) chk.textContent = visivel ? '✓' : '';
-        }
-    });
-    atualizarTotalSelecionado();
-}
-
+// ── CATEGORIAS (a página já vem fixa em modo quiz ou prova — ver MODO_ATUAL) ──
 function toggleCat(id) {
     const cb  = document.getElementById('cat-'+id);
     const lbl = document.getElementById('cat-lbl-'+id);
     if (!cb || !lbl) return;
-    if (tipoSessao === 'prova') {
+    if (typeof MODO_ATUAL !== 'undefined' && MODO_ATUAL === 'prova') {
         document.querySelectorAll('#cats-grid .cat-label').forEach(l => {
-            if (l.style.display === 'none') return;
             const c = l.querySelector('input[type=checkbox]');
             const k = l.querySelector('.cat-check');
             if (c) c.checked = false;
@@ -2315,9 +2269,7 @@ function toggleCat(id) {
 }
 
 function toggleTodas(marcar) {
-    // Apenas afeta categorias visíveis no modo atual
     document.querySelectorAll('#cats-grid .cat-label').forEach(lbl => {
-        if (lbl.style.display === 'none') return;
         const cb  = lbl.querySelector('input[type=checkbox]');
         const chk = lbl.querySelector('.cat-check');
         if (cb)  cb.checked = marcar;
@@ -2328,16 +2280,13 @@ function toggleTodas(marcar) {
 }
 
 function getCatsSelecionadas() {
-    return [...document.querySelectorAll('#cats-grid .cat-label')]
-        .filter(lbl => lbl.style.display !== 'none')
-        .map(lbl => lbl.querySelector('input[type=checkbox]'))
-        .filter(cb => cb && cb.checked)
+    return [...document.querySelectorAll('#cats-grid .cat-label input[type=checkbox]')]
+        .filter(cb => cb.checked)
         .map(cb => cb.value);
 }
 
 function atualizarTotalSelecionado() {
-    const visibleLabels = [...document.querySelectorAll('#cats-grid .cat-label')].filter(lbl => lbl.style.display !== 'none');
-    const checkedVisible = visibleLabels.filter(lbl => {
+    const checkedVisible = [...document.querySelectorAll('#cats-grid .cat-label')].filter(lbl => {
         const cb = lbl.querySelector('input[type=checkbox]');
         return cb && cb.checked;
     });
@@ -2348,10 +2297,11 @@ function atualizarTotalSelecionado() {
     });
     const el = document.getElementById('total-selecionado');
     if (!el) return;
+    const rotulo = (typeof MODO_ATUAL !== 'undefined' && MODO_ATUAL === 'prova') ? 'prova' : 'legislação';
     if (checkedVisible.length === 0) {
-        el.innerHTML = '<span style="color:var(--vermelho)">⚠️ Selecione ao menos uma legislação.</span>';
+        el.innerHTML = `<span style="color:var(--vermelho)">⚠️ Selecione ao menos uma ${rotulo}.</span>`;
     } else {
-        el.innerHTML = `<strong>${total}</strong> questão(ões) disponível(is) em <strong>${checkedVisible.length}</strong> legislação(ões)`;
+        el.innerHTML = `<strong>${total}</strong> questão(ões) disponível(is) em <strong>${checkedVisible.length}</strong> ${rotulo}(s)`;
     }
 }
 
@@ -2361,10 +2311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginLembrar = document.getElementById('login-lembrar');
     if (savedEmail && loginEmail) { loginEmail.value = savedEmail; if (loginLembrar) loginLembrar.checked = true; }
     if (document.getElementById('total-selecionado')) {
-        const params = new URLSearchParams(window.location.search);
-        const modo   = params.get('modo');
-        if (modo === 'prova' || modo === 'quiz') selecionarModo(modo);
-        else selecionarModo('quiz');
+        atualizarTotalSelecionado();
     }
     if (window.openSessionsExist) {
         const ret = document.getElementById('tela-retomada');
@@ -2381,8 +2328,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function iniciarQuiz() {
     const cats = getCatsSelecionadas();
     if (cats.length === 0) { await modalAlert('Selecione ao menos uma legislação.', '⚠️'); return; }
-    const modoEl = document.querySelector('[name=modo]:checked');
-    const modo   = modoEl ? modoEl.value : 'quiz';
+    const modo   = typeof MODO_ATUAL !== 'undefined' ? MODO_ATUAL : 'quiz';
     tipoSessao   = modo;
 
     const resp = await post({ acao:'iniciar', tipo:modo, 'categorias': cats });
