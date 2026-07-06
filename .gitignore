@@ -4,6 +4,9 @@
 # Áudios (muito grandes para GitHub)
 audios/
 
+# Slides/apresentações (muito grandes para GitHub, upload direto via FTP)
+apresentacoes/**/*.pdf
+
 # Arquivos de desenvolvimento/debug
 debug.php
 install.php

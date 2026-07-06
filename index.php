@@ -1510,7 +1510,11 @@ if (is_dir($slidesDir)) {
     foreach (glob($slidesDir . '*.pdf') as $f) {
         $slidesPdfs[] = basename($f);
     }
-    sort($slidesPdfs);
+    usort($slidesPdfs, function($a, $b) {
+        $numA = preg_match('/^(\d+)\./', $a, $m) ? (int)$m[1] : PHP_INT_MAX;
+        $numB = preg_match('/^(\d+)\./', $b, $m) ? (int)$m[1] : PHP_INT_MAX;
+        return $numA <=> $numB ?: strcmp($a, $b);
+    });
 }
 ?>
 <div class="card" style="max-width:860px;margin:0 auto">
@@ -1525,7 +1529,9 @@ if (is_dir($slidesDir)) {
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
     <?php foreach ($slidesPdfs as $pdf):
         $nome   = pathinfo($pdf, PATHINFO_FILENAME);
-        $nome   = preg_replace('/[-_]+/', ' ', $nome);
+        $nome   = preg_replace('/^\d+\.\s*/', '', $nome);
+        $nome   = preg_replace('/\s*-\s*slide\s*$/i', '', $nome);
+        $nome   = str_replace('_', ' ', $nome);
         $nome   = trim($nome);
         $urlPdf = 'apresentacoes/' . rawurlencode($pdf);
     ?>
