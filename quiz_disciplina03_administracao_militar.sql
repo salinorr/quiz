@@ -1,0 +1,417 @@
+-- ============================================================
+-- QUIZ (modo estudo livre) — Disciplina 3/20 do CHO:
+-- Administração Militar — Regulamento de Administração do Exército (RAE)
+-- Decreto nº 98.820, de 12 de janeiro de 1990
+-- 30 questões — dupla justificativa (doutrina do caderno de questões + legislação vigente confirmada)
+--
+-- ATENÇÃO: o RAE é regulamento FEDERAL do Exército Brasileiro, usado no CHO da PMRR
+-- como referência doutrinária/analógica (não é legislação do Estado de Roraima).
+-- Texto do decreto conferido em: legislacao/Decreto_98820_1990_RAE.txt
+-- (compilado a partir de pt.wikisource.org, cotejado com Portal da Câmara dos
+-- Deputados/LEGIN e Portal da Legislação da Presidência da República).
+-- Nome da categoria NÃO contém a palavra "prova" — deve aparecer no Quiz Livre.
+-- ============================================================
+SET NAMES utf8mb4;
+SET foreign_key_checks = 0;
+
+INSERT IGNORE INTO categorias (nome, descricao)
+VALUES ('Administração Militar — CHO 03', 'Disciplina 3/20 do CHO — Regulamento de Administração do Exército (Decreto nº 98.820/1990)');
+
+SET @cat_am03 = (SELECT id FROM categorias WHERE nome = 'Administração Militar — CHO 03' LIMIT 1);
+
+INSERT INTO questoes
+    (categoria_id, enunciado, opcao_a, opcao_b, opcao_c, opcao_d, opcao_e,
+     resposta_correta, explicacao, referencia_legal, nivel)
+VALUES
+
+-- Q01: Agente Diretor (direção integral)
+(@cat_am03,
+ 'No exercício da direção integral das atividades administrativas da Unidade Administrativa (UA), o comandante, chefe ou diretor, investido de autoridade legal e responsável pelos atos e fatos administrativos praticados na Unidade, assume a denominação específica de:',
+ 'Ordenador de Despesas (OD).',
+ 'Fiscal Administrativo.',
+ 'Agente Diretor (AD).',
+ 'Gestor de Patrimônio.',
+ 'Comandante de Subunidade.',
+ 'C',
+ 'O Art. 23, § 1º, estabelece que, na direção integral das atividades administrativas, a autoridade denomina-se Agente Diretor. A alternativa A está incorreta pois a denominação "Ordenador de Despesas" é restrita à função específica de direção das atividades orçamentárias e financeiras (§ 2º). As demais alternativas (B, D, E) referem-se a agentes executores ou cargos com atribuições subordinadas e específicas, não abrangendo a direção integral da UA.\n\n📜 Fundamento legal vigente: o art. 23, §1º, do Decreto nº 98.820/1990 (RAE) dispõe textualmente que, "no exercício da direção integral das atividades administrativas da Unidade Administrativa, a autoridade referida neste artigo denomina-se Agente Diretor (AD)"; o §2º reserva a denominação "Ordenador de Despesas" à "função específica da direção exclusiva das atividades de administração orçamentária e financeira" — confirmando que são duas facetas funcionais da mesma autoridade (o comandante/chefe/diretor da OM, art. 23, caput), não cargos distintos.',
+ 'Decreto 98.820/1990 (RAE), art. 23, §§1º e 2º',
+ 'medio'),
+
+-- Q02: Agentes Executores Diretos
+(@cat_am03,
+ 'Os agentes que atuam na coordenação e no controle, exercendo simultaneamente funções de assessoramento direto ao Agente Diretor e contando com adjuntos e auxiliares previstos nos Quadros de Organização, são tecnicamente denominados pelo RAE como:',
+ 'Agentes Executores Diretos.',
+ 'Agentes Executores Indiretos.',
+ 'Agentes de Inspeção e Controle.',
+ 'Auxiliares da Administração.',
+ 'Oficiais de Estado-Maior.',
+ 'A',
+ 'O Art. 29 define expressamente que os Agentes Executores Diretos são agentes de coordenação e controle que exercem também funções de assessoramento do Agente Diretor. A alternativa B está incorreta porque os Agentes Executores Indiretos (Art. 21, item 3) realizam a execução propriamente dita em níveis subordinados. As alternativas C e E trazem nomenclaturas não previstas na taxonomia do Art. 21, enquanto a D refere-se a quem participa da responsabilidade secundando chefes imediatos (Art. 48).\n\n📜 Fundamento legal vigente: o art. 29 do RAE confirma, com redação praticamente idêntica à cobrada na questão, que "os agentes executores diretos são agentes de coordenação e controle, exercendo também funções de assessoramento do Agente Diretor, e contam com adjuntos, auxiliares e outros agentes, de acordo com os Quadros de Organização da OM" — distinguindo-os dos Agentes Executores Indiretos, listados no art. 21, item 3 (Comandante de Subunidade, Chefes de Serviços, Oficiais em geral, Oficial de Dia, Subtenente etc.).',
+ 'Decreto 98.820/1990 (RAE), art. 21, item 2, e art. 29',
+ 'medio'),
+
+-- Q03: Associação de colunas — agentes e atribuições
+(@cat_am03,
+ 'Considere as atribuições dos agentes da administração e assinale a alternativa que apresenta a sequência correta de correlação entre as colunas:\n1. Encarregado do Setor de Contabilidade. 2. Agente Diretor. 3. Encarregado do Setor de Pessoal. 4. Ordenador de Despesas. 5. Fiscal Administrativo.\n( ) Principal responsável pela administração da UA, responsável pelos atos e fatos administrativos nela praticados. ( ) Responsável pelo assessoramento nos assuntos de administração patrimonial e orçamentária. ( ) Responsável pela orientação e execução dos registros contábeis analíticos da gestão. ( ) Responsável pela coordenação e controle das atividades relacionadas a pessoal e remuneração. ( ) Atua na direção específica das atividades de administração orçamentária e financeira.',
+ '2-5-1-3-4',
+ '2-1-5-3-4',
+ '4-5-1-3-2',
+ '2-5-3-1-4',
+ '4-2-1-5-3',
+ 'A',
+ 'A sequência reflete fielmente as competências descritas no RAE: o Agente Diretor (2) detém a responsabilidade integral (Art. 25); o Fiscal Administrativo (5) assessora em patrimônio e orçamento (Art. 30); o Encarregado de Contabilidade (1) executa registros analíticos (Art. 33); o Encarregado de Pessoal (3) coordena atividades de pessoal/remuneração (Art. 32); e o Ordenador de Despesas (4) foca na gestão orçamentária/financeira (Art. 23, § 2º).\n\n📜 Fundamento legal vigente: confirmado pelo teor literal dos artigos — art. 25 ("O Agente Diretor, como principal responsável pela administração da unidade... sendo responsável, portanto, pelos atos e fatos administrativos praticados na sua UA"); art. 30 (Fiscal Administrativo = "responsável pelo assessoramento do Agente Diretor nos assuntos de administração patrimonial e do Ordenador de Despesas na administração orçamentaria"); art. 33 (Encarregado de Contabilidade = "responsável pela orientação e execução dos registros contábeis analíticos dos atos e fatos da gestão orçamentária e financeira"); art. 32 (Encarregado de Pessoal = "responsável pelos encargos relativos à coordenação e ao controle das atividades relacionadas com o pessoal, inclusive de remuneração"); e art. 23, §2º (Ordenador de Despesas = direção exclusiva das atividades de administração orçamentária e financeira).',
+ 'Decreto 98.820/1990 (RAE), arts. 23 §2º, 25, 30, 32 e 33',
+ 'dificil'),
+
+-- Q04: Transmissão de material por comissão de três membros (morte do detentor)
+(@cat_am03,
+ 'O Capitão "X", Encarregado do Setor de Material de determinada Unidade Administrativa, faleceu subitamente durante o gozo de suas férias regulamentares. Visando observar o preceito de que a atividade administrativa não sofre "solução de continuidade" e garantir a regularidade do patrimônio sob guarda do falecido, o Agente Diretor deve:',
+ 'Aguardar o retorno das férias do substituto legal para que este assuma a carga individualmente após conferência.',
+ 'Determinar que o Fiscal Administrativo assuma a responsabilidade cumulativa, dispensando formalidades por motivo de força maior.',
+ 'Nomear, em Boletim Interno, uma comissão composta de três membros para realizar a transmissão de material e valores.',
+ 'Solicitar a presença de um perito do Órgão Gestor para atestar o estado do material antes de qualquer movimentação.',
+ 'Realizar a descarga automática de todo o material sob responsabilidade do Capitão "X" por motivo de óbito.',
+ 'C',
+ 'Conforme o Art. 144, nos casos de afastamento súbito (o que inclui morte, § 1º, item 7), a transmissão de material e valores deve ser realizada obrigatoriamente por uma comissão de três membros. A alternativa A está errada pois o Art. 135 veda a solução de continuidade. A B está incorreta pois a comissão é impositiva. A D e a E não possuem amparo legal; a descarga só ocorre nos motivos do Art. 85, e o óbito exige apenas a transmissão da carga para novo detentor.\n\n📜 Fundamento legal vigente: o art. 144, caput, do RAE determina que, "nos casos de afastamento súbito de agente detentor de bens do patrimônio, a transmissão de material e valores deverá ser realizada por uma comissão composta de três membros, nomeada em Boletim Interno da OM, logo após ser o fato conhecido"; o §1º, item 7, inclui expressamente a "morte" entre as hipóteses de afastamento súbito. O art. 135 fixa a regra-base de que "a atividade administrativa da unidade não sofre solução de continuidade, quando ocorre substituição de agentes".',
+ 'Decreto 98.820/1990 (RAE), art. 144, caput e §1º, item 7; art. 135',
+ 'medio'),
+
+-- Q05: Fato Administrativo x Ato Administrativo
+(@cat_am03,
+ 'O RAE estabelece distinções técnicas fundamentais entre atos e fatos administrativos. Com base no Art. 2º, assinale a alternativa que descreve corretamente um Fato Administrativo:',
+ 'Elaboração de uma proposta de orçamento para o próximo exercício.',
+ 'Realização de uma licitação na modalidade convite.',
+ 'Recebimento de material permanente com a respectiva inclusão em carga.',
+ 'Confecção de um plano interno de trabalho sem reflexo contábil.',
+ 'Realização de uma tomada de contas periódica para fiscalização interna.',
+ 'C',
+ 'De acordo com o Art. 2º, item 16, Fato Administrativo é a providência da qual decorre alteração no patrimônio (ex: recebimentos, cargas, descargas). As alternativas A, B, D e E descrevem Atos Administrativos, definidos no item 10 do mesmo artigo como providências visando à boa marcha da administração, mas que não alteram o patrimônio.\n\n📜 Fundamento legal vigente: o art. 2º, item 16, do RAE define Fato Administrativo como "providência praticada por um agente e da qual decorre alteração no patrimônio (aquisições ou vendas, recebimentos ou fornecimentos, cargas ou descargas, etc.)"; por oposição, o item 10 define Ato Administrativo como "providência de ordem geral, praticada por um agente visando à boa marcha da administração e da qual não decorre alteração no patrimônio (propostas de orçamentos, licitações, planos internos de trabalho, tomadas de contas, etc.)" — exatamente os exemplos usados nas alternativas A, B, D e E.',
+ 'Decreto 98.820/1990 (RAE), art. 2º, itens 10 e 16',
+ 'facil'),
+
+-- Q06: Adiantamento
+(@cat_am03,
+ 'O conceito de Adiantamento, nos termos do RAE, refere-se à entrega de recursos financeiros a servidor para despesas que não possam subordinar-se ao processo normal de aplicação. Sobre este instituto, é correto afirmar:',
+ 'Pode prescindir de empenho prévio caso a despesa seja de urgência comprovada.',
+ 'É sempre precedido de empenho na dotação adequada à despesa a realizar.',
+ 'Só pode ser concedido a Oficiais Superiores no exercício de função de comando.',
+ 'É vedado para a aquisição de material de consumo, limitando-se a serviços.',
+ 'Depende de autorização prévia e específica do Ministro do Exército para cada concessão.',
+ 'B',
+ 'O Art. 2º, item 1, define adiantamento como a entrega de recursos sempre precedida de empenho na dotação adequada à despesa a realizar. A alternativa A é falsa pois o empenho é condição precedente absoluta. As alternativas C, D e E impõem restrições que não constam na definição normativa do RAE.\n\n📜 Fundamento legal vigente: o art. 2º, item 1, do RAE define Adiantamento como "designação genérica para entrega de recursos financeiros a servidor, sempre precedida de empenho na dotação adequada à despesa a realizar, a qual não possa subordinar-se ao processo normal de aplicação [...] podendo receber a denominação de suprimento de fundos ou outra qualquer que venha a substituí-la" — confirmando que o empenho prévio é condição textual e obrigatória, sem as restrições de sujeito ou objeto sugeridas pelas demais alternativas.',
+ 'Decreto 98.820/1990 (RAE), art. 2º, item 1',
+ 'medio'),
+
+-- Q07: Administração do Exército — atividade-fim
+(@cat_am03,
+ 'A Administração do Exército, conforme estabelecido nos conceitos básicos do regulamento, caracteriza-se por ser o instrumento que serve para a ativação, direção e controle das Organizações Militares, possuindo como orientação primordial:',
+ 'O fortalecimento da autonomia financeira em relação ao Tesouro Nacional.',
+ 'A fiscalização de entidades civis vinculadas à defesa.',
+ 'A realização da atividade-fim do Exército.',
+ 'A gestão exclusiva dos bens de terceiros sob guarda da União.',
+ 'A substituição das atividades da Administração Federal Direta.',
+ 'C',
+ 'O Art. 2º, item 5, define explicitamente que a Administração do Exército é aquela orientada para a realização da atividade-fim do Exército. As demais alternativas falham por não corresponderem à definição literal (como a D) ou por contrariarem o Art. 3º, que afirma ser a Administração do Exército parte integrante e subordinada à Administração Federal (invalidando A e E).\n\n📜 Fundamento legal vigente: o art. 2º, item 5, do RAE conceitua Administração do Exército como "a que, orientada para a realização da atividade-fim do Exército, serve de instrumento para a ativação, a direção e o controle das Organizações Militares"; o art. 3º complementa que "a Administração do Exército é parte integrante da Administração Federal e a ela se subordina segundo normas legais" — o que afasta qualquer ideia de autonomia financeira ou substituição da Administração Federal (alternativas A e E).',
+ 'Decreto 98.820/1990 (RAE), art. 2º, item 5, e art. 3º',
+ 'facil'),
+
+-- Q08: UA autônoma x semi-autônoma
+(@cat_am03,
+ 'As Unidades Administrativas (UA) são os elementos orgânicos para o exercício da administração no Exército. Sobre a distinção entre UA autônoma e semi-autônoma, assinale a alternativa correta:',
+ 'A UA semi-autônoma não possui competência para gerir bens da União.',
+ 'A UA autônoma depende de coordenação externa para julgar direitos de seus subordinados.',
+ 'A UA semi-autônoma fica vinculada a uma UA autônoma para fins administrativos específicos, mas possui competência para determinadas atividades autônomas.',
+ 'Somente as UAs autônomas possuem Organização Militar (OM) vinculada.',
+ 'A semi-autonomia administrativa é concedida apenas em tempo de guerra.',
+ 'C',
+ 'Conforme o Art. 11, § 2º, a UA semi-autônoma é a que fica vinculada a uma UA autônoma para fins administrativos específicos, tendo, porém, competência para exercer, de forma autônoma, determinadas atividades. A alternativa A está incorreta pois ambas gerem bens (Art. 11, caput). A B contradiz o § 1º, que atribui à UA autônoma a competência para julgar direitos. As alternativas D e E inventam restrições inexistentes no texto legal.\n\n📜 Fundamento legal vigente: o art. 11, §2º, do RAE define UA semi-autônoma como "a que fica vinculada a uma UA autônoma para fins administrativos específicos, tendo, porém, competência para exercer, de forma autônoma, determinadas atividades administrativas"; o §1º atribui à UA autônoma competência para "praticar todos os atos e fatos administrativos decorrentes da gestão de bens da União e de terceiros, bem como estudar, encaminhar, dar parecer e julgar direitos" — texto que confirma integralmente a alternativa correta.',
+ 'Decreto 98.820/1990 (RAE), art. 11, §§1º e 2º',
+ 'medio'),
+
+-- Q09: Competência para criação/extinção de OM
+(@cat_am03,
+ 'No tocante à criação, transformação ou extinção de Organizações Militares (OM), o RAE define competências distintas conforme o valor da organização. É correto afirmar que:',
+ 'Atos relativos a OM de valor unidade ou inferior são da competência do Presidente da República.',
+ 'OM de valor superior a unidade são criadas por Portaria do Estado-Maior do Exército.',
+ 'Atos relativos a OM de valor unidade ou inferior são da competência do Ministro do Exército.',
+ 'A extinção de qualquer OM depende obrigatoriamente de Lei Ordinária.',
+ 'O Agente Diretor tem competência para transformar sua UA em semi-autônoma.',
+ 'C',
+ 'O Art. 12 estabelece que OM de valor superior a unidade depende de ato presidencial. Já o parágrafo único determina que os mesmos atos para OM de valor unidade ou inferior são da competência do Ministro do Exército. A alternativa A inverte as competências; a B erra o emissor do ato; a D ignora que a extinção pode ocorrer por Decreto ou Portaria Ministerial, e a E usurpa competência ministerial (Art. 17).\n\n📜 Fundamento legal vigente: o art. 12, caput, do RAE dispõe que "a criação, a localização de sede, a subordinação, a transformação, a extinção de OM de valor superior a unidade são processadas por ato presidencial, mediante proposta do Ministro do Exército"; o parágrafo único estabelece que "os mesmos atos relativos às OM de valor unidade ou inferior são da competência do Ministro do Exército" — confirmando a alternativa C.',
+ 'Decreto 98.820/1990 (RAE), art. 12, caput e parágrafo único',
+ 'medio'),
+
+-- Q10: Publicidade dos atos de estrutura
+(@cat_am03,
+ 'A publicidade é requisito de validade dos atos administrativos de estrutura. Segundo o Art. 16 do RAE, os atos de transformação, alteração de sede ou extinção de uma OM devem ser publicados obrigatoriamente em:',
+ 'Primeiro Boletim Interno da unidade sucessora.',
+ 'Diário Oficial da União, dispensando-se boletim interno.',
+ 'Boletim de encerramento de atividades da OM.',
+ 'Boletim do Exército para conhecimento de toda a Força.',
+ 'Documento ostensivo de circulação regional.',
+ 'C',
+ 'O Art. 16 prescreve que os atos de criação e organização constam no primeiro boletim, enquanto os de transformação, de alteração de localização de sede ou de extinção devem ser publicados no boletim de encerramento de atividades da OM. As demais alternativas não encontram respaldo no dispositivo citado.\n\n📜 Fundamento legal vigente: o art. 16 do RAE determina que "os atos de criação e de organização de uma OM devem ser publicados no seu primeiro Boletim Interno; os de transformação, de alteração de localização de sede ou de extinção, no seu boletim de encerramento de atividades" — texto literal que sustenta a alternativa C.',
+ 'Decreto 98.820/1990 (RAE), art. 16',
+ 'medio'),
+
+-- Q11: Delegação da função de Agente Diretor
+(@cat_am03,
+ 'Ao Agente Diretor, como principal responsável pela administração da UA, compete uma gama de encargos. Assinale a conduta que configura uma infração às normas de delegação previstas no RAE:',
+ 'Delegar a função de Agente Diretor a um Oficial Superior mais antigo que os demais agentes, em UA comandada por Oficial-General.',
+ 'Formalizar e assinar contratos decorrentes de licitações.',
+ 'Delegar as atribuições de Agente Diretor a um Subtenente da Unidade, visando descentralizar a gestão de material.',
+ 'Exercer fiscalização direta sobre a escrituração para mantê-la em ordem e em dia.',
+ 'Comunicar ao banco a substituição do Ordenador de Despesas e do Encarregado de Finanças.',
+ 'C',
+ 'A alternativa C está incorreta e configura a infração pois, conforme o Art. 26, a função de Agente Diretor só pode ser delegada a oficial superior. Subtenentes são auxiliares ou agentes executores indiretos (Art. 21) e não podem receber tal delegação. As alternativas A, B, D e E são atribuições ou procedimentos legais previstos nos Arts. 26 e 27.\n\n📜 Fundamento legal vigente: o art. 26, caput, do RAE restringe a delegação da função de Agente Diretor à hipótese de "Unidade Administrativa comandada, dirigida ou chefiada por Oficial-General", podendo recair apenas sobre "qualquer oficial superior mais antigo que os demais agentes da administração" — não há previsão de delegação a Subtenente (agente executor indireto, art. 21, item 3, "e"). As demais condutas (formalizar contratos, fiscalizar escrituração, comunicar ao banco) são atribuições expressas do Agente Diretor no art. 27, itens 3, 7 e 18.',
+ 'Decreto 98.820/1990 (RAE), art. 26, caput; art. 27, itens 3, 7 e 18',
+ 'medio'),
+
+-- Q12: Competências do Fiscal Administrativo
+(@cat_am03,
+ 'O Fiscal Administrativo é o agente executor direto responsável por assessorar o Agente Diretor e o Ordenador de Despesas. No cumprimento de seus encargos, é competência do Fiscal Administrativo:',
+ 'Decidir, em última instância, sobre a legalidade de IPM instaurados na unidade.',
+ 'Assinar as ordens de pagamento em conjunto com o Tesoureiro, substituindo o OD.',
+ 'Proceder à permanente fiscalização dos registros contábeis referentes à administração patrimonial.',
+ 'Nomear a comissão de recebimento de material sem anuência do Comandante.',
+ 'Arrecadar diretamente as receitas da União provenientes de taxas de ocupação.',
+ 'C',
+ 'O Art. 31, item 3, define que cabe ao Fiscal Administrativo proceder a permanente fiscalização dos registros contábeis, referentes à administração patrimonial. A alternativa A é função jurídica/disciplinar; a B é função do OD (Art. 28); a D é ato do Agente Diretor (Art. 66); e a E é atribuição do Encarregado de Finanças (Art. 34, item 5).\n\n📜 Fundamento legal vigente: o art. 31, item 3, do RAE atribui ao Fiscal Administrativo o encargo de "proceder a permanente fiscalização dos registros contábeis, referentes à administração patrimonial, responsabilizando-se por sua conferência e exatidão" — combinado com o art. 30, que o define como assessor do Agente Diretor (patrimônio) e do Ordenador de Despesas (orçamento).',
+ 'Decreto 98.820/1990 (RAE), art. 30 e art. 31, item 3',
+ 'medio'),
+
+-- Q13: Encarregado do Setor de Finanças (Tesoureiro)
+(@cat_am03,
+ 'O Encarregado do Setor de Finanças (Tesoureiro) desempenha papel técnico na gestão financeira. De acordo com o Art. 34 do RAE, compete-lhe:',
+ 'Elaborar o planejamento orçamentário anual da UA conforme as diretrizes do Estado-Maior.',
+ 'Arrecadar as rendas da UA e as receitas da União, de acordo com a legislação vigente.',
+ 'Realizar compras de pronto pagamento sem prévia autorização de qualquer autoridade.',
+ 'Fiscalizar a higiene do pessoal do Rancho na ausência do Aprovisionador.',
+ 'Decidir sobre a alienação de material inservível por meio de leilão.',
+ 'B',
+ 'O Art. 34, item 5, estabelece que compete ao Encarregado de Finanças arrecadar as rendas da UA e as receitas da União. A alternativa A é planejamento de nível superior/OD; a C viola a necessidade de determinação do OD (Art. 34, item 4); a D é função do Aprovisionador (Art. 37, item 4); e a E é competência do Agente Diretor (Art. 98).\n\n📜 Fundamento legal vigente: o art. 34, item 5, do RAE atribui ao Encarregado do Setor de Finanças o encargo de "arrecadar as rendas da UA e as receitas da União, de acordo com a legislação vigente" — as demais competências pertencem a outros agentes (compras/planejamento orçamentário ao OD/Agente Diretor, higiene do Rancho ao Aprovisionador, art. 37, item 4, e alienação de material ao Agente Diretor, art. 98).',
+ 'Decreto 98.820/1990 (RAE), art. 34, item 5',
+ 'medio'),
+
+-- Q14: Encarregado do Setor de Material
+(@cat_am03,
+ 'O Encarregado do Setor de Material possui atribuições específicas na gestão dos bens da UA. Entre seus encargos, destaca-se a obrigação de:',
+ 'Organizar o cardápio diário da unidade.',
+ 'Visitar assiduamente as oficinas para certificar-se de que consertos e reparações são feitos convenientemente.',
+ 'Efetuar o pagamento dos vencimentos das praças das subunidades.',
+ 'Decidir isoladamente sobre a descarga de material permanente.',
+ 'Exercer a vigilância externa do quartel fora do expediente.',
+ 'B',
+ 'O Art. 35, item 2, determina que o Encarregado de Material deve certificar-se sempre, por visitas assíduas às oficinas, se tudo é feito convenientemente. A alternativa A é do Aprovisionador; a C é do Tesoureiro/Cmt Subunidade (Art. 34 e 39); a D é do Agente Diretor (Art. 85); e a E é do Oficial de Dia (Art. 42).\n\n📜 Fundamento legal vigente: o art. 35, item 2, do RAE atribui ao Encarregado do Setor de Material o encargo de "efetuar as compras ou mandar realizar os consertos ou reparações no material, determinadas pelo OD, certificando-se sempre, por visitas assíduas às oficinas, se tudo é feito convenientemente" — texto que confirma literalmente a alternativa B.',
+ 'Decreto 98.820/1990 (RAE), art. 35, item 2',
+ 'medio'),
+
+-- Q15: Oficial de Dia no Rancho
+(@cat_am03,
+ 'No que concerne à atuação do Oficial de Dia no Rancho da Unidade, o Art. 43 do RAE prescreve que:',
+ 'Cabe ao Oficial de Dia realizar a pesagem de todos os víveres que entram no depósito.',
+ 'Ele possui autoridade técnica para reprovar a qualidade da carne servida por conta própria.',
+ 'Não lhe cabe, durante sua presença no rancho, senão a manutenção da ordem entre os arranchados, ressalvada a ausência do Aprovisionador.',
+ 'O Oficial de Dia deve assinar os balancetes de estoque do setor de aprovisionamento.',
+ 'Deve elaborar a escala de serviço dos cozinheiros e copeiros.',
+ 'C',
+ 'O Art. 43 afirma que não cabe ao Oficial de Dia, durante sua presença no rancho, senão a manutenção da ordem entre os arranchados. Em caso de ausência do Encarregado de Aprovisionamento, ele pode intervir apenas na quantidade. A qualidade (alternativa B) é competência do Fiscal Administrativo e técnicos. As demais alternativas (A, D, E) são atribuições do Aprovisionador (Art. 37).\n\n📜 Fundamento legal vigente: o art. 43, caput, do RAE dispõe que "não cabe ao Oficial de Dia, durante a sua presença no rancho, por ocasião das refeições, senão a manutenção da ordem entre os arranchados", competindo-lhe, apenas na ausência do Encarregado do Setor de Aprovisionamento, decidir sobre a "quantidade" da ração — a "qualidade desta é da competência do Fiscal Administrativo e dos técnicos (Médico, Veterinário e Encarregado do Setor de Aprovisionamento)".',
+ 'Decreto 98.820/1990 (RAE), art. 43, caput',
+ 'medio'),
+
+-- Q16: Material permanente
+(@cat_am03,
+ 'Segundo a classificação de bens móveis adotada pelo RAE, o material permanente caracteriza-se por:',
+ 'Perder sua identidade física em razão do uso.',
+ 'Ter durabilidade prevista superior a 2 (dois) anos e não perder sua identidade física pelo uso.',
+ 'Destinar-se exclusivamente à aplicação imediata em obras de engenharia.',
+ 'Ser composto apenas por bens que não podem ter movimento por força alheia.',
+ 'Possuir valor unitário sempre superior a 50 Maior Valor de Referência (MVR).',
+ 'B',
+ 'O Art. 53, item 1, define material permanente como o que tem durabilidade prevista superior a 2 (dois) anos e que em razão de seu uso não perde sua identidade física. A alternativa A descreve material de consumo (item 2). A D descreve bens imóveis (Art. 52). As demais não encontram base legal no RAE.\n\n📜 Fundamento legal vigente: o art. 53, item 1, do RAE define material permanente como "todo artigo, equipamento ou conjunto operacional ou administrativo, que tem durabilidade prevista superior a 2 (dois) anos e que em razão de seu uso não perde sua identidade física, nem se incorpora a outro bem" — em contraposição ao material de consumo (item 2), que "perde suas características individuais e isoladas" quando utilizado.',
+ 'Decreto 98.820/1990 (RAE), art. 53, item 1',
+ 'facil'),
+
+-- Q17: Material crítico/estratégico
+(@cat_am03,
+ 'Itens de suprimento que exigem medidas especiais para sua obtenção ou comércio no interesse da defesa nacional são classificados tecnicamente como:',
+ 'Material de consumo imediato.',
+ 'Material crítico ou estratégico (controlado).',
+ 'Bens de uso comum do povo.',
+ 'Suprimento eventual de urgência.',
+ 'Matéria-prima de aplicação direta.',
+ 'B',
+ 'Conforme o Art. 61, os artigos escassos (críticos) ou fundamentais à defesa (estratégicos) são materiais controlados pelo Órgão Gestor. As demais classificações são genéricas ou estranhas à terminologia técnica do RAE para este fim.\n\n📜 Fundamento legal vigente: o art. 61 do RAE submete à distribuição controlada pelo Órgão Gestor os artigos "de alto custo, os altamente técnicos, os que apresentam periculosidade no manuseio, os escassos no mercado interno ou externo (material crítico) e os que exigem medidas especiais para sua obtenção, produção, industrialização e comércio (material estratégico)" — terminologia técnica que corresponde à alternativa B.',
+ 'Decreto 98.820/1990 (RAE), art. 61',
+ 'facil'),
+
+-- Q18: Nível de suprimento — Nível Mínimo
+(@cat_am03,
+ 'O "Nível de Suprimento" é a quantidade de material que deve ser mantida em estoque. A quantidade que constitui reserva para atender as necessidades em qualquer caso de interrupção ocasional do fluxo de fornecimento denomina-se:',
+ 'Nível Operacional.',
+ 'Nível Máximo.',
+ 'Nível Mínimo.',
+ 'Nível de Segurança.',
+ 'Nível de Mobilização.',
+ 'C',
+ 'O Art. 63, § 3º, define Nível Mínimo como a quantidade mantida em estoque para atender as necessidades em interrupção ocasional do fluxo. O Operacional (§ 2º) é o estoque normal entre recebimentos. O Máximo (§ 4º) é a soma de ambos.\n\n📜 Fundamento legal vigente: o art. 63, §3º, do RAE define Nível Mínimo como "quantidade mínima de determinado suprimento a ser mantida em estoque; constitui reserva de suprimento para atender as necessidades em qualquer caso de interrupção ocasional do fluxo de fornecimento" — o Nível Operacional (§2º) é o "estoque normal de trabalho, entre recebimentos sucessivos", e o Máximo (§4º) é "a soma das quantidades que se referem aos níveis mínimo e operacional".',
+ 'Decreto 98.820/1990 (RAE), art. 63, §§2º, 3º e 4º',
+ 'medio'),
+
+-- Q19: Suprimento automático
+(@cat_am03,
+ 'O suprimento realizado através de planejamento, com base em legislação específica e que dispensa a elaboração de pedido pela UA ao Órgão Provedor, é o:',
+ 'Suprimento Eventual.',
+ 'Suprimento Automático.',
+ 'Suprimento Emergencial.',
+ 'Suprimento de Pronto Pagamento.',
+ 'Suprimento de Nivelamento.',
+ 'B',
+ 'O Art. 57, § 1º, estabelece que o suprimento automático é realizado através do planejamento, não sendo necessário elaborar pedido. O eventual (§ 2º) atende necessidades não previstas.\n\n📜 Fundamento legal vigente: o art. 57, §1º, do RAE dispõe que "o suprimento automático é realizado através do planejamento, tendo por base legislação específica, não sendo necessário elaborar pedido" — o suprimento eventual (§2º) "destina-se a atender necessidade não prevista de emergência ou ocasional".',
+ 'Decreto 98.820/1990 (RAE), art. 57, §§1º e 2º',
+ 'medio'),
+
+-- Q20: Comissão de Recebimento e Exame
+(@cat_am03,
+ 'A Comissão de Recebimento e Exame, nomeada para verificar material que der entrada na UA, deve observar as seguintes regras de composição e prazos:',
+ 'Composta por dois oficiais e um sargento, com prazo de 15 dias.',
+ 'Composta por três oficiais, com prazo de 8 (oito) dias para apresentar o termo.',
+ 'Composta apenas por especialistas civis, com prazo de 5 dias úteis.',
+ 'Composta pelo Agente Diretor e pelo OD, com prazo de 24 horas.',
+ 'Composta por qualquer agente executor, com prazo de 30 dias corridos.',
+ 'B',
+ 'O Art. 66, § 1º, prescreve que a comissão será constituída por três oficiais. O § 3º fixa o prazo de 8 (oito) dias para a apresentação do termo ou parte de recebimento. As demais alternativas alteram a composição ou o prazo previsto no regulamento.\n\n📜 Fundamento legal vigente: o art. 66, §1º, do RAE prevê que "a comissão de Recebimento e Exame será constituída por três oficiais", devendo o Encarregado do Setor de Material e o provável detentor direto, em princípio, integrá-la; o §3º fixa o "prazo de 8 (oito) dias para apresentar ao Fiscal Administrativo o termo ou parte de recebimento", prorrogável mediante solicitação fundamentada.',
+ 'Decreto 98.820/1990 (RAE), art. 66, §§1º e 3º',
+ 'medio'),
+
+-- Q21: Irregularidade no recebimento
+(@cat_am03,
+ 'Se no recebimento de material adquirido pela UA for encontrada irregularidade quanto à qualidade ou quantidade, o procedimento correto é:',
+ 'Devolver verbalmente ao fornecedor e aguardar nova remessa.',
+ 'Lavrar um Termo de Recebimento e Exame mencionando apenas as irregularidades e motivos da rejeição.',
+ 'Aceitar o material e providenciar o conserto nas oficinas da própria unidade.',
+ 'Destruir o material e comunicar o fato ao Ministério Público Militar.',
+ 'Escriturar o material como "bom" e abrir sindicância posterior.',
+ 'B',
+ 'O Art. 70 determina que, havendo irregularidade, lavrar-se-á um Termo de Recebimento e Exame, e o § 3º especifica que este mencionará apenas as irregularidades encontradas e os artigos rejeitados, com declaração dos motivos. Aceitar material irregular (C e E) gera responsabilidade civil para a comissão (Art. 71, § 1º).\n\n📜 Fundamento legal vigente: o art. 70, caput, do RAE determina que, havendo irregularidade no recebimento, "lavrarão um Termo de Recebimento e Exame"; o §3º especifica que "os termos mencionarão apenas as irregularidades encontradas e os artigos rejeitados, com declaração dos motivos da rejeição" — aceitar material irregular sem esse termo pode gerar responsabilidade nos termos do art. 71, §1º.',
+ 'Decreto 98.820/1990 (RAE), art. 70, caput e §3º; art. 71, §1º',
+ 'medio'),
+
+-- Q22: Avaliação de bens em excesso
+(@cat_am03,
+ 'Bens encontrados em excesso nas conferências patrimoniais ou materiais fabricados pela Unidade Administrativa devem ser incluídos no patrimônio tendo por base:',
+ 'O valor histórico de aquisição de itens semelhantes.',
+ 'O preço de custo da matéria-prima utilizada apenas.',
+ 'O preço corrente no comércio, citando-se mês e ano da fixação.',
+ 'Um valor simbólico de 1 (um) MVR para fins de inventário.',
+ 'O valor atribuído pelo doador original, se houver.',
+ 'C',
+ 'Conforme o Art. 73, § 2º, os bens encontrados em excesso serão incluídos no patrimônio tendo por base o preço corrente no comércio. As demais alternativas não possuem amparo no dispositivo legal citado.\n\n📜 Fundamento legal vigente: o art. 73, §2º, do RAE dispõe que "os bens encontrados em excesso serão incluídos no patrimônio, tendo por base o preço corrente no comercio, citando-se mês e ano da fixação de preço".',
+ 'Decreto 98.820/1990 (RAE), art. 73, §2º',
+ 'medio'),
+
+-- Q23: Motivos de descarga (EXCETO)
+(@cat_am03,
+ 'A descarga de material é o ato administrativo que retira o bem do patrimônio da UA. Segundo o Art. 85, são motivos gerais para a descarga, EXCETO:',
+ 'Inservibilidade para o fim a que se destina.',
+ 'Perda ou extravio.',
+ 'Furto ou roubo.',
+ 'Transferência para outra UA ou recolhimento.',
+ 'Modernização estética das instalações do comando.',
+ 'E',
+ 'O Art. 85, § 1º, lista exaustivamente os motivos para descarga (inservibilidade, perda, furto, transferência, etc.). A modernização estética (E) não é motivo legal para descarga.\n\n📜 Fundamento legal vigente: o art. 85, §1º, do RAE enumera os motivos gerais de descarga: "1) inservibilidade para o fim a que se destina, não sendo susceptível de reparação ou recuperação; 2) perda ou extravio; 3) furto ou roubo; 4) outros motivos (transferências, recolhimentos, etc.)" — rol que não inclui "modernização estética das instalações do comando" (alternativa E).',
+ 'Decreto 98.820/1990 (RAE), art. 85, §1º',
+ 'medio'),
+
+-- Q24: Descarga por furto/roubo — IPM
+(@cat_am03,
+ 'Nos casos de descarga motivada por furto ou roubo, o Agente Diretor deve obrigatoriamente determinar a:',
+ 'Abertura de sindicância administrativa simples.',
+ 'Instauração de Inquérito Policial-Militar (IPM).',
+ 'Nomeação de comissão de avaliação de danos.',
+ 'Cobrança imediata do valor no soldo do detentor.',
+ 'Realização de leilão dos itens remanescentes.',
+ 'B',
+ 'O Art. 88, § 3º, determina expressamente que nos casos de furto ou roubo deve haver a instauração de IPM. A sindicância (A) é usada para perdas onde não há indício de crime ou quando a responsabilidade não está clara (Art. 88, § 2º).\n\n📜 Fundamento legal vigente: o art. 88, §3º, do RAE determina que, "nos casos de furto ou roubo", a providência é a "instauração de IPM" — diversamente da hipótese de perda/extravio sem responsável definido, em que cabe "abertura de sindicância, quando não estiver caracterizada a responsabilidade pelo ressarcimento do prejuízo" (§2º, item 2).',
+ 'Decreto 98.820/1990 (RAE), art. 88, §§2º e 3º',
+ 'medio'),
+
+-- Q25: Alienação de matéria-prima e resíduos
+(@cat_am03,
+ 'As Unidades Administrativas podem alienar, mediante licitação e na forma das instruções vigentes, os seguintes itens:',
+ 'Armamento leve e munição fora de validade.',
+ 'Viaturas operacionais em estado de conservação regular.',
+ 'Matéria-prima sem previsão de uso e resíduos de oficina.',
+ 'Terrenos baldios pertencentes à União na sede da UA.',
+ 'Fardamento usado e inservível recolhido de praças.',
+ 'C',
+ 'O Art. 98 permite que as UA alienem a matéria-prima que não tenha previsão de ser utilizada, bem como os resíduos de oficina. Alienação de bens imóveis (D) ou material controlado (A) segue ritos diversos e restritos não previstos para a UA ordinária no Art. 98.\n\n📜 Fundamento legal vigente: o art. 98, caput, do RAE autoriza as Unidades Administrativas a alienar, "mediante licitação e na forma das instruções vigentes, a matéria-prima que não tenha previsão de ser utilizada, bem como os resíduos, de oficina" — os §§1º e 2º tratam, respectivamente, de artigos inservíveis adquiridos pela própria UA e da venda de resíduos "em princípio, a peso".',
+ 'Decreto 98.820/1990 (RAE), art. 98, caput e §§1º e 2º',
+ 'medio'),
+
+-- Q26: Movimentação — permanecer adido sem recursos
+(@cat_am03,
+ 'O militar movimentado deve ter suas contas ajustadas na origem. Na hipótese de inexistirem recursos para o pagamento de ajuda de custo e transporte, o servidor:',
+ 'Deve seguir destino por conta própria, sendo reembolsado posteriormente.',
+ 'Deve permanecer adido, como se efetivo fosse, até a disponibilidade dos recursos.',
+ 'Terá sua movimentação cancelada por carência orçamentária.',
+ 'Será desligado e aguardará o pagamento em sua residência.',
+ 'Receberá um adiantamento do Tesoureiro utilizando recursos do Rancho.',
+ 'B',
+ 'Conforme o Art. 102, § 3º, na ausência de recursos, o servidor deverá permanecer adido como se efetivo fosse à OM, até que haja disponibilidade daqueles recursos. As outras opções contrariam o direito do servidor ao transporte e ajuda de custo prévios.\n\n📜 Fundamento legal vigente: o art. 102, §3º, do RAE dispõe que, "no caso de não existirem na ocasião, recursos para o pagamento da ajuda de custo e para o transporte [...] deverá o mesmo permanecer adido como se efetivo fosse à OM, até que haja disponibilidade daqueles recursos", exceto se o servidor manifestar desejo de seguir destino.',
+ 'Decreto 98.820/1990 (RAE), art. 102, §3º',
+ 'medio'),
+
+-- Q27: Responsabilidade civil dos agentes
+(@cat_am03,
+ 'Sobre a responsabilidade civil dos agentes da administração militar, assinale a alternativa correta de acordo com o RAE:',
+ 'A absolvição criminal anula automaticamente o débito civil.',
+ 'A responsabilidade civil isenta o agente da sanção disciplinar.',
+ 'Recursos para suspensão de débitos interrompem os descontos na remuneração.',
+ 'A responsabilidade civil acarreta o ressarcimento dos prejuízos causados à União ou a terceiros.',
+ 'O Ministério do Exército não responde por danos causados por seus agentes a terceiros.',
+ 'D',
+ 'O Art. 109, § 2º, afirma que a responsabilidade civil acarreta o ressarcimento dos danos. A alternativa A é falsa (Art. 109, § 3º); a B é falsa (Art. 109, § 1º); a C é falsa (Art. 109, § 4º) e a E contraria o Art. 118, que estabelece a responsabilidade do Ministério com ação regressiva.\n\n📜 Fundamento legal vigente: o art. 109, §2º, do RAE dispõe que "a responsabilidade civil imputada ao agente ou auxiliar culpado acarretará o ressarcimento dos danos ou prejuízos causados à União ou a terceiros"; o §1º afasta a alternativa A (não isenta de sanção); o §3º afasta a alternativa da absolvição (só anula o débito se a ação civil for julgada improcedente em última instância); o §4º confirma que os recursos não sustam os descontos. O art. 118 confirma que "o Ministério do Exército responderá pelos danos que os agentes de administração causarem a terceiros", com ação regressiva em caso de culpa/dolo — o que afasta a alternativa E.',
+ 'Decreto 98.820/1990 (RAE), art. 109, §§1º a 4º; art. 118',
+ 'medio'),
+
+-- Q28: Responsabilidade em decisão baseada em parecer
+(@cat_am03,
+ 'Quanto à responsabilidade pessoal no processo decisório da UA, conforme o Art. 126 do RAE, é correto afirmar:',
+ 'O Agente Diretor é civilmente irresponsável se houver parecer favorável assinado por subordinado técnico.',
+ 'Quando o Agente Diretor toma decisão baseada em parecer, a responsabilidade é exclusiva do decisor, isentando o autor do parecer.',
+ 'Se ficar comprovado que o parecer foi incompleto ou inverídico, a responsabilidade recairá apenas sobre o seu autor.',
+ 'Em decisões baseadas em pareceres técnicos, a responsabilidade é sempre solidária, independentemente da veracidade das informações.',
+ 'Pareceres de comissões não geram responsabilidade aos seus membros, apenas ao Agente Diretor que os homologa.',
+ 'C',
+ 'O Art. 126, parágrafo único, é taxativo: se comprovada a informação incompleta ou inverídica, a responsabilidade recai apenas no autor da informação ou parecer. Em situações normais de pareceres verídicos, a responsabilidade é compartilhada (caput), o que invalida A e B. A alternativa D ignora a exceção do parágrafo único. A E contraria o Art. 133.\n\n📜 Fundamento legal vigente: o art. 126, caput, do RAE estabelece que, "quando o Agente Diretor tomar decisão, tendo por base informação ou parecer de agente, ambos compartilharão da responsabilidade"; o parágrafo único traz a exceção literal: "ficando comprovada que a informação ou parecer foi incompleto ou inverídico, a responsabilidade recaíra apenas no autor da informação ou parecer" — confirmando integralmente a alternativa C.',
+ 'Decreto 98.820/1990 (RAE), art. 126, caput e parágrafo único',
+ 'medio'),
+
+-- Q29: Força maior — exceção da negligência
+(@cat_am03,
+ 'A isenção de responsabilidade dos agentes ocorre em casos de força maior devidamente comprovados. Nos termos do Art. 147, NÃO é considerado caso de força maior:',
+ 'Incêndio, inundação ou terremoto.',
+ 'Epidemias e moléstias contagiosas.',
+ 'Saque ou destruição pelo inimigo em combate.',
+ 'Furto ou roubo onde reste comprovada a negligência do detentor.',
+ 'Falência de estabelecimento bancário onde a UA possuía conta.',
+ 'D',
+ 'Embora o item 4 do Art. 147 liste furto e roubo, existe ressalva de que a isenção fica dependente da ausência de culpa do agente. Negligência é culpa, portanto, não gera isenção. As outras opções são casos puros de força maior listados no artigo.\n\n📜 Fundamento legal vigente: o art. 147 do RAE lista os casos de força maior, entre eles "incêndio, desmoronamento, inundação, submersão, tormenta, terremoto..." (item 1), "epidemias e moléstias contagiosas" (item 3), "roubo, furto ou extorsão" (item 4), "falência de estabelecimento bancário..." (item 5) e "saque ou destruição pelo inimigo..." (item 8). A condição de que a isenção, nesses casos de roubo/furto/extorsão/incêndio, depende da ausência de culpa do agente está, com maior precisão técnica, no art. 119, parágrafo único, do RAE: "nos casos de roubo, furto, extorsão, incêndio ou dano material, a isenção de responsabilidade fica dependente da ausência de culpa do agente de administração" — os arts. 119 e 147 devem ser lidos em conjunto para a resposta completa desta questão.',
+ 'Decreto 98.820/1990 (RAE), art. 147, itens 1, 3, 4, 5 e 8; art. 119, parágrafo único',
+ 'medio'),
+
+-- Q30: Prazos de transmissão de função — Comandante de Subunidade
+(@cat_am03,
+ 'A passagem de função e material obedece a prazos rigorosos contados a partir da publicação em Boletim Interno. Sobre o prazo para o Comandante de Subunidade, o RAE estabelece:',
+ 'Até 20 (vinte) dias úteis.',
+ 'Até 8 (oito) dias úteis, iniciando-se a contagem no dia útil subsequente à publicação.',
+ 'Até 4 (quatro) dias úteis após a conferência física.',
+ 'Até 30 (trinta) dias corridos para material permanente.',
+ 'Imediatamente, sem prazo para conferência, visando a não solução de continuidade.',
+ 'B',
+ 'O Art. 143, item 2, fixa o prazo de até 8 (oito) dias úteis para o Comandante de Subunidade. O § 1º esclarece a contagem: inicia-se no dia útil subsequente à publicação. O prazo de 20 dias (A) é para o Encarregado de Material da UA (item 1). O de 4 dias (C) é para as demais frações (item 4).\n\n📜 Fundamento legal vigente: o art. 143, item 2, do RAE fixa o prazo de "até 8 (oito) dias úteis" para o "Ordenador de Despesas, Fiscal Administrativo, Comandante de Subunidade, Encarregados dos Setores de Finanças e de Aprovisionamento"; o §1º esclarece que "a contagem desses prazos será iniciada no dia útil subsequente à publicação, da dispensa de função, no Boletim Interno da OM". O prazo de 20 dias (item 1) é do Encarregado do Setor de Material da UA, e também se aplica, por força do item 3, aos "graduados encarregados de material de Subunidade"; o prazo de 4 dias (item 4) é das "demais frações da unidade".',
+ 'Decreto 98.820/1990 (RAE), art. 143, itens 1 a 4, e §1º',
+ 'medio');
+
+SET foreign_key_checks = 1;

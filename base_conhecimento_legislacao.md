@@ -14,6 +14,10 @@ Ultima atualizacao: 2026-07-06
 5. [Distincoes Conceituais Criticas](#5-distincoes-conceituais-criticas)
 6. [Competencias -- Quem Faz o Que](#6-competencias----quem-faz-o-que)
 7. [Justica Militar Estadual (JME)](#7-justica-militar-estadual-jme)
+8. [Lei de Abuso de Autoridade (Lei n. 13.869/2019)](#8-lei-de-abuso-de-autoridade-lei-n-138692019)
+9. [Atuacao Policial na Protecao dos Direitos Humanos de Pessoas em Situacao de Vulnerabilidade](#9-atuacao-policial-na-protecao-dos-direitos-humanos-de-pessoas-em-situacao-de-vulnerabilidade)
+10. [Aspectos Juridicos da Abordagem Policial](#10-aspectos-juridicos-da-abordagem-policial)
+11. [Administracao Militar -- RAE (Decreto n. 98.820/1990)](#11-administracao-militar----rae-decreto-n-988201990)
 
 ---
 
@@ -975,6 +979,305 @@ Enquanto nao entrar em vigor a lei de Promocao de Oficiais e Pracas:
 - CPJ = pracas, trimestral, rotativo. CEJ = oficiais, ad hoc, dissolvido apos o caso. Armadilha classica: trocar essas duas caracteristicas.
 - Sumula 53 = civil que comete crime contra a PM/CBM vai para a Justica Comum. Sumula 78 = competencia territorial fixada pela corporacao do policial, nao pelo local do crime.
 - "Crime militar por extensao" so existe apos a Lei 13.491/2017 e refere-se a crimes **exclusivos da lei comum** (nao do CPM) praticados nas condicoes do art. 9, II.
+
+---
+
+## 8. Lei de Abuso de Autoridade (Lei n. 13.869/2019)
+
+**Fontes principais**: Lei n. 13.869, de 5 de setembro de 2019 (texto compilado, planalto.gov.br); Codigo Penal, arts. 29 e 30 (concurso de pessoas e comunicabilidade de elementares), arts. 316 e 333 (concussao e corrupcao); Codigo de Processo Penal, art. 207 (sigilo profissional); Lei n. 9.455/1997 (Lei de Tortura); Enunciados do GNCCRIM/CNPG sobre a Lei de Abuso de Autoridade (Grupo Nacional de Coordenadores de Centro de Apoio Criminal, em conjunto com o Conselho Nacional de Procuradores-Gerais).
+
+**Nota de fonte**: nao confundir os Enunciados do GNCCRIM sobre a Lei de Abuso de Autoridade (13.869/2019) com outro documento homonimo do mesmo grupo sobre a chamada "Lei Anticrime" (Lei n. 13.964/2019) -- sao pautas e numeracoes de enunciados totalmente distintas.
+
+### 8.1 Sujeito Ativo -- Conceito Amplo de Agente Publico (art. 2)
+- Art. 2, caput: e sujeito ativo do crime **qualquer agente publico, servidor ou nao**, da administracao direta, indireta ou fundacional de qualquer dos Poderes (Uniao, Estados, DF, Municipios e Territorio), compreendendo, sem se limitar a: (I) servidores publicos e militares ou equiparados; (II) membros do Legislativo; (III) membros do Executivo; (IV) membros do Judiciario; (V) membros do Ministerio Publico; (VI) membros de tribunais/conselhos de contas.
+- **Paragrafo unico** (a definicao mais cobrada em prova): reputa-se agente publico **todo aquele que exerce, ainda que transitoriamente ou sem remuneracao**, por eleicao, nomeacao, designacao, contratacao ou qualquer outra forma de investidura ou vinculo, mandato, cargo, emprego ou funcao no orgao/entidade do caput. Isso abrange, por exemplo, mesarios eleitorais e colaboradores voluntarios eventuais.
+- Os crimes de abuso de autoridade sao **crimes proprios** (exigem a qualidade de agente publico), mas **admitem coautoria e participacao de particulares** (CP, arts. 29 e 30): a condicao de agente publico e elementar do tipo e, por isso, **se comunica** ao particular que atua em unidade de desigmios com o agente, desde que o particular tenha conhecimento dessa condicao.
+
+### 8.2 Elemento Subjetivo Especial -- Dolo Especifico (art. 1, §§1 e 2)
+- Art. 1, §1: as condutas descritas na lei so constituem abuso de autoridade quando praticadas com a **finalidade especifica** de (i) prejudicar outrem, (ii) beneficiar a si mesmo ou a terceiro, ou (iii) por mero capricho ou satisfacao pessoal. **Nao existe modalidade culposa** de abuso de autoridade; dolo generico nao basta.
+- O "beneficio a si mesmo" nao precisa ser patrimonial/financeiro: **vantagem moral** (ex.: buscar notoriedade e visibilidade nas redes sociais expondo desnecessariamente a intimidade do investigado) tambem preenche o requisito do dolo especifico.
+- Art. 1, §2 -- vedacao ao chamado **"crime de hermeneutica"**: a **divergencia na interpretacao de lei ou na avaliacao de fatos e provas nao configura abuso de autoridade**. Protege a independencia funcional de magistrados, membros do MP e demais agentes contra a criminalizacao de decisoes tecnicas razoaveis.
+  - **Enunciado 1/GNCCRIM**: os tipos da lei exigem elemento subjetivo diverso do mero dolo, restringindo o alcance da norma.
+  - **Enunciado 2/GNCCRIM**: a divergencia interpretativa, **salvo quando teratologica**, nao configura abuso de autoridade, ficando excluido o dolo -- ou seja, a protecao do §2 nao e absoluta: decisao teratologica (aberrante, sem qualquer base juridica razoavel) pode, a depender do caso, revelar o dolo especifico do §1.
+  - A atividade interpretativa legitima deve respeitar limites **materiais** (o texto da lei) e **jurisprudenciais** (entendimentos vinculantes dos tribunais superiores).
+- Havendo solicitacao ou exigencia de vantagem indevida no bojo da conduta abusiva, o agente responde pelo abuso de autoridade **em concurso** com o crime contra a administracao publica cabivel (concussao, art. 316, CP, ou corrupcao passiva, art. 317, CP, conforme o caso) -- a LAA nao absorve nem e absorvida por esses tipos, aplicando-se as regras gerais de concurso material (CP, arts. 69/70).
+
+### 8.3 Sujeito Passivo -- Dupla Subjetividade Passiva
+- A doutrina reconhece **dupla subjetividade passiva** nos crimes de abuso de autoridade: (i) o individuo (pessoa fisica ou juridica) diretamente prejudicado pela conduta, e (ii) o **Estado**, que tem sua imagem, regularidade e confiabilidade institucional ofendidas pelo desvio de conduta de seu agente.
+- Pessoas juridicas podem figurar como sujeito passivo (ex.: empresa que tem sua honra objetiva ou imagem atingida por divulgacao indevida de gravacao, art. 28).
+
+### 8.4 Acao Penal (art. 3)
+- Art. 3, caput: os crimes previstos na lei sao de **acao penal publica incondicionada** -- nao depende de representacao do ofendido.
+- §1: e admitida **acao privada subsidiaria da publica** caso o Ministerio Publico nao ofereca denuncia no prazo legal (inercia ministerial), podendo o MP aditar a queixa, repudia-la e oferecer denuncia substitutiva, intervir no processo, fornecer provas, recorrer e retomar a acao como parte principal em caso de negligencia do querelante.
+- §2: a acao privada subsidiaria deve ser exercida no prazo de **6 (seis) meses**, contado do esgotamento do prazo para a denuncia.
+- A inercia que autoriza a queixa subsidiaria pressupoe a **inexistencia de qualquer manifestacao ministerial** no prazo (Enunciado 3/GNCCRIM), e nao apenas demora ou manifestacao insatisfatoria.
+
+### 8.5 Privacao de Liberdade Ilegal e Conducao Coercitiva (arts. 9 e 10)
+- **Art. 9, caput**: decretar medida de privacao da liberdade em manifesta desconformidade com as hipoteses legais -- pena de detencao de 1 a 4 anos e multa.
+  - **Enunciado 5/GNCCRIM**: o sujeito ativo do caput **nao alcanca somente a autoridade judiciaria** -- o verbo nuclear "decretar" tem o sentido de determinar, decidir e ordenar a medida, podendo ser praticado por qualquer agente publico competente para tanto.
+  - **Paragrafo unico** do art. 9, este sim **restrito a autoridade judiciaria**: incorre na mesma pena o magistrado que, dentro de prazo razoavel, deixar de (I) relaxar prisao manifestamente ilegal; (II) substituir prisao preventiva por cautelar diversa ou conceder liberdade provisoria quando manifestamente cabivel; (III) deferir liminar ou ordem de habeas corpus quando manifestamente cabivel.
+- **Art. 10**: decretar a conducao coercitiva de testemunha ou investigado **manifestamente descabida** ou **sem previa intimacao** de comparecimento ao juizo -- pena de detencao de 1 a 4 anos e multa.
+  - **Enunciado 6/GNCCRIM** (em linha com as ADPFs 395 e 444/STF): investigados e reus **nao podem ser conduzidos coercitivamente** para serem **interrogados** perante autoridade policial ou judicial -- essa hipotese e vedada em qualquer circunstancia.
+  - **Enunciado 7/GNCCRIM**: outras hipoteses de conducao coercitiva (para atos diversos do interrogatorio) sao possiveis, mas **pressupoem motivacao e o descumprimento de previa notificacao/intimacao**.
+
+### 8.6 Comunicacao de Prisao, Nota de Culpa e Soltura (art. 12)
+- Art. 12, caput: deixar injustificadamente de comunicar prisao em flagrante a autoridade judiciaria no prazo legal -- pena de detencao de 6 meses a 2 anos e multa.
+- Paragrafo unico incorre na mesma pena quem: (I) deixa de comunicar **imediatamente** a execucao de prisao temporaria ou preventiva a autoridade judiciaria que a decretou; (II) deixa de comunicar imediatamente a prisao e o local de custodia a familia do preso ou pessoa por ele indicada; (III) deixa de entregar ao preso, no prazo de **24 (vinte e quatro) horas**, a **nota de culpa**, assinada pela autoridade, com o motivo da prisao e os nomes do condutor e das testemunhas; (IV) prolonga a execucao de pena ou prisao, deixando, **sem motivo justo e excepcionalissimo**, de executar o alvara de soltura imediatamente apos recebido ou de soltar o preso apos esgotado o prazo.
+- **Enunciado 8/GNCCRIM**: e possivel, para preservar identidade/imagem/dados pessoais, que da nota de culpa nao conste o nome do condutor, das testemunhas e das vitimas, nas excecoes legais.
+- **Enunciado 9/GNCCRIM**: a execucao imediata do alvara de soltura deve ocorrer apos o cumprimento dos procedimentos de seguranca necessarios (checagem de outras ordens de prisao e da autenticidade do proprio alvara) -- ou seja, "imediato" nao afasta a checagem minima de seguranca.
+
+### 8.7 Constrangimento do Preso/Detento (art. 13)
+- Constranger o preso ou detento, mediante violencia, grave ameaca ou reducao de sua capacidade de resistencia, a: (I) exibir-se ou ter seu corpo exibido a curiosidade publica; (II) submeter-se a situacao vexatoria ou constrangimento nao autorizado em lei; (III) produzir prova contra si mesmo ou contra terceiro -- pena de detencao de 1 a 4 anos e multa, sem prejuizo da pena da violencia.
+- Veda-se a **espetacularizacao** do preso (fotos/exposicao para redes internas, curiosidade publica etc.).
+- **Enunciado 10/GNCCRIM**: constranger o preso/detento, mediante violencia ou grave ameaca, a produzir prova contra si mesmo ou terceiro **pode configurar abuso de autoridade OU crime de tortura** (Lei 9.455/97), a depender das circunstancias do caso concreto -- a diferenciacao pratica esta na intensidade/gravidade do meio empregado e na finalidade (tortura exige, por exemplo, sofrimento fisico/mental intenso para obter informacao/confissao, ou como forma de castigo).
+
+### 8.8 Sigilo Profissional e Direito ao Silencio (art. 15)
+- Constranger a depor, sob ameaca de prisao, pessoa que, em razao de funcao, ministerio, oficio ou profissao, deva guardar segredo ou resguardar sigilo -- pena de detencao de 1 a 4 anos e multa. Rol exemplificativo (CPP, art. 207): advogados, medicos, parlamentares, psicologos, sacerdotes, jornalistas, entre outros que tenham dever legal de sigilo.
+- Paragrafo unico: incorre na mesma pena quem prossegue com o interrogatorio (I) de pessoa que decidiu exercer o **direito ao silencio**; ou (II) de pessoa que optou por ser assistida por advogado/defensor publico, sem a presenca de seu patrono.
+
+### 8.9 Identificacao do Agente Publico (art. 16)
+- Deixar de identificar-se ou identificar-se falsamente ao preso, por ocasiao da captura ou quando deva faze-lo durante a detencao/prisao -- pena de detencao de 6 meses a 2 anos e multa.
+- Paragrafo unico: mesma pena para quem, como responsavel por interrogatorio em procedimento investigatorio, deixa de se identificar ao preso ou atribui a si falsa identidade, cargo ou funcao.
+- Orientacao pratica (doutrina/manuais de corregedoria): agentes de seguranca devem manter a identificacao (tarjeta) visivel, inclusive sobre o colete balistico, durante a atuacao.
+
+### 8.10 Interrogatorio Policial e Repouso Noturno (art. 18)
+- Art. 18: submeter o preso a interrogatorio policial durante o **periodo de repouso noturno**, salvo se capturado em flagrante delito ou se ele, devidamente assistido, consentir em prestar declaracoes -- pena de detencao de 6 meses a 2 anos e multa. O proprio art. 18 nao define o periodo de repouso noturno; a definicao vem, por integracao sistemica, do art. 22, §1, III (mandado de busca domiciliar).
+- **Enunciado 11/GNCCRIM**: para efeitos do art. 18, compreende-se por repouso noturno o periodo das **21h00 as 5h00**, nos termos do art. 22, §1, III, da mesma lei.
+- **Enunciado 12/GNCCRIM**: ressalvadas as hipoteses de prisao em flagrante e concordancia do interrogado devidamente assistido, o interrogatorio extrajudicial do preso iniciado antes do repouso noturno **nao pode adentrar** esse periodo, devendo ser encerrado e, se necessario, complementado no dia seguinte.
+
+### 8.11 Pleito de Soltura ao Juiz (art. 19)
+- Impedir ou retardar, injustificadamente, o envio de pleito de preso a autoridade judiciaria competente para apreciar a legalidade da prisao ou as circunstancias da custodia -- pena de detencao de 1 a 4 anos e multa.
+- Paragrafo unico: mesma pena ao magistrado que, ciente do impedimento ou da demora, deixa de sana-lo ou, nao sendo competente, deixa de enviar o pedido a autoridade que o seja.
+- A doutrina admite como **causas excludentes** situacoes excepcionalissimas e devidamente comprovadas, como greve geral no sistema postal ou falha critica e comprovada nos sistemas de informatica -- nunca mero esquecimento, sobrecarga de trabalho ou decisao discricionaria de considerar o pedido "infundado".
+
+### 8.12 Entrevista Pessoal e Reservada com o Advogado (art. 20)
+- Impedir, sem justa causa, a entrevista pessoal e reservada do preso com seu advogado -- pena de detencao de 6 meses a 2 anos e multa.
+- Paragrafo unico: mesma pena a quem impede o preso, o reu solto ou o investigado de entrevistar-se pessoal e reservadamente com seu advogado/defensor, por prazo razoavel, antes de audiencia judicial, e de **sentar-se ao seu lado e com ele comunicar-se durante a audiencia**, **salvo no curso do interrogatorio** ou no caso de **audiencia por videoconferencia** (excecoes taxativas).
+- A regulamentacao de horario/local/duracao das entrevistas e permitida, desde que **nao desnature o conteudo da garantia** nem impeca necessidades urgentes; na ausencia de parlatorio adequado, cabe ao agente conduzir advogado e preso a local que garanta privacidade e reserva, e nao simplesmente suspender a entrevista.
+
+### 8.13 Separacao de Custodiados (art. 21)
+- Manter presos de ambos os sexos na mesma cela ou espaco de confinamento -- pena de detencao de 1 a 4 anos e multa. A expressao "espaco de confinamento" abrange, por extensao doutrinaria, tambem compartimentos de viatura durante conducao/transferencia.
+- Paragrafo unico: mesma pena para quem mantem, na mesma cela, crianca ou adolescente na companhia de maior de idade ou em ambiente inadequado (ECA -- Lei 8.069/1990).
+- **Enunciado 13/GNCCRIM** (atencao: o enunciado correto sobre este tema e o de **numero 13**, nao o 12 -- o Enunciado 12 trata do art. 18/repouso noturno, tema diverso): a violacao a regra de separacao de custodiados, **acompanhada de sofrimento fisico ou mental do preso**, conforme as circunstancias do caso, **nao tipifica o crime do art. 21 da LAA, mas o delito de tortura** (art. 1, caput, I, da Lei 9.455/97), infracao equiparada a hedionda, com os consectarios da Lei 8.072/1990.
+
+### 8.14 Violacao de Domicilio (art. 22)
+- Invadir ou adentrar, clandestina ou astuciosamente, ou a revelia da vontade do ocupante, imovel alheio ou suas dependencias, ou nele permanecer nessas condicoes, sem determinacao judicial ou fora das condicoes legais -- pena de detencao de 1 a 4 anos e multa.
+- §1 -- incorre na mesma pena quem: (I) coage alguem, mediante violencia ou grave ameaca, a franquear acesso ao imovel; (III) **cumpre mandado de busca e apreensao domiciliar apos as 21h ou antes das 5h**.
+- **Enunciado 14/GNCCRIM**: a elementar "imovel" do art. 22 deve ser conceituada nos termos do art. 79 do Codigo Civil.
+- **Enunciado 15/GNCCRIM**: o mandado de busca e apreensao deve ser cumprido durante o dia (CF, art. 5, XI); mesmo havendo luz solar, veda-se seu cumprimento entre 21h00 e 5h00, sob pena de abuso de autoridade (art. 22, §1, III).
+- §2 -- **excludentes de tipicidade**: nao ha crime se o ingresso for para prestar socorro, ou quando houver fundados indicios de flagrante delito ou desastre.
+- Para o ingresso amparado no consentimento do morador, a boa pratica recomendada pela doutrina/manuais e obter autorizacao **expressa**, preferencialmente com assinatura de termo, para prevenir futura responsabilizacao (o mero fato de a porta estar encostada nao autoriza presuncao de consentimento).
+
+### 8.15 Pontos-Chave para Elaboracao de Questoes (Abuso de Autoridade)
+- O nome tecnico do elemento subjetivo especial e "especial fim de agir" / dolo especifico (art. 1, §1); nao existe modalidade culposa na LAA.
+- Nao confundir o §1 (finalidade especifica -- dolo especifico) com o §2 (vedacao ao "crime de hermeneutica" -- protecao a divergencia interpretativa nao teratologica) do art. 1.
+- Art. 9, caput (qualquer agente publico competente) x paragrafo unico (restrito a autoridade judiciaria) -- armadilha classica de prova.
+- Enunciados 6 e 7/GNCCRIM sobre conducao coercitiva (art. 10): interrogatorio de investigado/reu = **sempre vedado**; outros atos = possivel, se motivado e apos descumprimento de previa notificacao.
+- Prazo da nota de culpa: **24 horas** (art. 12, §u, III) -- nao confundir com o prazo de comunicacao da prisao, que deve ser **imediato**.
+- Repouso noturno = **21h00 as 5h00** (Enunciado 11, por remissao ao art. 22, §1, III) -- vale tanto para o interrogatorio do art. 18 quanto para o cumprimento de mandado de busca do art. 22.
+- Atencao a diferenca entre Enunciado 12 (art. 18 -- interrogatorio nao pode adentrar o repouso noturno) e Enunciado 13 (art. 21 -- violacao da separacao de custodiados com sofrimento fisico/mental desclassifica para tortura, Lei 9.455/97) -- sao enunciados numericamente proximos, mas sobre temas diferentes, e e um erro comum troca-los.
+- Sentar-se ao lado do defensor em audiencia (art. 20, paragrafo unico) so pode ser negado no interrogatorio ou em audiencia por videoconferencia -- excecoes taxativas.
+- Excludentes do art. 22 (violacao de domicilio): socorro, flagrante delito, desastre (§2); fora dessas hipoteses, exige-se determinacao judicial.
+
+---
+
+## 9. Atuacao Policial na Protecao dos Direitos Humanos de Pessoas em Situacao de Vulnerabilidade
+
+**Fontes principais**: apostila tecnica do CHO -- "Abordagem Policial e Direitos Humanos" (Capitulos 1 a 10); Lei n. 8.069/1990 (Estatuto da Crianca e do Adolescente -- ECA); Lei n. 10.741/2003 (Estatuto do Idoso); Lei n. 11.343/2006 (Lei de Drogas); Lei n. 9.807/1999 (Lei de Protecao a Vitimas e Testemunhas); Lei n. 7.716/1989 (Lei do Racismo) e art. 140, §3, do Codigo Penal (Injuria Racial), na redacao dada pela Lei n. 14.532/2023; Lei n. 11.983/2009 (descriminalizacao da mendicancia); Decreto n. 7.053/2009 (Politica Nacional para a Populacao em Situacao de Rua); art. 68 da Lei das Contravencoes Penais (Decreto-Lei n. 3.688/1941); art. 249 do Codigo de Processo Penal (Decreto-Lei n. 3.689/1941); Sumula Vinculante n. 11/STF (uso de algemas).
+
+### 9.1 Aspectos Gerais da Abordagem Policial
+
+**Captura, Detencao e Prisao -- distincoes tecnico-doutrinarias**: a doutrina tecnica de seguranca publica escalona a intervencao policial em tres momentos: **Captura** (ato de abordar, parar, aproximar-se e estabelecer contato para confirmar a fundada suspeita -- fase inicial, precursora); **Detencao** (cerceamento da liberdade apos a confirmacao do ilicito, para conducao a autoridade competente -- fase intermediaria pos-flagrante); **Prisao em sentido estrito** (ato juridico aplicado apos sentenca penal condenatoria transitada em julgado, ou prisao cautelar decretada -- fase processual/executoria). Captura nao e sinonimo de prisao.
+
+**Fundada Suspeita**: requisito que autoriza a "quebra da invisibilidade" do cidadao pela abordagem -- deve se basear em **elementos concretos e objetivos** (atitude suspeita, caracteristicas do fato, contexto), nunca em criterios discriminatorios como cor da pele, vestimenta ou local de moradia. Nao e conceito puramente subjetivo; nervosismo isolado nao supre a exigencia legal.
+
+**Busca Pessoal**: compreende a inspecao do corpo, das vestes e de toda a **esfera de custodia** do abordado (bolsas, mochilas, malas, veiculo sob seu controle direto). Sequencia operacional (POP): verbalizacao ("Parado! Policia!") antes do contato fisico de revista.
+
+**Identificacao do Cidadao -- art. 68 da Lei das Contravencoes Penais**: constitui contravencao "recusar a autoridade, quando por esta justificadamente solicitado, dados ou indicacoes concernentes a propria identidade, estado, profissao, domicilio e residencia" (art. 68, Decreto-Lei n. 3.688/1941). O cidadao nao e obrigado a portar documento fisico, mas e obrigado a se identificar quando justificadamente solicitado. Nao existe "prisao para averiguacao" no ordenamento brasileiro.
+
+### 9.2 Protecao dos Direitos das Mulheres
+
+**Busca pessoal em mulheres -- art. 249, CPP**: "A busca em mulher sera feita por outra mulher, salvo se isso importar retardamento ou prejuizo da diligencia". Regra geral: busca por policial feminina; excecao (policial masculino) so se justifica em urgencia real (ex.: risco de descarte de arma/droga). Na ausencia de policial feminina e havendo necessidade urgente, procedimento tecnico recomendado: revista com as costas das maos. Areas de atencao especial na busca minuciosa: cabelos, seios e orgaos genitais.
+
+**Custodia e transporte**: mulheres detidas devem ser mantidas separadas de homens durante custodia/transporte. Gestantes/lactantes exigem atencao proporcional as limitacoes -- nao se algema gestante "para evitar queda".
+
+**Atendimento a vitimas de violencia**: prioriza-se entrevista e orientacao preferencialmente por policial feminina, evitando revitimizacao.
+
+### 9.3 Crianca e Adolescente -- Doutrina da Protecao Integral (ECA)
+
+**Classificacao etaria -- art. 2, ECA**: "Considera-se crianca, para os efeitos desta Lei, a pessoa ate doze anos de idade incompletos, e adolescente aquela entre doze e dezoito anos de idade". Crianca: ate 12 anos incompletos. Adolescente: entre 12 e 18 anos incompletos.
+
+**Ato infracional e inimputabilidade -- art. 103, ECA**: "Considera-se ato infracional a conduta descrita como crime ou contravencao penal". Criancas sujeitam-se **exclusivamente** a medidas de protecao (art. 101, ECA) -- nunca a auto de prisao em flagrante ou medida socioeducativa. Adolescentes sujeitam-se a **medidas socioeducativas** (arts. 112 e ss.), nao ao processo penal comum. A inimputabilidade penal do menor de 18 anos (art. 228, CRFB; art. 27, CP) nao significa impunidade: e tratamento diferenciado por ser pessoa em desenvolvimento.
+
+**Comunicacao da apreensao**: deve ser imediata a autoridade judiciaria e a familia (ou pessoa indicada).
+
+**Uso de algemas em adolescentes**: nao ha dispositivo especifico do ECA; aplica-se por analogia a **Sumula Vinculante n. 11/STF** (excepcional: resistencia, fundado receio de fuga ou perigo a integridade fisica, com justificativa por escrito).
+
+**Transporte digno -- art. 178, ECA**: "O adolescente a quem se atribua autoria de ato infracional nao podera ser conduzido ou transportado em compartimento fechado de veiculo policial, em condicoes atentatorias a sua dignidade, ou que impliquem risco a sua integridade fisica ou mental".
+
+### 9.4 Racismo e Injuria Racial
+
+- **Racismo** (Lei n. 7.716/1989): atinge coletividade **indeterminada** de pessoas (ex.: vedar acesso de negros a estabelecimento comercial).
+- **Injuria Racial**: atinge a honra subjetiva de pessoa(s) **determinada(s)**. Desde a **Lei n. 14.532/2023**, foi deslocada do art. 140, §3, CP para dentro da Lei 7.716/89 (novo **art. 2-A**), passando a ser especie do genero racismo, com as mesmas consequencias de **imprescritibilidade** e **inafiancabilidade** (art. 5, XLII, CRFB). Pena atual: reclusao de 2 a 5 anos e multa.
+- O art. 140, §3, CP, na redacao atual pos-2023, permanece aplicavel a injuria por **religiao** ou pela **condicao de pessoa idosa ou com deficiencia** (pena de 1 a 3 anos) -- nao mais para raca/cor/etnia/procedencia nacional, que migraram para a Lei do Racismo.
+- Expressoes como "elemento suspeito cor padrao" sao discriminatorias e devem ser abolidas das comunicacoes operacionais.
+
+### 9.5 Pessoas com Deficiencia -- Protocolos de Abordagem
+
+- Abordagem a cadeirante: POP recomenda efetivo minimo de **tres policiais** (verbalizacao/controle, seguranca, revista tecnica). Na revista de quem nao consegue se erguer: travar a roda com o pe, segurar pelos pulsos sob as axilas e erguer com cuidado. **Protocolo operacional, sem correspondencia em lei especifica.**
+- Abordagem a deficiente auditivo (surdo): evitar tocar pelas costas sem contato visual previo; segurar as maos enquanto a pessoa ainda esta de lado e so entao posicionar de costas. **Tambem protocolo operacional/tatico, sem lei especifica.**
+
+### 9.6 Populacao LGBTQIAPN+
+
+- **Identidade de genero** (percepcao subjetiva de si) e **orientacao sexual** (direcao do desejo afetivo-sexual) sao conceitos distintos; "opcao sexual" nao e terminologia tecnica adequada.
+- Travestis/pessoas trans nao dependem de cirurgia de redesignacao para terem identidade reconhecida.
+- Busca em travestis e mulheres transexuais: **prioritariamente por policial feminina**, respeitando a identidade de genero afirmada.
+- Homem transexual (identidade masculina, sexo biologico feminino): chamar pelo **nome social**, busca por **policial feminina** (concilia identidade com a literalidade do art. 249, CPP, que trata de busca "em mulher").
+- Uso do **nome social** e obrigatorio em toda a interacao (Decreto n. 8.727/2016, norma federal usada por analogia/referencia conceitual).
+
+### 9.7 Pessoa Idosa -- Estatuto do Idoso (Lei n. 10.741/2003)
+
+- **Art. 1**: instituido para regular direitos de pessoas com idade **igual ou superior a 60 anos** -- confirmado, sem divergencia (nao 65 nem 70).
+- **Art. 3, caput**: e obrigacao da familia, da comunidade, da sociedade **e** do Poder Publico assegurar, com absoluta prioridade, a efetivacao dos direitos do idoso -- dever **compartilhado**, nao exclusivo do Estado.
+- **Art. 4**: nenhum idoso sera objeto de negligencia, discriminacao, violencia, crueldade ou opressao.
+
+### 9.8 Pessoas em Situacao de Rua
+
+- **Lei n. 11.983/2009** revogou o art. 60 do Decreto-Lei 3.688/1941 (LCP), que tipificava a mendicancia -- desde 16/07/2009, mendigar **nao e mais contravencao penal**.
+- **Decreto n. 7.053/2009** (Politica Nacional para a Populacao em Situacao de Rua): respeito ao direito de ir e vir e a propriedade dos pertences; vedada remocao compulsoria para abrigos (depende de adesao voluntaria).
+
+### 9.9 Protecao a Vitimas e Testemunhas -- Lei n. 9.807/1999
+
+- **Art. 2, §1**: protecao pode se estender a **conjuge/companheiro, ascendentes, descendentes e dependentes** com convivencia habitual com a vitima/testemunha.
+- **Art. 2, §2** -- excludentes: ficam **excluidos** os de personalidade/conduta incompativel com as restricoes do programa, os **condenados cumprindo pena** e os **indiciados/acusados sob prisao cautelar**.
+
+### 9.10 Usuarios e Dependentes de Drogas -- Lei n. 11.343/2006
+
+- **Art. 28, caput**: porte para consumo pessoal sujeita a **advertencia, prestacao de servicos a comunidade e medida educativa** -- **sem pena de prisao** para o usuario (despenalizacao, nao descriminalizacao integral).
+- **Art. 28, §2**: criterios para distinguir consumo de trafico: natureza/quantidade da substancia, local e condicoes da acao, circunstancias sociais/pessoais, conduta e antecedentes -- **nao ha criterio geografico isolado** ("local de pista") que por si so qualifique trafico.
+- Dependencia quimica (conceito clinico): perda de controle, tolerancia, sindrome de abstinencia -- distingue-se do uso ocasional/recreativo.
+
+### 9.11 Pontos-Chave para Elaboracao de Questoes
+
+- Captura x Detencao x Prisao: nao confundir os tres momentos.
+- Fundada suspeita exige elementos objetivos -- nunca cor da pele, vestimenta ou local de moradia isoladamente.
+- Crianca (ate 12 incompletos) = so medida de protecao; Adolescente (12 a 18 incompletos) = medida socioeducativa. Nenhum e preso em flagrante.
+- Art. 178, ECA veda transporte de adolescente em compartimento fechado em condicoes atentatorias -- tema correlato mas distinto da regra geral de algemas (SV 11).
+- Racismo (coletividade indeterminada) x Injuria Racial (pessoa determinada) -- desde a Lei 14.532/2023, ambos na Lei 7.716/89, mesmas consequencias de imprescritibilidade/inafiancabilidade.
+- Busca em mulher (art. 249, CPP): regra e policial feminina; excecao e urgencia real, nao mera ausencia de efetivo feminino.
+- Estatuto do Idoso: 60 anos ou mais (nao 65/70); dever de protecao e de familia, comunidade, sociedade e Poder Publico.
+- Lei 9.807/99: conjuge/companheiro/familiares podem ser beneficiarios por extensao; presos cautelares/condenados nao podem.
+- Lei 11.343/06, art. 28: usuario nao e preso -- advertencia, prestacao de servicos, medida educativa.
+- Mendicancia: descriminalizada desde 2009 (Lei 11.983/2009).
+- Protocolos taticos de abordagem a cadeirantes/deficientes auditivos sao doutrina operacional (POP), sem lei especifica -- diferente dos demais temas desta secao, que tem base legal expressa.
+
+---
+
+## 10. Aspectos Jurídicos da Abordagem Policial
+
+**Fontes principais**: CRFB/1988 art. 5º, XI (inviolabilidade de domicílio) e art. 144 (poder de polícia); Código de Processo Penal (Decreto-Lei n. 3.689/1941), arts. 240 a 250 (busca domiciliar e pessoal) e art. 474, §3º (algemas no júri, com redação da Lei n. 11.689/2008); Código Penal (Decreto-Lei n. 2.848/1940), art. 150 (violação de domicílio), art. 329 (resistência), art. 330 (desobediência) e art. 333 (corrupção ativa); Súmula Vinculante n. 11/STF (uso de algemas); STF, RHC 90.376/RJ, Rel. Min. Celso de Mello, 2ª Turma, j. 03/04/2007 (busca veicular e prova ilícita por derivação); STF, HC 81.305-4/GO (fundada suspeita exige elementos objetivos, não subjetivos); Lei n. 13.869/2019 (Lei de Abuso de Autoridade, art. 9º), que revogou a antiga Lei n. 4.898/1965.
+
+### 10.1 Características dos Direitos Fundamentais
+- **Indisponibilidade**: impede a renúncia do direito fundamental pelo próprio titular; vincula o Estado à sua proteção mesmo contra a vontade de quem o detém.
+- **Universalidade**: os direitos fundamentais se estendem a todos os seres humanos, sem distinção.
+- **Relatividade (ou convivência das liberdades públicas)**: nenhum direito fundamental é absoluto; todos podem sofrer restrições legítimas para a convivência social e o bem comum (ex.: liberdade de locomoção cedendo a uma blitz policial legal).
+- **Inalienabilidade**: impossibilidade de venda, cessão ou transferência do direito a terceiros.
+- **Dignidade da pessoa humana**: eixo central dos direitos fundamentais; exige mínimo existencial moral e material, respeitando valores éticos, intimidade e liberdade. A segurança pública não é absoluta.
+- **Direitos x garantias**: direitos são os bens jurídicos em si (vida, liberdade, honra); garantias são os instrumentos processuais/institucionais que os asseguram contra o arbítrio (ex.: habeas corpus).
+- **Pacto de São José da Costa Rica**: determina que a pessoa presa seja conduzida, sem demora, à presença de um juiz ou outra autoridade habilitada por lei a exercer funções judiciais.
+
+### 10.2 Ato Administrativo e Poder de Polícia
+- **Autoexecutoriedade**: permite à Administração executar suas decisões pelos próprios meios, sem autorização judicial prévia. Distingue-se da **imperatividade** (imposição da vontade estatal independente da concordância do particular).
+- Elementos do ato: **sujeito/competência** (atribuição legal), **objeto** (deve ser lícito e determinado quanto a destinatário, efeitos, tempo e lugar), **forma**, **motivo**, **finalidade**.
+- **Discricionariedade** (margem de escolha legal sobre conveniência/oportunidade) x **arbitrariedade** (abuso que extrapola os limites legais).
+- **Desvio de finalidade**: o agente tem competência para o ato, mas o pratica visando fim diverso do interesse público (ex.: revista por vingança pessoal sob pretexto de "averiguação de rotina").
+
+### 10.3 Fundada Suspeita e Busca Pessoal, Veicular e Domiciliar
+- Não existe "pessoa suspeita" em abstrato -- existem **atitudes suspeitas** que destoam do contexto. Não pode se basear em critérios discriminatórios nem em puro subjetivismo.
+- **STF, HC 81.305-4/GO**: elementos puramente subjetivos (ex.: um "blusão" em dia de calor) são insuficientes para fundada suspeita, que exige elementos concretos.
+- **Busca pessoal (CPP, art. 244)**: independe de mandado em caso de prisão, fundada suspeita de arma/corpo de delito, ou no curso de busca domiciliar. Modalidades: ocular, manual, mecânica.
+- **Busca em mulher (CPP, art. 249)**: por outra mulher, salvo retardamento/prejuízo da diligência.
+- Recusa a fornecer dados de identificação configura a contravenção do art. 68 da LCP (não resistência nem desobediência).
+- **Busca veicular -- STF, RHC 90.376/RJ**: lícita com fundada suspeita de corpo de delito; veículo não é, em regra, extensão do domicílio.
+- **Busca domiciliar**: mandado judicial só pode ser cumprido **durante o dia** (CF, art. 5º, XI); à noite, apenas flagrante, desastre ou socorro. Procedimento (CPP, art. 245): ler o mandado, intimar a abrir a porta; arrombamento só em caso de desobediência. Correspondência lacrada: apreender e solicitar autorização judicial para abertura.
+- **Conceito de "casa" (CP, art. 150, §§4º e 5º)**: inclui compartimento habitado (mesmo móvel, com ânimo de moradia), aposento de habitação coletiva ocupado; exclui habitação coletiva aberta, taverna e casa de jogo.
+
+### 10.4 Súmula Vinculante n. 11/STF -- Uso de Algemas
+- Texto: só é lícito o uso de algemas em casos de resistência, fundado receio de fuga ou perigo à integridade física própria/alheia, justificada a excepcionalidade por escrito, sob pena de responsabilidade disciplinar, civil e penal do agente e nulidade da prisão/ato processual, sem prejuízo da responsabilidade civil do Estado.
+- **CPP, art. 474, §3º** (Lei 11.689/2008): no júri, não se permite algemas salvo necessidade absoluta de ordem, segurança das testemunhas ou integridade dos presentes.
+
+### 10.5 Crimes contra a Administração Pública Praticados por Particular
+- **Resistência (CP, art. 329)**: exige violência física contra a pessoa do funcionário ou auxiliar; violência contra coisas ou resistência passiva não tipificam.
+- **Desobediência (CP, art. 330)**: não há tipicidade quando a inexecução já é sancionada administrativamente por lei que não ressalva a cumulação penal (ex.: infrações de trânsito do CTB) -- entendimento consolidado do STJ quanto à subsidiariedade do tipo (a apostila atribuiu isso a um "STF, HC 8.452/RS" não localizado como julgado autêntico).
+- **Corrupção ativa (CP, art. 333)**: crime formal, consuma-se com o oferecimento/promessa, independente de aceitação.
+
+### 10.6 Abuso de Autoridade e Privação de Liberdade sem Formalidades Legais
+- A antiga Lei n. 4.898/1965 (art. 4º -- atentado à liberdade de locomoção) foi **revogada** pela Lei n. 13.869/2019 (art. 44), em vigor desde 3/1/2020.
+- Dispositivo correspondente hoje: **art. 9º da Lei 13.869/2019** (decretar privação de liberdade em manifesta desconformidade com as hipóteses legais).
+
+### 10.7 Pontos-Chave para Elaboração de Questões (Abordagem Policial)
+- Fundada suspeita exige elementos objetivos e concretos -- nunca aparência/roupa/raça isoladamente (HC 81.305-4/GO).
+- Busca pessoal sem mandado (art. 244, CPP): prisão, fundada suspeita de arma/corpo de delito, ou no curso de busca domiciliar.
+- Busca em mulher: por outra mulher, salvo urgência (art. 249, CPP).
+- Busca veicular lícita com fundada suspeita; veículo não é extensão do domicílio (RHC 90.376/RJ).
+- Mandado de busca domiciliar só de dia; à noite, apenas flagrante, desastre ou socorro.
+- "Casa" no CP inclui compartimento habitado móvel com ânimo de morada; exclui taverna/casa de jogo/habitação coletiva aberta.
+- Algemas (SV 11): só resistência, risco de fuga ou perigo à integridade física, com justificativa escrita.
+- Lei 4.898/65 está revogada desde 2019 -- hoje vigora a Lei 13.869/2019, art. 9º.
+
+---
+
+## 11. Administração Militar -- RAE (Decreto n. 98.820/1990)
+
+**Nota de natureza da fonte**: trata-se de **regulamento federal do Exército Brasileiro**, usado no CHO da PMRR como referência doutrinária sobre administração militar (nao e legislacao estadual de Roraima). Uma verificacao inicial levantou duvida sobre eventual revogacao pelo Decreto n. 10.810/2021, mas a leitura integral desse decreto de 2021 nao apresentou qualquer mencao ao Decreto 98.820/1990 entre os revogados; o LexML classifica o RAE como "multivigente" (sem revogacao expressa localizada). Recomenda-se confirmacao adicional antes de tratar a vigencia como 100% certa, embora seja adequado para uso doutrinario no Quiz.
+
+### 11.1 Agentes da Administração e Atribuições
+- **Agente Diretor (AD)** (art. 23, §1º): principal responsável pela administração da Unidade Administrativa (UA), com direção integral das atividades administrativas.
+- **Ordenador de Despesas (OD)** (art. 23, §2º): direção específica das atividades orçamentárias e financeiras.
+- **Fiscal Administrativo** (art. 30-31): agente executor direto, assessora AD e OD; fiscaliza permanentemente os registros contábeis de administração patrimonial.
+- **Encarregados de Setor** (arts. 32-37): Contabilidade (registros analíticos, art. 33), Pessoal (coordenação de pessoal/remuneração, art. 32), Finanças/Tesoureiro (arrecadação de rendas da UA e receitas da União, art. 34), Material (fiscalização de oficinas, art. 35), Aprovisionamento (art. 37).
+- **Agentes Executores Diretos** (art. 21, item 2; art. 29): coordenação/controle com assessoramento ao AD. **Agentes Executores Indiretos** (art. 21, item 3): execução subordinada.
+- Delegação da função de Agente Diretor (art. 26): só a **oficial superior**; jamais a subtenentes ou praças.
+- Oficial de Dia no rancho (art. 43): apenas manutenção da ordem entre arranchados, salvo ausência do Aprovisionador (quantidade, não qualidade).
+
+### 11.2 Unidades Administrativas e Organizações Militares
+- **UA autônoma x semi-autônoma** (art. 11): a semi-autônoma vincula-se a uma autônoma para fins administrativos específicos, mas tem competência para determinadas atividades próprias.
+- Criação/transformação/extinção de OM (art. 12): OM de valor superior a unidade depende de ato presidencial; de valor unidade ou inferior, do Ministro do Exército.
+- Publicidade (art. 16): criação/organização no 1º boletim; transformação/mudança de sede/extinção no boletim de encerramento de atividades da OM.
+
+### 11.3 Conceitos Básicos (art. 2º)
+- **Ato administrativo** (item 10): providência que visa à boa marcha da administração, sem alterar o patrimônio. **Fato administrativo** (item 16): providência da qual decorre alteração patrimonial (recebimentos, cargas, descargas).
+- **Adiantamento** (item 1): entrega de recursos sempre precedida de empenho na dotação adequada.
+- **Administração do Exército** (item 5): orientada para a realização da atividade-fim do Exército; é parte integrante e subordinada à Administração Federal (art. 3).
+
+### 11.4 Material, Suprimento, Recebimento e Descarga
+- **Material permanente** (art. 53, item 1): durabilidade superior a 2 anos, não perde identidade física pelo uso. **Material de consumo** (item 2): perde identidade física pelo uso.
+- **Material crítico/estratégico** (art. 61): itens controlados pelo Órgão Gestor, por escassez ou relevância à defesa nacional.
+- **Nível de suprimento** (art. 63): Mínimo (§3º, reserva para interrupção ocasional do fluxo), Operacional (§2º, estoque normal entre recebimentos), Máximo (§4º, soma de ambos).
+- **Suprimento automático** (art. 57, §1º): via planejamento, dispensa pedido da UA. **Eventual** (§2º): atende necessidades não previstas.
+- **Comissão de Recebimento e Exame** (art. 66): 3 oficiais, prazo de 8 dias para o termo. Irregularidade de qualidade/quantidade (art. 70): lavra-se Termo de Recebimento e Exame só com as irregularidades e motivos da rejeição.
+- Bens em excesso/fabricados pela UA (art. 73, §2º): incluídos no patrimônio pelo preço corrente no comércio.
+- **Descarga** (art. 85, §1º): motivos taxativos (inservibilidade, perda, furto/roubo, transferência) -- modernização estética NÃO é motivo. Furto/roubo (art. 88, §3º) exige instauração de IPM.
+- **Alienação** (art. 98): matéria-prima sem previsão de uso e resíduos de oficina, mediante licitação.
+- Movimentação sem recursos disponíveis (art. 102, §3º): militar permanece adido, como se efetivo fosse, até disponibilidade dos recursos.
+
+### 11.5 Responsabilidade Civil e Força Maior
+- Responsabilidade civil (art. 109, §2º): acarreta ressarcimento dos danos à União/terceiros; não isenta de sanção disciplinar (§1º); absolvição criminal não anula débito civil automaticamente (§3º); Ministério do Exército responde com ação regressiva (art. 118).
+- Parecer incompleto/inverídico (art. 126, parágrafo único): responsabilidade recai só sobre o autor do parecer; em pareceres verídicos, responsabilidade é compartilhada (caput).
+- **Força maior** (art. 119, parágrafo único -- não art. 147, conforme correção de citação abaixo): isenção de responsabilidade depende da ausência de culpa do agente; negligência comprovada em furto/roubo afasta a isenção mesmo estando o item listado como força maior.
+- Transmissão de material/função por afastamento súbito (art. 144, §1º, item 7 -- inclui óbito): comissão obrigatória de 3 membros. Prazo de passagem de função do Comandante de Subunidade (art. 143, item 2): até 8 dias úteis, contados do dia útil subsequente à publicação.
+- Solução de continuidade da atividade administrativa é vedada (art. 135).
+
+### 11.6 Nota de Correção de Citação (Q29 do caderno original)
+- O caderno atribui ao "Art. 147, Parágrafo Único" a regra de que a isenção por força maior (furto/roubo) depende da ausência de culpa do agente. A conferência do texto oficial do RAE indica que essa regra consta, na verdade, do **art. 119, parágrafo único** (Capítulo dos princípios básicos de responsabilidade) -- o art. 147 trata de outras hipóteses (material contaminado, avaria de imóvel etc.). A lógica doutrinária da questão permanece correta; apenas a citação do artigo foi ajustada no campo `referencia_legal`/`explicacao` do banco de questões.
+
+### 11.7 Pontos-Chave para Elaboração de Questões (Administração Militar/RAE)
+- Agente Diretor = responsabilidade integral da UA; Ordenador de Despesas = só orçamento/finanças; Fiscal Administrativo = assessoramento e fiscalização contábil-patrimonial -- não confundir os três papéis.
+- Delegação da função de Agente Diretor: somente a oficial superior, nunca a subtenente/praça.
+- Material permanente (>2 anos, não perde identidade física) x material de consumo (perde identidade física pelo uso).
+- Descarga por furto/roubo exige IPM; demais casos podem exigir sindicância.
+- Força maior não isenta responsabilidade se houver culpa (negligência) comprovada do agente -- regra do art. 119, parágrafo único (não do art. 147, conforme nota de correção acima).
+- Prazos de transmissão de função/material contam-se do dia útil subsequente à publicação em Boletim Interno.
 
 ---
 
