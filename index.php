@@ -1632,7 +1632,7 @@ $audiosCatalog = [
                 <span style="background:<?= e($g['cor']) ?>;color:#fff;border-radius:7px;padding:3px 10px;font-size:.73rem;font-weight:700;white-space:nowrap"><?= e($m['badge']) ?></span>
                 <span style="font-size:.82rem;color:#555;font-weight:600;overflow-wrap:break-word"><?= e($m['titulo']) ?></span>
             </div>
-            <audio controls style="width:100%;height:36px;margin-bottom:10px" preload="none">
+            <audio controls style="width:100%;height:36px;margin-bottom:10px" preload="metadata">
                 <source src="<?= e($url) ?>" type="audio/mp4">
                 Navegador não suporta áudio HTML5.
             </audio>
