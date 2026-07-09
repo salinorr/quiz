@@ -1,7 +1,7 @@
 # Base de Conhecimento -- Legislacao Militar de Roraima
 
 **Documento de referencia para criacao de questoes do Quiz PMRR**
-Ultima atualizacao: 2026-07-06
+Ultima atualizacao: 2026-07-09
 
 ---
 
@@ -18,6 +18,11 @@ Ultima atualizacao: 2026-07-06
 9. [Atuacao Policial na Protecao dos Direitos Humanos de Pessoas em Situacao de Vulnerabilidade](#9-atuacao-policial-na-protecao-dos-direitos-humanos-de-pessoas-em-situacao-de-vulnerabilidade)
 10. [Aspectos Juridicos da Abordagem Policial](#10-aspectos-juridicos-da-abordagem-policial)
 11. [Administracao Militar -- RAE (Decreto n. 98.820/1990)](#11-administracao-militar----rae-decreto-n-988201990)
+12. [Chefia e Lideranca Militar (Manual C 20-10)](#12-chefia-e-lideranca-militar-manual-c-20-10)
+13. [Direito Administrativo (CF/88 art. 37 e correlatos)](#13-direito-administrativo-cf88-art-37-e-correlatos)
+14. [Direito Constitucional (CF/88)](#14-direito-constitucional-cf88)
+15. [Direitos Humanos e Cidadania (DUDH e CADH)](#15-direitos-humanos-e-cidadania-dudh-e-cadh)
+16. [Direitos da Comunidade LGBTQIAPN+](#16-direitos-da-comunidade-lgbtqiapn)
 
 ---
 
@@ -1409,6 +1414,507 @@ Tenente-Coronel QEO (teto do quadro)
 | Estatuto dos Militares | LC n. 194/2012 | Arts. 1-161 |
 | Codigo de Etica e Disciplina | Lei n. 963/2014 | Arts. 1-102 |
 | Alteracoes ao Estatuto | LC n. 372/2026 | Altera arts. 22 e 71-A da LC 194/2012 |
+
+## 12. Chefia e Liderança Militar (Manual C 20-10)
+
+**Nota de natureza da fonte**: disciplina baseada no **Manual de Campanha C 20-10 (Liderança Militar)**, Exército Brasileiro (publicado em 2011, disponível na Biblioteca Digital do Exército -- BDEX), concebido de forma integrada à Doutrina Militar Terrestre (DMT). **Trata-se de doutrina interna das Forças Armadas, sem lei publica numerada correspondente** -- não há legislação para baixar nesta disciplina. Por analogia, temas de ética e valores militares remetem ao Estatuto dos Militares de Roraima (LC 194/2012, art. 39 -- ver seção 1.7) e ao CEDM/RR (Lei 963/2014, arts. 15 a 22 -- Deontologia Militar, ver seção 2.3), sem que estes diplomas definam tecnicamente os conceitos doutrinários do manual (pilares, competências, correntes teóricas etc.).
+
+### 12.1 Fundamentos e o Fenômeno da Liderança
+
+- O **ser humano é o elemento primordial de qualquer exército**, a "engrenagem propulsora" para a realização dos objetivos institucionais. A doutrina **não** fixa parâmetros pétreos/imutáveis de comportamento e recebe aportes importantes da **psicologia social**. A evolução tecnológica das armas **realça**, não diminui, a importância do fator humano.
+- O fenômeno da liderança é composto por **quatro fatores fundamentais**:
+
+| Fator | Definição |
+|---|---|
+| **Líder** | Quem exerce a influência sobre o grupo |
+| **Liderados** | O grupo influenciado |
+| **Situação** | Somatório de elementos internos e externos que influenciam a motivação do grupo |
+| **Interação** | Processo pelo qual informações, ideias, pensamentos, sentimentos e emoções tramitam entre os membros do grupo |
+
+- **Liderança x Chefia x Gerência**: não são sinônimos. **Gerência/chefia** apoiam-se na esfera **formal** (cargo, autoridade legal, administração de recursos). **Liderança** é processo de **influência interpessoal informal**, apoiado no prestígio pessoal aceito pelo grupo, que transcende o cargo formal.
+- Em situações de **crise/combate com risco de vida**, os subordinados só obedecem voluntariamente às ordens quando estas estão **afiançadas pela confiança** já construída com o comandante em tempo de paz -- a disciplina formal isolada não garante, por si só, esse cumprimento.
+
+### 12.2 Correntes e Teorias da Liderança
+
+| Corrente | Foco | Teoria(s) associada(s) | Ideia-chave |
+|---|---|---|---|
+| **Centrada na Figura do Líder** | O que o líder é/faz | **Teoria Inatista** | Líder é predestinado/"abençoado pela Providência Divina"; **Teoria dos Tipos/Estilos** (autocrático, participativo/democrático, laissez-faire) |
+| **Centrada nos Seguidores** | Caracterização do líder emergente | **Teoria Sócio-Histórica** | Processo grupal histórico de formação de vínculos -- experientes orientam os mais novos; líder é "produto do grupo" |
+| **Centrada na Situação** | Relatividade do fenômeno | Corrente Situacional | Liderança depende do **tempo e do lugar**; competências exigidas variam com as circunstâncias -- um líder eficaz em combate não é, necessariamente, eficaz na administração de paz (e vice-versa) |
+| **Integradora** | Totalidade de fatores coexistentes | **Teoria do Campo Social (Kurt Lewin)** | Grupo e ambiente formam um todo; conduta explicada pela **inter-relação dinâmica** entre partes interdependentes ("campo psicológico") |
+
+**Estilos clássicos de liderança** (Teoria dos Tipos/Estilos):
+- **Autocrático**: centraliza decisões, fixa normas sem consulta, exige execução imediata.
+- **Participativo/Democrático**: atua sintonizado com o grupo, incentiva participação, aproveita sugestões antes de decidir.
+- **Laissez-faire**: concede total liberdade ao grupo, abstém-se de guiar ou controlar diretamente.
+- **Alternância de estilos**: é **recomendada**, não proibida -- o estilo deve variar conforme situação, perfil do grupo e urgência da missão (ex.: autocrático em combate imediato, participativo em planejamento de adestramento em tempo de paz). Rigidez em um único estilo é considerada **imprópria**.
+
+### 12.3 Formas de Exercício e Níveis de Comando
+
+- **Liderança direta**: o líder interage frequentemente e pessoalmente com o grupo (exemplo pessoal, palestras, visitas). **Liderança indireta**: caracteriza-se pela influência do líder sobre outros líderes subordinados, materializada por documentos e tecnologia, dada a impossibilidade de contato direto com todo o efetivo.
+
+| Nível de Comando | Escalão | Forma predominante | Características |
+|---|---|---|---|
+| **Pequenos Escalões** | Do cabo ao capitão | **Liderança direta** (predominante) | Líder deve estar junto aos comandados, exemplo pessoal constante; proficiência profissional é condição *sine qua non*; sargento não deve se afastar do contato com o soldado |
+| **Organizacional/Tático** | Unidades e Grandes Unidades | Liderança direta **e** indireta | Interface materializada por boletins, diretrizes, ordens de operações e tecnologia da informação; comandante deve buscar oportunidades de liderança direta (visitas, palestras) para não se isolar em gabinete |
+| **Estratégico** | Alto Comando/Oficiais Generais | **Liderança indireta** (predominante) | Competências de **negociação, visão de futuro e relacionamento funcional externo** assumem papel preponderante; exige conhecimentos de Geopolítica e História Militar; valores morais permanecem **não negociáveis**; fiscalização direta da ponta deve ser **delegada** |
+
+### 12.4 Pilares da Liderança Militar: Saber, Ser e Fazer
+
+| Pilar | Definição | Exemplo de falha |
+|---|---|---|
+| **Saber** (Proficiência Profissional) | Conhecimento técnico e tático necessário à função | Desconhecer normas de conduta ou o manuseio do equipamento |
+| **Ser** (Senso Moral) | Incorporação de valores e traços de personalidade ao caráter | Agir com desonestidade, falhar em ser exemplo moral mesmo tendo bom "Saber" técnico |
+| **Fazer** (Atitude Adequada) | Capacidade de agir/executar de forma correta na prática | Não saber colocar em prática o conhecimento técnico e os valores |
+
+**Ponto-chave**: um militar tecnicamente competente ("Saber") mas desonesto ou sem exemplo moral está falhando no pilar **Ser**, não no Saber ou no Fazer.
+
+### 12.5 Ética e Valores Militares
+
+- **Ética**: ciência do comportamento que busca explicar, justificar e criticar os costumes de uma sociedade.
+- **Moral**: conjunto de normas, princípios, preceitos e valores que norteiam o comportamento do indivíduo no grupo social -- **não é inata**, é adquirida/conquistada por hábito.
+- **Preceitos da Ética Militar** (doutrina, com eco no Estatuto dos Militares/LC 194/2012, art. 39, e no CEDM/RR, arts. 15-22): impõem ao comandante a **responsabilidade finalística pela defesa da Pátria e garantia dos poderes constitucionais**, vedando a transigência com princípios morais e a amoralidade.
+- **Crenças e valores**: **não são inatos, são aprendidos**; a compreensão/aceitação de valores comuns **reduz conflitos** e facilita a ação coletiva; as **atitudes do líder são mais imitadas do que as ordens verbais/escritas**.
+- **Integridade de caráter**: valor moral mais importante, pois **condensa todos os demais valores básicos** -- honra, honestidade, verdade, justiça, respeito e lealdade.
+- **Favoritismo**: falta de natureza moral **grave**, que **solapa e destrói a confiança** no líder (ex.: comandante que beneficia sistematicamente amigos pessoais em detrimento de quem tem desempenho superior).
+- **Lealdade**: deve ser dedicada às pessoas **em função dos valores que elas defendem/representam** -- não é incondicional nem serve para acobertar erros/transgressões éticas de subordinados ou superiores.
+- **Espírito de Corpo**: sentimento de orgulho de pertencer ao Exército/Corporação, à Arma/Serviço e ao grupo -- a "alma coletiva" da tropa. Distinto de Patriotismo/Civismo (voltados à nação) e de Idealismo (fé na missão/amor à profissão) e de Pundonor Militar (honra/dignidade individual).
+
+### 12.6 Competências do Líder
+
+| Domínio | Conteúdo |
+|---|---|
+| **Cognitivo** | Conhecimentos técnicos e táticos (equivale ao "Saber") |
+| **Psicomotor** | Habilidades de adestramento físico |
+| **Afetivo** | Dividido em **pessoais** (autoconhecimento, autocontrole, resiliência, adaptabilidade, coragem moral) e **interpessoais** (empatia, tacto, camaradagem) |
+
+- **Autoconhecimento**: saber os próprios pontos fortes e fracos, para reforçar capacidades e minimizar deficiências.
+- **Coragem Moral** (distinta de Coragem Física): defesa de princípios/convicções éticas mesmo com prejuízo de interesses pessoais (ex.: contrariar o comandante em defesa de um princípio institucional).
+- **Resiliência**: capacidade de se recuperar rapidamente de traumas/reveses. **Adaptabilidade**: ajuste apropriado do comportamento/planejamento às mudanças de situação. Frequentemente cobradas em conjunto em cenários de reverso tático.
+- **Tacto**: competência interpessoal de relacionar-se sem ferir suscetibilidades do subordinado, associada ao conceito de **"Sereno Rigor"** (corrigir no momento certo, com equilíbrio).
+- **Camaradagem**: obrigação de incentivar e manter harmonia e solidariedade -- não se confunde com "perdoar todos os erros".
+
+### 12.7 Inteligência Emocional (Goleman)
+
+- Habilidades fundamentais da Inteligência Emocional aplicadas à liderança, com destaque para a **Empatia**: capacidade de **reconhecer as emoções nas demais pessoas ou grupos** por meio de observação cuidadosa -- não se confunde com pena/compaixão sistemática, nem com controle de instintos de sobrevivência (coragem física) ou cálculo lógico sob pressão (inteligência lógico-matemática, de Gardner).
+
+### 12.8 Comando: Elemento Formal x Elemento Informal
+
+- O **Comando** integra dois elementos: a **autoridade legal/administração** (elemento **formal**, decorrente do cargo) e a **Liderança Militar** (elemento **informal, mas desejável**, que permite mover pessoas para além da mera força da lei). A liderança **não substitui** a autoridade legal, nem se reduz à gerência administrativa -- ambos coexistem e se complementam.
+- O processo de influência interpessoal da liderança busca o **estabelecimento de vínculos afetivos e credibilidade** para favorecer o **logro dos objetivos da Organização Militar** -- conciliando missão institucional e bem-estar do subordinado, sem romper a hierarquia (risco de "promiscuidade") nem substituir os objetivos da missão pelas aspirações individuais.
+
+### 12.9 Pontos-Chave para Elaboração de Questões
+
+- Liderança **não é sinônimo** de chefia/gerência (formal) -- é processo de influência interpessoal (informal, mas desejável) que **complementa** a autoridade legal, não a substitui.
+- Quatro fatores do fenômeno da liderança: líder, liderados, situação e **interação** (tramitação de informações/emoções) -- não confundir interação com "situação" (soma de fatores internos/externos).
+- Correntes teóricas: Centrada no Líder (Inatista, Estilos) x Centrada nos Seguidores (Sócio-Histórica) x Situacional (tempo/lugar) x Integradora (Kurt Lewin, campo social).
+- Estilos: autocrático (centraliza), participativo/democrático (ouve o grupo), laissez-faire (liberdade total, sem controle). **Alternância situacional é recomendada**, rigidez em um único estilo é imprópria.
+- Níveis de comando: pequenos escalões = liderança **direta** predominante; organizacional/tático = **direta e indireta** via documentos/tecnologia; estratégico = **indireta** predominante, com foco em negociação e visão de futuro.
+- Pilares Saber/Ser/Fazer: Saber = proficiência técnica; Ser = senso moral/caráter; Fazer = atitude/execução prática. Desonestidade com boa técnica = falha no **Ser**, não no Saber.
+- Moral (normas/valores do grupo, adquirida por hábito) x Ética (ciência que estuda o comportamento moral) -- não confundir os dois conceitos.
+- Integridade condensa honra, honestidade, verdade, justiça, respeito e lealdade -- é o valor mais importante do líder.
+- Favoritismo = falta moral grave (destrói confiança); Lealdade = condicionada aos valores defendidos, não é incondicional nem serve para encobrir erros.
+- Espírito de Corpo (orgulho de grupo/Arma) ≠ Patriotismo/Civismo (nação) ≠ Idealismo (fé na missão) ≠ Pundonor (honra individual).
+- Competências afetivas dividem-se em pessoais (autoconhecimento, resiliência, adaptabilidade, coragem moral) e interpessoais (empatia, tacto, camaradagem) -- distintas das competências cognitivas (técnicas) e psicomotoras (físicas).
+- Empatia (Goleman) = reconhecer emoções alheias por observação -- não é pena nem coragem física.
+- Esta disciplina é **doutrina interna do Exército Brasileiro** (Manual C 20-10), sem lei pública numerada -- quando o tema for ética/valores militares, cabe citar por analogia o Estatuto dos Militares de Roraima (LC 194/2012, art. 39) e o CEDM/RR (Lei 963/2014, arts. 15-22), sem inventar artigos específicos não documentados nas seções 1 e 2 desta base.
+
+---
+
+## 13. Direito Administrativo (CF/88 art. 37 e correlatos)
+
+**Fontes principais**: Caderno de Questões Comentadas de Direito Administrativo (CHO) — Academia Coronel Walterler; CF/88, art. 37, caput (princípios LIMPE) e §6º (responsabilidade civil objetiva do Estado); CTN — Lei n. 5.172/1966, arts. 77 a 80 (poder de polícia e taxas); Lei n. 8.429/1992 — Lei de Improbidade Administrativa (art. 4º, **HOJE REVOGADO** pela Lei n. 14.230/2021); Lei n. 4.717/1965 — Lei da Ação Popular, art. 2º (vícios do ato administrativo: incompetência e desvio de finalidade); Lei n. 9.784/1999 — Lei do Processo Administrativo Federal (arts. 2º, 11, 12 e 15); Lei n. 8.112/1990, art. 126 (independência das instâncias, paralelo doutrinário); Decreto-Lei n. 200/1967, art. 5º (entidades da Administração Indireta); Súmula 473/STF (autotutela e limites do controle judicial); Código Penal, art. 327 (conceito ampliado de funcionário público, por analogia).
+
+### 13.1 Princípios da Administração Pública
+
+- **Princípios expressos (LIMPE) — CF/88, art. 37, caput**: Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência. A Eficiência só passou a constar expressamente do caput a partir da **EC n. 19/1998**.
+- **Legalidade**: para o particular, é lícito fazer tudo que a lei não proíbe; para o administrador público, só é permitido fazer o que a lei autoriza ou determina (legalidade estrita).
+- **Impessoalidade**: veda favorecimento ou prejuízo de administrados por critérios pessoais/subjetivos (ex.: recusar atendimento a um "desafeto" viola a impessoalidade, não a proporcionalidade).
+- **Moralidade**: exige conduta ética, leal e de boa-fé, além da mera legalidade formal. A jurisprudência do STJ reconhece que a mora administrativa excessiva e injustificada, ao abalar a confiança legítima do cidadão, também ofende a moralidade.
+- **Publicidade**: exige transparência dos atos administrativos, ressalvadas as hipóteses de sigilo do art. 5º, XXXIII, CF/88 (segurança da sociedade e do Estado).
+- **Autotutela (Súmula 473/STF)**: a Administração pode anular atos ilegais (dos quais não se originam direitos) e revogar atos inconvenientes/inoportunos (respeitados direitos adquiridos), sempre ressalvada a apreciação judicial.
+- **Princípios implícitos**: Ampla Defesa (CF/88, art. 5º, LV) e Segurança Jurídica — hoje também positivados no art. 2º, caput, da Lei n. 9.784/1999 (Lei do Processo Administrativo Federal), ao lado de finalidade, motivação, razoabilidade, proporcionalidade, moralidade, contraditório, interesse público e eficiência.
+- **Atenção — Art. 4º da Lei 8.429/1992 (LIA)**: a redação histórica desse artigo (agentes públicos obrigados a observar legalidade, impessoalidade, moralidade e publicidade) **foi revogada pela Lei n. 14.230/2021**. Hoje, o fundamento vigente para essa exigência é diretamente o art. 37, caput, da CF/88, combinado com o art. 1º da LIA (na redação atual). Cuidado ao citar "art. 4º da LIA" como se estivesse em vigor.
+
+### 13.2 Poderes Administrativos
+
+| Poder | Conteúdo | Base |
+|---|---|---|
+| **Vinculado** | Ausência de margem de escolha do agente | Legalidade estrita |
+| **Discricionário** | Liberdade de escolha quanto a conveniência, oportunidade e/ou conteúdo, dentro dos limites da lei | Doutrina; CF/88, art. 37, caput |
+| **Hierárquico** | Distribuição/escalonamento de funções, subordinação, fiscalização, delegação e avocação de competência dentro da mesma pessoa jurídica | Lei 9.784/1999, arts. 11, 12 e 15 |
+| **Disciplinar** | Apuração e punição de infrações funcionais de quem tem vínculo especial de sujeição com a Administração | Estatutos/regimes disciplinares específicos |
+| **Normativo/Regulamentar** | Edição de atos gerais e abstratos para fiel execução da lei e organização do serviço, sem inovar originariamente no ordenamento | Paralelo: CF/88, art. 84, IV |
+| **De Polícia** | Condiciona/restringe liberdade e propriedade em razão do interesse público; pode ensejar cobrança de taxa | CTN, art. 78 |
+
+- **Poder-dever (Di Pietro)**: os poderes administrativos são irrenunciáveis — o agente não pode deixar de exercê-los quando a lei exige, nem deles dispor em proveito próprio.
+- **Poder hierárquico x Poder de Polícia**: hierárquico pressupõe subordinação DENTRO da mesma pessoa jurídica; não se manifesta entre entidades distintas da Administração Indireta (que se relacionam por vinculação/tutela, não hierarquia).
+- **Poder de Polícia — definição legal (CTN, art. 78)**: "atividade da administração pública que, limitando ou disciplinando direito, interêsse ou liberdade, regula a prática de ato ou abstenção de fato, em razão de intêresse público concernente à segurança, à higiene, à ordem, aos costumes (...) à tranqüilidade pública ou ao respeito à propriedade e aos direitos individuais ou coletivos." O parágrafo único define o exercício REGULAR do poder de polícia (competência do órgão, processo legal, sem abuso ou desvio de poder em atividade discricionária).
+- **Ciclo de polícia**: ordem (norma) → consentimento (atos preventivos, ex.: licença e autorização) → fiscalização → sanção.
+  - Polícia administrativa: incide sobre bens/atividades, caráter predominantemente **preventivo**.
+  - Polícia judiciária: incide sobre pessoas, caráter predominantemente **repressivo**.
+  - **Delegabilidade**: apenas atos MATERIAIS e acessórios (ex.: fiscalização técnica) podem ser delegados a entidades da Administração Indireta (STF, RE 633.782, Tema 532); as fases de ordem e sanção são indelegáveis a particulares.
+  - Nem todo poder de polícia é vinculado: pode incidir sobre atividade discricionária (CTN, art. 78, parágrafo único).
+
+### 13.3 Agentes Públicos
+
+- **Particulares em colaboração**: exercem função pública de modo transitório/episódico, sem vínculo empregatício fixo (ex.: mesários, jurados). Conceito doutrinário; para fins penais, o conceito amplo de "funcionário público" está no CP, art. 327 (usado por analogia).
+
+### 13.4 Responsabilidade Civil do Estado
+
+- **Teoria do Risco Administrativo — CF/88, art. 37, §6º**: "As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos responderão pelos danos que seus agentes, nessa qualidade, causarem a terceiros, assegurado o direito de regresso contra o responsável nos casos de dolo ou culpa."
+- Pressupostos da responsabilidade OBJETIVA do Estado: conduta de agente público (nessa qualidade) + dano + nexo causal — **dispensa-se prova de dolo/culpa** para responsabilizar o Estado (dolo/culpa só importa na ação de regresso contra o agente).
+
+### 13.5 Atos Administrativos — Atributos e Elementos
+
+- **Imperatividade x Autoexecutoriedade**: imperatividade = imposição unilateral da vontade estatal (comando), independe de concordância do particular; autoexecutoriedade = possibilidade de a Administração executar materialmente suas decisões sem autorização judicial prévia (ação). Atos de consentimento (ex.: licença) não têm imperatividade, pois dependem de provocação/interesse do particular.
+- **Elementos do ato administrativo (COMFFORM/DOSAÇÃO)**: competência (sujeito), objeto, forma, motivo, finalidade.
+- **Desvio de finalidade** (vício de Finalidade): o agente tem competência e observa a forma, mas persegue fim diverso do interesse público (ex.: remoção "por interesse do serviço" que na verdade é vingança pessoal). Base legal: Lei n. 4.717/1965 (Lei da Ação Popular), art. 2º, "e": "o desvio de finalidade se verifica quando o agente pratica o ato visando a fim diverso daquele previsto, explícita ou implicitamente, na regra de competência."
+- **Excesso de Poder** (vício de Competência): o agente extrapola os limites de sua competência legal. Base legal: Lei n. 4.717/1965, art. 2º, "a": "a incompetência fica caracterizada quando o ato não se incluir nas atribuições legais do agente que o praticou."
+- **Discricionariedade x arbitrariedade**: discricionariedade é a margem de escolha dentro dos limites legais; arbitrariedade extrapola esses limites.
+
+### 13.6 Fontes do Direito Administrativo
+
+- Fonte primária: a lei, em sentido amplo.
+- Fontes secundárias: doutrina, jurisprudência não vinculante e **costumes administrativos** — práticas reiteradas, uniformes e LÍCITAS (compatíveis com a lei e o interesse público). Costume não pode contrariar a lei (jamais *contra legem*).
+
+### 13.7 Controle da Administração Pública
+
+- **Controle judicial**: o Judiciário pode ANULAR atos ilegais, mas não pode REVOGAR atos válidos por conveniência/oportunidade (isso invadiria o mérito administrativo). Mesmo em atos discricionários, cabe controle de legalidade dos elementos vinculados (competência, forma, finalidade) e de razoabilidade/proporcionalidade — o que não cabe é substituir o mérito.
+- Base: CF/88, art. 5º, XXXV (inafastabilidade da jurisdição) c/c Súmula 473/STF.
+- **Independência das instâncias** (penal, civil, administrativa): regra geral, cada esfera responde autonomamente pelo mesmo fato. EXCEÇÃO: a absolvição penal só afasta automaticamente a responsabilidade administrativa quando a sentença nega CATEGORICAMENTE a existência do fato ou a autoria — absolvição por falta de provas ou por prescrição penal NÃO afasta a instância administrativa. Paralelo: Lei n. 8.112/1990, art. 126; CPP, art. 66.
+
+### 13.8 Pontos-Chave para Elaboração de Questões
+
+- LIMPE (CF/88, art. 37, caput) — Eficiência só é expressa desde a EC 19/1998; Ampla Defesa e Segurança Jurídica são implícitas (esta última positivada no art. 2º da Lei 9.784/99).
+- Art. 4º da Lei 8.429/1992 está **revogado** desde a Lei 14.230/2021 — não citar como "artigo vigente" sem essa ressalva.
+- Autotutela: Súmula 473/STF — anula por ilegalidade, revoga por conveniência/oportunidade, sempre ressalvada apreciação judicial.
+- Poder de polícia: CTN, art. 78 — definição legal; ciclo (ordem/consentimento/fiscalização/sanção); só atos materiais são delegáveis à Administração Indireta (RE 633.782).
+- Poder hierárquico exige subordinação DENTRO da mesma pessoa jurídica — não existe entre entidades distintas da Administração Indireta.
+- Responsabilidade civil do Estado: CF/88, art. 37, §6º — objetiva (conduta + dano + nexo, sem dolo/culpa); regresso contra agente exige dolo/culpa.
+- Desvio de finalidade (vício de Finalidade) x Excesso de Poder (vício de Competência) — ambos "modalidades" de abuso de poder, mas atingem elementos diferentes do ato (Lei 4.717/1965, art. 2º, "a" e "e").
+- Controle judicial: anula ilegalidade, nunca revoga por mérito (conveniência/oportunidade).
+- Independência das instâncias: só a negativa categórica de fato/autoria na esfera penal vincula a esfera administrativa.
+
+---
+
+## 14. Direito Constitucional (CF/88)
+
+**Fontes principais**: Constituicao da Republica Federativa do Brasil de 1988 (texto compilado, planalto.gov.br) -- Titulo I (Principios Fundamentais, arts. 1 a 4), Titulo II (Direitos e Garantias Fundamentais: Capitulo I -- Direitos e Deveres Individuais e Coletivos, art. 5; Capitulo II -- Direitos Sociais, art. 6; Capitulo III -- Nacionalidade, art. 12; Capitulo IV -- Direitos Politicos, arts. 14 e 15), Titulo III, Capitulo VII (Administracao Publica, arts. 37 e 41); apostila tecnica do CHO -- "Direito Constitucional" (Teoria da Constituicao, Principios Fundamentais, Direitos e Garantias Individuais, Direitos Sociais, Nacionalidade, Direitos Politicos e Administracao Publica).
+
+### 14.1 Fundamentos e Objetivos Fundamentais da Republica
+
+- **Fundamentos (art. 1, CF/88)** -- nao confundir com objetivos: soberania; cidadania; dignidade da pessoa humana; valores sociais do trabalho e da livre iniciativa; pluralismo politico. Paragrafo unico: "Todo o poder emana do povo, que o exerce por meio de representantes eleitos ou diretamente".
+- **Objetivos fundamentais (art. 3, CF/88)**: construir uma sociedade livre, justa e solidaria; garantir o desenvolvimento nacional; erradicar a pobreza e a marginalizacao e reduzir as desigualdades sociais e regionais; promover o bem de todos, sem preconceitos de origem, raca, sexo, cor, idade e quaisquer outras formas de discriminacao.
+- **Principios das relacoes internacionais (art. 4, CF/88)**: independencia nacional; prevalencia dos direitos humanos; autodeterminacao dos povos; nao-intervencao; igualdade entre os Estados; defesa da paz; solucao pacifica dos conflitos; repudio ao terrorismo e ao racismo; cooperacao entre os povos para o progresso da humanidade; concessao de asilo politico. Paragrafo unico: integracao com os povos da **America Latina** (nao apenas paises de lingua portuguesa).
+- A Constituicao e a norma suprema, fundamento de validade de todo o ordenamento juridico (supremacia constitucional); e classificada como **rigida** (exige processo legislativo especial de emenda, art. 60), o que supera a visao da Constituicao como mera "folha de papel" (forca normativa da Constituicao).
+
+### 14.2 Direitos e Garantias Fundamentais -- Caracteristicas e Dimensoes
+
+- **Caracteristicas doutrinarias**: universalidade (aplicacao a todos, sem restricao a natos); indivisibilidade (nao podem ser fragmentados em blocos negociaveis); irrenunciabilidade (nao se pode abdicar definitivamente, embora se possa deixar de exercer temporariamente); inalienabilidade (nao sao comercializaveis); imprescritibilidade (nao se perdem pelo decurso do tempo ou pelo nao uso).
+- **Dimensoes/geracoes de direitos**: 1a dimensao -- liberdades negativas, dever de abstencao do Estado (direitos civis e politicos classicos); 2a dimensao -- direitos de prestacao, exigem atuacao positiva do Estado (direitos sociais, igualdade material); 3a dimensao -- direitos coletivos e difusos, solidariedade/fraternidade (meio ambiente -- art. 225, CF/88; paz; patrimonio comum da humanidade); 4a dimensao -- ligada a globalizacao politico-economica (democracia, informacao, pluralismo). As dimensoes se **acumulam e se complementam**, nao ha revogacao da anterior pela posterior.
+- **Aplicacao imediata (art. 5, §1)**: "As normas definidoras dos direitos e garantias fundamentais tem aplicacao imediata" -- vinculam os Poderes Publicos desde a promulgacao da CF/88, independentemente de lei regulamentadora, ainda que a doutrina reconheca gradacoes de eficacia (plena, contida, limitada).
+- **Isonomia formal x material**: igualdade formal (art. 5, caput -- "todos sao iguais perante a lei"); igualdade material (tratar desigualmente os desiguais na medida de sua desigualdade -- Rui Barbosa), fundamento constitucional das acoes afirmativas (cotas, reserva de vagas para PcD -- art. 37, VIII).
+- **Dignidade da pessoa humana (art. 1, III)**: valor-fonte do sistema, vetor hermeneutico dos direitos fundamentais e limite ao poder estatal; extensivo a brasileiros e estrangeiros residentes no pais (art. 5, caput).
+- **Direito a vida (art. 5, caput c/c art. 1, III)**: interpretado em sentido amplo -- direito de nao ser morto arbitrariamente (dimensao negativa) e direito a condicoes minimas de existencia digna, com deveres positivos de saude (dimensao positiva, art. 196).
+- **Vedacao de penas (art. 5, XLVII)**: nao havera penas de morte (salvo guerra declarada, art. 84, XIX), de carater perpetuo, de trabalhos forcados, de banimento, ou cruéis.
+- **Liberdades de pensamento, expressao e religiao**: e livre a manifestacao do pensamento, vedado o anonimato (art. 5, IV); livre expressao intelectual/artistica/cientifica, sem censura ou licenca (art. 5, IX); liberdade de consciencia e crenca, com protecao aos locais de culto e as liturgias (art. 5, VI).
+- **Reuniao e associacao (art. 5, XVI a XX)**: reuniao pacifica em locais abertos ao publico independe de autorizacao, exige apenas previo aviso; associacao para fins licitos independe de autorizacao, vedada a de carater paramilitar; dissolucao compulsoria de associacao exige decisao judicial **com transito em julgado**; suspensao de atividades exige apenas decisao judicial (sem necessidade de transito em julgado); ninguem pode ser compelido a associar-se ou a permanecer associado.
+- **Seguranca juridica (art. 5, XXXVI)**: "a lei nao prejudicara o direito adquirido, o ato juridico perfeito e a coisa julgada" -- protecao triplice; nao abrange mera "expectativa de direito".
+- **Devido processo legal, contraditorio e ampla defesa (art. 5, LIV e LV)**: contraditorio = direito de ciencia e reacao; ampla defesa = uso de todos os meios licitos de defesa; garantias aplicaveis tanto a processos judiciais quanto **administrativos**.
+
+### 14.3 Remedios Constitucionais
+
+- **Habeas Corpus (art. 5, LXVIII)**: cabivel sempre que alguem sofrer ou se achar ameacado de sofrer violencia ou coacao em sua liberdade de locomocao, por ilegalidade ou abuso de poder. Gratuito; capacidade postulatoria universal (dispensa advogado); admite modalidade preventiva ("salvo-conduto").
+- **Mandado de Seguranca (art. 5, LXIX)**: protege direito liquido e certo, **nao amparado por habeas corpus ou habeas data**, quando o responsavel pela ilegalidade/abuso de poder for autoridade publica ou agente de pessoa juridica no exercicio de atribuicoes do Poder Publico -- e remedio **subsidiario**. MS coletivo (art. 5, LXX): partido politico com representacao no Congresso Nacional; organizacao sindical/entidade de classe/associacao constituida ha pelo menos um ano.
+- **Habeas Data (art. 5, LXXII)**: para assegurar o conhecimento de informacoes relativas a pessoa do impetrante em bancos de dados governamentais ou de carater publico (alinea a), ou para retificacao de dados quando nao se prefira faze-lo por processo sigiloso (alinea b).
+- **Acao Popular (art. 5, LXXIII)**: legitimidade exclusiva do **cidadao** (nao estrangeiros); visa anular ato lesivo ao patrimonio publico, a moralidade administrativa, ao meio ambiente e ao patrimonio historico e cultural; autor isento de custas e onus de sucumbencia, salvo comprovada ma-fe.
+- **Mandado de Injuncao (art. 5, LXXI)**: cabivel quando a falta de norma regulamentadora torne inviavel o exercicio de direitos e liberdades constitucionais e das prerrogativas inerentes a nacionalidade, soberania e cidadania.
+
+### 14.4 Direitos Sociais (art. 6, CF/88)
+
+- Rol atual (redacao da **EC 90/2015**, com paragrafo unico da **EC 114/2021**): educacao, saude, alimentacao, trabalho, moradia, **transporte**, lazer, seguranca, previdencia social, protecao a maternidade e a infancia, assistencia aos desamparados; paragrafo unico -- renda basica familiar para brasileiro em situacao de vulnerabilidade social.
+- Diferem dos direitos individuais classicos (1a dimensao, liberdades negativas) por exigirem **atuacao positiva/prestacional** do Estado (2a dimensao).
+- **Reserva do possivel x minimo existencial** (construcao doutrinario-jurisprudencial do STF, sem artigo especifico): o minimo existencial e o nucleo essencial e impostergavel do direito social, que o Estado deve garantir **independentemente** de alegacao generica de limitacao orcamentaria.
+
+### 14.5 Nacionalidade (art. 12, CF/88)
+
+- **Brasileiros natos (art. 12, I)**: (a) nascidos no Brasil, ainda que de pais estrangeiros, desde que estes nao estejam a servico de seu pais (criterio territorial -- jus soli, com excecao para filhos de estrangeiros a servico do proprio pais); (b) nascidos no estrangeiro, de pai ou mae brasileira, desde que **qualquer deles esteja a servico da Republica Federativa do Brasil** (criterio funcional -- dispensa registro ou opcao); (c) nascidos no estrangeiro, de pai ou mae brasileira, desde que **sejam registrados em reparticao brasileira competente** ou **venham a residir no Brasil e optem, apos a maioridade**, pela nacionalidade brasileira (redacao da EC 54/2007).
+- **Brasileiros naturalizados (art. 12, II)**: (a) originarios de paises de lingua portuguesa -- um ano de residencia ininterrupta e idoneidade moral; (b) estrangeiros de qualquer nacionalidade residentes ha **mais de 15 anos ininterruptos e sem condenacao penal**, mediante requerimento.
+- **Perda da nacionalidade (art. 12, §4, na redacao da EC 131/2023 -- ATENCAO, redacao alterada em 2023)**: (I) cancelamento da naturalizacao por sentenca judicial, em virtude de **fraude relacionada ao processo de naturalizacao ou de atentado contra a ordem constitucional e o Estado Democratico** (redacao anterior a 2023 falava em "atividade nociva ao interesse nacional" -- texto **superado**); (II) pedido expresso de perda da nacionalidade brasileira perante autoridade competente, ressalvadas situacoes que acarretem apatridia. A antiga hipotese de perda por "aquisicao de outra nacionalidade" (com excecoes, como reconhecimento de nacionalidade originaria pela lei estrangeira) foi **revogada** pela EC 131/2023.
+
+### 14.6 Direitos Politicos (arts. 14 e 15, CF/88)
+
+- **Alistamento e voto (art. 14, §1)**: obrigatorios para maiores de 18 anos; facultativos para analfabetos, maiores de 70 anos, e maiores de 16 e menores de 18 anos. Estrangeiros **nao podem** se alistar como eleitores (art. 14, §2), nem os conscritos durante o servico militar obrigatorio.
+- **Perda x Suspensao dos direitos politicos (art. 15)** -- vedada a cassacao, so se admite perda/suspensao nos casos taxativos: (I) cancelamento da naturalizacao por sentenca transitada em julgado -- **perda**; (II) incapacidade civil absoluta -- **suspensao**; (III) condenacao criminal transitada em julgado, enquanto durarem os efeitos -- **suspensao**; (IV) recusa de cumprir obrigacao a todos imposta ou prestacao alternativa -- **perda**; (V) improbidade administrativa, nos termos do art. 37, §4 -- **suspensao**.
+
+### 14.7 Principios da Administracao Publica (art. 37, CF/88)
+
+- **Art. 37, caput -- LIMPE**: legalidade, impessoalidade, moralidade, publicidade e eficiencia. Para o administrador, a legalidade tem sentido **estrito** (so pode fazer o que a lei expressamente autoriza), diferente do particular (pode fazer tudo que a lei nao proibe).
+- **Concurso publico (art. 37, II a V)**: investidura em cargo/emprego publico depende de aprovacao previa em concurso, ressalvados cargos em comissao de livre nomeacao/exoneracao; prazo de validade **de ate 2 anos, prorrogavel uma vez por igual periodo** (nao 5 anos); cargos em comissao e funcoes de confianca destinam-se apenas a atribuicoes de direcao, chefia e assessoramento; aprovacao fora do numero de vagas gera **mera expectativa de direito**, nao direito subjetivo automatico (salvo excecoes jurisprudenciais do STF).
+- **Reserva de vagas para PcD (art. 37, VIII)**: a lei reservara percentual de cargos e empregos publicos para pessoas com deficiencia.
+- **Administracao Direta e Indireta**: Direta = Uniao, Estados, DF e Municipios; Indireta = autarquias, fundacoes publicas, empresas publicas e sociedades de economia mista (Decreto-Lei 200/1967, art. 4, II) -- todas sujeitas ao concurso publico e aos principios do art. 37, inclusive publicidade.
+- **Responsabilidade civil objetiva do Estado (art. 37, §6)** -- Teoria do Risco Administrativo: pessoas juridicas de direito publico e de direito privado prestadoras de servicos publicos (inclusive concessionarias/permissionarias) respondem pelos danos causados por seus agentes, **exigindo-se apenas conduta, dano e nexo causal**, dispensada prova de dolo/culpa; assegurado direito de regresso contra o agente responsavel em caso de dolo ou culpa. Culpa exclusiva da vitima exclui o nexo causal e, por consequencia, a responsabilidade estatal.
+- **Estabilidade do servidor (art. 41)**: adquirida apos **3 anos** de efetivo exercicio (nao 2), para nomeados via concurso, condicionada a **avaliacao especial de desempenho** por comissao instituida para essa finalidade (§4). Perda do cargo do estavel (§1) exige: (I) sentenca judicial transitada em julgado; (II) processo administrativo com ampla defesa; ou (III) procedimento de avaliacao periodica de desempenho, na forma de lei complementar.
+
+### 14.8 Pontos-Chave para Elaboracao de Questoes
+
+- Fundamentos (art. 1) x Objetivos (art. 3) x Principios das relacoes internacionais (art. 4): nao misturar os tres rols em uma mesma alternativa.
+- Integracao internacional do paragrafo unico do art. 4 e com os povos da **America Latina**, nao apenas paises de lingua portuguesa.
+- Caracteristicas dos direitos fundamentais: irrenunciabilidade nao impede o **nao exercicio temporario**, apenas veda a renuncia definitiva.
+- Dimensoes de direitos se acumulam, nao se substituem; 3a dimensao = coletivos/difusos (meio ambiente, paz); direitos sociais e igualdade material = 2a dimensao (nao 1a).
+- Pena de morte: unica excecao constitucional e guerra declarada (art. 84, XIX) -- demais penas (perpetua, trabalhos forcados, banimento, cruéis) sao vedadas sem excecao.
+- Reuniao (previo aviso, sem armas) x Associacao (independe de autorizacao, vedado carater paramilitar); dissolucao compulsoria de associacao exige transito em julgado, suspensao nao exige.
+- Seguranca juridica (art. 5, XXXVI) protege direito adquirido, ato juridico perfeito e coisa julgada -- nunca "expectativa de direito".
+- Remedios constitucionais: HC = liberdade de locomocao; HD = acesso/retificacao de dados pessoais; MS = subsidiario (direito liquido e certo nao amparado por HC/HD); Acao Popular = legitimidade do cidadao, tutela patrimonio publico/moralidade/meio ambiente/patrimonio historico-cultural; Mandado de Injuncao = ausencia de norma regulamentadora.
+- Rol do art. 6 ja foi ampliado por emendas (alimentacao -- EC 64/2010; transporte -- EC 90/2015; paragrafo unico sobre renda basica -- EC 114/2021) -- nao e rol imutavel.
+- Nacionalidade nata por criterio funcional (art. 12, I, "b") dispensa registro/opcao; criterio do registro/opcao (alinea "c") e distinto.
+- **Atencao a EC 131/2023**: reescreveu o art. 12, §4 (perda de nacionalidade) -- redacao antiga ("atividade nociva ao interesse nacional") esta superada; nova redacao fala em fraude no processo de naturalizacao ou atentado a ordem constitucional/Estado Democratico, alem de pedido expresso de perda (ressalvada apatridia).
+- Alistamento/voto: obrigatorio 18-70 anos (nao analfabeto/nao maior de 70); facultativo para analfabetos, maiores de 70 e 16-18 anos; estrangeiros e conscritos nao se alistam.
+- Perda x suspensao de direitos politicos (art. 15): perda = incisos I e IV; suspensao = incisos II, III e V -- cassacao e sempre vedada.
+- LIMPE (art. 37, caput): legalidade do administrador e sentido estrito (so faz o que a lei autoriza), oposto da legalidade do particular.
+- Prazo de validade do concurso publico e de ate 2 anos, prorrogavel uma vez por igual periodo (nao 5 anos); aprovacao fora das vagas gera mera expectativa de direito.
+- Responsabilidade civil do Estado (art. 37, §6) e objetiva (Teoria do Risco Administrativo) -- basta conduta, dano e nexo causal; direito de regresso exige dolo ou culpa do agente.
+- Estabilidade (art. 41): 3 anos de efetivo exercicio + avaliacao especial de desempenho; perda exige sentenca judicial, PAD com ampla defesa, ou avaliacao periodica de desempenho -- nunca decisao administrativa unilateral simples.
+
+---
+
+## 15. Direitos Humanos e Cidadania (DUDH e CADH)
+
+**Fontes principais**: apostila técnica do CHO -- "Direitos Humanos e Cidadania.pdf" (Academia Coronel Walterler); Declaração Universal dos Direitos Humanos (DUDH, ONU, Resolução 217 A (III) da Assembleia Geral, 10/12/1948); Convenção Americana sobre Direitos Humanos (CADH / Pacto de São José da Costa Rica), promulgada no Brasil pelo Decreto n. 678/1992; Carta das Nações Unidas (1945); CRFB/1988, art. 5º, §4º (EC n. 45/2004); Res. 60/251 da Assembleia Geral da ONU (2006).
+
+### 15.1 Teoria Geral e Evolução Histórica dos Direitos Humanos
+
+**Titularidade universal**: a titularidade dos Direitos Humanos depende apenas da condição de pessoa humana -- não importa origem, raça, sexo, credo ou mesmo condenação criminal anterior. Nao ha graduacao por condicao economica, social ou religiosa (DUDH, arts. 1 e 2).
+
+**Natureza jurídica das normas de DH**: nao sao meros apelos eticos -- geram para o Estado o dever de **respeitar** (abstencao) e o dever de **garantir** o exercicio dos direitos, inclusive impedindo violacoes por terceiros (CADH, art. 1, §1).
+
+**Definição jurídica**: conjunto de normas que regem as relacoes entre individuos e instituicoes e dos individuos entre si -- conceito **historicamente construido**, sem definicao unica e imutavel.
+
+**Marcos historicos anteriores a DUDH** (sem correspondencia em artigo de tratado, mas antecedentes doutrinarios da DUDH):
+- **Iluminismo/contratualistas** (Hobbes, Locke, Rousseau): direitos inalienaveis e imprescritiveis, independentes do Estado (jusnaturalismo).
+- **Magna Carta (1215)**: primeiro documento a submeter o governante a normas escritas, limitando o poder monarquico (protecao estamental -- clero e nobreza).
+- **Documentos ingleses do sec. XVII**: Petition of Rights (1628) -- veda aquartelamento forcado; Habeas Corpus Act (1679) -- protege liberdade de locomocao; Bill of Rights (1689) -- supremacia do Parlamento sobre o Rei.
+- **EUA (1776/1787)**: Declaracao de Independencia + Bill of Rights (1791) -- 1a Emenda (expressao, religiao, peticao, reuniao) e 2a Emenda (porte de armas).
+- **Franca (1789)**: Declaracao dos Direitos do Homem e do Cidadao -- resistencia a opressao, legalidade, igualdade perante a lei, soberania popular.
+
+### 15.2 Gerações de Direitos Humanos (teoria das dimensões -- Karel Vasak / Paulo Bonavides)
+
+| Geracao | Foco | Marco/Exemplo | Correspondencia na DUDH |
+|---------|------|----------------|--------------------------|
+| **1a** | Liberdades negativas (dever de abstencao do Estado) -- direitos civis e politicos | Revolucoes liberais burguesas | arts. 3 a 21 |
+| **2a** | Prestacoes positivas do Estado -- direitos sociais, economicos e culturais | Constituicoes do Mexico (1917) e de Weimar (1919); Revolucao Industrial | arts. 22 a 26 |
+| **3a** | Solidariedade/fraternidade -- titularidade difusa/coletiva | Paz, meio ambiente sadio, patrimonio comum da humanidade | posterior a DUDH (decadas de 1970-80) |
+| **4a** | Universalizacao dos direitos no contexto da globalizacao politico-economica | Democracia, informacao, pluralismo (Paulo Bonavides) | posterior a DUDH |
+
+Nao confundir as geracoes: prestacao positiva = 2a; liberdade negativa = 1a; titularidade coletiva/paz/meio ambiente = 3a; globalizacao/informacao = 4a.
+
+### 15.3 Processo de Internacionalização e o Sistema ONU
+
+- **Fundação da ONU (1945)**, Conferencia de Sao Francisco -- impulso decisivo para a internacionalizacao dos DH, viabilizando tratados que limitam o poder politico dos Estados sobre seus nacionais. Nao extingue a soberania dos Estados-membros.
+- **Tribunal de Nuremberg (1945-1946)**: instituido pelo **Acordo de Londres**, condenacoes baseadas no costume internacional -- tribunal **ad hoc e temporario**, precedente historico do futuro TPI. Nao foi criado pela DUDH (que é de 1948, posterior).
+- **Idiomas oficiais da ONU**: originalmente 5 (ingles, frances, espanhol, chines, russo); o **arabe** foi incorporado a Assembleia Geral pela **Resolucao 3190 (XXVIII), de 1973**, com uso depois estendido aos demais orgaos -- hoje sao **6 idiomas oficiais**.
+- **CIJ x TPI**: a **CIJ** (Corte Internacional de Justica) e orgao judiciario principal da ONU, permanente, e resolve **disputas entre Estados** (Carta da ONU, 1945). O **TPI** (Tribunal Penal Internacional), criado pelo **Estatuto de Roma (1998)**, e organizacao autonoma (nao integra a ONU), complementar as jurisdicoes penais nacionais, e julga **individuos** por genocidio, crimes de guerra, crimes contra a humanidade e agressao. O Brasil se submete a jurisdicao do TPI por forca do **art. 5, §4, CRFB** (EC 45/2004): "O Brasil se submete a jurisdicao de Tribunal Penal Internacional a cuja criacao tenha manifestado adesao." Incorporado pelo Decreto Legislativo 112/2002 e promulgado pelo Decreto 4.388/2002.
+- **Conselho de Direitos Humanos da ONU**: criado em **marco de 2006** pela **Resolucao 60/251** da Assembleia Geral, **sucessor da extinta Comissao de Direitos Humanos** (1946), orgao subsidiario da propria Assembleia Geral (nao e orgao judiciario nem subordinado ao TPI).
+
+### 15.4 Declaração Universal dos Direitos Humanos -- DUDH (1948)
+
+**Adoção**: Resolucao 217 A (III) da Assembleia Geral da ONU, **10/12/1948**, aprovada por **48 Estados a favor e nenhum voto contrario** (8 abstencoes). **Nao e tratado** sujeito a ratificacao -- natureza juridica de **recomendacao (soft law)**, embora hoje seu conteudo seja amplamente reconhecido como **costume internacional**.
+
+**Núcleo protetivo (arts. 1 a 11)**:
+- Art. 1: todos nascem livres e iguais em dignidade e direitos.
+- Art. 2: nao discriminacao (raca, cor, sexo, lingua, religiao, opiniao politica, origem, riqueza, nascimento).
+- Art. 5: proibicao da tortura e de tratamento cruel, desumano ou degradante.
+- Art. 9: proibicao de prisao, detencao ou exilio arbitrarios.
+- Art. 11, §1: presuncao de inocencia ate prova legal da culpabilidade, em julgamento publico com garantias de defesa.
+
+**Direitos civis e de circulacao (arts. 12 a 21)**:
+- Art. 14, §2: direito de asilo **nao pode ser invocado** em caso de perseguicao legitimamente motivada por crimes de direito comum ou por atos contrarios aos objetivos/principios da ONU.
+- Art. 15: direito a nacionalidade; veda privacao arbitraria e veda impedir mudanca de nacionalidade.
+- Art. 16: familia e casamento -- livre e pleno consentimento dos nubentes; iguais direitos entre homens e mulheres quanto ao casamento, duracao e dissolucao; familia como nucleo natural e fundamental da sociedade.
+- Art. 17: direito a propriedade, so ou em sociedade com outros; veda privacao arbitraria.
+
+**Direitos sociais (arts. 22 a 26)**:
+- Art. 23: direito ao trabalho, incluindo protecao contra o desemprego, e direito de organizar sindicatos.
+- Art. 24: repouso e lazer, inclusive ferias remuneradas periodicas.
+- Art. 25, §2: maternidade e infancia com assistencia especial.
+- Art. 26, §1: instrucao elementar **gratuita e obrigatoria**.
+
+### 15.5 Convenção Americana sobre Direitos Humanos -- CADH / Pacto de São José da Costa Rica
+
+**Incorporação ao Brasil**: adesao brasileira depositada em **25/09/1992**; promulgada internamente pelo **Decreto n. 678, de 6/11/1992**. Art. 1, §2: "Para os efeitos desta Convencao, pessoa e todo ser humano" -- **protege apenas pessoas fisicas**, nao pessoas juridicas.
+
+**Direito à vida e pena de morte (art. 4)**:
+- §1: vida protegida "em geral, desde o momento da concepcao".
+- §3: **veda o restabelecimento** da pena de morte em Estados que ja a hajam abolido.
+- §4: **veda** a pena de morte para delitos politicos ou comuns conexos a delitos politicos.
+- §5: **veda** a pena de morte a quem, no momento do delito, era menor de 18 ou maior de 70 anos, e a mulher gravida.
+- §6: direito de solicitar anistia, indulto ou comutacao -- **veda execucao** enquanto o pedido estiver pendente.
+
+**Integridade pessoal e condições de detenção (art. 5)**:
+- §2: tratamento com respeito a dignidade inerente ao ser humano.
+- §4: separacao entre processados e condenados, salvo circunstancias excepcionais.
+- §5: menores processados devem ser separados de adultos e conduzidos a tribunal especializado com maxima rapidez.
+- §6: finalidade essencial da pena privativa de liberdade e a **reforma e readaptacao social**, nao a mera retribuicao.
+
+**Proibição de escravidão e trabalho forçado (art. 6, §3)** -- excecoes ao trabalho forcado:
+a) trabalho de recluso sob controle de autoridade publica (vedado coloca-lo a disposicao de particulares/empresas);
+b) servico militar (com isencao por motivo de consciencia, se prevista em lei);
+c) servico por perigo ou calamidade;
+d) trabalho/servico que faca parte das obrigacoes civicas normais.
+
+**Liberdade pessoal e audiência de custódia (art. 7)**:
+- §4: notificacao sem demora da acusacao.
+- §5: conducao **sem demora** a presenca de juiz ou autoridade autorizada por lei -- base convencional da **audiencia de custodia** no direito brasileiro.
+- §6: habeas corpus pode ser interposto pela propria pessoa **ou por outra pessoa**.
+- §7: veda prisao por divida, **exceto** por inadimplemento de obrigacao alimentar.
+
+**Garantias judiciais e legalidade (arts. 8, 9 e 10)**:
+- Art. 8, §2, "g": direito de nao depor contra si mesmo nem se declarar culpado.
+- Art. 8, §2, "a": direito a tradutor/interprete gratuito, sem exigencia de comprovacao de renda.
+- Art. 9: principio da legalidade e da retroatividade -- so retroage a lei penal **mais benefica**.
+- Art. 10: indenizacao por erro judiciario exige sentenca condenatoria **transitada em julgado**.
+
+**Reunião, associação e direitos políticos (arts. 15, 16, 22 e 23)**:
+- Art. 15: direito de reuniao **pacifica e sem armas**.
+- Art. 16: liberdade de associacao para fins ideologicos, religiosos, politicos, economicos, trabalhistas, sociais, culturais, desportivos ou de qualquer outra natureza.
+- Art. 22, §8: veda expulsao/entrega do estrangeiro a pais onde sua vida/liberdade corra risco por raca, nacionalidade, religiao, condicao social ou opinioes politicas (**non-refoulement**).
+- Art. 22, §9: **proibida a expulsao coletiva** de estrangeiros, sem excecao.
+- Art. 23, §1, "c": acesso a funcoes publicas em condicoes gerais de igualdade -- lei pode regular apenas por criterios objetivos (idade, nacionalidade, residencia, idioma, instrucao, capacidade civil/mental ou condenacao penal).
+
+### 15.6 Pontos-Chave para Elaboração de Questões
+
+- Titularidade dos DH e universal e incondicional -- nao se perde por condenacao criminal (DUDH, arts. 1 e 2).
+- Estado tem dever duplo: respeitar (abstencao) e garantir (protecao ativa) -- CADH, art. 1, §1.
+- Geracoes de direitos: 1a = liberdade negativa; 2a = prestacao positiva; 3a = solidariedade/coletiva; 4a = globalizacao/informacao.
+- DUDH (1948) = recomendacao/soft law, adotada por 48 votos a favor e nenhum contra; CADH (1969/Decreto 678/1992) = tratado vinculante, ratificado pelo Brasil.
+- CIJ julga Estados; TPI (Estatuto de Roma) julga individuos -- CRFB, art. 5, §4.
+- Conselho de Direitos Humanos da ONU: criado em 2006 (Res. 60/251), sucede a Comissao extinta.
+- CADH, art. 4: pena de morte vedada para politicos, menores de 18, maiores de 70 e gestantes; veda restabelecimento e execucao com pedido de comutacao pendente.
+- CADH, art. 7, §5: base convencional da audiencia de custodia no Brasil.
+- CADH, art. 22, §9: expulsao coletiva de estrangeiros e vedada sem excecao; §8 veda non-refoulement por raca/nacionalidade/religiao/condicao social/opiniao politica.
+- CADH so protege pessoa fisica (art. 1, §2) -- nao protege pessoa juridica.
+
+---
+
+## 16. Direitos da Comunidade LGBTQIAPN+
+
+Disciplina 10/20 do CHO. Trata dos conceitos fundamentais de sexo, gênero e sexualidade, da construção jurisprudencial do STF sobre união homoafetiva, identidade de gênero e criminalização da LGBTfobia, e das normas administrativas que garantem o uso do nome social e o tratamento não discriminatório da população LGBTQIAPN+ pelo Estado.
+
+---
+
+### 16.1 Conceitos Fundamentais
+
+#### Sexo x Gênero
+- **Sexo**: características biológicas do indivíduo (órgãos sexuais e reprodutivos, cromossomos, hormônios).
+- **Gênero**: construção social e cultural dos papéis de masculinidade e feminilidade, muitas vezes hierarquizada e subordinatória em relação à mulher.
+- **Ponto-chave para questões**: sexo e gênero não são sinônimos; a orientação sexual (direção do desejo afetivo-sexual) é uma terceira categoria distinta de ambos.
+
+#### Identidade de Gênero x Orientação Sexual
+- **Identidade de gênero**: percepção subjetiva que a pessoa tem de si mesma quanto ao gênero, independentemente do sexo atribuído no nascimento. Definição legal (Decreto nº 8.727/2016, art. 1º, parágrafo único, II): "dimensão da identidade de uma pessoa que diz respeito à forma como se relaciona com as representações de masculinidade e feminilidade e que não está, necessariamente, determinada pelo sexo atribuído no nascimento."
+- **Orientação sexual**: direção do desejo/atração afetivo-sexual (heterossexualidade, homossexualidade, bissexualidade, pansexualidade etc.).
+- **Ponto-chave**: identidade de gênero é "quem eu sou"; orientação sexual é "por quem eu me atraio". São categorias independentes entre si.
+
+#### Identidades da Sigla LGBTQIAPN+
+| Termo | Definição resumida |
+|-------|---------------------|
+| Cisgênero | Identidade de gênero corresponde ao sexo atribuído no nascimento |
+| Transgênero/Transexual | Identidade de gênero diverge do sexo atribuído no nascimento, identificando-se integralmente com o gênero masculino ou feminino |
+| Não binário | Não se identifica exclusivamente com o gênero masculino ou feminino |
+| Intersexual | Nasce com características biológicas que não se encaixam nas noções binárias típicas de corpo masculino/feminino |
+| Queer | Conceito guarda-chuva/político; rejeita rótulos fixos e resiste à hetero-cis-normatividade |
+| Pansexual | Atração afetivo-sexual por pessoas independentemente do gênero |
+| Gênero fluido | Identidade de gênero que transita entre masculino, feminino ou outras vivências ao longo do tempo |
+
+#### Nome Social
+- Designação pela qual a pessoa travesti ou transexual se identifica e é socialmente reconhecida, adotada até (ou independentemente d)a retificação definitiva dos documentos civis.
+- **Ponto-chave**: uso do nome social não exige laudo médico, tratamento hormonal ou cirurgia — basta a autodeclaração/requerimento da pessoa interessada.
+
+---
+
+### 16.2 Jurisprudência do STF
+
+#### União Homoafetiva — ADI 4277 e ADPF 132 (2011)
+- Julgamento conjunto, relator Min. Ayres Britto (05/05/2011).
+- O STF reconheceu a união estável entre pessoas do mesmo sexo como entidade familiar, por meio da técnica de **interpretação conforme a Constituição** aplicada ao art. 1.723 do Código Civil.
+- Fundamentos centrais: dignidade da pessoa humana, direito à busca da felicidade, igualdade, liberdade e pluralismo (inclusive familiar) como valores sócio-político-culturais protegidos pela CF/88.
+- Tese do "**Constitucionalismo Fraternal**": o sexo das pessoas não se presta como fator de desigualação jurídica, salvo disposição constitucional expressa; o direito à preferência (orientação) sexual é emanação da dignidade humana.
+- Efeito posterior: CNJ, Resolução nº 175/2013, obrigou os cartórios de todo o país a celebrar casamento civil e a converter união estável em casamento entre pessoas do mesmo sexo.
+
+#### Criminalização da Homofobia e Transfobia — ADO 26 e MI 4733 (2019)
+- Julgamento conjunto, j. 13/06/2019 (rel. Min. Celso de Mello e Min. Edson Fachin).
+- O STF reconheceu a **omissão inconstitucional** do Congresso Nacional em legislar sobre o tema e determinou que, até a edição de lei específica, condutas homofóbicas e transfóbicas sejam enquadradas nos tipos penais da **Lei do Racismo (Lei nº 7.716/1989)**.
+- Homicídio motivado por homofobia/transfobia passa a ser tratado como circunstância qualificadora (motivo torpe).
+- A repressão penal não alcança nem restringe a liberdade religiosa, desde que as manifestações não configurem discurso de ódio.
+
+#### Retificação de Registro Civil de Pessoas Trans — RE 670.422 (Tema 761) e ADI 4275 (2018)
+- Julgamento em 15/08/2018.
+- Tese: a pessoa transgênero tem **direito subjetivo** à alteração de prenome e de gênero no registro civil, **independentemente de cirurgia de transgenitalização ou de autorização judicial**, bastando a manifestação de vontade (autodeclaração).
+- A retificação pode ser feita **diretamente em cartório** (via administrativa) ou judicialmente, à escolha do interessado.
+- Regulamentação: CNJ, **Provimento nº 73/2018** (procedimento de retificação em cartório).
+
+#### Sucessão em Uniões Homoafetivas — RE 646.721 (Tema 498, 2017)
+- J. 10/05/2017, rel. para o acórdão Min. Roberto Barroso.
+- Declarada a inconstitucionalidade do art. 1.790 do Código Civil de 2002 (que tratava a sucessão do companheiro de forma mais restritiva que a do cônjuge).
+- Tese: aplica-se o mesmo regime sucessório (art. 1.829 do CC/2002) tanto a cônjuges quanto a companheiros, inclusive em uniões homoafetivas.
+
+---
+
+### 16.3 Normas Administrativas — Nome Social e Identidade de Gênero
+
+| Norma | Objeto |
+|-------|--------|
+| **Decreto nº 8.727/2016** | Dispõe sobre o uso do nome social e o reconhecimento da identidade de gênero de pessoas travestis e transexuais no âmbito da administração pública federal direta, autárquica e fundacional. Art. 2º, parágrafo único: veda expressões pejorativas e discriminatórias. |
+| **Resolução CNJ nº 270/2018** | Assegura o uso do nome social a pessoas travestis e transexuais em todos os órgãos do Poder Judiciário. |
+| **Portaria nº 1.820/2009 (CNS)** | Dispõe sobre os direitos e deveres dos usuários da saúde: garante atendimento humanizado, livre de discriminação, e uso do nome social no SUS, independentemente do registro civil. |
+| **Resolução nº 12/2015 (CNCD/LGBT) e Portaria PGR/MPU nº 104/2014** | Adotam o critério da identidade de gênero autopercebida (não o sexo biológico/registral) para acesso a banheiros, vestiários e espaços segregados por gênero na administração pública. |
+| **Resolução CNJ nº 348/2020** | Incorpora as **Regras de Bangkok** (ONU, 2010) para o tratamento de pessoas LGBTI presas/custodiadas: exige capacitação e sensibilidade dos agentes penitenciários e apoio psicológico adequado, sem isolamento compulsório automático. |
+
+**Ponto-chave**: todas essas normas adotam o critério da **autodeclaração/autopercepção** da identidade de gênero — nenhuma delas exige laudo médico, tratamento hormonal, cirurgia ou decisão judicial para o reconhecimento administrativo do nome social ou da identidade de gênero.
+
+---
+
+### 16.4 Lei Maria da Penha e Casais Homoafetivos
+
+- **Lei nº 11.340/2006, art. 5º, parágrafo único**: "As relações pessoais enunciadas neste artigo independem de orientação sexual."
+- A Lei Maria da Penha protege a mulher (inclusive mulher trans, considerando a identidade de gênero) em qualquer relação íntima de afeto, com ou sem coabitação e independentemente de casamento civil formalizado — o que abrange, por exemplo, a violência doméstica entre duas mulheres em relacionamento homoafetivo.
+- A proteção abrange violência física, psicológica, sexual, patrimonial e moral (art. 5º, caput, c/c art. 7º).
+
+---
+
+### 16.5 Lei nº 9.029/1995 — Vedação à Discriminação nas Relações de Trabalho
+
+- Proíbe a adoção de qualquer prática discriminatória e limitativa para efeito de acesso à relação de trabalho ou de sua manutenção, por motivo de sexo, origem, raça, cor, estado civil, situação familiar, deficiência, reabilitação profissional, idade, entre outros (art. 1º, redação dada pela Lei nº 13.146/2015).
+- Constituem crime (art. 2º) a exigência de atestado/exame relativo a esterilização ou gravidez, e a indução à esterilização genética ou ao controle de natalidade fora dos parâmetros do SUS.
+- Rompimento da relação de trabalho por ato discriminatório dá ao empregado, além do direito à reparação por dano moral, a opção entre reintegração com ressarcimento integral ou percepção em dobro da remuneração do período de afastamento (art. 4º).
+- É a base normativa geral (não específica para orientação sexual/identidade de gênero, mas de aplicação analógica e complementar) citada junto às Convenções OIT nº 111 (discriminação em matéria de emprego e profissão) e nº 190 (eliminação da violência e do assédio no mundo do trabalho, com atenção a grupos vulneráveis desproporcionalmente afetados) no enfrentamento da discriminação de pessoas LGBTQIAPN+ no ambiente de trabalho.
+
+**Arquivo de referência**: `legislacao/Lei_9029_1995_VedaDiscriminacaoTrabalho.html` (texto integral, fonte planalto.gov.br) e `legislacao/Decreto_8727_2016_NomeSocial.html` (texto integral, fonte planalto.gov.br).
+
+---
+
+### 16.6 Tabela-Resumo — Números-Chave da Disciplina 10
+
+| Item | Norma/Precedente |
+|------|-------------------|
+| Objetivo fundamental — não discriminação | CF/88, art. 3º, IV |
+| Proteção integral de criança/adolescente/jovem | CF/88, art. 227 |
+| União homoafetiva como entidade familiar | STF, ADI 4277/ADPF 132 (2011) |
+| Casamento civil obrigatório em cartório | CNJ, Resolução 175/2013 |
+| Criminalização da homofobia/transfobia | STF, ADO 26/MI 4733 (2019); Lei 7.716/1989 |
+| Retificação de registro civil sem cirurgia/decisão judicial | STF, RE 670.422 (Tema 761)/ADI 4275 (2018); CNJ, Provimento 73/2018 |
+| Sucessão em uniões homoafetivas | STF, RE 646.721 (Tema 498, 2017); CC/2002, art. 1.829 |
+| Lei Maria da Penha independe de orientação sexual | Lei 11.340/2006, art. 5º, parágrafo único |
+| Vedação à discriminação no trabalho | Lei 9.029/1995 |
+| Nome social — administração pública federal | Decreto 8.727/2016 |
+| Nome social — Poder Judiciário | CNJ, Resolução 270/2018 |
+| Nome social — SUS | Portaria 1.820/2009-CNS |
+| Discriminação em emprego/profissão | Convenção 111-OIT (1958) |
+| Violência e assédio no trabalho | Convenção 190-OIT (2019) |
+| Tráfico de pessoas e vulnerabilidade por identidade de gênero | Princípios de Yogyakarta (2007), Princípio 11 |
+| Pessoas LGBTI custodiadas/presas | CNJ, Resolução 348/2020; Regras de Bangkok (ONU, 2010) |
+
+**FONTE PRINCIPAL**: Caderno de Questões — Direitos da Comunidade LGBTQIAPN+ (Academia Coronel Walterler).
 
 ---
 
