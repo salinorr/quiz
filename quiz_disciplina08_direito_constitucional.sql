@@ -1,0 +1,475 @@
+-- ============================================================
+-- QUIZ — Disciplina 8/20 do CHO: Direito Constitucional
+-- 30 questões — dupla justificativa (doutrina/apostila + legislação vigente)
+-- Modo Quiz Livre (categoria sem a palavra "prova" no nome)
+-- Base doutrinária: apostila técnica do CHO — Direito Constitucional
+--   (Teoria da Constituição, Princípios Fundamentais, Direitos e Garantias
+--   Individuais, Direitos Sociais, Nacionalidade, Direitos Políticos e
+--   Administração Pública)
+-- Base legal vigente: Constituição Federal de 1988 — arts. 1º, 3º, 4º, 5º,
+--   6º, 12, 14, 15, 37 e 41; Decreto-Lei 200/1967, art. 4º
+-- ============================================================
+SET NAMES utf8mb4;
+SET foreign_key_checks = 0;
+
+INSERT IGNORE INTO categorias (nome, descricao)
+VALUES ('Direito Constitucional — CHO 08', 'Disciplina 8/20 do CHO — Teoria da Constituição, Princípios Fundamentais, Direitos e Garantias Individuais, Direitos Sociais, Nacionalidade, Direitos Políticos e Administração Pública (CF/88)');
+
+SET @cat_dc08 = (SELECT id FROM categorias WHERE nome = 'Direito Constitucional — CHO 08' LIMIT 1);
+
+INSERT INTO questoes
+    (categoria_id, enunciado, opcao_a, opcao_b, opcao_c, opcao_d, opcao_e,
+     resposta_correta, explicacao, referencia_legal, nivel)
+VALUES
+
+-- Q01: Conceito de Constituição
+(@cat_dc08,
+ 'Sobre o conceito de Constituição e sua posição no ordenamento jurídico, assinale a alternativa correta:',
+ 'A Constituição é um documento de caráter predominantemente político-simbólico, carecendo de força normativa vinculante para os Poderes.',
+ 'O fundamento de validade de todas as normas do sistema jurídico brasileiro repousa na Constituição Federal.',
+ 'A organização dos Poderes e a proteção de direitos fundamentais são temas que podem ser tratados por lei ordinária sem previsão constitucional.',
+ 'A Constituição Federal de 1988 é considerada flexível por permitir a convivência entre normas constitucionais e leis infraconstitucionais.',
+ 'Em concursos e exames jurídicos, a visão da Constituição como mera "folha de papel" ou documento político sobrepõe-se à sua natureza de norma jurídica.',
+ 'B',
+ 'A alternativa B está correta pois a Constituição é a norma suprema do ordenamento jurídico brasileiro, fundamento de validade de todas as demais normas (leis, decretos, atos administrativos), conforme a teoria da hierarquia das normas. A alternativa A está incorreta porque a Constituição possui força normativa vinculante plena, e não caráter meramente político-simbólico. A alternativa C é falsa, pois a organização dos Poderes e os direitos fundamentais são matérias de reserva constitucional. A alternativa D está incorreta, pois a CF/88 é classificada pela doutrina como rígida, exigindo processo legislativo especial (emenda constitucional) para sua alteração. A alternativa E inverte o entendimento consolidado, já que a visão da Constituição como "folha de papel" (Lassalle) é superada pela força normativa da Constituição (Konrad Hesse), prevalecente na doutrina e jurisprudência atuais.
+
+📜 Fundamento legal vigente: trata-se de conceito doutrinário de Teoria da Constituição (supremacia constitucional e rigidez formal da CF/88), sem correspondência em artigo isolado — decorre do sistema de controle de constitucionalidade previsto no art. 102, caput, da CF/88 (o STF como guardião da Constituição), e do art. 60 (processo de emenda constitucional), que evidencia a rigidez formal da Carta de 1988.',
+ 'CF/88, arts. 60 e 102, caput (rigidez e supremacia constitucional)',
+ 'medio'),
+
+-- Q02: Fundamentos x Objetivos Fundamentais
+(@cat_dc08,
+ 'É imperativo distinguir os Fundamentos (Art. 1º) dos Objetivos Fundamentais (Art. 3º). Assinale a alternativa que apresenta exclusivamente Objetivos Fundamentais da República Federativa do Brasil:',
+ 'Soberania, Cidadania e Dignidade da Pessoa Humana.',
+ 'Pluralismo Político e Valores Sociais do Trabalho.',
+ 'Garantir o desenvolvimento nacional e reduzir as desigualdades sociais e regionais.',
+ 'Promoção do bem de todos e a concessão de asilo político.',
+ 'Independência nacional, não intervenção e erradicação da pobreza.',
+ 'C',
+ 'A alternativa C está correta, pois "garantir o desenvolvimento nacional" e "reduzir as desigualdades sociais e regionais" são, respectivamente, os incisos II e III do art. 3º. A alternativa A traz Fundamentos do art. 1º, não Objetivos. A alternativa B mistura um Fundamento (pluralismo político, art. 1º, V) com outro Fundamento (valores sociais do trabalho, art. 1º, IV). A alternativa D mistura um Objetivo (promoção do bem de todos, art. 3º, IV) com um Princípio das relações internacionais (concessão de asilo político, art. 4º, X). A alternativa E mistura Princípios das relações internacionais (independência nacional e não intervenção, art. 4º, I e IV) com um Objetivo (erradicação da pobreza, art. 3º, III).
+
+📜 Fundamento legal vigente: CF/88, art. 3º: "Constituem objetivos fundamentais da República Federativa do Brasil: (...) II - garantir o desenvolvimento nacional; III - erradicar a pobreza e a marginalização e reduzir as desigualdades sociais e regionais." Os Fundamentos (soberania, cidadania, dignidade da pessoa humana, valores sociais do trabalho e da livre iniciativa, pluralismo político) estão no art. 1º; os Princípios das relações internacionais (independência nacional, não intervenção, asilo político etc.) estão no art. 4º.',
+ 'CF/88, art. 3º, II e III',
+ 'medio'),
+
+-- Q03: Princípios das Relações Internacionais
+(@cat_dc08,
+ 'No que concerne aos Princípios das Relações Internacionais (Art. 4º), assinale a alternativa que NÃO apresenta um princípio regente do Brasil no plano externo:',
+ 'Repúdio ao terrorismo e ao racismo.',
+ 'Prevalência dos direitos humanos e autodeterminação dos povos.',
+ 'Defesa da paz e solução pacífica dos conflitos.',
+ 'Promoção da integração econômica, política, social e cultural exclusivamente dos países de língua portuguesa.',
+ 'Cooperação entre os povos para o progresso da humanidade e concessão de asilo político.',
+ 'D',
+ 'A alternativa D é a correta para a questão (que pede a opção que NÃO corresponde a um princípio vigente), pois o texto constitucional não restringe a integração aos países de língua portuguesa; o parágrafo único do art. 4º menciona expressamente a formação de uma comunidade latino-americana de nações. As demais alternativas (A, B, C, E) reproduzem fielmente os incisos VIII, II e III, VI e VII, e IX e X do art. 4º, sendo, portanto, princípios efetivamente vigentes.
+
+📜 Fundamento legal vigente: CF/88, art. 4º, parágrafo único: "A República Federativa do Brasil buscará a integração econômica, política, social e cultural dos povos da América Latina, visando à formação de uma comunidade latino-americana de nações." Não há previsão constitucional de integração restrita aos países de língua portuguesa (essa cooperação é tratada por acordos específicos da CPLP, sem status constitucional).',
+ 'CF/88, art. 4º, parágrafo único',
+ 'medio'),
+
+-- Q04: Características dos Direitos Fundamentais
+(@cat_dc08,
+ 'Quanto às características dos Direitos Fundamentais, é correto afirmar:',
+ 'A Universalidade permite que os direitos fundamentais sejam restringidos apenas aos brasileiros natos.',
+ 'A Indivisibilidade determina que os direitos fundamentais podem ser fragmentados em blocos independentes para fins de renúncia.',
+ 'A Irrenunciabilidade implica que o titular não pode abdicar definitivamente de seus direitos fundamentais, embora possa deixar de exercê-los temporariamente.',
+ 'A Inalienabilidade permite a venda de direitos fundamentais desde que haja concordância do Estado.',
+ 'A Imprescritibilidade significa que o direito fundamental se perde caso o titular não o exercite em um prazo de dez anos.',
+ 'C',
+ 'A alternativa C está correta: irrenunciabilidade não se confunde com o simples não exercício (que é admitido temporariamente), mas veda a renúncia definitiva do direito. A alternativa A inverte o conceito de universalidade, que é justamente a extensão a todos, independentemente da condição de nato ou naturalizado. A alternativa B contraria a indivisibilidade, que impede o fracionamento dos direitos fundamentais em blocos negociáveis. A alternativa D nega a inalienabilidade, que torna os direitos fundamentais insuscetíveis de comercialização. A alternativa E contraria a imprescritibilidade, segundo a qual os direitos fundamentais não se perdem pelo decurso do tempo ou pelo não uso.
+
+📜 Fundamento legal vigente: trata-se de classificação doutrinária das características dos direitos fundamentais (universalidade, indivisibilidade, irrenunciabilidade, inalienabilidade, imprescritibilidade, historicidade), sem artigo constitucional que as enumere expressamente de forma sistemática; decorrem da interpretação do art. 5º, caput e §1º, da CF/88, que consagra a aplicabilidade imediata e a essencialidade desses direitos.',
+ 'Doutrina de Direitos Fundamentais; CF/88, art. 5º, caput e §1º',
+ 'medio'),
+
+-- Q05: Dimensões dos Direitos Fundamentais
+(@cat_dc08,
+ 'Sobre as Dimensões dos Direitos Fundamentais, assinale a alternativa tecnicamente correta:',
+ 'A 1ª Dimensão exige uma atuação positiva e prestacional do Estado, focando na saúde e educação.',
+ 'A 2ª Dimensão foca na abstenção estatal (liberdades negativas), protegendo a propriedade e a vida.',
+ 'A 3ª Dimensão engloba os direitos coletivos e difusos, tendo como exemplos o meio ambiente e a paz.',
+ 'A doutrina moderna ensina que a nova dimensão de direitos revoga e substitui integralmente a dimensão anterior.',
+ 'A igualdade material e os direitos sociais são exemplos clássicos de direitos de 1ª Dimensão.',
+ 'C',
+ 'A alternativa C está correta: a 3ª dimensão (ou geração), ligada à fraternidade/solidariedade, abrange direitos coletivos e difusos como meio ambiente, paz e patrimônio comum da humanidade. A alternativa A inverte os conceitos, pois a atuação positiva do Estado em saúde e educação é típica da 2ª dimensão. A alternativa B também inverte, pois a abstenção estatal (liberdades negativas) caracteriza a 1ª dimensão. A alternativa D contraria a doutrina majoritária, que ensina que as dimensões se acumulam e se complementam, sem que a posterior revogue a anterior. A alternativa E está errada, pois igualdade material e direitos sociais são exemplos de 2ª dimensão, não de 1ª.
+
+📜 Fundamento legal vigente: trata-se de classificação doutrinária (dimensões ou gerações de direitos fundamentais, sistematizada por autores como Paulo Bonavides), sem artigo constitucional único que a discipline; a 3ª dimensão encontra respaldo constitucional concreto, por exemplo, no art. 225, caput, da CF/88: "Todos têm direito ao meio ambiente ecologicamente equilibrado, bem de uso comum do povo e essencial à sadia qualidade de vida."',
+ 'Doutrina das Dimensões dos Direitos Fundamentais; CF/88, art. 225, caput (exemplo de 3ª dimensão)',
+ 'medio'),
+
+-- Q06: Aplicabilidade imediata (art. 5º, §1º)
+(@cat_dc08,
+ 'Acerca da aplicabilidade das normas de direitos fundamentais, conforme o art. 5º, §1º, da CF/88, a regra geral estabelece que tais normas têm aplicação imediata. Isso significa que:',
+ 'Dependem obrigatoriamente de lei regulamentadora para começar a produzir qualquer efeito jurídico.',
+ 'Vinculam o Estado e os Poderes Públicos desde a promulgação da Constituição Federal.',
+ 'Sua eficácia fica condicionada à disponibilidade orçamentária prévia do ente federado.',
+ 'São normas de natureza meramente programática, servindo apenas como guia ético ao legislador.',
+ 'Só podem ser invocadas pelo cidadão após dez anos de vigência do texto constitucional.',
+ 'B',
+ 'A alternativa B reproduz corretamente o efeito da aplicação imediata: vinculação direta e automática dos Poderes Públicos desde a promulgação da Constituição, em 5 de outubro de 1988. A alternativa A contraria a própria essência da aplicação imediata, que dispensa lei regulamentadora para produzir efeitos mínimos. A alternativa C condiciona indevidamente a eficácia à reserva do possível de forma genérica, o que a jurisprudência do STF não admite como regra absoluta. A alternativa D rebaixa as normas de direitos fundamentais a caráter programático, contrariando a força normativa que a Constituição lhes atribui. A alternativa E cria um prazo de carência inexistente no texto constitucional.
+
+📜 Fundamento legal vigente: CF/88, art. 5º, §1º: "As normas definidoras dos direitos e garantias fundamentais têm aplicação imediata." O dispositivo vincula diretamente os Poderes Públicos desde a promulgação da Constituição, ainda que a doutrina reconheça gradações de eficácia conforme a natureza de cada norma (plena, contida ou limitada).',
+ 'CF/88, art. 5º, §1º',
+ 'facil'),
+
+-- Q07: Isonomia formal e material
+(@cat_dc08,
+ 'Considere o princípio da Isonomia em suas dimensões formal e material. Assinale a alternativa correta:',
+ 'A Igualdade Material consiste em aplicar a lei de forma cega, tratando todos de maneira idêntica independentemente de suas condições sociais.',
+ 'Políticas de ações afirmativas são inconstitucionais por violarem a igualdade formal prevista no caput do art. 5º.',
+ 'A isonomia constitucional permite tratar desigualmente os desiguais, na medida de suas desigualdades, para atingir a igualdade real.',
+ 'O princípio da igualdade vincula apenas o Poder Judiciário, sendo o Legislador livre para criar distinções arbitrárias.',
+ 'A igualdade absoluta é o objetivo da Constituição, proibindo-se qualquer diferenciação baseada em idade ou deficiência física em concursos públicos.',
+ 'C',
+ 'A alternativa C reproduz a fórmula clássica da isonomia material, atribuída a Rui Barbosa e amplamente adotada pelo STF, que fundamenta as ações afirmativas. A alternativa A descreve a igualdade meramente formal, insuficiente para corrigir desigualdades reais. A alternativa B está incorreta, pois o STF reconhece a constitucionalidade de cotas e ações afirmativas como instrumentos de igualdade material (ex.: ADPF 186 sobre cotas raciais). A alternativa D é falsa, pois o princípio da igualdade vincula todos os Poderes, inclusive o Legislador, que não pode criar distinções arbitrárias e desarrazoadas. A alternativa E contraria a própria isonomia material, que admite diferenciações legítimas, como reserva de vagas para pessoas com deficiência (art. 37, VIII, CF/88).
+
+📜 Fundamento legal vigente: CF/88, art. 5º, caput, consagra a igualdade formal ("Todos são iguais perante a lei, sem distinção de qualquer natureza..."); a igualdade material é extraída da interpretação sistemática desse dispositivo com o art. 3º, III e IV (redução das desigualdades sociais e regionais; promoção do bem de todos sem preconceitos), fundamento constitucional das ações afirmativas.',
+ 'CF/88, art. 5º, caput c/c art. 3º, III e IV',
+ 'medio'),
+
+-- Q08: Direito à vida e dignidade humana
+(@cat_dc08,
+ 'O Direito à Vida e a Dignidade da Pessoa Humana são eixos centrais do ordenamento. Assinale a alternativa que reflete a interpretação constitucional técnica:',
+ 'O direito à vida limita-se estritamente ao aspecto biológico de não ter a existência interrompida.',
+ 'A dignidade da pessoa humana é um direito acessório que pode ser suprimido em prol da segurança pública estatal.',
+ 'O direito à vida abrange tanto o direito de não ser privado dela arbitrariamente quanto o direito a condições mínimas de existência digna.',
+ 'O Estado, em nome da ordem pública, está autorizado a submeter detentos a tratamentos degradantes.',
+ 'A proteção da vida é uma obrigação exclusivamente negativa do Estado, não havendo deveres positivos de prestação de saúde.',
+ 'C',
+ 'A alternativa C está correta, pois a doutrina e a jurisprudência interpretam o direito à vida em sentido amplo (dimensão negativa e positiva). A alternativa A restringe indevidamente o direito à vida ao aspecto meramente biológico, ignorando a vida digna. A alternativa B é inaceitável, pois a dignidade da pessoa humana é fundamento da República (art. 1º, III) e núcleo intangível, não sendo direito acessório suprimível. A alternativa D viola frontalmente a vedação a tratamento desumano ou degradante (art. 5º, III) e o respeito à integridade física e moral dos presos (art. 5º, XLIX). A alternativa E ignora os deveres positivos de saúde decorrentes do direito à vida combinado com o direito social à saúde (art. 6º e art. 196).
+
+📜 Fundamento legal vigente: CF/88, art. 5º, caput, assegura a inviolabilidade do direito à vida; combinado com o art. 1º, III (dignidade da pessoa humana), a jurisprudência do STF interpreta o direito à vida em sentido amplo, abrangendo o direito de não ser morto arbitrariamente e o direito a condições mínimas de existência digna, com deveres positivos de prestação estatal (saúde, art. 196, CF/88).',
+ 'CF/88, art. 5º, caput c/c art. 1º, III',
+ 'medio'),
+
+-- Q09: Proibição de penas e pena de morte
+(@cat_dc08,
+ 'Sobre a proibição de penas e a ressalva constitucional quanto à pena de morte, marque a opção correta:',
+ 'A pena de morte é permitida no Brasil para crimes hediondos com resultado morte.',
+ 'É vedada a pena de morte, salvo em caso de guerra declarada, nos termos da Constituição.',
+ 'São permitidas penas de caráter perpétuo e de trabalhos forçados em estabelecimentos militares.',
+ 'A proibição de tortura e tratamento desumano admite exceções em casos de terrorismo internacional.',
+ 'A Constituição proíbe apenas a pena de morte, sendo as penas de banimento permitidas em situações excepcionais.',
+ 'B',
+ 'A alternativa B reproduz literalmente a única exceção constitucional à vedação da pena de morte. A alternativa A é falsa, pois crimes hediondos, ainda que com resultado morte, não autorizam pena capital em tempo de paz. A alternativa C está incorreta, pois penas perpétuas e de trabalhos forçados são vedadas em qualquer hipótese, inclusive no âmbito militar. A alternativa D é falsa, pois a vedação à tortura e a tratamentos desumanos é absoluta, sem exceção para terrorismo. A alternativa E também está incorreta, pois a pena de banimento é igualmente proibida, sem qualquer ressalva.
+
+📜 Fundamento legal vigente: CF/88, art. 5º, XLVII: "não haverá penas: a) de morte, salvo em caso de guerra declarada, nos termos do art. 84, XIX; b) de caráter perpétuo; c) de trabalhos forçados; d) de banimento; e) cruéis." A pena de morte é excepcionalíssima, cabível apenas em caso de guerra declarada.',
+ 'CF/88, art. 5º, XLVII, "a"',
+ 'facil'),
+
+-- Q10: Funções da Dignidade da Pessoa Humana
+(@cat_dc08,
+ 'A Dignidade da Pessoa Humana, enquanto fundamento da República, possui funções específicas. É imperativo notar que:',
+ 'Ela atua apenas como uma meta futura, não tendo aplicação em casos concretos atuais.',
+ 'Serve como parâmetro de interpretação dos direitos fundamentais e limite ao poder de império do Estado.',
+ 'Não possui força para invalidar leis que contrariem seu conteúdo essencial.',
+ 'Está restrita aos brasileiros natos, não sendo aplicada aos estrangeiros residentes no país.',
+ 'Sua natureza é de norma de eficácia limitada, dependendo de lei para produzir efeitos jurídicos.',
+ 'B',
+ 'A alternativa B está correta: a dignidade da pessoa humana funciona como valor-fonte do sistema, vetor hermenêutico dos direitos fundamentais e limite ao poder estatal. A alternativa A nega a aplicabilidade imediata da dignidade, que já produz efeitos concretos desde a promulgação da CF/88. A alternativa C é falsa, pois leis contrárias ao conteúdo essencial da dignidade humana podem ser declaradas inconstitucionais pelo controle de constitucionalidade. A alternativa D contraria o art. 5º, caput, que estende a proteção a brasileiros e estrangeiros residentes no país. A alternativa E está incorreta, pois a dignidade da pessoa humana, como fundamento da República, tem aplicação imediata (art. 5º, §1º), e não eficácia limitada.
+
+📜 Fundamento legal vigente: CF/88, art. 1º, III, elenca a dignidade da pessoa humana como fundamento da República. A doutrina reconhece à dignidade a função de valor-fonte do sistema constitucional, servindo como vetor hermenêutico e limite à atuação estatal, com plena aplicabilidade imediata (art. 5º, §1º) e extensão a brasileiros e estrangeiros residentes no país (art. 5º, caput).',
+ 'CF/88, art. 1º, III c/c art. 5º, caput e §1º',
+ 'medio'),
+
+-- Q11: Habeas Corpus preventivo
+(@cat_dc08,
+ 'A liberdade de locomoção é protegida pelo remédio constitucional do Habeas Corpus. Assinale a alternativa correta:',
+ 'O Habeas Corpus é um remédio oneroso, exigindo o pagamento de custas processuais.',
+ 'Somente advogados devidamente inscritos na OAB possuem capacidade postulatória para impetrar Habeas Corpus.',
+ 'O Habeas Corpus preventivo visa evitar uma ameaça real e ilegal à liberdade de ir e vir.',
+ 'Contra prisão decorrente de sentença transitada em julgado, nunca será cabível qualquer medida via Habeas Corpus.',
+ 'A liberdade de locomoção em tempo de paz é absoluta, não podendo sofrer qualquer restrição legal.',
+ 'C',
+ 'A alternativa C está correta: o HC preventivo (também chamado "salvo-conduto") tutela a liberdade de locomoção contra ameaça real e ilegal ainda não consumada. A alternativa A é falsa, pois o HC é remédio gratuito, sem custas. A alternativa B está incorreta, pois o HC possui capacidade postulatória universal, podendo ser impetrado por qualquer pessoa, mesmo sem advogado. A alternativa D é equivocada, pois mesmo após o trânsito em julgado, cabe HC nos casos de manifesta ilegalidade superveniente na execução da pena. A alternativa E ignora que a liberdade de locomoção pode sofrer restrições legais legítimas (ex.: prisões cautelares, execução penal).
+
+📜 Fundamento legal vigente: CF/88, art. 5º, LXVIII: "conceder-se-á habeas corpus sempre que alguém sofrer ou se achar ameaçado de sofrer violência ou coação em sua liberdade de locomoção, por ilegalidade ou abuso de poder." A modalidade preventiva protege contra a ameaça, sendo gratuita e de capacidade postulatória universal.',
+ 'CF/88, art. 5º, LXVIII',
+ 'medio'),
+
+-- Q12: Liberdade de pensamento e expressão
+(@cat_dc08,
+ 'Quanto à liberdade de pensamento e expressão (Art. 5º, IV e IX), assinale a alternativa que está em plena conformidade com o texto constitucional:',
+ 'É livre a manifestação do pensamento, inclusive sob a forma de anonimato para proteção do emissor.',
+ 'A expressão intelectual e artística depende de licença prévia da autoridade administrativa.',
+ 'O anonimato é expressamente vedado, visando a responsabilização por eventuais abusos.',
+ 'O Estado pode exercer censura prévia em programas jornalísticos para preservar a moralidade.',
+ 'Ninguém pode ser privado de direitos por convicção política, salvo se esta contrariar a ideologia do governo vigente.',
+ 'C',
+ 'A alternativa C reproduz literalmente a vedação constitucional ao anonimato. A alternativa A contraria o texto expresso do inciso IV, que veda justamente o anonimato. A alternativa B é falsa, pois a expressão intelectual, artística, científica e de comunicação independe de censura ou licença (inciso IX). A alternativa D viola diretamente a vedação à censura prevista no mesmo inciso IX. A alternativa E distorce o inciso VIII, que veda a privação de direitos por convicção política, sem qualquer ressalva quanto à "ideologia do governo vigente".
+
+📜 Fundamento legal vigente: CF/88, art. 5º, IV ("é livre a manifestação do pensamento, sendo vedado o anonimato") e IX ("é livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença"). A vedação ao anonimato visa permitir a responsabilização por eventuais abusos.',
+ 'CF/88, art. 5º, IV e IX',
+ 'facil'),
+
+-- Q13: Reunião e associação
+(@cat_dc08,
+ 'Analise as condições para o exercício das liberdades de Reunião e Associação e assinale a alternativa que apresenta a distinção correta entre elas:',
+ 'A reunião em locais abertos ao público exige autorização prévia, enquanto a associação independe de qualquer aviso.',
+ 'As associações de caráter paramilitar são permitidas, desde que tenham fins lícitos e sociais.',
+ 'A dissolução compulsória de uma associação exige decisão judicial com trânsito em julgado, ao passo que a mera suspensão de atividades exige apenas decisão judicial simples.',
+ 'O aviso prévio à autoridade competente é requisito indispensável para a criação de uma associação.',
+ 'O indivíduo pode ser compelido a permanecer associado se a associação prestar serviços públicos essenciais.',
+ 'C',
+ 'A alternativa C está correta e reflete a distinção literal do art. 5º, XIX: dissolução compulsória exige trânsito em julgado; suspensão de atividades exige apenas decisão judicial (sem necessidade de trânsito em julgado). A alternativa A inverte a exigência: a reunião pacífica exige apenas prévio aviso (não autorização), e a associação, para fins lícitos, independe de autorização (inciso XVIII). A alternativa B contraria expressamente o inciso XVII, que veda associações de caráter paramilitar mesmo com fins lícitos. A alternativa D contraria o inciso XVIII, segundo o qual a criação de associações independe de autorização ou aviso prévio. A alternativa E viola o inciso XX, que veda a compulsoriedade de permanecer associado, sem exceção para serviços públicos.
+
+📜 Fundamento legal vigente: CF/88, art. 5º, XVI (reunião pacífica em locais abertos ao público, sem armas, dispensada autorização, exigido apenas prévio aviso) e XIX ("as associações só poderão ser compulsoriamente dissolvidas ou ter suas atividades suspensas por decisão judicial, exigindo-se, no primeiro caso, o trânsito em julgado").',
+ 'CF/88, art. 5º, XVI e XIX',
+ 'dificil'),
+
+-- Q14: Liberdade religiosa
+(@cat_dc08,
+ 'No que tange à liberdade de consciência e de crença, a Constituição Federal assegura:',
+ 'O livre exercício dos cultos religiosos, mas não protege as liturgias praticadas em locais privados.',
+ 'Que a prestação de assistência religiosa em entidades civis e militares de internação coletiva é facultada ao Estado.',
+ 'A proteção aos locais de culto e suas liturgias como desdobramento da liberdade religiosa.',
+ 'Que a crença religiosa justifica o descumprimento de qualquer dever legal imposto a todos, sem necessidade de prestação alternativa.',
+ 'O ensino religioso de uma única religião oficial em todas as escolas públicas do país.',
+ 'C',
+ 'A alternativa C está correta, pois o texto constitucional protege expressamente os locais de culto e suas liturgias. A alternativa A restringe indevidamente a proteção, que abrange as liturgias de forma ampla, sem excluir locais privados. A alternativa B está incorreta, pois a assistência religiosa em entidades de internação coletiva é assegurada como direito, nos termos da lei, e não mera faculdade estatal (inciso VII). A alternativa D contraria o inciso VIII, que exige, nesse caso, o cumprimento de prestação alternativa fixada em lei. A alternativa E é falsa, pois o Brasil é um Estado laico, sem religião oficial, e o ensino religioso é de matrícula facultativa (art. 210, §1º).
+
+📜 Fundamento legal vigente: CF/88, art. 5º, VI: "é inviolável a liberdade de consciência e de crença, sendo assegurado o livre exercício dos cultos religiosos e garantida, na forma da lei, a proteção aos locais de culto e a suas liturgias."',
+ 'CF/88, art. 5º, VI',
+ 'medio'),
+
+-- Q15: Segurança jurídica — direito adquirido, ato jurídico perfeito e coisa julgada
+(@cat_dc08,
+ 'A Segurança Jurídica manifesta-se através da proteção de situações consolidadas. Segundo o art. 5º, XXXVI, a lei não prejudicará:',
+ 'O direito adquirido, a expectativa de direito e a coisa julgada.',
+ 'O ato jurídico perfeito, o direito adquirido e a coisa julgada.',
+ 'Apenas a coisa julgada em matéria penal benéfica.',
+ 'O ato administrativo pendente e a vontade do administrador público.',
+ 'A lei nova, pois esta sempre retroage para atingir atos passados em nome do interesse social.',
+ 'B',
+ 'A alternativa B reproduz literalmente a proteção tríplice do dispositivo constitucional. A alternativa A substitui indevidamente o "ato jurídico perfeito" por "expectativa de direito", que, por definição doutrinária, não é protegida (mera possibilidade futura). A alternativa C restringe indevidamente a proteção apenas à esfera penal benéfica, quando o dispositivo é de aplicação geral. A alternativa D cria proteção inexistente para "ato administrativo pendente" e "vontade do administrador". A alternativa E inverte a regra constitucional, que veda a retroatividade da lei nova em prejuízo das situações consolidadas, sendo a irretroatividade a regra, e não a retroatividade.
+
+📜 Fundamento legal vigente: CF/88, art. 5º, XXXVI: "a lei não prejudicará o direito adquirido, o ato jurídico perfeito e a coisa julgada." Texto literal e vigente, sem menção a "expectativa de direito", que é categoria doutrinária distinta e não protegida por esse dispositivo.',
+ 'CF/88, art. 5º, XXXVI',
+ 'facil'),
+
+-- Q16: Devido processo legal, contraditório e ampla defesa
+(@cat_dc08,
+ 'Sobre o Devido Processo Legal, o contraditório e a ampla defesa, assinale a alternativa correta:',
+ 'O contraditório consiste no direito de ciência e reação, enquanto a ampla defesa garante o uso de todos os meios lícitos para a proteção de direitos.',
+ 'Tais garantias são restritas aos processos judiciais, não sendo aplicáveis aos processos administrativos disciplinares.',
+ 'O devido processo legal possui apenas uma dimensão formal, que é o cumprimento de prazos.',
+ 'A presunção de inocência não impede que o indivíduo seja considerado culpado antes do trânsito em julgado.',
+ 'No processo administrativo, a ampla defesa pode ser dispensada em nome do princípio da eficiência.',
+ 'A',
+ 'A alternativa A está correta e traduz a distinção doutrinária clássica entre os dois institutos. A alternativa B contraria expressamente o texto constitucional, que estende as garantias aos processos administrativos. A alternativa C ignora a dimensão substantiva (material) do devido processo legal, que exige razoabilidade e proporcionalidade das decisões, além da mera dimensão formal (procedimental). A alternativa D contraria o princípio da presunção de inocência (art. 5º, LVII), segundo o qual ninguém será considerado culpado até o trânsito em julgado de sentença penal condenatória. A alternativa E é inaceitável, pois a ampla defesa é garantia constitucional inafastável em qualquer processo administrativo, sob pena de nulidade.
+
+📜 Fundamento legal vigente: CF/88, art. 5º, LIV ("ninguém será privado da liberdade ou de seus bens sem o devido processo legal") e LV ("aos litigantes, em processo judicial ou administrativo, e aos acusados em geral são assegurados o contraditório e ampla defesa, com os meios e recursos a ela inerentes"). O inciso LV estende expressamente as garantias aos processos administrativos.',
+ 'CF/88, art. 5º, LIV e LV',
+ 'medio'),
+
+-- Q17: Mandado de Segurança x Habeas Data
+(@cat_dc08,
+ 'Diferencie o objeto do Mandado de Segurança (MS) do Habeas Data (HD). Diante de uma recusa imotivada de um órgão público em fornecer informações relativas à pessoa do impetrante constantes de bancos de dados governamentais, o remédio cabível e sua justificativa são:',
+ 'Mandado de Segurança, pois trata-se de direito líquido e certo não amparado por HC.',
+ 'Habeas Data, pois visa especificamente o conhecimento ou retificação de informações pessoais.',
+ 'Ação Popular, pois a negativa fere a moralidade administrativa.',
+ 'Mandado de Injunção, devido à ausência de norma regulamentadora sobre transparência.',
+ 'Habeas Corpus, por haver restrição indireta à liberdade de escolha do cidadão.',
+ 'B',
+ 'A alternativa B está correta, pois o Habeas Data é o remédio constitucional específico para essa finalidade. A alternativa A está incorreta, pois o Mandado de Segurança é subsidiário, cabível apenas quando o direito líquido e certo não for amparado por habeas corpus ou habeas data — e, no caso descrito, há remédio específico (HD), o que afasta o MS. A alternativa C é inadequada, pois a Ação Popular tem objeto distinto (anulação de ato lesivo ao patrimônio público, moralidade administrativa, meio ambiente e patrimônio histórico-cultural). A alternativa D não se aplica, pois não há ausência de norma regulamentadora, mas sim recusa de acesso a dados já regulados. A alternativa E desvirtua o objeto do Habeas Corpus, que tutela exclusivamente a liberdade de locomoção.
+
+📜 Fundamento legal vigente: CF/88, art. 5º, LXXII, "a": "conceder-se-á habeas data: a) para assegurar o conhecimento de informações relativas à pessoa do impetrante, constantes de registros ou bancos de dados de entidades governamentais ou de caráter público." O Mandado de Segurança (art. 5º, LXIX) é subsidiário, cabível apenas quando não amparado por habeas corpus ou habeas data.',
+ 'CF/88, art. 5º, LXXII, "a"',
+ 'medio'),
+
+-- Q18: Ação Popular e Mandado de Segurança Coletivo
+(@cat_dc08,
+ 'A Ação Popular e o Mandado de Segurança Coletivo são instrumentos de controle. Assinale a alternativa correta sobre seus requisitos:',
+ 'Qualquer pessoa física, inclusive estrangeiros, pode ajuizar Ação Popular.',
+ 'O Mandado de Segurança Coletivo pode ser impetrado por qualquer partido político, independentemente de representação no Congresso.',
+ 'A Ação Popular visa anular ato lesivo ao patrimônio público, à moralidade administrativa, ao meio ambiente e ao patrimônio histórico e cultural.',
+ 'O autor da Ação Popular sempre pagará custas judiciais, independentemente de comprovada má-fé.',
+ 'Entidades de classe só podem impetrar MS Coletivo se tiverem mais de cinco anos de funcionamento.',
+ 'C',
+ 'A alternativa C reproduz fielmente o rol de bens jurídicos tutelados pela Ação Popular. A alternativa A está incorreta, pois a legitimidade ativa da Ação Popular é restrita ao "cidadão" (titular de direitos políticos, comprovados por título de eleitor), não se estendendo a estrangeiros. A alternativa B contraria a exigência de representação no Congresso Nacional para partidos políticos impetrarem MS Coletivo (art. 5º, LXX, "a"). A alternativa D contraria a isenção de custas e do ônus da sucumbência, salvo comprovada má-fé do autor. A alternativa E é falsa, pois a exigência para organizações sindicais e entidades de classe é de apenas um ano de constituição e funcionamento, não cinco.
+
+📜 Fundamento legal vigente: CF/88, art. 5º, LXXIII: "qualquer cidadão é parte legítima para propor ação popular que vise a anular ato lesivo ao patrimônio público ou de entidade de que o Estado participe, à moralidade administrativa, ao meio ambiente e ao patrimônio histórico e cultural, ficando o autor, salvo comprovada má-fé, isento de custas judiciais e do ônus da sucumbência."',
+ 'CF/88, art. 5º, LXXIII',
+ 'medio'),
+
+-- Q19: Direitos Sociais e prestação positiva
+(@cat_dc08,
+ 'Sobre os Direitos Sociais (Art. 6º), é correto afirmar que eles se distinguem dos direitos individuais clássicos por:',
+ 'Exigirem uma abstenção do Estado (liberdade negativa).',
+ 'Serem considerados normas meramente programáticas, sem qualquer eficácia jurídica imediata.',
+ 'Exigirem uma atuação positiva do Estado, sendo classificados como direitos de prestação.',
+ 'Possuírem um rol taxativo que impede a inclusão de novos direitos como o transporte e a alimentação.',
+ 'Serem hierarquicamente inferiores aos direitos de 1ª Dimensão.',
+ 'C',
+ 'A alternativa C está correta, pois os direitos sociais, de 2ª dimensão, exigem prestações positivas do Estado (saúde, educação, moradia etc.). A alternativa A descreve os direitos individuais de 1ª dimensão (liberdades negativas), e não os sociais. A alternativa B nega indevidamente a eficácia jurídica imediata que o art. 5º, §1º, atribui aos direitos fundamentais, entre eles os sociais. A alternativa D está desatualizada e incorreta: o rol do art. 6º já foi ampliado por emendas constitucionais para incluir a alimentação (EC 64/2010) e o transporte (EC 90/2015), demonstrando que não é rol fechado e imutável. A alternativa E é falsa, pois não há hierarquia entre as dimensões de direitos fundamentais, todas de igual estatura constitucional.
+
+📜 Fundamento legal vigente: CF/88, art. 6º, caput, na redação dada pela Emenda Constitucional nº 90/2015: "São direitos sociais a educação, a saúde, a alimentação, o trabalho, a moradia, o transporte, o lazer, a segurança, a previdência social, a proteção à maternidade e à infância, a assistência aos desamparados, na forma desta Constituição."',
+ 'CF/88, art. 6º, caput (redação da EC 90/2015)',
+ 'facil'),
+
+-- Q20: Reserva do possível x Mínimo existencial
+(@cat_dc08,
+ 'Relacione os conceitos de Reserva do Possível e Mínimo Existencial no âmbito dos direitos sociais. Assinale a opção tecnicamente adequada:',
+ 'A Reserva do Possível permite que o Estado se omita totalmente da prestação de serviços de saúde alegando falta de verba.',
+ 'O Judiciário está proibido de intervir em políticas sociais devido ao princípio da separação dos Poderes.',
+ 'O Estado deve garantir o Mínimo Existencial, que representa o núcleo essencial e impostergável do direito social, independentemente de limitações orçamentárias.',
+ 'A falta de recursos financeiros é o único critério para a validade de um direito social.',
+ 'O Mínimo Existencial aplica-se exclusivamente ao direito de propriedade privada.',
+ 'C',
+ 'A alternativa C está correta e reflete a posição consolidada do STF: o mínimo existencial é núcleo intangível, não sujeito à alegação genérica de "reserva do possível". A alternativa A distorce o instituto, pois a reserva do possível não autoriza omissão total do Estado quanto a direitos mínimos, sob pena de violação da dignidade da pessoa humana. A alternativa B é falsa, pois o STF admite excepcionalmente a intervenção judicial em políticas públicas quando há omissão estatal na garantia do mínimo existencial. A alternativa D ignora que a mera alegação de falta de recursos, sem comprovação concreta e específica, não afasta o dever estatal quanto ao núcleo essencial dos direitos sociais. A alternativa E é incorreta, pois o mínimo existencial relaciona-se aos direitos sociais fundamentais (saúde, educação, moradia, alimentação), e não ao direito de propriedade.
+
+📜 Fundamento legal vigente: trata-se de construção doutrinário-jurisprudencial (STF, cf. ARE 639.337 e RE 587.970, entre outros), sem artigo constitucional expresso que defina "reserva do possível" ou "mínimo existencial" — ambos os institutos são extraídos da interpretação sistemática dos direitos sociais (art. 6º, CF/88) e da dignidade da pessoa humana (art. 1º, III, CF/88), que impõem ao Estado a garantia do núcleo essencial desses direitos.',
+ 'Construção doutrinário-jurisprudencial (STF); CF/88, arts. 1º, III, e 6º',
+ 'dificil'),
+
+-- Q21: Rol de Direitos Sociais do art. 6º
+(@cat_dc08,
+ 'Assinale a alternativa que contém apenas direitos sociais expressamente previstos no rol do Art. 6º da CF/88:',
+ 'Vida, Liberdade e Segurança.',
+ 'Educação, Saúde, Trabalho e Moradia.',
+ 'Soberania, Cidadania e Dignidade.',
+ 'Propriedade, Herança e Direito de Resposta.',
+ 'Sigilo de correspondência, Inviolabilidade de domicílio e Lazer.',
+ 'B',
+ 'A alternativa B está correta, pois educação, saúde, trabalho e moradia constam expressamente do rol do art. 6º. A alternativa A traz direitos individuais do art. 5º, caput, não sociais. A alternativa C traz Fundamentos da República (art. 1º), não direitos sociais. A alternativa D traz direitos individuais patrimoniais e de personalidade do art. 5º. A alternativa E mistura direitos individuais do art. 5º (sigilo de correspondência, inviolabilidade de domicílio) com apenas um direito social correto (lazer), o que invalida a alternativa por não ser exclusivamente social.
+
+📜 Fundamento legal vigente: CF/88, art. 6º, caput: "São direitos sociais a educação, a saúde, a alimentação, o trabalho, a moradia, o transporte, o lazer, a segurança, a previdência social, a proteção à maternidade e à infância, a assistência aos desamparados, na forma desta Constituição."',
+ 'CF/88, art. 6º, caput',
+ 'facil'),
+
+-- Q22: Nacionalidade — critério funcional (brasileiro nato)
+(@cat_dc08,
+ 'No que concerne à Nacionalidade, analise as situações abaixo e identifique o critério para ser considerado brasileiro nato:',
+ 'Nascido no estrangeiro, de pai e mãe estrangeiros, que venha a residir no Brasil aos 18 anos.',
+ 'Nascido no Brasil, de pais estrangeiros que estejam a serviço de seu país de origem.',
+ 'Nascido no estrangeiro, de pai ou mãe brasileira, desde que qualquer deles esteja a serviço da República Federativa do Brasil.',
+ 'Estrangeiro de qualquer nacionalidade residente no Brasil há mais de 15 anos ininterruptos e sem condenação penal.',
+ 'Português com residência permanente no Brasil, por reciprocidade.',
+ 'C',
+ 'A alternativa C descreve corretamente o critério funcional (art. 12, I, "b"), que dispensa registro em repartição consular ou opção posterior pela nacionalidade brasileira, bastando que o genitor esteja a serviço do Brasil. A alternativa A descreve situação de estrangeiro que não se enquadra em nenhuma hipótese de nacionalidade brasileira nata. A alternativa B descreve exatamente a exceção ao critério territorial (jus soli): filho de estrangeiros a serviço de seu próprio país NÃO é brasileiro nato. A alternativa D descreve a hipótese de naturalização ordinária de estrangeiros (art. 12, II, "b" — 15 anos), que gera brasileiro naturalizado, não nato. A alternativa E descreve a quase-nacionalidade dos portugueses (art. 12, §1º), que também não é hipótese de nato.
+
+📜 Fundamento legal vigente: CF/88, art. 12, I, "b": são brasileiros natos "os nascidos no estrangeiro, de pai brasileiro ou mãe brasileira, desde que qualquer deles esteja a serviço da República Federativa do Brasil" — é o critério funcional, que dispensa registro ou opção posterior, diferentemente da alínea "c" do mesmo inciso (critério do registro consular ou da opção após a maioridade).',
+ 'CF/88, art. 12, I, "b"',
+ 'medio'),
+
+-- Q23: Perda da nacionalidade brasileira
+(@cat_dc08,
+ 'Sobre a Perda da Nacionalidade brasileira, assinale a alternativa que apresenta uma hipótese prevista na Constituição:',
+ 'Viagem ao exterior por período superior a dois anos sem comunicação ao Ministério das Relações Exteriores.',
+ 'Condenação criminal por crime comum no Brasil.',
+ 'Cancelamento da naturalização, por sentença judicial, em virtude de atividade nociva ao interesse nacional.',
+ 'Exercício de direito político em país estrangeiro por brasileiro nato.',
+ 'Aquisição de outra nacionalidade em virtude de reconhecimento de nacionalidade originária pela lei estrangeira.',
+ 'C',
+ 'A alternativa C é a única, entre as opções, que descreve corretamente a estrutura de uma hipótese constitucional de perda de nacionalidade: o cancelamento judicial da naturalização. As alternativas A, B e D descrevem situações que a Constituição não elenca como causas de perda de nacionalidade (viagem prolongada, condenação criminal comum e exercício de direito político no exterior não estão previstos no art. 12, §4º). A alternativa E descrevia, na redação anterior à Emenda Constitucional nº 131/2023, uma das exceções em que a aquisição de outra nacionalidade NÃO acarretava a perda (reconhecimento de nacionalidade originária pela lei estrangeira); com a reforma de 2023, essa hipótese de exceção foi revogada e a própria causa de perda por "aquisição de outra nacionalidade" foi substituída por outra redação, tornando a alternativa E ainda mais desatualizada.
+
+📜 Fundamento legal vigente: CF/88, art. 12, §4º, I, na redação dada pela Emenda Constitucional nº 131/2023, prevê que será declarada a perda da nacionalidade do brasileiro que "tiver cancelada sua naturalização, por sentença judicial, em virtude de fraude relacionada ao processo de naturalização ou de atentado contra a ordem constitucional e o Estado Democrático". A expressão "atividade nociva ao interesse nacional", usada na alternativa C, corresponde à redação originária de 1988, hoje superada pela EC 131/2023 — o candidato deve registrar que, embora a estrutura da hipótese (cancelamento judicial da naturalização) permaneça correta, o fundamento específico deve ser atualizado para a redação vigente.',
+ 'CF/88, art. 12, §4º, I (redação dada pela EC 131/2023)',
+ 'dificil'),
+
+-- Q24: Alistamento eleitoral e voto
+(@cat_dc08,
+ 'Quanto aos Direitos Políticos e ao alistamento eleitoral (Art. 14), assinale a alternativa que reflete corretamente as regras de obrigatoriedade e facultatividade:',
+ 'O alistamento eleitoral e o voto são facultativos para os analfabetos e para os maiores de setenta anos.',
+ 'O voto é obrigatório para os maiores de dezesseis e menores de dezoito anos.',
+ 'Estrangeiros podem se alistar como eleitores desde que residentes há mais de cinco anos.',
+ 'O voto é facultativo para todos os cidadãos entre dezoito e setenta anos de idade.',
+ 'O alistamento eleitoral é proibido para os maiores de 70 anos.',
+ 'A',
+ 'A alternativa A está correta e reproduz literalmente as alíneas "a" e "b" do inciso II do §1º do art. 14. A alternativa B inverte a regra: o voto é facultativo (não obrigatório) para os maiores de dezesseis e menores de dezoito anos (alínea "c"). A alternativa C contraria o §2º do art. 14, que veda expressamente o alistamento de estrangeiros como eleitores, independentemente do tempo de residência. A alternativa D está incorreta, pois o voto é obrigatório (não facultativo) para os maiores de dezoito anos, ressalvadas as exceções legais. A alternativa E é falsa, pois o alistamento dos maiores de 70 anos não é proibido, apenas facultativo.
+
+📜 Fundamento legal vigente: CF/88, art. 14, §1º: "O alistamento eleitoral e o voto são: I - obrigatórios para os maiores de dezoito anos; II - facultativos para: a) os analfabetos; b) os maiores de setenta anos; c) os maiores de dezesseis e menores de dezoito anos." O §2º do mesmo artigo veda o alistamento de estrangeiros e, durante o serviço militar obrigatório, dos conscritos.',
+ 'CF/88, art. 14, §1º e §2º',
+ 'facil'),
+
+-- Q25: Perda x Suspensão dos direitos políticos
+(@cat_dc08,
+ 'Diferencie as hipóteses de Perda e Suspensão dos direitos políticos (Art. 15). Assinale a alternativa que apresenta uma causa de Suspensão:',
+ 'Cancelamento da naturalização por sentença transitada em julgado.',
+ 'Recusa de cumprir obrigação a todos imposta ou prestação alternativa.',
+ 'Condenação criminal transitada em julgado, enquanto durarem seus efeitos.',
+ 'Morte do cidadão.',
+ 'Aquisição voluntária de outra nacionalidade fora das exceções constitucionais.',
+ 'C',
+ 'A alternativa C está correta: a doutrina classifica a condenação criminal transitada em julgado (inciso III) como causa de suspensão temporária, cessando seus efeitos quando extinta a punibilidade ou cumprida a pena. A alternativa A (inciso I) e a alternativa B (inciso IV) são classificadas pela doutrina como hipóteses de perda (definitiva, ainda que passível de reaquisição em situações específicas), não de suspensão. A alternativa D (morte) não é sequer hipótese do art. 15, mas causa natural de extinção da personalidade e, por consequência, dos direitos políticos. A alternativa E não corresponde a nenhuma das hipóteses taxativas do art. 15, estando relacionada, em vez disso, à perda de nacionalidade do art. 12, §4º.
+
+📜 Fundamento legal vigente: CF/88, art. 15: "É vedada a cassação de direitos políticos, cuja perda ou suspensão só se dará nos casos de: (...) III - condenação criminal transitada em julgado, enquanto durarem seus efeitos." A doutrina classifica os incisos I (cancelamento de naturalização) e IV (recusa de cumprir obrigação a todos imposta) como hipóteses de perda, e os incisos II (incapacidade civil absoluta), III (condenação criminal) e V (improbidade administrativa) como hipóteses de suspensão.',
+ 'CF/88, art. 15, III',
+ 'medio'),
+
+-- Q26: Legalidade e Impessoalidade na Administração Pública
+(@cat_dc08,
+ 'A Administração Pública é regida pelos princípios do LIMPE. Sobre os princípios da Legalidade e da Impessoalidade, assinale a alternativa correta:',
+ 'A Legalidade para o administrador público significa que ele pode fazer tudo o que a lei não proíbe.',
+ 'A Impessoalidade permite que o gestor público utilize nomes e imagens de autoridades em publicidade de obras públicas para fins de promoção pessoal.',
+ 'Na Administração Pública, a Legalidade tem sentido estrito: o administrador só pode fazer o que a lei expressamente autoriza.',
+ 'O princípio da impessoalidade autoriza o tratamento diferenciado a cidadãos que possuam vínculos políticos com o administrador.',
+ 'A legalidade administrativa e a legalidade aplicada ao particular possuem exatamente o mesmo conteúdo e extensão.',
+ 'C',
+ 'A alternativa C está correta: para o administrador público, a legalidade tem sentido estrito, diferentemente da legalidade aplicável ao particular (que pode fazer tudo o que a lei não proíbe). A alternativa A inverte exatamente essa lógica, aplicando ao Poder Público a regra da autonomia da vontade privada. A alternativa B viola frontalmente a impessoalidade e a vedação à promoção pessoal na publicidade de atos governamentais (art. 37, §1º). A alternativa D contraria a essência da impessoalidade, que veda tratamento diferenciado por vínculos pessoais ou políticos. A alternativa E ignora a distinção doutrinária clássica entre a legalidade privada (ampla) e a legalidade administrativa (estrita, de subordinação à lei).
+
+📜 Fundamento legal vigente: CF/88, art. 37, caput: "A administração pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência (...)." A vedação à promoção pessoal na publicidade de atos, programas, obras e serviços públicos está prevista no art. 37, §1º.',
+ 'CF/88, art. 37, caput e §1º',
+ 'facil'),
+
+-- Q27: Administração Direta e Indireta
+(@cat_dc08,
+ 'Sobre a organização da Administração Pública Direta e Indireta, assinale a alternativa correta:',
+ 'A União, os Estados e os Municípios integram a Administração Indireta.',
+ 'As autarquias, fundações públicas, empresas públicas e sociedades de economia mista integram a Administração Indireta.',
+ 'As empresas públicas estão dispensadas de realizar concurso público para a contratação de seus empregados permanentes.',
+ 'O princípio da publicidade não se aplica às entidades da Administração Indireta.',
+ 'A Administração Pública só existe no âmbito do Poder Executivo, sendo inexistente nos Poderes Judiciário e Legislativo.',
+ 'B',
+ 'A alternativa B está correta e traz a definição clássica de Administração Indireta. A alternativa A inverte os conceitos: União, Estados, Distrito Federal e Municípios são entes federativos que integram a Administração Direta. A alternativa C contraria o art. 37, II, da CF/88, que exige concurso público inclusive para empresas públicas e sociedades de economia mista, ressalvados cargos em comissão. A alternativa D é falsa, pois o princípio da publicidade (art. 37, caput) vincula toda a Administração Pública, direta e indireta. A alternativa E ignora que a atividade administrativa (função atípica) também existe nos Poderes Judiciário e Legislativo, ao lado de suas funções típicas.
+
+📜 Fundamento legal vigente: CF/88, art. 37, caput, submete toda a administração pública direta e indireta de qualquer dos Poderes aos princípios do LIMPE; a estrutura clássica da Administração Indireta (autarquias, empresas públicas, sociedades de economia mista e fundações públicas) está definida no Decreto-Lei nº 200/1967, art. 4º, II, recepcionado pela CF/88.',
+ 'CF/88, art. 37, caput; Decreto-Lei 200/1967, art. 4º, II',
+ 'medio'),
+
+-- Q28: Concurso Público
+(@cat_dc08,
+ 'No tocante ao Concurso Público (Art. 37, II a IV), é correto afirmar que:',
+ 'O prazo de validade do concurso será de até cinco anos, prorrogável por igual período.',
+ 'Cargos em comissão dispensam concurso público e destinam-se apenas a atribuições de direção, chefia e assessoramento.',
+ 'A aprovação em concurso público fora do número de vagas gera, automaticamente, direito subjetivo à nomeação imediata.',
+ 'A lei não pode reservar vagas para pessoas com deficiência em concursos públicos para não ferir a isonomia.',
+ 'O concurso público é facultativo para o preenchimento de empregos públicos em sociedades de economia mista.',
+ 'B',
+ 'A alternativa B reproduz corretamente a regra do art. 37, V, quanto à finalidade restrita dos cargos em comissão. A alternativa A está incorreta, pois o prazo de validade do concurso é de até dois anos, prorrogável uma única vez por igual período (art. 37, III), e não cinco anos. A alternativa C contraria a regra geral, segundo a qual a aprovação fora do número de vagas gera mera expectativa de direito, e não direito subjetivo automático, ressalvadas hipóteses excepcionais reconhecidas pela jurisprudência do STF (preterição arbitrária, por exemplo). A alternativa D contraria expressamente o art. 37, VIII, que determina a reserva de percentual de cargos e empregos para pessoas com deficiência, como concretização da isonomia material. A alternativa E é falsa, pois o concurso público é obrigatório também para empregos públicos em sociedades de economia mista e empresas públicas (art. 37, II).
+
+📜 Fundamento legal vigente: CF/88, art. 37, II (investidura em cargo ou emprego público depende de aprovação em concurso público, ressalvados os cargos em comissão), III (prazo de validade do concurso de até 2 anos, prorrogável uma vez por igual período), V (funções de confiança e cargos em comissão destinam-se apenas às atribuições de direção, chefia e assessoramento) e VIII (reserva de percentual de cargos para pessoas com deficiência).',
+ 'CF/88, art. 37, II, III, V e VIII',
+ 'medio'),
+
+-- Q29: Estabilidade do servidor público
+(@cat_dc08,
+ 'A Estabilidade do servidor público (Art. 41) é uma garantia constitucional. Sobre seus requisitos e perda, assinale a alternativa correta:',
+ 'A estabilidade é adquirida após dois anos de efetivo exercício para quem ingressou via concurso.',
+ 'O servidor estável nunca poderá perder o cargo, independentemente de sua conduta.',
+ 'São requisitos para a estabilidade: três anos de efetivo exercício e aprovação em avaliação especial de desempenho por comissão instituída para esse fim.',
+ 'O servidor estável pode perder o cargo por decisão administrativa simples do seu superior hierárquico, sem necessidade de processo.',
+ 'A avaliação periódica de desempenho não é hipótese prevista na Constituição para a perda do cargo do servidor estável.',
+ 'C',
+ 'A alternativa C está correta e reúne os dois requisitos cumulativos exigidos pelo art. 41, caput e §4º. A alternativa A erra o prazo, que é de três anos, e não dois. A alternativa B contraria o próprio §1º do art. 41, que prevê hipóteses expressas de perda do cargo mesmo para o servidor estável. A alternativa D é inconstitucional, pois a perda do cargo do estável exige sentença judicial transitada em julgado, processo administrativo com ampla defesa, ou procedimento de avaliação periódica de desempenho — nunca decisão administrativa unilateral e simples. A alternativa E contraria expressamente o inciso III do §1º, que prevê a avaliação periódica de desempenho, na forma de lei complementar, como hipótese de perda do cargo.
+
+📜 Fundamento legal vigente: CF/88, art. 41, caput: "São estáveis após três anos de efetivo exercício os servidores nomeados para cargo de provimento efetivo em virtude de concurso público", combinado com o §4º: "Como condição para a aquisição da estabilidade, é obrigatória a avaliação especial de desempenho por comissão instituída para essa finalidade." O §1º prevê as três hipóteses de perda do cargo: sentença judicial transitada em julgado, processo administrativo com ampla defesa, e avaliação periódica de desempenho.',
+ 'CF/88, art. 41, caput, §1º e §4º',
+ 'medio'),
+
+-- Q30: Responsabilidade Civil do Estado — Teoria do Risco Administrativo
+(@cat_dc08,
+ 'A Responsabilidade Civil do Estado (Art. 37, §6º) fundamenta-se na Teoria do Risco Administrativo. Isso implica que:',
+ 'O Estado responde subjetivamente, sendo necessária a prova de dolo do agente público em todos os casos.',
+ 'A responsabilidade é objetiva, exigindo-se apenas a comprovação da conduta, do dano e do nexo causal, independentemente de culpa ou dolo.',
+ 'As concessionárias de serviços públicos não respondem objetivamente pelos danos que causarem.',
+ 'O Estado não possui direito de regresso contra o agente público, mesmo que este tenha agido com culpa comprovada.',
+ 'A existência de culpa exclusiva da vítima não é capaz de excluir a responsabilidade do Estado.',
+ 'B',
+ 'A alternativa B está correta e reproduz o núcleo da Teoria do Risco Administrativo, adotada pelo art. 37, §6º, da CF/88: basta o trinômio conduta, dano e nexo causal, sendo dispensada a prova de dolo ou culpa do agente para a responsabilização do Estado (responsabilidade objetiva). A alternativa A inverte a teoria adotada, atribuindo natureza subjetiva à responsabilidade estatal, quando na verdade é objetiva. A alternativa C contraria o próprio texto constitucional, que estende expressamente a responsabilidade objetiva às pessoas jurídicas de direito privado prestadoras de serviços públicos, incluindo concessionárias e permissionárias. A alternativa D contraria a parte final do §6º, que assegura o direito de regresso do Estado contra o agente responsável, nos casos de dolo ou culpa. A alternativa E é falsa, pois a culpa exclusiva da vítima é reconhecida pela doutrina e jurisprudência como causa excludente do nexo de causalidade, afastando a responsabilidade estatal.
+
+📜 Fundamento legal vigente: CF/88, art. 37, §6º: "As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos responderão pelos danos que seus agentes, nessa qualidade, causarem a terceiros, assegurado o direito de regresso contra o responsável nos casos de dolo ou culpa." Consagra a responsabilidade objetiva do Estado (Teoria do Risco Administrativo), exigindo apenas conduta, dano e nexo causal.',
+ 'CF/88, art. 37, §6º',
+ 'medio');
+
+SET foreign_key_checks = 1;

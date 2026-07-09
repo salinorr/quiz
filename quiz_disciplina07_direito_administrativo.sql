@@ -1,0 +1,428 @@
+-- ============================================================
+-- QUIZ — Disciplina 7/20 do CHO: Direito Administrativo
+-- 30 questões — dupla justificativa (doutrina/apostila + legislação vigente)
+-- Modo Quiz Livre (categoria sem a palavra "prova" no nome)
+-- Base doutrinária: Caderno de Questões Comentadas de Direito Administrativo
+--   (Curso de Habilitação de Oficiais) — Academia Coronel Walterler
+--   Blocos: Princípios da Administração Pública; Poderes Administrativos;
+--   Agentes Públicos; Responsabilidade Civil do Estado; Atos Administrativos
+--   (atributos, elementos, abuso de poder); Fontes do Direito Administrativo;
+--   Controle da Administração Pública
+-- Base legal vigente: CF/88, art. 37 (caput — princípios LIMPE — e §6º —
+--   responsabilidade civil objetiva do Estado); Lei nº 5.172/1966 — CTN
+--   (arts. 77 a 80 — poder de polícia e taxas); Lei nº 8.429/1992 — Lei de
+--   Improbidade Administrativa (art. 4º, HOJE REVOGADO pela Lei nº
+--   14.230/2021 — ver observação na Questão 5); Lei nº 4.717/1965 — Lei da
+--   Ação Popular (art. 2º — hipóteses de nulidade do ato administrativo:
+--   incompetência e desvio de finalidade); Lei nº 9.784/1999 — Lei do
+--   Processo Administrativo Federal (arts. 2º, 11, 12 e 15 — princípios,
+--   competência, delegação e avocação); Lei nº 8.112/1990 (art. 126 —
+--   independência das instâncias); Decreto-Lei nº 200/1967 (art. 5º —
+--   entidades da Administração Indireta); Súmula Vinculante e Súmula
+--   473/STF (autotutela e controle judicial); Código Penal, art. 327
+--   (conceito ampliado de funcionário público, por analogia)
+-- ============================================================
+SET NAMES utf8mb4;
+SET foreign_key_checks = 0;
+
+INSERT IGNORE INTO categorias (nome, descricao)
+VALUES ('Direito Administrativo — CHO 07', 'Disciplina 7/20 do CHO — Princípios da Administração Pública, poderes administrativos, agentes públicos, atos administrativos, responsabilidade civil do Estado e controle da Administração');
+
+SET @cat_da07 = (SELECT id FROM categorias WHERE nome = 'Direito Administrativo — CHO 07' LIMIT 1);
+
+INSERT INTO questoes
+    (categoria_id, enunciado, opcao_a, opcao_b, opcao_c, opcao_d, opcao_e,
+     resposta_correta, explicacao, referencia_legal, nivel)
+VALUES
+
+-- Q01: Princípios LIMPE
+(@cat_da07,
+ 'De acordo com o artigo 37 da Constituição Federal de 1988, a administração pública deve obedecer a cinco princípios expressos. Sendo eles:',
+ 'Investimento, resultado, positividade, autoridade e legalidade.',
+ 'Moralidade, celeridade, burocratização, eficiência e lucro.',
+ 'Eficiência, lucro, competitividade, perenidade e investimento.',
+ 'Legalidade, impessoalidade, moralidade, publicidade e eficiência.',
+ NULL,
+ 'D',
+ 'A alternativa D reproduz corretamente os cinco princípios constitucionais expressos no caput do art. 37, conhecidos pelo acrônimo LIMPE (Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência). As demais alternativas trazem termos estranhos ao regime jurídico de direito público — como "lucro", "perenidade", "investimento" e "competitividade" — que não constam do dispositivo constitucional.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput (com redação dada pela EC nº 19/1998): "A administração pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência e, também, ao seguinte: (...)". A Eficiência só passou a constar expressamente do caput a partir da Emenda Constitucional nº 19/1998.',
+ 'CF/88, art. 37, caput (redação da EC 19/1998)',
+ 'facil'),
+
+-- Q02: Princípio da Legalidade
+(@cat_da07,
+ 'Os atos administrativos devem estar em conformidade com a lei, visto que só será permitido ao administrador praticar aqueles autorizados ou determinados por lei. Tal conceito corresponde a qual princípio básico da administração pública?',
+ 'Moralidade.',
+ 'Motivação.',
+ 'Legalidade.',
+ 'Eficiência.',
+ NULL,
+ 'C',
+ 'A alternativa C está correta, pois o princípio da Legalidade é o pilar que subordina toda a atuação do administrador público à vontade da lei: ao contrário do particular, que pode fazer tudo que a lei não proíbe, o administrador só pode fazer o que a lei expressamente autoriza ou determina (legalidade estrita). As alternativas A, B e D descrevem outros institutos — moralidade (ética e boa-fé), motivação (exposição dos fundamentos do ato) e eficiência (presteza e economicidade) — que não se confundem com a subordinação do agente ao texto legal.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput, c/c art. 5º, II ("ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei"). Para a Administração Pública a legalidade é mais estrita que para o particular: só pode agir com base em autorização legal expressa.',
+ 'CF/88, art. 37, caput; art. 5º, II',
+ 'facil'),
+
+-- Q03: Legalidade privada x pública
+(@cat_da07,
+ 'O Comandante de uma OPM, ao se dirigir aos seus comandados, proferiu a seguinte frase: "Na Administração Pública não há liberdade nem vontade pessoal. Enquanto na administração particular é lícito fazer tudo que a lei não proíbe, na Administração Pública só é permitido fazer o que a lei autoriza". O ensinamento apresentado pelo gestor está relacionado com o princípio constitucional da:',
+ 'Intensidade.',
+ 'Criatividade.',
+ 'Efetividade.',
+ 'Legalidade.',
+ NULL,
+ 'D',
+ 'A alternativa D está correta. A frase reproduzida pelo Comandante é a formulação doutrinária clássica (Hely Lopes Meirelles) da diferença entre a legalidade no âmbito privado e no âmbito público: o particular pode fazer tudo que a lei não proíbe (autonomia da vontade), enquanto o administrador público só pode agir dentro dos limites expressamente autorizados pela lei (legalidade estrita). As alternativas A, B e C — "intensidade", "criatividade" e "efetividade" — não correspondem a nenhum princípio constitucional expresso da Administração Pública.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput. O contraste com a esfera privada decorre do art. 5º, II, da CF/88, aplicável ao particular.',
+ 'CF/88, art. 37, caput; art. 5º, II',
+ 'facil'),
+
+-- Q04: Autotutela
+(@cat_da07,
+ 'A respeito dos princípios da Administração Pública, assinale a alternativa correta.',
+ 'Segundo o princípio da legalidade, expressamente previsto na Constituição, a Administração Pública pode fazer tudo o que a lei não proíbe.',
+ 'De acordo com o princípio da autotutela, a Administração Pública pode anular seus próprios atos quando eivados de vícios que os tornem ilegais.',
+ 'O princípio da publicidade obriga a publicação de todos os atos praticados pela Administração Pública, até mesmo dos relacionados à segurança nacional.',
+ 'A publicidade é um princípio constitucional que norteia apenas a administração pública direta.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta: pela autotutela, a Administração Pública pode rever de ofício seus próprios atos, anulando-os quando ilegais ou revogando-os por conveniência e oportunidade, sem necessidade de provocar previamente o Poder Judiciário. A alternativa A inverte o conteúdo do princípio da legalidade, que exige autorização expressa da lei (e não mera ausência de proibição, regra válida apenas para o particular). A alternativa C está incorreta porque informações relacionadas à segurança da sociedade e do Estado são exceção expressa ao princípio da publicidade. A alternativa D é falsa, pois a publicidade rege tanto a administração direta quanto a indireta.\n\n📜 Fundamento legal vigente: Súmula 473/STF: "A administração pode anular seus próprios atos, quando eivados de vícios que os tornam ilegais, porque deles não se originam direitos; ou revogá-los, por motivo de conveniência ou oportunidade, respeitados os direitos adquiridos, e ressalvada, em todos os casos, a apreciação judicial." A exceção à publicidade decorre do art. 5º, XXXIII, da CF/88 (sigilo imprescindível à segurança da sociedade e do Estado).',
+ 'Súmula 473/STF; CF/88, art. 5º, XXXIII',
+ 'medio'),
+
+-- Q05: Art. 4º da LIA (hoje revogado) — princípios
+(@cat_da07,
+ 'Segundo o Art. 4º da Lei da Improbidade Administrativa, os agentes públicos de qualquer nível ou hierarquia são obrigados a velar pela estrita observância de determinados princípios, no trato dos assuntos que lhe são afetos. Sendo assim, analise as assertivas que seguem, relacionadas aos referidos princípios: I. Legalidade e impessoalidade. II. Moralidade e publicidade. III. Probabilidade e eficácia. Quais estão corretas?',
+ 'Apenas I e II.',
+ 'Apenas I e III.',
+ 'Apenas II e III.',
+ 'I, II e III.',
+ NULL,
+ 'A',
+ 'A alternativa A está correta: os itens I (legalidade e impessoalidade) e II (moralidade e publicidade) reproduzem os princípios que a redação original do art. 4º da Lei nº 8.429/1992 impunha aos agentes públicos observarem estritamente. O item III é falso porque "probabilidade" e "eficácia" são termos deturpados que não correspondiam à redação legal — o correto seria "probidade" e "eficiência" (esta última sequer constava do rol original do art. 4º).\n\n📜 Fundamento legal vigente: ATENÇÃO — o art. 4º da Lei nº 8.429/1992, citado no enunciado, foi EXPRESSAMENTE REVOGADO pela Lei nº 14.230/2021 (a "Nova Lei de Improbidade Administrativa"), que reestruturou profundamente o diploma, passando a exigir dolo específico para a configuração do ato de improbidade. Isso significa que, hoje, não existe mais um "art. 4º da LIA" com esse conteúdo em vigor. A observância desses princípios pelos agentes públicos permanece exigível, mas seu fundamento legal vigente é diretamente o art. 37, caput, da CF/88 (LIMPE), combinado com o art. 1º da Lei 8.429/1992 (na redação da Lei 14.230/2021), que hoje trata da tutela da probidade na organização do Estado. Para fins de prova, o examinador pode cobrar a redação histórica do art. 4º como conhecimento de doutrina, mas o operador do direito deve saber que esse dispositivo específico não está mais em vigor.',
+ 'Lei 8.429/1992, art. 4º (REVOGADO pela Lei 14.230/2021); CF/88, art. 37, caput',
+ 'dificil'),
+
+-- Q06: Moralidade — mora administrativa
+(@cat_da07,
+ 'O direito de petição aos poderes públicos, assegurado pela Constituição Federal de 1988, impõe à administração o dever de apresentar tempestiva resposta. A demora excessiva e injustificada da administração para cumprir essa obrigação é omissão violadora do princípio da eficiência. Segundo o STJ, por colocar em xeque a legítima confiança que o cidadão comum deposita na atuação da administração pública, tal mora atenta também contra o princípio da:',
+ 'Finalidade.',
+ 'Presunção de legitimidade.',
+ 'Autotutela.',
+ 'Moralidade.',
+ NULL,
+ 'D',
+ 'A alternativa D está correta. A doutrina e a jurisprudência entendem que a moralidade administrativa vai além da mera legalidade formal: exige do gestor público uma conduta ética, leal e de boa-fé, compatível com a confiança que o cidadão deposita na Administração. A demora excessiva e injustificada em responder a um requerimento administrativo, ainda que não configure isoladamente uma ilegalidade formal específica, fere essa relação de confiança e, por isso, atenta contra a moralidade administrativa, além de configurar violação ao princípio da eficiência.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput (princípio da moralidade) c/c art. 5º, XXXIV, "a" (direito de petição aos Poderes Públicos em defesa de direitos ou contra ilegalidade ou abuso de poder). A jurisprudência do STJ, em julgados sobre mora administrativa, reconhece que a demora excessiva e sem justificativa no exame de requerimentos ofende a moralidade e a eficiência administrativas — a citação de acórdão específico deve ser conferida diretamente na fonte antes de reprodução em prova, para evitar atribuição incorreta de ementa.',
+ 'CF/88, art. 37, caput; art. 5º, XXXIV, "a"',
+ 'medio'),
+
+-- Q07: Impessoalidade e Publicidade
+(@cat_da07,
+ 'O tratamento igualitário e a prestação de contas à população são considerados fundamentais nos atos da administração pública, derivando, respectivamente, dos princípios:',
+ 'Da legalidade e da constitucionalidade.',
+ 'Da impessoalidade e da publicidade.',
+ 'Da moralidade e da eficiência.',
+ 'Da transparência e da regularidade.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta: o tratamento igualitário — vedação a favoritismos ou perseguições pessoais — é a essência da Impessoalidade, enquanto a prestação de contas e a transparência dos atos administrativos ao público é o núcleo do princípio da Publicidade. As demais alternativas combinam princípios (legalidade, constitucionalidade, moralidade, eficiência) ou expressões (transparência, regularidade) que não correspondem exatamente aos dois conceitos descritos no enunciado.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput.',
+ 'CF/88, art. 37, caput',
+ 'facil'),
+
+-- Q08: Princípios implícitos x expressos
+(@cat_da07,
+ 'Helly Lopes Meirelles define que, entre os princípios básicos da Administração Pública, estão aqueles que não estão expressos na Constituição Federal e entre eles estão os seguintes princípios: I. Eficiência. II. Ampla defesa. III. Segurança jurídica. Quais estão corretos?',
+ 'Apenas I.',
+ 'Apenas I e II.',
+ 'Apenas I e III.',
+ 'Apenas II e III.',
+ NULL,
+ 'D',
+ 'A alternativa D está correta. Após a Emenda Constitucional nº 19/1998, a Eficiência (item I) passou a ser princípio expresso no caput do art. 37 da CF/88, deixando de ser apenas implícito — por isso o item I não se enquadra no que a questão pede (princípios NÃO expressos na Constituição). Já a Ampla Defesa (item II) e a Segurança Jurídica (item III) são reconhecidas pela doutrina administrativista como princípios implícitos da Administração Pública, hoje também positivados na legislação infraconstitucional do processo administrativo.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput (eficiência expressa, desde a EC 19/1998); art. 5º, LV (ampla defesa e contraditório, previstos expressamente apenas para litigantes em processo judicial ou administrativo); Lei nº 9.784/1999, art. 2º, caput (Lei do Processo Administrativo Federal, que cita expressamente o princípio da segurança jurídica ao lado de legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, interesse público e eficiência).',
+ 'CF/88, art. 37, caput; art. 5º, LV; Lei 9.784/1999, art. 2º',
+ 'dificil'),
+
+-- Q09: Eficiência
+(@cat_da07,
+ 'Quando o agente público cumpre com suas competências, agindo com presteza, perfeição, buscando sempre o melhor resultado e com o menor custo possível, no sentido econômico-jurídico, esse agente atende ao princípio:',
+ 'Da proporcionalidade.',
+ 'Da eficiência.',
+ 'Da universalidade.',
+ 'Da uniformidade.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta: o princípio da Eficiência impõe ao agente público a busca por presteza, perfeição técnica e economicidade na prestação do serviço público, sempre em busca do melhor resultado com o menor custo. As alternativas A, C e D citam institutos ou termos que não correspondem a esse conceito específico de qualidade e economicidade na atuação administrativa.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput (princípio da eficiência, incluído pela EC nº 19/1998).',
+ 'CF/88, art. 37, caput (EC 19/1998)',
+ 'facil'),
+
+-- Q10: Impessoalidade — Cabo Chico Peba
+(@cat_da07,
+ 'O Cabo Chico Peba trabalha no protocolo do QCG. O cidadão Zé Maria ali compareceu para protocolizar um requerimento, mas o Cabo Chico Peba se recusou a receber o documento e expulsou o cidadão do recinto, sob o argumento de que dito cidadão é seu vizinho e antigo desafeto. Na hipótese narrada, o Cb Chico Peba violou diretamente o princípio constitucional expresso da administração pública da:',
+ 'Continuidade, eis que as atividades administrativas não podem sofrer qualquer tipo de interrupção.',
+ 'Impessoalidade, pois não pode discriminar usuários do serviço público, seja para benefício, seja para prejuízo.',
+ 'Competitividade, haja vista que todos os cidadãos devem ter as mesmas oportunidades ao se valer dos serviços do setor público.',
+ 'Proporcionalidade, uma vez que a negativa de recebimento de documentos deve decorrer de decisão criminal.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. A atuação do Cabo movida por "desafeto pessoal" — tratando o cidadão de forma diferenciada e prejudicial em razão de uma relação estritamente pessoal — é o exemplo clássico de violação da Impessoalidade, princípio que veda tanto o favorecimento quanto o prejuízo de administrados por critérios subjetivos alheios ao interesse público. A alternativa A não é o princípio diretamente violado no caso (não há interrupção do serviço, mas discriminação pessoal). "Competitividade" (alternativa C) não é princípio constitucional expresso da Administração Pública. A alternativa D inventa uma exigência ("decisão criminal") sem correspondência legal.\n\n📜 Fundamento legal vigente: CF/88, art. 37, caput (princípio da impessoalidade).',
+ 'CF/88, art. 37, caput',
+ 'medio'),
+
+-- Q11: Descentralização por outorga
+(@cat_da07,
+ 'A descentralização administrativa é o processo pelo qual os entes políticos transferem atribuições administrativas a outras pessoas jurídicas. Assinale a opção que apresenta a forma de descentralização que ocorre quando o Estado cria uma fundação pública para executar determinado serviço público.',
+ 'Descentralização por outorga.',
+ 'Descentralização por colaboração.',
+ 'Descentralização por delegação.',
+ 'Descentralização participativa.',
+ NULL,
+ 'A',
+ 'A alternativa A está correta. A descentralização por outorga (também chamada descentralização por serviços) ocorre quando o Estado, mediante lei específica, cria uma nova pessoa jurídica (autarquia, fundação pública, empresa pública ou sociedade de economia mista) e a ela transfere a titularidade e a execução de determinado serviço público, integrando-a à Administração Indireta — é exatamente o caso da criação de uma fundação pública. A descentralização por colaboração (ou por delegação) ocorre quando o Estado transfere apenas a execução do serviço a pessoa jurídica de direito privado já existente (concessionária/permissionária), sem lhe transferir a titularidade. "Descentralização participativa" não é categoria reconhecida pela doutrina administrativista.\n\n📜 Fundamento legal vigente: Decreto-Lei nº 200/1967, art. 5º, incisos I a IV, que classifica as entidades da Administração Indireta (autarquia, empresa pública, sociedade de economia mista e fundação pública), todas criadas por lei (ou autorizadas por lei, no caso da fundação pública) — base normativa da descentralização por outorga.',
+ 'Decreto-Lei 200/1967, art. 5º',
+ 'medio'),
+
+-- Q12: Ciclo de polícia — atos preventivos
+(@cat_da07,
+ 'A autorização e a licença constituem exemplos clássicos do exercício do poder de polícia e são medidas consideradas:',
+ 'Repressivas.',
+ 'Preventivas.',
+ 'Judiciárias.',
+ 'Normativas e punitivas.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. Autorização e licença são atos de consentimento estatal que ocorrem antes da conduta do particular (ex.: autorização para porte de arma, licença para construir), inaugurando o exercício do poder de polícia em sua fase preventiva, dentro do chamado "ciclo de polícia" (ordem, consentimento, fiscalização e sanção). Não se trata de medidas repressivas (que pressupõem infração já consumada), judiciárias (a polícia judiciária incide sobre pessoas, na apuração de crimes) ou punitivas (a sanção é fase distinta e posterior do ciclo de polícia).\n\n📜 Fundamento legal vigente: CTN (Lei nº 5.172/1966), art. 78, caput, que fundamenta o poder de polícia como atividade da administração que "limitando ou disciplinando direito, interêsse ou liberdade, regula a prática de ato ou abstenção de fato" — a doutrina do ciclo de polícia (ordem, consentimento, fiscalização, sanção) deriva desse dispositivo, sem detalhamento legal expresso das quatro fases.',
+ 'CTN (Lei 5.172/1966), art. 78 (doutrina do ciclo de polícia)',
+ 'facil'),
+
+-- Q13: Poder de polícia — afirmativas
+(@cat_da07,
+ 'Sobre o tema do poder de polícia, analise as afirmativas a seguir. I. A polícia administrativa tem caráter predominantemente preventivo, enquanto a polícia judiciária tem caráter predominantemente repressivo. II. O poder de polícia é indelegável, somente podendo ser exercido pela Administração Pública direta. III. O poder de polícia sempre será exercido em caráter vinculado, nos estritos termos da lei que autoriza o seu exercício. Está correto o que se afirma em:',
+ 'I, apenas.',
+ 'II, apenas.',
+ 'III, apenas.',
+ 'II e III, apenas.',
+ NULL,
+ 'A',
+ 'Apenas o item I está correto: a polícia administrativa (incide sobre bens, direitos e atividades) tem caráter predominantemente preventivo, enquanto a polícia judiciária (incide sobre pessoas, na apuração de infrações penais) tem caráter predominantemente repressivo. O item II é falso porque, segundo entendimento consolidado da doutrina e do STF, os atos MATERIAIS e de mera fiscalização do ciclo de polícia podem ser delegados a pessoas jurídicas de direito privado integrantes da Administração Indireta — sendo indelegáveis a particulares apenas as fases de ordem (edição de normas) e de sanção (juízo de coerção). O item III é falso porque o poder de polícia pode ser exercido tanto de forma vinculada quanto discricionária, a depender da margem de liberdade que a lei conferir ao agente no caso concreto.\n\n📜 Fundamento legal vigente: CTN, art. 78, parágrafo único, que ressalva expressamente a hipótese de o poder de polícia recair sobre "atividade que a lei tenha como discricionária" — confirmando que nem todo poder de polícia é vinculado. Sobre a delegabilidade de atos materiais de fiscalização a pessoas jurídicas de direito privado da Administração Indireta, ver jurisprudência do STF (RE 633.782, Tema 532 de repercussão geral).',
+ 'CTN, art. 78; STF, RE 633.782 (Tema 532)',
+ 'dificil'),
+
+-- Q14: Poder-dever (Di Pietro)
+(@cat_da07,
+ 'O poder é um instrumento indispensável para que o Estado atinja as suas finalidades. Em conformidade com o entendimento de DI PIETRO, temos que os poderes:',
+ 'São renunciáveis.',
+ 'São irrenunciáveis.',
+ 'Podem ser exercidos além dos limites da lei, por serem titulados na realidade como "poder-dever".',
+ 'São irrenunciáveis, exceto quando o Estado for acionado por calamidade pública.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. Para Maria Sylvia Zanella Di Pietro, os poderes administrativos (vinculado, discricionário, hierárquico, disciplinar, regulamentar e de polícia) não são meras faculdades do administrador, mas verdadeiros "poderes-deveres" conferidos para a consecução do interesse público — por isso são irrenunciáveis: o agente não pode deixar de exercê-los quando a lei exige, nem abrir mão deles em proveito próprio ou de terceiros. As alternativas A, C e D contrariam essa premissa doutrinária básica.\n\n📜 Fundamento legal vigente: trata-se de conceito doutrinário consolidado (Maria Sylvia Zanella Di Pietro, "Direito Administrativo"), decorrente da principiologia da indisponibilidade do interesse público ligada ao art. 37, caput, da CF/88, sem correspondência em artigo de lei que defina expressamente a expressão "poder-dever" — a nomenclatura é construção da doutrina administrativista.',
+ 'Doutrina (Di Pietro); CF/88, art. 37, caput (indisponibilidade do interesse público)',
+ 'medio'),
+
+-- Q15: Poder discricionário
+(@cat_da07,
+ 'Um dos poderes do administrador público é aquele pelo qual possui uma razoável liberdade de atuação, agindo de acordo com liberdade de escolha de sua conveniência, oportunidade e conteúdo. O nome desse poder é:',
+ 'Hierárquico.',
+ 'Vinculado.',
+ 'Discricionário.',
+ 'Disciplinar.',
+ NULL,
+ 'C',
+ 'A alternativa C está correta. O Poder Discricionário é aquele em que a própria lei confere ao administrador uma margem de liberdade para decidir, no caso concreto, sobre a conveniência, a oportunidade e, por vezes, o conteúdo do ato a ser praticado — sempre dentro dos limites legais, sob pena de configurar arbitrariedade. As demais alternativas descrevem poderes distintos: o hierárquico (organização interna e subordinação), o vinculado (ausência de margem de escolha) e o disciplinar (apuração de infrações funcionais).\n\n📜 Fundamento legal vigente: trata-se de conceito doutrinário fundado no princípio da legalidade (CF/88, art. 37, caput) — a lei, ao deixar de esgotar previamente todos os elementos do ato, atribui ao administrador a discricionariedade dentro dos limites por ela fixados (diferente de arbitrariedade, que extrapola esses limites).',
+ 'CF/88, art. 37, caput (doutrina — discricionariedade nos limites da lei)',
+ 'facil'),
+
+-- Q16: Poder hierárquico — fiscalizar, delegar, avocar
+(@cat_da07,
+ 'O dever de fiscalizar os atos de seus subordinados, anulando-os se ilegais, ou revogando-os se forem inconvenientes ou inoportunos, bem como de delegar e avocar funções, derivam do poder:',
+ 'Normativo.',
+ 'Hierárquico.',
+ 'Disciplinar.',
+ 'Regulamentar.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. O Poder Hierárquico é a fonte das prerrogativas de comando, organização, fiscalização e revisão dos atos dos subordinados (anulação por ilegalidade ou revogação por inconveniência/inoportunidade), além de fundamentar os institutos da delegação e da avocação de competência dentro da estrutura hierarquizada da Administração. As demais alternativas descrevem outros poderes: normativo/regulamentar (edição de atos gerais e abstratos) e disciplinar (apuração e punição de infrações funcionais).\n\n📜 Fundamento legal vigente: Lei nº 9.784/1999, art. 11 (a competência é irrenunciável, "salvo os casos de delegação e avocação legalmente admitidos"), art. 12 (delegação de competência) e art. 15 (avocação, em caráter excepcional, de competência de órgão hierarquicamente inferior); e Súmula 473/STF (anulação de atos ilegais e revogação por conveniência/oportunidade).',
+ 'Lei 9.784/1999, arts. 11, 12 e 15; Súmula 473/STF',
+ 'medio'),
+
+-- Q17: Poder de polícia — taxa
+(@cat_da07,
+ 'A respeito dos poderes administrativos, é correto afirmar que:',
+ 'O poder normativo corresponde à competência de que dispõe o Chefe do Poder Executivo para submeter à apreciação do Poder Legislativo projetos de lei.',
+ 'O poder hierárquico pode se manifestar tanto dentro de uma mesma pessoa jurídica, como entre pessoas jurídicas distintas.',
+ 'A penalidade de multa imposta ao particular por estacionar em local proibido é expressão do poder disciplinar.',
+ 'O poder de polícia é aquele por meio do qual a Administração condiciona a liberdade e a propriedade dos indivíduos, podendo ensejar a cobrança de taxa.',
+ NULL,
+ 'D',
+ 'A alternativa D está correta. O poder de polícia fundamenta a imposição de limites e condicionamentos ao exercício de direitos individuais (liberdade e propriedade) em prol da coletividade, e sua atividade de fiscalização pode legitimar a cobrança da chamada taxa de polícia. A alternativa A confunde poder normativo com a iniciativa legislativa. A alternativa B está incorreta porque o poder hierárquico, por definição, pressupõe subordinação dentro da MESMA pessoa jurídica (estrutura interna), não se manifestando entre entidades distintas da Administração Indireta (que se relacionam por vinculação/tutela, não hierarquia). A alternativa C está incorreta: multa de trânsito aplicada a particular é exercício do poder de polícia, e não do poder disciplinar (este último exige vínculo jurídico especial de sujeição, como o de servidor público).\n\n📜 Fundamento legal vigente: CTN, art. 77 (taxas têm como fato gerador o exercício regular do poder de polícia) e art. 78 (definição de poder de polícia como atividade que, "limitando ou disciplinando direito, interêsse ou liberdade", regula a prática de ato em razão do interesse público).',
+ 'CTN, arts. 77 e 78',
+ 'medio'),
+
+-- Q18: Interdição de estádio — poder de polícia
+(@cat_da07,
+ 'Com base em determinada lei, o Comandante do CPC compareceu ao Estádio de Futebol de Boa Vista/RR e, constatando diversas violações a normas sanitárias e de segurança, promoveu a interdição do estádio. Nessa situação hipotética, verifica-se uma característica própria:',
+ 'Do poder hierárquico, com base no princípio da supremacia do interesse público.',
+ 'Do poder regulamentar, pois houve uma regulação da atividade empresarial.',
+ 'Do poder disciplinar, pois o ato aplicou uma penalidade ao particular.',
+ 'Do poder de polícia, pois limitou uma atividade de um particular.',
+ NULL,
+ 'D',
+ 'A alternativa D está correta. A interdição de um estabelecimento (ou evento) fundamentada no descumprimento de normas sanitárias e de segurança é manifestação clássica do poder de polícia, na fase de fiscalização e sanção do ciclo de polícia, condicionando o exercício de atividade privada em razão do interesse público. Não se trata de poder hierárquico (que pressupõe subordinação interna à Administração), poder regulamentar (edição de normas gerais e abstratas, e não ato concreto de interdição) ou poder disciplinar (que exige vínculo jurídico especial com o agente público, inexistente entre o Estado e o particular gestor do estádio).\n\n📜 Fundamento legal vigente: CTN, art. 78, caput — o poder de polícia abrange justamente o condicionamento de atividades em razão de interesse público concernente "à segurança, à higiene, à ordem (...) à tranqüilidade pública".',
+ 'CTN, art. 78',
+ 'facil'),
+
+-- Q19: Poder hierárquico — subordinação
+(@cat_da07,
+ 'A competência que se reconhece ao Executivo para distribuir e escalonar as funções de seus órgãos e para ordenar e rever a atuação de seus agentes, estabelecendo uma relação de subordinação entre os servidores de seu quadro de pessoal, recebe a denominação de poder:',
+ 'Discricionário.',
+ 'Normativo.',
+ 'Hierárquico.',
+ 'Disciplinar e vinculado.',
+ NULL,
+ 'C',
+ 'A alternativa C está correta. A estruturação interna dos órgãos, a distribuição e o escalonamento de funções, bem como a definição de relações de subordinação entre os agentes de um mesmo quadro de pessoal, constituem a essência do Poder Hierárquico. As demais alternativas descrevem outros institutos: discricionariedade (margem de escolha em decisões), poder normativo (edição de atos gerais e abstratos) e poder disciplinar (apuração de infrações funcionais, que não se confunde com "vinculado", classificação distinta relativa à margem de liberdade do agente).\n\n📜 Fundamento legal vigente: Lei nº 9.784/1999, art. 11, que reconhece a estrutura de competências dos órgãos administrativos, exercida "pelos órgãos administrativos a que foi atribuída como própria", base normativa da organização hierárquica da Administração Pública.',
+ 'Lei 9.784/1999, art. 11',
+ 'medio'),
+
+-- Q20: Poder normativo — Portaria do Comandante-Geral
+(@cat_da07,
+ 'O Comandante da PMRR editou a Portaria nº 024/2026-PMRR, que estabelece o horário de expediente e a jornada de expediente administrativo nas OPM sediadas na capital e no interior do estado. De acordo com a doutrina de Direito Administrativo, o citado ato praticado pelo CG está calcado no chamado poder:',
+ 'De polícia administrativa, que disciplina a atividade dos servidores públicos.',
+ 'De discricionariedade, que permite ao Comandante Geral inovar no ordenamento jurídico.',
+ 'Disciplinar, que autoriza o Presidente do Tribunal a estabelecer rotinas administrativas internas.',
+ 'Normativo, que visa regulamentar situação de caráter geral e abstrato.',
+ NULL,
+ 'D',
+ 'A alternativa D está correta. Ao editar portaria estabelecendo, em caráter geral e abstrato, o horário de expediente e a jornada administrativa das OPM, o Comandante-Geral exerce o poder normativo (regulamentar em sentido amplo), que consiste na edição de atos gerais e abstratos voltados à organização do serviço e à fiel execução da lei, sem inovar originariamente no ordenamento jurídico — o que é vedado a atos infralegais. Não se trata de poder de polícia (que incide sobre direitos de terceiros/particulares, não sobre a própria organização interna do serviço), de discricionariedade autônoma (que não é "poder" apto a inovar no ordenamento) nem de poder disciplinar (a alternativa C, além disso, menciona equivocadamente "Presidente do Tribunal", estranho ao caso).\n\n📜 Fundamento legal vigente: o poder normativo interno de organização do serviço tem paralelo doutrinário no poder regulamentar do Chefe do Executivo (CF/88, art. 84, IV — decretos e regulamentos para fiel execução da lei); no âmbito da PMRR, a competência do Comandante-Geral para editar atos normativos de organização administrativa interna decorre da legislação estadual de organização básica da corporação (LC nº 194/2012 — Estatuto dos Militares de Roraima).',
+ 'CF/88, art. 84, IV (paralelo doutrinário); LC 194/2012',
+ 'medio'),
+
+-- Q21: Particulares em colaboração
+(@cat_da07,
+ 'Acerca da classificação dos agentes públicos e considerando a natureza do vínculo mantido com o Estado, assinale a alternativa que define corretamente os particulares em colaboração:',
+ 'São agentes que possuem vínculo profissional permanente e estatutário, exercendo atividades típicas de Estado.',
+ 'São pessoas físicas que exercem função pública de modo transitório ou episódico, sem vínculo empregatício fixo, como ocorre com mesários e jurados.',
+ 'São agentes políticos investidos em cargos de direção superior mediante eleição ou nomeação política.',
+ 'São servidores regidos pela CLT que ocupam emprego público em empresas públicas ou sociedades de economia mista.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. Os particulares em colaboração são agentes que auxiliam o Estado no exercício de função pública de forma transitória, episódica ou gratuita, sem perder sua condição de particular e sem vínculo empregatício permanente com a Administração — são exemplos os mesários, jurados, convocados para o serviço militar e recrutados para serviços obrigatórios por lei (júri, eleições). As demais alternativas descrevem outras categorias de agentes públicos: servidores estatutários (A), agentes políticos (C) e empregados públicos (D).\n\n📜 Fundamento legal vigente: trata-se de classificação doutrinária dos agentes públicos (Maria Sylvia Di Pietro / Hely Lopes Meirelles), sem artigo de lei específico que defina "particulares em colaboração" com esse nome — mas o conceito amplo de agente público, para fins penais, que abrange essa categoria episódica, está no Código Penal, art. 327: "Considera-se funcionário público, para os efeitos penais, quem, embora transitoriamente ou sem remuneração, exerce cargo, emprego ou função pública."',
+ 'Doutrina administrativista; CP, art. 327 (por analogia)',
+ 'medio'),
+
+-- Q22: Responsabilidade civil do Estado — risco administrativo
+(@cat_da07,
+ 'A responsabilidade civil do Estado no Brasil fundamenta-se na Teoria do Risco Administrativo. Com base nessa doutrina e no Art. 37, §6º da CF/88, são pressupostos indispensáveis para a configuração do dever de indenizar:',
+ 'Conduta do agente (na qualidade de agente público), dano e nexo causal, sendo desnecessária a prova de dolo ou culpa.',
+ 'Culpa exclusiva do agente, dano moral comprovado e ausência de nexo causal.',
+ 'Comprovação de dolo do servidor e insuficiência patrimonial do Estado para arcar com o prejuízo.',
+ 'Conduta omissiva genérica e comprovação de que o Estado não possuía recursos para evitar o evento.',
+ NULL,
+ 'A',
+ 'A alternativa A está correta. A responsabilidade civil objetiva do Estado, fundada na Teoria do Risco Administrativo, exige apenas o trinômio conduta (de agente público, nessa qualidade) + dano + nexo de causalidade — dispensando-se a prova de dolo ou culpa do agente para a responsabilização do Estado (o dolo/culpa só é relevante para a ação de regresso contra o servidor). As alternativas B, C e D descrevem elementos incompatíveis com a responsabilidade objetiva (exigência de culpa exclusiva, dolo do servidor ou "insuficiência patrimonial" como requisito, que não existem no texto constitucional).\n\n📜 Fundamento legal vigente: CF/88, art. 37, §6º: "As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos responderão pelos danos que seus agentes, nessa qualidade, causarem a terceiros, assegurado o direito de regresso contra o responsável nos casos de dolo ou culpa." O dispositivo consagra a responsabilidade objetiva do Estado (dispensa de dolo/culpa) e a responsabilidade subjetiva do agente na ação regressiva.',
+ 'CF/88, art. 37, §6º',
+ 'medio'),
+
+-- Q23: Imperatividade x Autoexecutoriedade
+(@cat_da07,
+ 'No estudo dos atributos dos atos administrativos, é imperativo distinguir a Imperatividade da Autoexecutoriedade. Sobre o tema, assinale a alternativa correta:',
+ 'A imperatividade refere-se à execução material do ato pelo Estado, enquanto a autoexecutoriedade exige sempre concordância prévia do particular.',
+ 'A imperatividade relaciona-se à imposição da vontade estatal ao administrado (unilateralidade), enquanto a autoexecutoriedade refere-se à possibilidade de execução direta sem autorização judicial prévia.',
+ 'Ambos os atributos são obrigatórios em todos os atos administrativos, inclusive nos atos de consentimento como a licença.',
+ 'A imperatividade decorre da presunção de veracidade, enquanto a autoexecutoriedade depende de notificação judicial obrigatória.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. A Imperatividade (ou coercibilidade) relaciona-se ao COMANDO — é a imposição unilateral da vontade estatal ao administrado, independentemente de sua concordância. Já a Autoexecutoriedade relaciona-se à AÇÃO — é a possibilidade de a própria Administração executar materialmente suas decisões, pelos seus próprios meios, sem necessidade de prévia autorização do Poder Judiciário. As alternativas A, C e D invertem ou distorcem esses conceitos: a alternativa A inverte os focos (comando x execução); a alternativa C erra ao generalizar, pois atos de consentimento (como a licença) não possuem imperatividade, já que dependem da provocação/interesse do particular; a alternativa D inventa um requisito ("notificação judicial obrigatória") incompatível com a própria definição de autoexecutoriedade.\n\n📜 Fundamento legal vigente: trata-se de classificação doutrinária consolidada dos atributos do ato administrativo (imperatividade, presunção de legitimidade/veracidade, autoexecutoriedade e tipicidade), sem correspondência em artigo de lei que os defina de forma unificada — a autoexecutoriedade encontra fundamento indireto no poder de polícia (CTN, art. 78) e a imperatividade decorre da supremacia do interesse público, princípio implícito ligado ao regime jurídico-administrativo do art. 37, caput, da CF/88.',
+ 'Doutrina (atributos do ato administrativo); CTN, art. 78 (fundamento indireto da autoexecutoriedade)',
+ 'dificil'),
+
+-- Q24: Desvio de finalidade — remoção por vingança
+(@cat_da07,
+ 'Considere que um oficial superior, possuindo competência para transferir subordinados, decide remover um sargento para uma localidade remota apenas por vingança pessoal, embora o ato esteja formalmente motivado por "interesse do serviço". À luz dos elementos do ato administrativo (COMFFORM), tal ato é nulo por vício de:',
+ 'Forma, pois a remoção deveria ser publicada em Diário Oficial.',
+ 'Competência, pois o superior não detém poder para movimentar pessoal em nenhuma hipótese.',
+ 'Finalidade, configurando desvio de finalidade, visto que o interesse público foi preterido em favor de um interesse privado.',
+ 'Objeto, pois a remoção de servidores é um ato proibido pelo ordenamento jurídico.',
+ NULL,
+ 'C',
+ 'A alternativa C está correta. O vício de Finalidade — na modalidade desvio de finalidade (ou desvio de poder) — ocorre quando o agente, mesmo dentro de sua competência legal e observando a forma devida, pratica o ato visando a um fim diverso daquele que a norma de competência almeja (interesse público), perseguindo interesse pessoal, como vingança. A motivação formal ("interesse do serviço") é apenas aparente, mascarando o real motivo ilícito. A alternativa A está incorreta porque o vício de forma trata da omissão ou irregularidade das formalidades do ato, não do motivo real da remoção. A alternativa B é falsa, pois o oficial de fato detém competência legal para remover subordinados — o problema não está na competência em si, mas no fim perseguido. A alternativa D é falsa, pois a remoção de servidores é ato lícito e comum na Administração; o vício está no desvio da finalidade, não no objeto do ato.\n\n📜 Fundamento legal vigente: Lei nº 4.717/1965 (Lei da Ação Popular), art. 2º, alínea "e", e parágrafo único, alínea "e": "o desvio de finalidade se verifica quando o agente pratica o ato visando a fim diverso daquele previsto, explícita ou implicitamente, na regra de competência." Embora editada para disciplinar a ação popular, essa é a definição legal de referência utilizada pela doutrina para os vícios do ato administrativo, inclusive fora do contexto da ação popular.',
+ 'Lei 4.717/1965 (Lei da Ação Popular), art. 2º, "e"',
+ 'dificil'),
+
+-- Q25: Excesso de Poder
+(@cat_da07,
+ 'O abuso de poder é uma patologia do ato administrativo que se manifesta de duas formas distintas. Assinale a opção que descreve corretamente o Excesso de Poder:',
+ 'Ocorre quando o agente busca um fim diverso daquele previsto na norma, embora atue dentro de sua competência.',
+ 'Caracteriza-se quando o agente atua fora dos limites de sua competência legal ou pratica ato que a lei não lhe conferiu.',
+ 'É sinônimo de uso regular do poder, desde que o resultado final seja benéfico para a Administração.',
+ 'Manifesta-se exclusivamente em atos vinculados, sendo impossível sua ocorrência em atos discricionários.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. O Excesso de Poder é a modalidade de abuso de poder que atinge o elemento Competência: o agente extrapola os limites daquilo que a lei lhe permitiu fazer, atuando fora de sua esfera de atribuições ou de forma que a lei sequer autorizou. A alternativa A descreve, na verdade, o desvio de finalidade (outra modalidade de abuso de poder, que atinge o elemento Finalidade, e não a Competência). A alternativa C nega a própria natureza patológica/ilícita do excesso de poder. A alternativa D é falsa, pois o excesso de poder pode ocorrer tanto em atos vinculados quanto em atos discricionários, sempre que o agente ultrapassar sua competência legal.\n\n📜 Fundamento legal vigente: Lei nº 4.717/1965 (Lei da Ação Popular), art. 2º, alínea "a", e parágrafo único, alínea "a": "a incompetência fica caracterizada quando o ato não se incluir nas atribuições legais do agente que o praticou." O excesso de poder corresponde, tecnicamente, ao vício de incompetência definido nesse dispositivo.',
+ 'Lei 4.717/1965 (Lei da Ação Popular), art. 2º, "a"',
+ 'medio'),
+
+-- Q26: Fontes secundárias — costumes administrativos
+(@cat_da07,
+ 'As fontes do Direito Administrativo são os meios pelos quais as normas se manifestam. Sobre as fontes secundárias, como a doutrina e os costumes, é correto afirmar:',
+ 'Os costumes administrativos são práticas reiteradas e aceitas, podendo contrariar a lei em nome da eficiência.',
+ 'A doutrina é fonte direta e obrigatória, vinculando as decisões dos tribunais de forma absoluta.',
+ 'Os costumes administrativos são fontes secundárias que consistem em práticas reiteradas e lícitas, compatíveis com o interesse público.',
+ 'A lei é considerada fonte secundária, pois deve sempre ceder espaço à jurisprudência dominante.',
+ NULL,
+ 'C',
+ 'A alternativa C está correta. Os Costumes Administrativos são fontes secundárias do Direito Administrativo, consistindo em práticas reiteradas, uniformes e licitamente aceitas pela Administração e pelos administrados, desde que compatíveis com a lei e com o interesse público — jamais podendo contrariar a legislação vigente (o que descaracterizaria sua licitude). A alternativa A está incorreta justamente por admitir a contrariedade à lei. A alternativa B superestima o papel da doutrina, que é fonte indireta/secundária, sem força vinculante obrigatória sobre os tribunais (diferente de súmulas vinculantes, por exemplo). A alternativa D inverte a hierarquia das fontes: a lei é fonte primária (principal) do Direito Administrativo, e não secundária.\n\n📜 Fundamento legal vigente: trata-se de classificação doutrinária das fontes do Direito Administrativo (fontes primárias: lei, em sentido amplo; fontes secundárias: doutrina, jurisprudência não vinculante e costumes), sem correspondência em dispositivo legal único que as discipline de forma sistemática — decorre da hierarquia normativa fixada pela CF/88 (arts. 59 e seguintes, processo legislativo) e do princípio da legalidade (art. 37, caput), que veda a substituição da lei pelo costume contra legem.',
+ 'Doutrina (fontes do Direito Administrativo); CF/88, art. 37, caput (legalidade)',
+ 'medio'),
+
+-- Q27: Controle judicial — mérito administrativo
+(@cat_da07,
+ 'O controle da Administração Pública assegura a observância da legalidade e do interesse público. Sobre o controle exercido pelo Poder Judiciário, assinale a alternativa correta:',
+ 'O Judiciário pode revogar atos administrativos convenientes, substituindo o juízo de mérito do administrador.',
+ 'O controle judicial restringe-se exclusivamente aos atos vinculados, sendo vedada a análise de legalidade em atos discricionários.',
+ 'O Judiciário pode anular atos administrativos eivados de ilegalidade, mas não lhe cabe o controle do mérito administrativo (conveniência e oportunidade).',
+ 'O controle judicial é apenas prévio e obrigatório para toda e qualquer contratação pública.',
+ NULL,
+ 'C',
+ 'A alternativa C está correta. O Poder Judiciário exerce controle de legalidade (e de legitimidade, em sentido amplo) sobre os atos da Administração Pública, podendo anular atos ilegais — mas não lhe é dado revogar atos administrativos válidos por razões de conveniência e oportunidade, pois isso invadiria o mérito administrativo, reservado ao juízo discricionário do próprio administrador. A alternativa A descreve exatamente essa invasão vedada. A alternativa B é falsa: mesmo em atos discricionários, o Judiciário pode e deve controlar a legalidade dos elementos vinculados (competência, forma, finalidade) e a compatibilidade com princípios como razoabilidade e proporcionalidade — o que não pode é substituir o mérito. A alternativa D inventa uma exigência de controle "prévio e obrigatório" incompatível com o sistema de controle judicial repressivo (a posteriori), regra geral no Brasil.\n\n📜 Fundamento legal vigente: CF/88, art. 5º, XXXV (princípio da inafastabilidade da jurisdição: "a lei não excluirá da apreciação do Poder Judiciário lesão ou ameaça a direito"), combinado com a construção jurisprudencial consolidada na Súmula 473/STF, que ressalva "em todos os casos, a apreciação judicial" apenas quanto à legalidade dos atos anulados ou revogados pela própria Administração.',
+ 'CF/88, art. 5º, XXXV; Súmula 473/STF',
+ 'medio'),
+
+-- Q28: Indisponibilidade do interesse público
+(@cat_da07,
+ 'O regime jurídico-administrativo fundamenta-se em princípios que equilibram prerrogativas e sujeições. O princípio implícito que estabelece que o gestor não é proprietário do interesse público, devendo gerir os bens coletivos nos limites da lei, denomina-se:',
+ 'Supremacia do Interesse Público.',
+ 'Indisponibilidade do Interesse Público.',
+ 'Autotutela Administrativa.',
+ 'Publicidade Institucional.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. O princípio da Indisponibilidade do Interesse Público ensina que os bens, direitos e interesses geridos pela Administração pertencem à coletividade, e não ao gestor público — que atua apenas como administrador, sem poder de disposição livre sobre o patrimônio público, devendo agir estritamente nos limites que a lei autoriza. A Supremacia do Interesse Público (alternativa A) é o princípio "irmão" que trata da prevalência do interesse coletivo sobre o particular em caso de conflito, mas não descreve diretamente a vedação à disposição livre pelo gestor. A Autotutela (alternativa C) trata da revisão dos próprios atos pela Administração. A "Publicidade Institucional" (alternativa D) não é o conceito descrito no enunciado.\n\n📜 Fundamento legal vigente: trata-se de princípio implícito do regime jurídico-administrativo (doutrina de Celso Antônio Bandeira de Mello), decorrente logicamente do art. 37, caput, da CF/88 — a subordinação da Administração à legalidade estrita pressupõe que o gestor não tem disponibilidade sobre o interesse público, apenas o dever de geri-lo conforme a lei.',
+ 'CF/88, art. 37, caput (decorrência doutrinária); Doutrina (Celso Antônio Bandeira de Mello)',
+ 'medio'),
+
+-- Q29: Independência das instâncias
+(@cat_da07,
+ 'A responsabilidade funcional do servidor público é pautada pela independência das instâncias. De acordo com o material didático, a sentença penal absolutória somente impedirá a punição administrativa do servidor quando:',
+ 'A absolvição ocorrer por falta de provas para a condenação.',
+ 'O juiz penal reconhecer a prescrição da pretensão punitiva.',
+ 'A sentença negar categoricamente a existência do fato ou a autoria do crime.',
+ 'O servidor for absolvido por clemência do júri popular.',
+ NULL,
+ 'C',
+ 'A alternativa C está correta. Em regra, as instâncias penal, civil e administrativa são independentes entre si, podendo um mesmo fato gerar responsabilizações distintas em cada esfera. A única hipótese em que a absolvição penal vincula e afasta automaticamente a responsabilidade administrativa é quando a sentença criminal nega categoricamente a existência do fato ou a autoria do agente — pois, nesses casos, não há mais base fática para qualquer responsabilização. A absolvição por falta de provas (alternativa A) ou pelo reconhecimento de prescrição penal (alternativa B) NÃO impede a instância administrativa de prosseguir e até punir o servidor, pois não afirmam a inexistência do fato. A alternativa D descreve hipótese estranha ao regime de responsabilidade de servidores estatutários.\n\n📜 Fundamento legal vigente: Lei nº 8.112/1990 (Regime Jurídico dos Servidores Públicos Civis da União — usada por analogia doutrinária a estatutos estaduais), art. 126: "A responsabilidade administrativa do servidor será afastada no caso de absolvição criminal que negue a existência do fato ou sua autoria." Correlato: Código de Processo Penal, art. 66, que também condiciona a repercussão civil da absolvição penal ao reconhecimento categórico da inexistência material do fato.',
+ 'Lei 8.112/1990, art. 126 (paralelo doutrinário); CPP, art. 66',
+ 'dificil'),
+
+-- Q30: Delegabilidade do poder de polícia
+(@cat_da07,
+ 'O Poder de Polícia manifesta-se através de um ciclo de atuação. Sobre a delegabilidade deste poder, o entendimento doutrinário atual permite:',
+ 'A delegação total do poder de polícia, inclusive atos sancionatórios, a empresas privadas com fins lucrativos.',
+ 'A delegação de atos materiais e acessórios (como a fiscalização técnica) a entidades da Administração Indireta.',
+ 'Que apenas o Poder Legislativo exerça a fase de sanção do ciclo de polícia.',
+ 'A delegação da fase de "ordem de polícia" a particulares em colaboração por meio de contrato verbal.',
+ NULL,
+ 'B',
+ 'A alternativa B está correta. O ciclo de polícia compreende quatro fases: ordem (edição da norma), consentimento (atos de anuência prévia, como licenças), fiscalização e sanção. Segundo o entendimento consolidado pelo STF, apenas os atos materiais e acessórios (como a fiscalização técnica) podem ser delegados a entidades da Administração Indireta com personalidade jurídica de direito público ou, em certas condições, de direito privado, sob regime não concorrencial — permanecendo indelegáveis a particulares as fases de ordem (juízo normativo) e de sanção (juízo de coerção), que exigem o exercício de poder de autoridade típico de Estado. A alternativa A viola frontalmente esse entendimento ao admitir delegação total, inclusive sancionatória, a empresas privadas com fins lucrativos. A alternativa C inventa uma exclusividade do Poder Legislativo para a fase de sanção, que na verdade cabe ao Poder Executivo. A alternativa D é inadmissível tanto pela exigência de forma (a delegação de atos de polícia não se faz por "contrato verbal") quanto pela indelegabilidade da fase de ordem a particulares em colaboração.\n\n📜 Fundamento legal vigente: CTN, art. 78 (definição de poder de polícia); jurisprudência do STF sobre a delegabilidade dos atos materiais e de fiscalização do poder de polícia a pessoas jurídicas de direito privado integrantes da Administração Indireta (RE 633.782, Tema 532 de repercussão geral), mantendo-se indelegáveis as fases de ordem e sanção.',
+ 'CTN, art. 78; STF, RE 633.782 (Tema 532)',
+ 'dificil');
+
+SET foreign_key_checks = 1;
