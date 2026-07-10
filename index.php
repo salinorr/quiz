@@ -221,12 +221,24 @@ if (count($openSessions) === 1 && empty($_SESSION['sessao_id'])) {
 // ── Categorias para tela inicial ─────────────────────────────
 function getCategorias(): array {
     $db = getDB();
-    return $db->query(
+    $cats = $db->query(
         "SELECT c.id, c.nome, c.descricao, COUNT(q.id) AS total
          FROM categorias c
          LEFT JOIN questoes q ON q.categoria_id = c.id AND q.ativa = 1
-         GROUP BY c.id ORDER BY c.id"
+         GROUP BY c.id"
     )->fetchAll();
+    // Ordena para exibicao: categorias legadas (sem "CHO") primeiro, na ordem de
+    // criacao; depois as disciplinas do CHO pela numeracao (CHO 01, 02, ... 20),
+    // e nao pela ordem de id (que ficou fora de sequencia). Feito em PHP porque o
+    // MySQL da hospedagem e anterior ao 8.0 (sem REGEXP_SUBSTR).
+    usort($cats, function ($a, $b) {
+        $numA = preg_match('/CHO\s*0*(\d+)/u', $a['nome'], $mA) ? (int) $mA[1] : null;
+        $numB = preg_match('/CHO\s*0*(\d+)/u', $b['nome'], $mB) ? (int) $mB[1] : null;
+        $keyA = [$numA === null ? 0 : 1, $numA ?? (int) $a['id'], (int) $a['id']];
+        $keyB = [$numB === null ? 0 : 1, $numB ?? (int) $b['id'], (int) $b['id']];
+        return $keyA <=> $keyB;
+    });
+    return $cats;
 }
 
 // ── Próximo número de tentativa ──────────────────────────────
