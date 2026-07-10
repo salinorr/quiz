@@ -610,12 +610,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($acao === 'finalizar') {
         if (!empty($_SESSION['sessao_id'])) {
             $db = getDB();
-            $db->prepare("UPDATE sessoes SET finalizado_em=NOW() WHERE id=?")->execute([$_SESSION['sessao_id']]);
+            $sessaoId = $_SESSION['sessao_id'];
+            $db->prepare("UPDATE sessoes SET finalizado_em=NOW() WHERE id=?")->execute([$sessaoId]);
             $stmt = $db->prepare("SELECT * FROM sessoes WHERE id=?");
-            $stmt->execute([$_SESSION['sessao_id']]);
+            $stmt->execute([$sessaoId]);
             $sessao = $stmt->fetch();
+
+            $stmtErros = $db->prepare(
+                "SELECT q.enunciado, q.opcao_a, q.opcao_b, q.opcao_c, q.opcao_d, q.opcao_e,
+                        r.resposta_dada, q.resposta_correta, q.explicacao, q.referencia_legal,
+                        c.nome AS categoria
+                 FROM respostas_usuario r
+                 JOIN questoes q ON q.id = r.questao_id
+                 JOIN categorias c ON c.id = q.categoria_id
+                 WHERE r.sessao_id = ? AND r.acertou = 0
+                 ORDER BY r.id ASC"
+            );
+            $stmtErros->execute([$sessaoId]);
+            $errosDetalhe = $stmtErros->fetchAll();
+
             unset($_SESSION['sessao_id'], $_SESSION['respondidas'], $_SESSION['categorias'], $_SESSION['questao_atual'], $_SESSION['tipo_sessao']);
-            echo json_encode(['sessao' => $sessao]);
+            echo json_encode(['sessao' => $sessao, 'erros_detalhe' => $errosDetalhe]);
         }
         exit;
     }
@@ -1818,6 +1833,7 @@ const MODO_ATUAL = <?= json_encode($modoAtual) ?>;
         <button class="btn btn-primary" onclick="reiniciar()">🔄 Novo Quiz</button>
         <a href="?p=historico" class="btn btn-outline">📋 Ver Histórico</a>
     </div>
+    <div id="res-revisao" style="display:none;margin-top:28px;text-align:left"></div>
 </div>
 
 <?php endif; ?>
@@ -2486,8 +2502,53 @@ async function finalizarQuiz() {
     document.getElementById('tela-resultado').style.display = 'block';
     const ph = document.getElementById('placar-header');
     if (ph) ph.style.display = 'none';
+    renderRevisaoErros(resp.erros_detalhe || []);
     window.scrollTo({ top:0, behavior:'smooth' });
     sessaoId = null;
+}
+
+function renderRevisaoErros(erros) {
+    const box = document.getElementById('res-revisao');
+    if (!box) return;
+    if (!erros.length) { box.style.display = 'none'; box.innerHTML = ''; return; }
+
+    const letras = ['a','b','c','d','e'];
+    let html = `<h3 style="color:var(--verde-md,#2e7d32);font-size:1.15rem;margin-bottom:12px">📝 Revise suas questões erradas (${erros.length})</h3>`;
+
+    erros.forEach((q, i) => {
+        const correta = (q.resposta_correta || '').toUpperCase();
+        const dada    = (q.resposta_dada || '').toUpperCase();
+        let alternativas = '';
+        letras.forEach(l => {
+            const texto = q['opcao_' + l];
+            if (texto === null || texto === undefined || texto === '') return;
+            const letra = l.toUpperCase();
+            let estilo = 'padding:6px 10px;border-radius:6px;margin-bottom:4px;font-size:.85rem';
+            let marcador = '';
+            if (letra === correta) {
+                estilo += ';background:#e8f5e9;color:#2e7d32;font-weight:700';
+                marcador = ' ✅';
+            } else if (letra === dada) {
+                estilo += ';background:#ffebee;color:#c62828;font-weight:700';
+                marcador = ' ❌';
+            }
+            alternativas += `<div style="${estilo}">${letra}) ${escHtml(texto)}${marcador}</div>`;
+        });
+
+        html += `
+        <div style="background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:16px;margin-bottom:14px">
+            <p style="font-size:.75rem;color:#888;margin-bottom:6px">${escHtml(q.categoria || '')}</p>
+            <p style="font-weight:700;margin-bottom:10px">${i + 1}. ${escHtml(q.enunciado || '')}</p>
+            ${alternativas}
+            <p style="margin-top:10px;font-size:.85rem"><strong>❌ Sua resposta:</strong> ${dada}) ${escHtml(q['opcao_' + dada.toLowerCase()] || '')}</p>
+            <p style="font-size:.85rem"><strong>✅ Resposta correta:</strong> ${correta}) ${escHtml(q['opcao_' + correta.toLowerCase()] || '')}</p>
+            ${q.explicacao ? `<p style="margin-top:10px;font-size:.82rem;color:#555;white-space:pre-line"><strong>📖 Explicação:</strong> ${escHtml(q.explicacao)}</p>` : ''}
+            ${q.referencia_legal ? `<p style="margin-top:6px;font-size:.78rem;color:#888"><strong>📌 Referência:</strong> ${escHtml(q.referencia_legal)}</p>` : ''}
+        </div>`;
+    });
+
+    box.innerHTML = html;
+    box.style.display = 'block';
 }
 
 function classificarTrofeu(pct) {
