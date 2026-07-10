@@ -25,3 +25,6 @@ jobs:
             **/.git*/**
             **/config.sample.php
             **/.env.example
+            **/*.sql
+            **/*.md
+            **/questoes_para_revisao.txt

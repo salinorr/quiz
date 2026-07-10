@@ -1,0 +1,27 @@
+# Bloqueia acesso HTTP direto a arquivos sensiveis que ficam na pasta do quiz.
+# O site (index.php) le tudo do banco de dados; estes arquivos servem apenas
+# para carga do banco (.sql) e documentacao interna (.md) -- nao devem ser
+# baixaveis pelos usuarios, pois os .sql contem os gabaritos das questoes.
+# As leis em .pdf continuam acessiveis (a pagina "Leis" as serve).
+
+# Apache 2.4+
+<IfModule mod_authz_core.c>
+    <FilesMatch "\.(sql|md|log)$">
+        Require all denied
+    </FilesMatch>
+    <FilesMatch "^(config\.php|config\.sample\.php|\.env.*)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# Apache 2.2 (hospedagem compartilhada antiga)
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.(sql|md|log)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+    <FilesMatch "^(config\.php|config\.sample\.php|\.env.*)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
