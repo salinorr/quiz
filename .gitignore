@@ -12,6 +12,11 @@ debug.php
 install.php
 install2.php
 
+# Export de questões com gabarito para revisão externa.
+# NUNCA commitar: a pasta inteira é publicada em public_html/quiz/ pelo deploy FTP,
+# e isso deixaria os gabaritos baixáveis por qualquer aluno.
+questoes_para_revisao.txt
+
 # Sistema
 .DS_Store
 Thumbs.db

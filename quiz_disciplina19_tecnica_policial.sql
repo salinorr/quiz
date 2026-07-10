@@ -1,0 +1,451 @@
+-- ============================================================
+-- QUIZ — Disciplina 19/20 do CHO: Técnica Policial Militar (Módulo Blitz Policial)
+-- 30 questões — doutrina técnico-operacional (POP de blitz policial) com dois
+--   pontos de contato legais pontuais
+-- Modo Quiz Livre (categoria sem a palavra "prova" no nome)
+-- Base doutrinária: "Técnica Policial Militar — Módulo Blitz Policial", Academia
+--   Coronel Walterler — conceitos, níveis (Educativo/Preventivo/Repressivo) e
+--   categorias (1 a 3) de blitz; princípio da universalidade; planejamento,
+--   logística e funções (Comandante, Selecionador, Segurança, Vistoriador,
+--   Registro); montagem do dispositivo (Box de Abordagem e Box de Registro);
+--   estados de prontidão mental (branco/amarelo/laranja/vermelho); busca
+--   pessoal e veicular; uso do etilômetro; uso da força e resistência à
+--   abordagem; verbalização, evasão e casos específicos (autoridades, tentativa
+--   de suborno, insulfilm, motocicletas, barreira linguística, menores)
+-- Observação sobre a fonte: disciplina majoritariamente doutrinária (POP),
+--   sem lei pública numerada correspondente para a maior parte das questões.
+--   Há, contudo, dois pontos de contato legais pontuais, tratados com precisão
+--   técnica nas questões 16-19:
+--   (a) Busca pessoal/veicular (fundada suspeita) — o fundamento correto é o
+--       Código de Processo Penal comum (Decreto-Lei 3.689/1941), arts. 240
+--       ("A busca poderá ser domiciliar ou pessoal"), 244 (busca pessoal
+--       independe de mandado em caso de prisão, fundada suspeita de posse de
+--       arma/objeto de crime, ou no curso de busca domiciliar) e 249 (busca em
+--       mulher, por outra mulher, salvo prejuízo à diligência) — já mapeados
+--       e documentados na Seção 10 ("Aspectos Jurídicos da Abordagem Policial")
+--       da base de conhecimento de legislação do projeto, e já baixados em
+--       legislacao/CPP_Decreto_Lei_3689_1941.pdf. Por precisão técnica, optou-se
+--       por citar o CPP comum (e não o CPPM — Código de Processo Penal Militar,
+--       Decreto-Lei 1.002/1969), já que a busca em blitz de trânsito trata de
+--       ilícitos comuns (não de infrações penais militares), e o próprio
+--       artigo referido (240 e seguintes, "busca pessoal/domiciliar") só
+--       corresponde à numeração do CPP comum, não do CPPM.
+--   (b) Etilômetro/embriaguez ao volante — Código de Trânsito Brasileiro
+--       (Lei nº 9.503/1997): art. 165 (infração administrativa gravíssima,
+--       caracterizada a partir de 0,05 mg/L de álcool por litro de ar
+--       alveolar, descontado o erro máximo admissível do aparelho) e art. 306
+--       (crime de embriaguez ao volante, caracterizado a partir de 0,3 mg/L de
+--       ar alveolar ou 6 dg/L de sangue, ou por sinais de alteração
+--       psicomotora); a margem/erro máximo admissível do etilômetro (0,04
+--       mg/L) está prevista na Resolução CONTRAN nº 432/2013 (Anexo I —
+--       Tabela de Valores Referenciais para Etilômetro), com base na Portaria
+--       INMETRO nº 006/2002.
+-- ============================================================
+SET NAMES utf8mb4;
+
+-- Cria a categoria so se ainda nao existir. NAO usar INSERT IGNORE: categorias.nome
+-- nao tem indice UNIQUE, entao o IGNORE nao dedupe e cria uma categoria duplicada vazia.
+INSERT INTO categorias (nome, descricao)
+SELECT 'Técnica Policial Militar — CHO 19', 'Disciplina 19/20 do CHO — Módulo Blitz Policial: níveis e categorias, planejamento, funções, montagem do dispositivo, prontidão mental, busca pessoal/veicular, etilômetro, uso da força, verbalização e casos específicos'
+  FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM categorias WHERE nome = 'Técnica Policial Militar — CHO 19');
+
+SET @cat_tpm19 = (SELECT id FROM categorias WHERE nome = 'Técnica Policial Militar — CHO 19' ORDER BY id LIMIT 1);
+
+-- Aposenta questoes ja carregadas desta categoria (idempotente em recarga; FK RESTRICT).
+UPDATE questoes SET ativa = 0 WHERE categoria_id = @cat_tpm19;
+
+INSERT INTO questoes
+    (categoria_id, enunciado, opcao_a, opcao_b, opcao_c, opcao_d, opcao_e,
+     resposta_correta, explicacao, referencia_legal, nivel)
+VALUES
+
+-- Q01: Conceito de Blitz Policial
+(@cat_tpm19,
+ 'Durante o planejamento de uma operação, um Oficial de Operações deve distinguir claramente a Blitz Policial de outras modalidades de intervenção. Com base na doutrina de Técnica Policial Militar, a característica que define especificamente a Blitz Policial é:',
+ 'A interrupção total e permanente do fluxo de veículos em pontos de divisa interestadual para fins exclusivamente tributários.',
+ 'A execução de cerco e bloqueio em áreas rurais com o objetivo único de captura de foragidos da justiça.',
+ 'A interrupção parcial e temporária do fluxo de pessoas ou veículos, mediante sinalização física, visual e sonora, para vistorias e checagens.',
+ 'A conjugação de ações estratégicas de longa duração que dispensa a utilização de sinalização sonora para priorizar o elemento surpresa.',
+ 'A modalidade de policiamento que foca apenas na identificação de pessoas, sendo vedada a verificação de condições veiculares ou documentos de trânsito.',
+ 'C',
+ 'A alternativa C está correta: a Blitz Policial é definida pela doutrina como a interrupção parcial e temporária do fluxo de pessoas ou veículos, realizada mediante sinalização física, visual e sonora, com a finalidade de vistorias e checagens. A alternativa A descreve, na verdade, um posto fiscal fixo de natureza tributária, não uma blitz policial. A alternativa B confunde a blitz com a operação de "Cerco e Bloqueio", tática distinta voltada à captura de foragidos em área delimitada. A alternativa D contraria a exigência doutrinária de sinalização sonora e o caráter temporário (não permanente) da blitz. A alternativa E restringe indevidamente o escopo da operação, que abrange tanto pessoas quanto veículos e documentação.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial (Academia Coronel Walterler). Não há lei numerada específica para a definição conceitual de blitz policial.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'facil'),
+
+-- Q02: Nível 2 (Preventivo)
+(@cat_tpm19,
+ 'O Comando de um Pelotão recebe a missão de realizar uma Blitz em uma área com altos índices de roubo de veículos, visando realizar verificações após a ocupação prévia do local. De acordo com os objetivos doutrinários, essa operação é classificada como:',
+ 'Nível 1 — Educativo, pois visa orientar os condutores sobre a segurança de seus veículos.',
+ 'Nível 2 — Preventivo, pois foca na ocupação de locais com incidência significativa ou possibilidade de infrações.',
+ 'Nível 3 — Repressivo, pois toda blitz em área de crime visa exclusivamente a restauração da tranquilidade após o fato.',
+ 'Categoria 3 — Especializada, devido ao risco inerente à área de roubos, independentemente do nível de intervenção.',
+ 'Nível Administrativo, visto que a ocupação prévia de vias urbanas não possui caráter operacional preventivo.',
+ 'B',
+ 'A alternativa B está correta: o Nível 2 (Preventivo) caracteriza-se pela ocupação de locais com incidência significativa ou possibilidade de infrações, exatamente o cenário descrito. A alternativa A está incorreta porque o Nível 1 (Educativo) é voltado à orientação e conscientização, sem o caráter de ocupação de área de risco. A alternativa C confunde nível com categoria e descreve incorretamente o Nível 3, que é acionado em resposta imediata a um fato já ocorrido, não pela mera possibilidade estatística de infração. A alternativa D mistura os conceitos de "nível" (finalidade da operação) e "categoria" (estrutura logística), que são classificações distintas na doutrina. A alternativa E não corresponde a nenhuma classificação doutrinária existente.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial. Não há lei numerada específica para os níveis de blitz.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q03: Categoria 3 — requisitos logísticos
+(@cat_tpm19,
+ 'Um Comandante de guarnição planeja uma Blitz de Categoria 3. Ao conferir os recursos logísticos, percebe que dispõe de 3 policiais, 1 viatura de 4 rodas, armamento convencional e cones leves de sinalização. Segundo a Tabela 1 da doutrina, para que esta operação seja tecnicamente classificada como Categoria 3, o que está faltando?',
+ 'Um efetivo mínimo de 5 policiais e pelo menos 2 viaturas de 4 rodas.',
+ 'A presença obrigatória de apoio aéreo e veículos blindados, sem os quais a categoria não se sustenta.',
+ 'Dispositivos de bloqueio de pista (furar pneus) e armamento reforçado.',
+ 'A substituição da viatura de 4 rodas por pelo menos duas motocicletas de escolta.',
+ 'Apenas o aumento do efetivo para 4 policiais, permanecendo o armamento convencional como padrão.',
+ 'C',
+ 'A alternativa C está correta: a doutrina exige, para a Categoria 3, dispositivos específicos de bloqueio de pista (como equipamentos de furar pneus) e armamento reforçado, itens ausentes no cenário descrito. A alternativa A está incorreta porque o efetivo e o número de viaturas relatados não são, por si só, o elemento diferenciador exigido pela Tabela 1 para essa categoria. A alternativa B exagera os requisitos, exigindo recursos (apoio aéreo, blindados) não previstos na doutrina de blitz. A alternativa D propõe uma substituição de recurso sem amparo na tabela doutrinária. A alternativa E é insuficiente, pois manter o armamento convencional contraria justamente a exigência de armamento reforçado da Categoria 3.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — Tabela 1 da doutrina de Técnica Policial Militar, Módulo Blitz Policial, que define os recursos mínimos por categoria de operação. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q04: Princípio da Universalidade
+(@cat_tpm19,
+ 'Durante uma Blitz de Nível 1 (Educativo) voltada para a Semana do Meio Ambiente, um policial detecta que o condutor possui um mandado de prisão em aberto. Aplica-se ao caso o Princípio da Universalidade, o qual determina que:',
+ 'O policial deve apenas orientar o cidadão sobre o tema ambiental, pois o escopo da operação limita a competência da equipe.',
+ 'A equipe deve tomar as providências penais cabíveis, independentemente de a irregularidade não ser o objetivo primordial da operação.',
+ 'O mandado deve ser ignorado para não descaracterizar o caráter educativo da Blitz.',
+ 'A prisão só poderia ser efetuada se a Blitz fosse de Nível 3 (Repressivo) ou Categoria 3.',
+ 'O condutor deve ser liberado, devendo o policial apenas anotar os dados para futura abordagem por equipe especializada.',
+ 'B',
+ 'A alternativa B está correta: o Princípio da Universalidade determina que a equipe policial deve tomar as providências cabíveis diante de qualquer irregularidade constatada, ainda que ela seja estranha ao objetivo primordial da operação (no caso, o tema ambiental). A alternativa A restringe indevidamente a competência da equipe ao tema da campanha, o que contraria o princípio. A alternativa C e a alternativa E equivalem, na prática, à omissão diante de um mandado de prisão válido, conduta incompatível com o dever funcional do policial. A alternativa D condiciona indevidamente o cumprimento do mandado ao nível ou categoria da blitz, distinção que a doutrina não faz para esse fim.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — Princípio da Universalidade, doutrina de Técnica Policial Militar, Módulo Blitz Policial. Não há lei numerada específica; o dever de agir diante de mandado de prisão decorre da função de polícia ostensiva de modo geral.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q05: Migração de nível e categoria
+(@cat_tpm19,
+ 'Considere um cenário onde uma Blitz Categoria 2, de caráter preventivo (Nível 2), está em andamento. O CICOp informa que um veículo em fuga após assalto a banco com reféns desloca-se para o local da Blitz. Segundo a doutrina, a decisão correta sobre a mudança de nível e categoria é:',
+ 'A operação deve ser encerrada imediatamente, pois a categoria 2 não possui estrutura para enfrentar crimes violentos.',
+ 'A operação pode migrar para a Categoria 3 e assumir caráter repressivo, caso receba reforço de pessoal e logística de bloqueio.',
+ 'O nível deve permanecer preventivo, sendo proibida a mudança de categoria durante a execução da operação.',
+ 'O Comandante deve mudar o estado de prontidão para o nível de força letal, mas manter a categoria 2 por economia administrativa.',
+ 'A mudança de categoria depende exclusivamente de autorização judicial, dado que altera o direito de ir e vir dos cidadãos.',
+ 'B',
+ 'A alternativa B está correta: a doutrina prevê expressamente a flexibilidade de migração de nível (para Repressivo) e de categoria (para Categoria 3), desde que a operação receba o reforço de pessoal e a logística de bloqueio necessários à nova configuração de risco. A alternativa A é desproporcional, pois o encerramento abrupto abandona a oportunidade tática de intercepção, quando a adaptação de recursos é o procedimento correto. A alternativa C contraria a própria flexibilidade doutrinária da blitz frente a fatos supervenientes. A alternativa D é incompleta, pois a mudança de prontidão sem o correspondente reforço estrutural (categoria) compromete a segurança da equipe. A alternativa E inventa uma exigência de autorização judicial inexistente na doutrina operacional de trânsito.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à flexibilidade de migração de nível e categoria conforme a evolução do risco. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'dificil'),
+
+-- Q06: Inferioridade numérica/tática
+(@cat_tpm19,
+ 'Em uma Blitz Categoria 1 (efetivo de 2 a 3 policiais), o PM Selecionador para um veículo com 5 ocupantes adultos. Diante da análise de risco, a equipe percebe que está em inferioridade numérica e tática. Qual a recomendação doutrinária para este cenário?',
+ 'Proceder à abordagem com arma em punho para compensar a inferioridade numérica.',
+ 'Ordenar o desembarque de todos simultaneamente para manter o controle visual no Box de Abordagem.',
+ 'Liberar imediatamente o veículo sem abordá-lo, cientificando o CICOp com os dados para possível abordagem posterior por guarnição reforçada.',
+ 'Solicitar que o motorista estacione no Box de Registro e aguardar a chegada de reforço antes de qualquer interação.',
+ 'Abordar o veículo e mais um veículo subsequente para evitar que o fluxo pare, conforme o princípio da agilidade.',
+ 'C',
+ 'A alternativa C está correta: diante de inferioridade numérica e tática detectada, a doutrina prioriza a segurança da equipe, recomendando a liberação do veículo sem abordagem, com o repasse imediato dos dados ao CICOp para viabilizar uma abordagem posterior por guarnição reforçada. A alternativa A aumenta o risco de um incidente com arma de fogo em situação de desvantagem, contrariando o princípio de segurança. A alternativa B expõe a equipe ao desembarque simultâneo de cinco ocupantes sem controle tático adequado. A alternativa D mantém a equipe em contato direto e vulnerável enquanto aguarda reforço, o que a doutrina busca evitar. A alternativa E inventa um "princípio da agilidade" inexistente e agrava ainda mais a inferioridade numérica ao somar outro veículo à abordagem.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à análise de risco e à priorização da segurança da equipe policial. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q07: Zona Quente de Criminalidade (ZQC)
+(@cat_tpm19,
+ 'No planejamento de uma Blitz, o Comandante deve priorizar locais classificados como Zona Quente de Criminalidade (ZQC). Tecnicamente, a ZQC é definida como:',
+ 'Pontos turísticos com grande aglomeração de pessoas e baixa visibilidade.',
+ 'Áreas com aclives e declives acentuados que facilitam a frenagem de veículos em fuga.',
+ 'Locais onde, estatisticamente, ocorre concentração de crimes violentos.',
+ 'Trechos de rodovias com alta incidência de animais na pista e acidentes de trânsito.',
+ 'Perímetros próximos a unidades de saúde e escolas, visando a proteção de vulneráveis.',
+ 'C',
+ 'A alternativa C está correta: a Zona Quente de Criminalidade (ZQC) é tecnicamente definida como o local onde, estatisticamente, ocorre concentração de crimes violentos, servindo de critério objetivo para o planejamento do posicionamento da blitz. A alternativa A associa a ZQC a aglomeração turística, característica não relacionada ao critério estatístico-criminal. A alternativa B confunde critério de segurança viária (topografia) com critério criminal. A alternativa D refere-se a um critério de sinistralidade de trânsito, distinto do conceito de criminalidade violenta. A alternativa E descreve um critério de proteção de vulneráveis, relevante para outras políticas, mas não é a definição técnica de ZQC.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto aos critérios de planejamento territorial da operação. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'facil'),
+
+-- Q08: Itens acessórios obrigatórios — cones
+(@cat_tpm19,
+ 'Um Oficial de Logística prepara o material para uma Blitz Categoria 2. Ele disponibiliza 6 cones de sinalização, 2 lanternas e 1 etilômetro. De acordo com os itens acessórios obrigatórios listados no Caderno Doutrinário, esta carga logística está:',
+ 'Correta, pois 6 cones são suficientes para balizar uma pista simples.',
+ 'Incorreta, pois o mínimo exigido é de oito cones de sinalização.',
+ 'Incorreta, pois as lanternas são itens facultativos, exigidos apenas para operações noturnas.',
+ 'Correta, desde que a viatura utilize o giroflex como complemento da sinalização física.',
+ 'Incorreta, pois exige-se um mínimo de dez cones e dois etilômetros por viatura.',
+ 'B',
+ 'A alternativa B está correta: a doutrina exige o mínimo de oito cones de sinalização para a montagem regular do dispositivo, número superior aos seis disponibilizados no cenário. A alternativa A subestima a exigência mínima real. A alternativa C está incorreta porque as lanternas fazem parte dos itens acessórios de forma geral, não sendo condicionadas exclusivamente ao período noturno. A alternativa D tenta suprir a insuficiência de cones com o giroflex da viatura, o que não substitui a exigência específica de sinalização por cones. A alternativa E exagera a exigência mínima, tanto de cones quanto de etilômetros, além do previsto na doutrina.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto aos itens acessórios logísticos mínimos exigidos por categoria de operação. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'facil'),
+
+-- Q09: Atribuição do PM Selecionador
+(@cat_tpm19,
+ 'O PM Selecionador desempenha um papel crítico no fluxo da operação. Assinale a alternativa que descreve uma atribuição CORRETA e EXCLUSIVA desta função:',
+ 'Realizar a busca pessoal nos ocupantes e vistoriar o compartimento de carga do veículo.',
+ 'Proceder à identificação funcional de autoridades e preencher os autos de infração no Box de Registro.',
+ 'Escolher os veículos a serem fiscalizados e sinalizar gestualmente e com silvos de apito para direcioná-los ao Box de Abordagem.',
+ 'Manter escuta ininterrupta da rede-rádio e garantir a segurança perimetral da equipe com arma portátil.',
+ 'Definir as funções de cada policial e coordenar as comunicações com o CICOp.',
+ 'C',
+ 'A alternativa C está correta: compete exclusivamente ao PM Selecionador escolher os veículos a serem fiscalizados e sinalizá-los, gestualmente e com silvos de apito, para direcioná-los ao Box de Abordagem. A alternativa A descreve as atribuições do PM Vistoriador, responsável pela busca e vistoria. A alternativa B mistura atribuições de verbalização com autoridades e de registro de infrações, tarefas de outras funções na operação. A alternativa D descreve a função do PM Segurança, voltada à proteção perimetral e ao armamento portátil. A alternativa E corresponde às atribuições do PM Comandante, responsável pela coordenação geral e pelas comunicações operacionais.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à divisão técnica de funções da equipe (Comandante, Selecionador, Segurança, Vistoriador e Registro). Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q10: Vulgarização do impacto — armamento portátil
+(@cat_tpm19,
+ 'Sobre a função do PM Segurança e o uso de armamento portátil, a doutrina estabelece uma diretriz para evitar a "vulgarização do impacto". Nesse sentido:',
+ 'Todos os policiais da Blitz devem empunhar armas portáteis para intimidar possíveis agressores.',
+ 'Apenas o PM Segurança deverá empunhar o armamento portátil ou de porte de forma ostensiva, mantendo a melhor posição tática.',
+ 'O uso de arma portátil é vedado em Blitz de Nível 1 e 2, sendo restrito a operações de Nível 3.',
+ 'O PM Segurança deve manter a arma sempre no coldre, só podendo sacá-la após o início de uma resistência ativa agressiva.',
+ 'O armamento portátil deve ser mantido no interior da viatura, sendo utilizado apenas em casos de evasão confirmada.',
+ 'B',
+ 'A alternativa B está correta: para evitar a "vulgarização do impacto" e o risco de disparos acidentais, apenas o PM Segurança deve empunhar o armamento de forma ostensiva, mantendo-se na melhor posição tática de cobertura da equipe. A alternativa A generaliza indevidamente a empunhadura da arma a todos os policiais, o que é justamente o efeito que a doutrina busca evitar. A alternativa C restringe indevidamente essa diretriz a determinados níveis, quando ela se aplica de forma geral à função de segurança. A alternativa D atrasaria excessivamente a resposta da equipe, pois a diretriz permite a postura ostensiva preventiva, e não apenas reativa. A alternativa E é irreal do ponto de vista tático, pois retira da equipe a capacidade de reação imediata a uma ameaça no Box de Abordagem.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto ao uso proporcional e concentrado do armamento portátil pela função de segurança. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q11: Atribuição do PM Comandante
+(@cat_tpm19,
+ 'Compete ao PM Comandante da operação a coordenação direta do dispositivo. É sua responsabilidade:',
+ 'Executar a busca veicular minuciosa no porta-malas e motor.',
+ 'Permanecer no Box de Registro realizando exclusivamente a lavratura de multas.',
+ 'Definir as funções de cada policial e realizar as comunicações operacionais via rede-rádio.',
+ 'Atuar como Selecionador e Vistoriador simultaneamente para otimizar o efetivo.',
+ 'Operar o etilômetro em todos os condutores selecionados, independentemente de sinais de embriaguez.',
+ 'C',
+ 'A alternativa C está correta: o PM Comandante é o responsável direto pela coordenação geral da operação, cabendo-lhe definir as funções de cada policial e realizar as comunicações operacionais via rede-rádio, inclusive com o CICOp. A alternativa A atribui ao Comandante uma tarefa técnica do PM Vistoriador. A alternativa B restringe indevidamente sua atuação ao Box de Registro e a uma única tarefa administrativa. A alternativa D descaracteriza a própria função de coordenação ao acumulá-la com tarefas técnicas de seleção e vistoria, o que compromete a visão geral da operação. A alternativa E impõe ao Comandante uma tarefa técnica (operação do etilômetro) de forma indiscriminada, sem relação com sua atribuição de coordenação.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto às atribuições do PM Comandante da operação. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'facil'),
+
+-- Q12: Distribuição de funções com efetivo reduzido
+(@cat_tpm19,
+ 'Em uma Blitz Categoria 1 realizada por apenas dois policiais, como deve ser feita a distribuição de funções conforme a doutrina?',
+ 'Um policial atua como Comandante/Segurança e o outro como Selecionador/Vistoriador.',
+ 'É proibido realizar a Blitz com apenas dois policiais, devendo a guarnição aguardar reforço.',
+ 'Ambos os policiais devem atuar como Vistoriadores, ficando a segurança a cargo do sistema de videomonitoramento da via.',
+ 'O PM mais antigo assume a função de Selecionador e o mais moderno a de Comandante.',
+ 'As funções devem ser fixas, sendo vedado o acúmulo de atribuições para não comprometer a técnica.',
+ 'A',
+ 'A alternativa A está correta: com efetivo de apenas dois policiais, a doutrina prevê o acúmulo técnico de funções, cabendo a um deles as atribuições de Comandante/Segurança (retaguarda e coordenação) e ao outro as de Selecionador/Vistoriador (seleção e busca). A alternativa B contraria a própria previsão doutrinária de blitz com efetivo mínimo (Categoria 1), que dispensa a espera por reforço para operações de menor porte. A alternativa C é irreal e insegura, pois videomonitoramento não substitui a segurança física da equipe. A alternativa D fixa a distribuição por critério de antiguidade, alheio ao critério funcional previsto na doutrina. A alternativa E é logicamente incompatível com um efetivo de apenas dois policiais para cobrir todas as funções da operação.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto ao acúmulo técnico de funções em efetivo reduzido. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q13: Box de Registro
+(@cat_tpm19,
+ 'A organização física da Blitz prevê a existência de dois espaços distintos: o Box de Abordagem e o Box de Registro. Sobre o Box de Registro, é correto afirmar que:',
+ 'É o local destinado à triagem inicial e sinalização gestual dos veículos.',
+ 'Destina-se ao acolhimento de pedestres que desejam informações sobre a operação.',
+ 'É o local definido para efetuar autuações de trânsito, registro de ocorrências, prisões e apreensões após a detecção de irregularidades.',
+ 'Deve ser posicionado antes do Box de Abordagem para facilitar o fluxo de veículos liberados.',
+ 'É uma zona de lazer e descanso para a equipe policial durante os intervalos da operação.',
+ 'C',
+ 'A alternativa C está correta: o Box de Registro é o local definido para a formalização das ocorrências — autuações de trânsito, registros, prisões e apreensões — após a irregularidade ter sido detectada no Box de Abordagem. A alternativa A descreve, na verdade, a função do Box de Abordagem, onde ocorre a triagem inicial. A alternativa B é alheia à finalidade técnica de ambos os boxes. A alternativa D inverte a lógica de fluxo da operação, já que o Box de Registro é subsequente, e não anterior, ao Box de Abordagem. A alternativa E descaracteriza completamente a finalidade operacional do espaço.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à montagem física do dispositivo (Box de Abordagem e Box de Registro). Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'facil'),
+
+-- Q14: Tempo de permanência da Blitz
+(@cat_tpm19,
+ 'O tempo de permanência de uma Blitz em um mesmo local é um fator tático relevante. Segundo a orientação técnica:',
+ 'A Blitz deve durar no mínimo 4 horas para justificar o deslocamento logístico.',
+ 'O tempo previsto é de 30 a 60 minutos, podendo ser redefinido pelo PM Comandante conforme a avaliação no local.',
+ 'A operação deve ser encerrada em 15 minutos para evitar que a localização seja compartilhada em redes sociais.',
+ 'A permanência deve ser ininterrupta durante todo o turno de serviço, visando a saturação da área.',
+ 'O tempo é definido exclusivamente pelo CICOp, sendo vedado ao Comandante local alterá-lo.',
+ 'B',
+ 'A alternativa B está correta: a orientação técnica prevê um tempo de permanência de 30 a 60 minutos, admitindo-se sua redefinição pelo PM Comandante conforme a avaliação tática realizada no próprio local. A alternativa A exige um período fixo excessivo, incompatível com a flexibilidade tática da operação. A alternativa C fixa um prazo curto demais e baseado em uma justificativa alheia à doutrina (exposição em redes sociais). A alternativa D propõe permanência ininterrupta, contrária à orientação de rotatividade e variação de pontos de blitz. A alternativa E retira do Comandante local a autonomia de ajuste que a doutrina expressamente lhe confere.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto ao tempo de permanência recomendado por ponto de operação. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'facil'),
+
+-- Q15: Estados de prontidão mental
+(@cat_tpm19,
+ 'Sobre o estado de prontidão mental dos policiais durante a operação, assinale a alternativa que descreve a transição CORRETA:',
+ 'Manter-se em estado branco (relaxado) durante o balizamento e laranja (alerta) apenas se houver disparo.',
+ 'Manter-se em estado amarelo (atenção) durante a operação e passar ao estado laranja (alerta) no momento da abordagem.',
+ 'Permanecer constantemente em estado vermelho (alarme) com a arma empunhada para garantir a segurança.',
+ 'Iniciar em estado amarelo (atenção) e retornar ao estado branco (relaxado) após a conferência dos documentos.',
+ 'O estado de prontidão é fixo em laranja (alerta) para todas as funções, inclusive para o PM que realiza o registro administrativo.',
+ 'B',
+ 'A alternativa B está correta: a doutrina recomenda a manutenção do estado amarelo (atenção) durante toda a operação, com elevação ao estado laranja (alerta) especificamente no momento da abordagem, quando o risco se concentra. A alternativa A é inadequada porque o estado branco (relaxamento total) é incompatível com uma operação policial em andamento, mesmo durante o balizamento. A alternativa C exagera a prontidão, mantendo permanentemente um estado (vermelho/alarme) reservado a situações de confronto efetivo, o que gera fadiga e risco de reação desproporcional. A alternativa D é incorreta porque retornar ao estado branco durante a operação expõe a equipe a uma queda de vigilância inadequada. A alternativa E fixa indevidamente o estado laranja para todas as funções, inclusive as de menor exposição imediata ao risco, como o registro administrativo.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto aos estados de prontidão mental (código de cores) aplicados à atividade policial. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q16: Busca pessoal — fundada suspeita
+(@cat_tpm19,
+ 'A busca pessoal e veicular exige a existência de "fundada suspeita". Com base na legislação processual penal e na doutrina aplicada, assinale a alternativa correta:',
+ 'A fundada suspeita é um conceito meramente burocrático, sendo obrigatória a revista em 100% dos veículos selecionados.',
+ 'Veículos automotores são considerados domicílio, exigindo mandado judicial para busca interna em qualquer circunstância.',
+ 'A busca pessoal consiste na procura material feita nas vestes, pastas, malas e, quando necessário, no próprio corpo.',
+ 'O tirocínio policial não é elemento válido para justificar a fundada suspeita, exigindo-se prova material prévia.',
+ 'A busca veicular deve ser realizada com os ocupantes no interior do veículo para evitar que estes dispensem ilícitos na via.',
+ 'C',
+ 'A alternativa C está correta: a busca pessoal consiste na procura material realizada nas vestes, pastas, malas e, quando necessário, no próprio corpo do abordado, sempre condicionada à existência de fundada suspeita — elementos objetivos e concretos, e não meros critérios subjetivos ou discriminatórios. A alternativa A contraria a exigência de fundada suspeita ao propor a revista indiscriminada de todos os veículos, o que violaria a garantia constitucional contra buscas arbitrárias. A alternativa B está incorreta: o veículo automotor não é equiparado a domicílio para fins de busca, dispensando mandado judicial quando presente a fundada suspeita. A alternativa D nega o tirocínio policial (a experiência e a percepção treinada do agente diante de indícios concretos de conduta), que é elemento legítimo, embora não exclusivo, para fundamentar a suspeita. A alternativa E é tecnicamente equivocada e insegura, pois manter os ocupantes dentro do veículo durante a vistoria compromete o controle tático da equipe.\n\n📜 Fundamento legal vigente: Código de Processo Penal (Decreto-Lei nº 3.689/1941), art. 240 ("a busca poderá ser domiciliar ou pessoal") e art. 244 (a busca pessoal independe de mandado quando houver fundada suspeita de que a pessoa oculte consigo arma ou objeto de crime), aplicados por analogia à busca veicular em abordagem de trânsito.',
+ 'CPP (Decreto-Lei 3.689/1941), arts. 240 e 244 (analogia)',
+ 'medio'),
+
+-- Q17: Sequência técnica da busca veicular
+(@cat_tpm19,
+ 'Durante a realização da busca veicular, o PM Vistoriador deve seguir uma sequência técnica padronizada. Assinale a alternativa que apresenta a ordem correta de verificação dos compartimentos:',
+ 'Cabine interna -> Região do motor -> Porta-malas.',
+ 'Região do motor -> Porta-malas -> Cabine interna.',
+ 'Porta-malas -> Parte interna -> Região do motor (se necessário).',
+ 'A sequência é livre, ficando a critério do tirocínio do policial no momento da abordagem.',
+ 'Deve-se iniciar sempre pelos pneus e chassi, finalizando pela cabine interna.',
+ 'C',
+ 'A alternativa C está correta: a sequência técnica padronizada para a busca veicular é porta-malas, seguido da parte interna do veículo e, por fim, da região do motor, quando necessário. As alternativas A e B invertem essa ordem técnica, comprometendo o método sistemático de varredura que reduz o risco de omissão de compartimentos e de surpresa por parte do abordado. A alternativa D descaracteriza a própria finalidade de uma sequência padronizada, que existe justamente para uniformizar o procedimento e evitar falhas dependentes exclusivamente do critério individual. A alternativa E propõe uma sequência não prevista na doutrina, iniciando por itens (pneus e chassi) que não são a primeira etapa da varredura padrão.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à sequência técnica de vistoria veicular. Aplica-se, por analogia, o fundamento da busca do art. 240 do Código de Processo Penal (Decreto-Lei nº 3.689/1941), que autoriza a procura material de objetos relacionados ao crime, adaptado à sistemática de varredura de compartimentos do veículo.',
+ 'Doutrina de Blitz Policial (POP); CPP (Decreto-Lei 3.689/1941), art. 240 (analogia)',
+ 'medio'),
+
+-- Q18: Etilômetro — limiar de configuração
+(@cat_tpm19,
+ 'Numa blitz, um condutor sopra o etilômetro e o aparelho acusa 0,32 mg de álcool por litro de ar. Além da infração administrativa, esse resultado já caracteriza o CRIME de embriaguez ao volante (conduzir com a capacidade psicomotora alterada). A partir de qual concentração de álcool por litro de ar expelido se configura esse crime?',
+ '0,1 mg por litro de ar.',
+ '0,2 mg por litro de ar.',
+ '0,3 mg por litro de ar.',
+ '0,6 mg por litro de ar.',
+ 'Qualquer concentração de álcool basta para o crime, sem patamar mínimo.',
+ 'C',
+ 'A alternativa C está correta: 0,3 mg de álcool por litro de ar alveolar (equivalente a 6 decigramas por litro de sangue) é o patamar que caracteriza o CRIME de embriaguez ao volante. As demais alternativas apresentam valores incompatíveis: 0,1 e 0,2 mg/L (A e B) são inferiores ao patamar do crime; 0,6 mg/L (D) é superior e não corresponde ao limiar legal; e a alternativa E confunde os dois planos — "qualquer concentração" basta para a INFRAÇÃO administrativa, não para o crime, que exige o patamar de 0,3 mg/L (ou a comprovação da alteração da capacidade psicomotora por outros meios).\n\n📜 Fundamento legal vigente: Código de Trânsito Brasileiro (Lei nº 9.503/1997). É essencial distinguir dois planos: (1) a INFRAÇÃO administrativa gravíssima do art. 165 configura-se com QUALQUER concentração de álcool (multa e suspensão do direito de dirigir por 12 meses); (2) o CRIME do art. 306 exige capacidade psicomotora alterada, presumida a partir de 0,3 mg/L de ar alveolar ou 6 decigramas por litro de sangue. Do resultado desconta-se o erro máximo admissível do etilômetro, conforme a Resolução CONTRAN nº 432/2013.',
+ 'CTB (Lei 9.503/1997), art. 306 (crime) x art. 165 (infração); Resolução CONTRAN 432/2013',
+ 'medio'),
+
+-- Q19: Recusa ao teste do etilômetro
+(@cat_tpm19,
+ 'Caso o condutor se recuse a realizar o teste do etilômetro, mas apresente hálito etílico, agressividade e desordem nas vestes, o policial deve:',
+ 'Liberar o condutor, pois a recusa impede a constituição de prova de embriaguez.',
+ 'Forçar o condutor a realizar o teste soprando o aparelho mediante uso de força física.',
+ 'Caracterizar a infração mediante a descrição dos notórios sinais de embriaguez em termo específico ou na ocorrência.',
+ 'Encaminhá-lo ao hospital para extração compulsória de sangue, independentemente de autorização.',
+ 'Aplicar apenas uma advertência verbal, já que a prova técnica é indispensável para a AIT.',
+ 'C',
+ 'A alternativa C está correta: diante da recusa ao teste do etilômetro, a legislação de trânsito admite a caracterização da infração ou do crime por meio da descrição formal dos sinais notórios de embriaguez (hálito etílico, agressividade, desordem nas vestes, entre outros), consignados em termo específico ou no boletim de ocorrência. A alternativa A está incorreta, pois a recusa ao teste não implica impunidade nem impede a autuação por outros meios de prova. A alternativa B é vedada, já que ninguém pode ser constrangido, mediante uso de força física, a produzir prova contra si mesmo. A alternativa D também viola a vedação à autoincriminação forçada, exigindo-se o consentimento do condutor para procedimentos invasivos. A alternativa E subestima os sinais evidentes de embriaguez relatados, que são, por si só, meio de prova idôneo para a autuação.\n\n📜 Fundamento legal vigente: Código de Trânsito Brasileiro (Lei nº 9.503/1997), art. 306, §2º, que autoriza a caracterização da embriaguez ao volante por sinais que indiquem alteração da capacidade psicomotora, independentemente da prova técnica direta (etilômetro ou exame de sangue), conforme disciplinado pela Resolução CONTRAN nº 432/2013.',
+ 'CTB (Lei 9.503/1997), art. 306, §2º; Resolução CONTRAN 432/2013',
+ 'medio'),
+
+-- Q20: Resistência ativa com agressão não letal
+(@cat_tpm19,
+ 'Durante a tentativa de busca pessoal, o abordado desfere chutes contra o policial, tentando impedir a ação, mas sem utilizar armas ou colocar a vida do PM em risco de morte iminente. Essa conduta é classificada como:',
+ 'Resistência Passiva.',
+ 'Abordado Cooperativo.',
+ 'Resistência Ativa com agressão letal.',
+ 'Resistência Ativa com agressão não letal.',
+ 'Desobediência administrativa sem uso de força.',
+ 'D',
+ 'A alternativa D está correta: a agressão física direta (chutes) que não emprega armas nem coloca a vida do policial em risco iminente de morte é classificada, na escala doutrinária de resistência, como Resistência Ativa com agressão não letal. A alternativa A está incorreta porque a Resistência Passiva caracteriza-se pela inércia ou recusa não violenta (ex.: tensionar o corpo, não obedecer a comandos), sem agressão física. A alternativa B é incompatível com a descrição do cenário, que relata clara oposição violenta. A alternativa C exigiria o emprego de meio apto a causar morte ou lesão gravíssima, o que não ocorre com chutes desacompanhados de armas ou risco de morte. A alternativa E subestima a gravidade da conduta, que envolve agressão física efetiva, e não mera desobediência.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à escala de resistência à abordagem (passiva, ativa não letal e ativa letal) e à correspondente escala de uso proporcional da força. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q21: Evasão Tipo B e uso de arma de fogo
+(@cat_tpm19,
+ 'Um veículo não respeita a ordem de parada e empreende fuga (Evasão Tipo B). Qual a diretriz doutrinária correta quanto ao uso de arma de fogo?',
+ 'Efetuar disparos nos pneus para imobilizar o veículo imediatamente.',
+ 'Realizar disparos intimidativos para o alto para forçar a parada do condutor.',
+ 'Não efetuar disparos intimidativos; disparar apenas se o veículo representar risco imediato à vida (atropelamento intencional).',
+ 'Disparar contra o motor do veículo, visando cessar a fuga por meios técnicos.',
+ 'Utilizar obrigatoriamente armamento de longo alcance para atingir o condutor em fuga.',
+ 'C',
+ 'A alternativa C está correta: a doutrina veda os disparos intimidativos em casos de fuga simples e reserva o uso da arma de fogo como último recurso, exclusivamente diante de risco imediato à vida, como uma tentativa de atropelamento intencional contra a equipe ou terceiros. A alternativa A é tecnicamente inviável e perigosa, pois disparar contra pneus em movimento tem baixa eficácia e alto risco de acertar terceiros, além de não corresponder ao critério de proporcionalidade exigido. A alternativa B é expressamente vedada pela doutrina, que rejeita disparos meramente intimidativos. A alternativa D repete o erro técnico de mirar em partes específicas do veículo em movimento, sem amparo doutrinário e com elevado risco de dano colateral. A alternativa E cria uma obrigatoriedade de uso de armamento de longo alcance inexistente na doutrina, que condiciona o disparo à existência de risco imediato à vida, e não a um tipo específico de armamento.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto ao uso proporcional e excepcional da força letal em casos de evasão veicular. Não há lei numerada específica; aplicam-se, de forma geral, os princípios de proporcionalidade e excepcionalidade do uso da força letal reconhecidos na doutrina de segurança pública.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'dificil'),
+
+-- Q22: Abordagem a autoridade
+(@cat_tpm19,
+ 'Ao abordar um cidadão que se identifica como Juiz de Direito, o policial deve adotar o seguinte procedimento de verbalização e conduta:',
+ 'Dispensar a identificação funcional em respeito à autoridade alegada.',
+ 'Utilizar o pronome de tratamento adequado, identificar-se e solicitar a apresentação da carteira funcional.',
+ 'Ordenar imediatamente o desembarque com as mãos na cabeça para garantir a igualdade de tratamento.',
+ 'Ignorar a autoridade e realizar busca pessoal invasiva para demonstrar o poder de polícia da Blitz.',
+ 'Proibir que a autoridade faça contato telefônico até que a vistoria veicular seja concluída.',
+ 'B',
+ 'A alternativa B está correta: a doutrina recomenda que a abordagem a quem se identifica como autoridade seja conduzida com diálogo respeitoso, pronome de tratamento adequado, identificação do próprio policial e a solicitação formal da apresentação da carteira funcional para confirmação. A alternativa A está incorreta, pois a alegação de autoridade não dispensa a conferência técnica, sob risco de fraude na identificação. A alternativa C é desproporcional e desnecessária diante de mera identificação verbal ainda não contestada, podendo gerar constrangimento indevido sem base em fundada suspeita. A alternativa D contraria a exigência de fundada suspeita para busca invasiva e é uma reação desproporcional à simples alegação de autoridade. A alternativa E restringe indevidamente um direito do abordado sem amparo doutrinário ou legal.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à verbalização e conduta em abordagem a autoridades. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q23: Tentativa de suborno
+(@cat_tpm19,
+ 'Durante a entrega dos documentos, o condutor deixa uma nota de cem reais intencionalmente entre a CNH e o documento do carro. Qual a conduta ética e técnica exigida do PM?',
+ 'Aceitar o valor para o fundo de manutenção da viatura.',
+ 'Devolver o dinheiro educadamente e fingir que não viu para evitar conflitos.',
+ 'Determinar que o condutor retire pertences particulares e entregue apenas o solicitado; confirmada a intenção, adotar as medidas legais por corrupção.',
+ 'Solicitar que o condutor repita a oferta em voz alta para que a equipe atue como testemunha de um crime de concussão.',
+ 'Recolher o dinheiro como prova material e liberar o condutor sem aplicar multas.',
+ 'C',
+ 'A alternativa C está correta: diante do indício de oferta de vantagem indevida, o procedimento técnico e ético correto é determinar que o condutor retire os pertences particulares e entregue apenas a documentação solicitada; confirmada a intenção de suborno, cabem as medidas legais cabíveis por crime de corrupção ativa. A alternativa A configura o próprio crime de corrupção passiva por parte do policial. A alternativa B, embora evite o crime pela recusa, omite-se da apuração e das medidas legais cabíveis diante de um indício de ilícito presenciado pela própria equipe. A alternativa D descreve equivocadamente o crime (concussão é a exigência de vantagem pelo funcionário público, e não a oferta espontânea pelo particular, que configura corrupção ativa), além de forçar uma situação artificial de prova. A alternativa E mistura a apreensão indevida do valor como prova com a liberação irregular do condutor, dispensando inclusive as autuações de trânsito eventualmente cabíveis.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à conduta ética diante de tentativa de suborno, com reflexo nos tipos penais de corrupção ativa e passiva previstos na legislação penal comum. Não há lei numerada específica na doutrina de blitz para este procedimento.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'dificil'),
+
+-- Q24: Blitz noturna e película escura
+(@cat_tpm19,
+ 'Na execução de uma Blitz Noturna, um veículo com película escura (insul-film) é selecionado. Segundo a doutrina, o policial deve:',
+ 'Bater no vidro com o bastão tonfa para que o motorista abra a janela.',
+ 'Solicitar que o condutor acenda a luz interna e mantenha as mãos visíveis sobre o volante.',
+ 'Apontar o foco da lanterna diretamente nos olhos do condutor para ofuscá-lo e garantir a segurança.',
+ 'Posicionar-se diretamente à frente do farol do veículo para melhor visualização do interior.',
+ 'Solicitar que o condutor apague os faróis e o giroflex da viatura para não prejudicar a visão noturna.',
+ 'B',
+ 'A alternativa B está correta: diante da película escura que compromete a visibilidade do interior do veículo, a técnica recomendada é solicitar que o condutor acenda a luz interna e mantenha as mãos visíveis sobre o volante, permitindo o controle visual da equipe sem necessidade de contato físico imediato. A alternativa A é agressiva e desproporcional para o momento inicial da abordagem, podendo escalar desnecessariamente a tensão. A alternativa C compromete a própria segurança do policial, pois ofuscar o condutor prejudica a leitura de suas reações e pode provocar reação defensiva abrupta. A alternativa D expõe o policial a uma posição de risco, diretamente à frente do veículo, vulnerável a um eventual arranco do motorista. A alternativa E retira da equipe recursos de iluminação e sinalização importantes justamente durante uma operação noturna.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto às técnicas de abordagem em condições de baixa visibilidade. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q25: Barreira linguística
+(@cat_tpm19,
+ 'Ao abordar um estrangeiro que demonstra não compreender as ordens verbais em português devido à barreira linguística, a orientação doutrinária é:',
+ 'Liberar o indivíduo imediatamente para evitar incidentes diplomáticos.',
+ 'Elevar o tom de voz e repetir a ordem até que o abordado obedeça por intimidação.',
+ 'Atentar para a utilização de gestos e sinais que favoreçam a compreensão de sua intenção.',
+ 'Utilizar gírias locais para tentar estabelecer uma conexão informal de entendimento.',
+ 'Conduzi-lo à delegacia para que um intérprete oficial realize a verbalização da abordagem.',
+ 'C',
+ 'A alternativa C está correta: diante da barreira linguística, a orientação doutrinária é atentar para o uso de gestos e sinais que favoreçam a compreensão mútua da intenção, viabilizando a comunicação essencial de comandos de segurança mesmo sem domínio do idioma comum. A alternativa A é desproporcional, pois a mera dificuldade de comunicação não justifica a liberação automática sem qualquer verificação. A alternativa B é ineficaz, já que elevar o tom de voz não resolve a barreira linguística e pode ser interpretado como agressão, escalando a tensão. A alternativa D é imprecisa, pois gírias locais tendem a ser ainda mais incompreensíveis para um estrangeiro do que a linguagem-padrão. A alternativa E é desproporcional para o momento inicial da abordagem, que deve ser resolvido preferencialmente no próprio local com recursos de comunicação não verbal.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à comunicação em abordagens com barreira linguística. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'facil'),
+
+-- Q26: Abordagem a motocicletas
+(@cat_tpm19,
+ 'Sobre a abordagem a motocicletas, qual o procedimento prioritário em relação aos ocupantes para garantir a segurança da equipe?',
+ 'Controlar primeiro o condutor, pois ele detém o controle físico do veículo.',
+ 'Exigir que o condutor desça e retire o capacete antes do passageiro.',
+ 'Controlar as mãos do passageiro e ordenar que desça primeiro, pois geralmente é quem porta arma de fogo.',
+ 'Iniciar a vistoria pelo baú da motocicleta enquanto os ocupantes permanecem montados.',
+ 'Dispensar a busca pessoal se ambos estiverem utilizando capacetes devidamente afivelados.',
+ 'C',
+ 'A alternativa C está correta: a doutrina prioriza o controle das mãos do passageiro (garupa) e sua descida em primeiro lugar, por ser estatisticamente quem mais frequentemente porta a arma de fogo em abordagens a motocicletas, reduzindo o risco de reação armada à equipe. A alternativa A inverte a prioridade recomendada, já que o condutor, ocupado com o controle do veículo, tende a representar um risco imediato menor que o passageiro com as mãos livres. A alternativa B foca em um procedimento de identificação (retirada do capacete) sem relação com a prioridade de controle de risco armado. A alternativa D é tecnicamente inadequada, pois iniciar a vistoria com os ocupantes ainda montados mantém a mobilidade e o risco de fuga ou reação. A alternativa E é uma generalização indevida, já que o uso de capacete não tem relação alguma com a existência de fundada suspeita para a busca pessoal.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto às técnicas específicas de abordagem a motocicletas. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q27: Posicionamento do PM Comandante em pista dupla
+(@cat_tpm19,
+ 'Ao abordar um veículo em pista dupla com uma equipe de dois policiais, qual deve ser o posicionamento do PM Comandante após o veículo parar próximo ao cone designado?',
+ 'Posicionar-se à frente do veículo para realizar a identificação visual do motorista.',
+ 'Deslocar-se para a retaguarda do veículo, permanecendo sobre o passeio, para atuar como PM Segurança.',
+ 'Iniciar imediatamente a busca no interior do porta-malas enquanto o motorista desembarca.',
+ 'Permanecer no centro da pista de rolamento para controlar o tráfego lateral.',
+ 'Sentar-se no banco do motorista da viatura para agilizar uma possível perseguição.',
+ 'B',
+ 'A alternativa B está correta: com efetivo reduzido, o PM Comandante deve deslocar-se para a retaguarda do veículo, permanecendo sobre o passeio, de modo a fazer a segurança do colega que atua na frente, acumulando tecnicamente essa função. A alternativa A expõe o Comandante a uma posição frontal vulnerável, sem cobertura, além de duplicar uma tarefa já atribuída a outro membro da equipe. A alternativa C é prematura e tecnicamente incorreta, pois a busca deve seguir a sequência técnica padronizada e ocorrer após a triagem inicial, não simultaneamente ao desembarque. A alternativa D expõe o próprio Comandante a risco de atropelamento por permanecer na pista de rolamento em vez de local seguro. A alternativa E retira o Comandante da cena de segurança imediata, comprometendo a cobertura do colega durante a abordagem.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto ao posicionamento tático da equipe em pista dupla com efetivo reduzido. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q28: Técnica de vistoria de portas
+(@cat_tpm19,
+ 'A tática de busca veicular exige manobras específicas para detecção de ilícitos ocultos. Ao realizar a vistoria interna das portas, o policial deve:',
+ 'Utilizar uma marreta para verificar a resistência do forro interno.',
+ 'Levantar o vidro, colocar um papel atrás da numeração do chassi para conferência e bater no forro para verificar se o som é uniforme.',
+ 'Desmontar o painel plástico de todas as portas preventivamente em todas as vistorias.',
+ 'Solicitar que o proprietário remova os forros para evitar danos ao patrimônio pelo Estado.',
+ 'Apenas observar visualmente, sendo proibido tocar ou balançar as portas do veículo.',
+ 'B',
+ 'A alternativa B está correta: a técnica de vistoria das portas envolve levantar o vidro, utilizar um papel posicionado atrás da numeração do chassi para conferência de eventuais adulterações, e bater no forro das portas para identificar, pela uniformidade do som, possíveis compartimentos ocultos ou objetos escondidos. A alternativa A é desproporcional e danosa, utilizando força excessiva incompatível com a técnica de vistoria padronizada. A alternativa C é desproporcional como regra geral, pois a desmontagem preventiva de todas as portas em toda vistoria, sem indício concreto, extrapola os limites da fundada suspeita. A alternativa D transfere ao proprietário uma tarefa que é do próprio policial, além de comprometer a autonomia técnica da vistoria. A alternativa E é insuficiente tecnicamente, já que a mera observação visual não permite detectar compartimentos ocultos, sendo o teste sonoro (bater no forro) uma técnica reconhecida.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto à técnica de vistoria de compartimentos veiculares. Aplica-se, por analogia, o fundamento da busca do art. 240 do Código de Processo Penal (Decreto-Lei nº 3.689/1941).',
+ 'Doutrina de Blitz Policial (POP); CPP (Decreto-Lei 3.689/1941), art. 240 (analogia)',
+ 'dificil'),
+
+-- Q29: Acúmulo de veículos no Box de Abordagem
+(@cat_tpm19,
+ 'Considere que, durante uma Blitz, ocorra um acúmulo excessivo de veículos no Box de Abordagem, comprometendo a segurança. A conduta correta do PM Selecionador é:',
+ 'Acelerar as vistorias, dispensando a busca pessoal para dar vazão ao fluxo.',
+ 'Encaminhar o excesso de veículos para o Box de Registro sem fiscalização prévia.',
+ 'Interromper a parada de veículos enquanto o Comandante reorganiza os espaços e o fluxo.',
+ 'Solicitar que os condutores aguardem no acostamento sem qualquer supervisão policial.',
+ 'Delegar a função de vistoria ao PM Segurança para agilizar o atendimento.',
+ 'C',
+ 'A alternativa C está correta: diante do acúmulo excessivo de veículos, o PM Selecionador deve interromper temporariamente a seleção de novos veículos, permitindo que o PM Comandante reorganize os espaços e o fluxo da operação antes de retomar a triagem. A alternativa A compromete a qualidade e a segurança da vistoria ao dispensar etapas técnicas apenas para dar vazão ao fluxo. A alternativa B é tecnicamente incorreta, pois encaminhar veículos ao Box de Registro sem a fiscalização prévia no Box de Abordagem inverte a lógica sequencial da operação. A alternativa D expõe condutores e veículos a uma situação de abandono de supervisão, gerando risco de segurança viária e de fuga. A alternativa E descaracteriza a função do PM Segurança, cuja atribuição prioritária é a proteção perimetral da equipe, não a vistoria técnica.\n\n📜 Fundamento legal vigente: procedimento operacional padrão (POP) da corporação — doutrina de Técnica Policial Militar, Módulo Blitz Policial, quanto ao gerenciamento de fluxo e reorganização tática do dispositivo. Não há lei numerada específica.',
+ 'Doutrina de Blitz Policial (POP) — Técnica Policial Militar',
+ 'medio'),
+
+-- Q30: Abordagem a menor de idade
+(@cat_tpm19,
+ 'Na abordagem a menor de idade aparentemente desacompanhado e em atitude suspeita durante a Blitz, a conduta técnica e legal recomendada é:',
+ 'Tratar com a mesma abordagem padrão de adultos, sem qualquer distinção de procedimento.',
+ 'Priorizar a abordagem com linguagem adequada à idade, buscando contato com responsável legal e, se necessário, acionar o Conselho Tutelar.',
+ 'Liberar automaticamente por se tratar de menor, independentemente da suspeita fundada.',
+ 'Conduzir imediatamente à Delegacia sem qualquer tentativa de contato familiar.',
+ 'Aplicar medida socioeducativa diretamente no local da Blitz.',
+ 'B',
+ 'A alternativa B está correta: a abordagem a menor de idade exige linguagem adequada à faixa etária, a busca por contato com responsável legal e, se necessário, o acionamento do Conselho Tutelar, em observância à proteção integral e prioritária assegurada à criança e ao adolescente. A alternativa A ignora a condição peculiar de pessoa em desenvolvimento do menor, que exige tratamento diferenciado. A alternativa C é incorreta, pois a condição de menor não afasta a possibilidade de abordagem diante de fundada suspeita, apenas impõe procedimentos e encaminhamentos específicos. A alternativa D é desproporcional e contraria a prioridade de contato familiar e de encaminhamento a órgãos de proteção antes de medidas mais gravosas. A alternativa E é tecnicamente incorreta, pois a aplicação de medida socioeducativa não é atribuição da equipe de blitz nem pode ocorrer sem o devido processo legal e a intervenção dos órgãos competentes.\n\n📜 Fundamento legal vigente: Estatuto da Criança e do Adolescente (Lei nº 8.069/1990), arts. 4º (dever de prioridade absoluta e proteção integral) e 136 (atribuições do Conselho Tutelar), aplicados à abordagem policial de menores em situação de suspeita, em conjunto com o procedimento operacional padrão (POP) da doutrina de Técnica Policial Militar, Módulo Blitz Policial.',
+ 'ECA (Lei 8.069/1990), arts. 4º e 136; Doutrina de Blitz Policial (POP)',
+ 'medio');
+

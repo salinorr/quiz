@@ -1,0 +1,404 @@
+-- ============================================================
+-- QUIZ — Disciplina 14/20 do CHO: Licitações & Contratos (Lei nº 14.133/2021)
+-- 30 questões — Nova Lei de Licitações e Contratos Administrativos
+-- Modo Quiz Livre (categoria sem a palavra "prova" no nome)
+-- Base legal: Lei nº 14.133/2021 (texto compilado e atualizado, planalto.gov.br),
+--   salvo em legislacao/Lei_14133_2021_NovaLeiLicitacoes.html
+-- Particularidade desta disciplina: as questões 1 a 10 da fonte original vieram no
+--   formato "Certo ou Errado" (afirmativas julgadas). Foram convertidas para 2
+--   alternativas (opcao_a = "Certo", opcao_b = "Errado"; opcao_c/d/e = NULL).
+--   As questões 11 a 30 já vinham em formato A-E de múltipla escolha.
+-- Correção de conteúdo: a questão 25 da fonte original ("é dispensável a licitação
+--   para... credenciamento") continha um erro de gabarito — o credenciamento é
+--   hipótese de INEXIGIBILIDADE (Lei 14.133/2021, art. 74, IV), não de dispensa
+--   (art. 75). A questão foi reformulada para testar corretamente a inexigibilidade
+--   (art. 74, III — notória especialização), evitando induzir erro no militar.
+--   A questão 17 da fonte original era duplicata literal da questão 13 (mesmo
+--   conteúdo sobre consórcios de ME/EPP); foi reformulada para testar outro aspecto
+--   do mesmo artigo (limite de empresas consorciadas e substituição de consorciado,
+--   art. 15, §§4º e 5º), evitando repetição de conteúdo no banco de questões.
+-- ============================================================
+SET NAMES utf8mb4;
+SET foreign_key_checks = 0;
+
+INSERT IGNORE INTO categorias (nome, descricao)
+VALUES ('Licitações & Contratos — CHO 14', 'Disciplina 14/20 do CHO — Nova Lei de Licitações e Contratos Administrativos (Lei nº 14.133/2021): modalidades, fases, contratação direta (dispensa/inexigibilidade), procedimentos auxiliares, planejamento, regimes de execução e matriz de riscos');
+
+SET @cat_lc14 = (SELECT id FROM categorias WHERE nome = 'Licitações & Contratos — CHO 14' LIMIT 1);
+
+INSERT INTO questoes
+    (categoria_id, enunciado, opcao_a, opcao_b, opcao_c, opcao_d, opcao_e,
+     resposta_correta, explicacao, referencia_legal, nivel)
+VALUES
+
+-- Q01: Modalidades de licitação — Diálogo Competitivo (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "O Diálogo Competitivo consta expressamente entre as modalidades de licitação da nova legislação de licitações e contratos administrativos, sendo destinado a objetos que envolvam inovação tecnológica ou técnica, hipótese em que a Administração não consegue, sozinha, definir com precisão a solução mais adequada às suas necessidades." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. A nova legislação de licitações estabeleceu cinco modalidades licitatórias, extinguindo o convite e a tomada de preços que existiam no regime anterior. O Diálogo Competitivo é a modalidade inédita, aplicável a contratações que envolvam inovação tecnológica ou técnica, quando a Administração não consegue, por si só, definir a solução mais adequada às suas necessidades, exigindo diálogo estruturado com licitantes previamente selecionados por critérios objetivos.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 28, V (lista as modalidades: pregão, concorrência, concurso, leilão e diálogo competitivo), c/c art. 6º, XLI (define diálogo competitivo) e art. 32, I, "a" (autoriza o uso da modalidade quando o objeto envolver inovação tecnológica ou técnica).',
+ 'Lei 14.133/2021, art. 28, V c/c art. 32, I',
+ 'facil'),
+
+-- Q02: As sete fases do processo licitatório (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "O processo licitatório disciplinado pela nova lei segue, em regra, um rito sequencial padronizado, composto por sete fases distintas, que se inicia na fase preparatória (interna) e se encerra na fase de homologação." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. O processo licitatório segue, em regra, sete fases em sequência: preparatória, divulgação do edital, apresentação de propostas e lances (quando for o caso), julgamento, habilitação, recursal e homologação.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 17, incisos I a VII, que enumera expressamente as sete fases do processo licitatório nessa ordem.',
+ 'Lei 14.133/2021, art. 17, I a VII',
+ 'facil'),
+
+-- Q03: Designação de agentes públicos — quadros efetivos (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "A designação de agentes públicos para as funções essenciais à execução da nova lei de licitações caberá à autoridade máxima do órgão ou entidade, que deverá observar a exigência de indicação, entre servidores efetivos ou empregados públicos dos quadros permanentes da Administração, preferencialmente." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. A nova legislação reforça a profissionalização das contratações públicas ao exigir que a autoridade máxima do órgão designe, preferencialmente, servidores efetivos ou empregados públicos dos quadros permanentes da Administração para conduzir a licitação (agente de contratação, pregoeiro, comissão de contratação), reduzindo a dependência de cargos comissionados ou terceirizados nessas funções sensíveis.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 7º e art. 8º, caput, que tratam da designação de agentes públicos para as funções essenciais à execução da lei, com preferência pelos quadros permanentes.',
+ 'Lei 14.133/2021, art. 7º e art. 8º',
+ 'medio'),
+
+-- Q04: Dispensa de licitação — teto de R$ 50 mil para "outros serviços e compras" (Certo/Errado)
+(@cat_lc14,
+ 'Situação Hipotética: Uma fundação pública estadual celebrou contrato administrativo, por dispensa de licitação, com pessoa jurídica de direito privado sem fins lucrativos, para prestação de serviço de assistência social no valor de R$ 45.000,00 (quarenta e cinco mil reais). Considere a assertiva: "A contratação direta foi regular, pois o valor está abaixo do teto legal previsto para dispensa de licitação na hipótese de outros serviços e compras." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. A contratação é regular porque o valor de R$ 45.000,00 está abaixo do teto estabelecido para a dispensa de licitação em razão do valor, na hipótese de "outros serviços e compras" (diferente do teto, mais elevado, previsto para obras e serviços de engenharia ou para serviços de manutenção de veículos automotores).\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 75, II, que autoriza a dispensa de licitação "para contratação que envolva valores inferiores a R$ 50.000,00 (cinquenta mil reais), no caso de outros serviços e compras".',
+ 'Lei 14.133/2021, art. 75, II',
+ 'medio'),
+
+-- Q05: Dispensa x Inexigibilidade — distinção conceitual (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "Na contratação direta por dispensa, a competição entre fornecedores é viável, mas a lei autoriza a Administração a deixar de licitar por razões de conveniência elencadas em rol taxativo; já na inexigibilidade, há inviabilidade fática de competição, sendo o rol legal meramente exemplificativo." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. Na dispensa, a competição é, em tese, viável, mas a lei elenca taxativamente as hipóteses em que a Administração pode deixar de licitar (rol fechado). Já na inexigibilidade, há inviabilidade fática de competição (por exemplo, fornecedor exclusivo ou notória especialização), sendo o rol legal apenas exemplificativo ("em especial"), pois a inviabilidade de competir pode ocorrer em situações não previstas expressamente.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 74, caput ("É inexigível a licitação quando inviável a competição, em especial nos casos de...") c/c art. 75, caput ("É dispensável a licitação:"), que evidenciam a distinção estrutural entre o rol exemplificativo da inexigibilidade e o rol taxativo da dispensa.',
+ 'Lei 14.133/2021, art. 74 c/c art. 75',
+ 'dificil'),
+
+-- Q06: Inversão de fases — habilitação após o julgamento (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "Diferentemente do regime revogado pela Lei nº 8.666/1993, a nova legislação estabelece que, em regra, a fase de habilitação é posterior à fase de julgamento das propostas, sendo analisada a documentação apenas do licitante mais bem classificado." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. A inversão de fases é a regra geral do novo regime: primeiro ocorre o julgamento das propostas e apenas o licitante provisoriamente vencedor tem sua documentação de habilitação analisada, o que confere maior celeridade ao certame. A antecipação da habilitação para antes do julgamento é possível, mas depende de ato motivado e previsão expressa no edital — é a exceção, não a regra.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 17, V (habilitação como quinta fase, após julgamento) c/c § 1º do mesmo artigo (permite, excepcionalmente e mediante ato motivado previsto em edital, que a habilitação anteceda as fases de propostas/lances e de julgamento).',
+ 'Lei 14.133/2021, art. 17, V c/c § 1º',
+ 'medio'),
+
+-- Q07: Sistema de Registro de Preços — não é vedado (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "A nova legislação de licitações veda a possibilidade de uso, por meio de ata, do sistema de registro de preços." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'B',
+ 'A assertiva está ERRADA. A nova legislação, ao contrário do afirmado, incentiva e disciplina expressamente o uso do Sistema de Registro de Preços (SRP) como procedimento auxiliar das licitações, prevendo, inclusive, a divulgação obrigatória da ata de registro de preços e das contratações dele decorrentes no Portal Nacional de Contratações Públicas (PNCP).\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 78, IV (inclui o SRP entre os procedimentos auxiliares) e arts. 82 a 86 (disciplinam especificamente o Sistema de Registro de Preços, incluindo a atuação do órgão gerenciador e dos órgãos participantes).',
+ 'Lei 14.133/2021, art. 78, IV c/c arts. 82 a 86',
+ 'facil'),
+
+-- Q08: Diálogo Competitivo — procedimento (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "Para a contratação de obras, serviços e compras, um órgão público pode adotar a modalidade diálogo competitivo, promovendo diálogos com licitantes previamente selecionados mediante critérios objetivos, com o intuito de desenvolver uma ou mais alternativas capazes de atender às suas necessidades, devendo os licitantes apresentar proposta final somente após o encerramento dos diálogos." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. O diálogo competitivo é aplicável exatamente quando a Administração busca desenvolver, em conjunto com licitantes previamente selecionados por critérios objetivos, uma ou mais alternativas técnicas capazes de atender às suas necessidades para obras, serviços e compras, seguindo as fases de diálogo e, ao final, de apresentação de proposta final e competição entre os participantes.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 32, caput e incisos, que disciplinam integralmente o procedimento do diálogo competitivo, incluindo a seleção prévia de licitantes por critérios objetivos e a apresentação de proposta final após o encerramento da fase de diálogos.',
+ 'Lei 14.133/2021, art. 32',
+ 'medio'),
+
+-- Q09: Cooperativas — participação em licitações (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "Os profissionais organizados sob a forma de cooperativa estão impedidos de participar de licitações regidas pela nova lei." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'B',
+ 'A assertiva está ERRADA. A lei veda restrições indevidas à competitividade, inclusive quanto à participação de sociedades cooperativas, que podem licitar desde que atendidas as condições específicas estabelecidas para esse tipo de organização (regularidade do regime cooperado, compatibilidade do objeto com a atuação cooperada, entre outras exigências do regramento próprio).\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 5º (princípio da isonomia e vedação a cláusulas que comprometam, restrinjam ou frustrem o caráter competitivo, inclusive quanto a cooperativas) c/c art. 16, caput e incisos, que disciplina especificamente as condições para participação de cooperativas.',
+ 'Lei 14.133/2021, art. 5º c/c art. 16',
+ 'facil'),
+
+-- Q10: Apoio técnico externo em bens/serviços especiais (Certo/Errado)
+(@cat_lc14,
+ 'Considere a seguinte assertiva: "Em licitação que envolva bens ou serviços especiais, cujo objeto não seja rotineiramente contratado pela Administração, poderá ser contratado, por prazo determinado, serviço de empresa ou de profissional especializado para assessorar os agentes públicos responsáveis pela condução da licitação." A assertiva está:',
+ 'Certo',
+ 'Errado',
+ NULL, NULL, NULL,
+ 'A',
+ 'A assertiva está CERTA. Para objetos especiais e não rotineiros, a nova legislação permite que a Administração contrate, por prazo determinado, apoio técnico externo (empresa ou profissional especializado) para assessorar o agente de contratação ou a comissão de contratação na condução do certame, reconhecendo que nem sempre o corpo técnico permanente possui a expertise necessária para objetos incomuns.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 8º, § 4º, que autoriza expressamente essa contratação de apoio técnico especializado, por prazo determinado, em licitações de bens ou serviços especiais não rotineiramente contratados.',
+ 'Lei 14.133/2021, art. 8º, § 4º',
+ 'medio'),
+
+-- Q11: Procedimento de Manifestação de Interesse (PMI)
+(@cat_lc14,
+ 'Um órgão público pretende obter, junto à iniciativa privada, estudos técnicos, investigações e projetos preliminares de utilidade para uma futura licitação de grande complexidade, sem que isso implique preferência automática do realizador no certame. De acordo com a nova legislação de licitações, esse instrumento é denominado:',
+ 'Etapa obrigatória da modalidade Diálogo Competitivo, na qual os licitantes se credenciam para a fase de propostas técnicas.',
+ 'Nova modalidade licitatória, adotada para objetos de alta complexidade que demandem solução tecnológica inovadora.',
+ 'Prática vedada, desde a edição da nova lei, para licitações de obras e serviços de engenharia.',
+ 'Procedimento auxiliar, iniciado com a publicação de edital de chamamento público, destinado à coleta de estudos, investigações, levantamentos e projetos vinculados à contratação, cujo ressarcimento caberá ao vencedor do certame.',
+ 'Procedimento integrado à fase interna do credenciamento, adotado quando desvantajosa a contratação exclusiva de um único interessado.',
+ 'D',
+ 'A alternativa D está correta: o Procedimento de Manifestação de Interesse (PMI) não é modalidade licitatória nem etapa do Diálogo Competitivo, mas um procedimento auxiliar, iniciado por edital de chamamento público, para que a Administração obtenha da iniciativa privada estudos, investigações, levantamentos e projetos de utilidade para a futura licitação. Sua característica central é que o realizador não adquire preferência no certame, e o custo desses estudos é ressarcido pelo licitante vencedor. As alternativas A e B confundem o PMI com o Diálogo Competitivo (que é modalidade autônoma). A alternativa C é falsa, pois o PMI é amplamente utilizado justamente em obras e serviços de engenharia complexos. A alternativa E descreve, de forma incorreta, o credenciamento.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 78, III (inclui o PMI entre os procedimentos auxiliares) c/c art. 81, caput e § 1º (disciplina o procedimento aberto de manifestação de interesse e o ressarcimento pelo vencedor da licitação).',
+ 'Lei 14.133/2021, art. 78, III c/c art. 81',
+ 'dificil'),
+
+-- Q12: Definições legais — Agente de Contratação
+(@cat_lc14,
+ 'Para os fins da nova legislação de licitações, a pessoa designada pela autoridade competente, entre servidores efetivos ou empregados públicos dos quadros permanentes da Administração, para tomar decisões, acompanhar o trâmite da licitação, dar impulso ao procedimento licitatório e executar as demais atividades necessárias ao bom andamento do certame até a homologação, é tecnicamente denominada:',
+ 'Fiscal do contrato.',
+ 'Gestor de convênio.',
+ 'Autoridade máxima do órgão.',
+ 'Agente de contratação.',
+ 'Ordenador de despesas.',
+ 'D',
+ 'A alternativa D está correta: o Agente de Contratação é o "maestro" do processo licitatório, necessariamente designado entre servidores efetivos ou empregados públicos dos quadros permanentes, responsável por conduzir o certame do início ao impulso processual até a homologação. A alternativa A (fiscal do contrato) atua na fase de execução contratual, não na condução da licitação. A alternativa B não corresponde a nenhuma figura da lei de licitações. A alternativa C (autoridade máxima) é quem designa o agente de contratação, mas não se confunde com ele. A alternativa E (ordenador de despesas) refere-se à gestão orçamentário-financeira, distinta da condução do certame.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 6º, LX (define agente de contratação) c/c art. 8º, caput (reitera que a licitação será conduzida por agente de contratação designado entre servidores efetivos ou empregados públicos dos quadros permanentes).',
+ 'Lei 14.133/2021, art. 6º, LX c/c art. 8º',
+ 'medio'),
+
+-- Q13: Consórcios — benefício de ME/EPP na habilitação econômico-financeira
+(@cat_lc14,
+ 'Determinado edital de licitação será disputado, entre outros, por um consórcio composto, em sua totalidade, por microempresas e empresas de pequeno porte. Nos termos da nova legislação de licitações, quanto à exigência de habilitação econômico-financeira para esse consórcio específico, é correto afirmar que:',
+ 'Não haverá acréscimo sobre o valor exigido de licitante individual para a habilitação econômico-financeira.',
+ 'Haverá acréscimo de 10% sobre o valor exigido de licitante individual, sem qualquer exceção.',
+ 'Cada empresa consorciada deverá, isoladamente, comprovar o valor integral exigido de licitante individual.',
+ 'O consórcio de ME/EPP está automaticamente dispensado de qualquer comprovação de qualificação econômico-financeira.',
+ 'O acréscimo aplicável a esse consórcio será de 30%, por se tratar de composição integralmente formada por ME/EPP.',
+ 'A',
+ 'A alternativa A está correta: como regra geral, o edital deve estabelecer para o consórcio um acréscimo de 10% sobre o valor exigido de licitante individual para fins de habilitação econômico-financeira — mas esse acréscimo NÃO se aplica aos consórcios compostos, em sua totalidade, por microempresas e empresas de pequeno porte, que ficam dispensados do acréscimo (não da exigência em si). A alternativa B ignora a exceção legal para ME/EPP. A alternativa C contraria a lógica de somatório de capacidades típica dos consórcios. A alternativa D exagera a exceção legal, que afasta apenas o acréscimo, não a exigência de qualificação. A alternativa E inventa um percentual sem previsão legal.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 15, § 1º (acréscimo de 10% para consórcios em geral) c/c § 2º (exceção expressa para consórcios integralmente formados por ME/EPP).',
+ 'Lei 14.133/2021, art. 15, §§ 1º e 2º',
+ 'medio'),
+
+-- Q14: Diálogo Competitivo — natureza jurídica (modalidade, não procedimento auxiliar)
+(@cat_lc14,
+ 'Entre as inovações introduzidas pela nova legislação de licitações, destaca-se o denominado diálogo competitivo. Sobre sua natureza jurídica e funcionamento, é correto afirmar que constitui:',
+ 'Um dos procedimentos auxiliares à licitação, adotado previamente à instauração do certame para delimitar o objeto a ser licitado.',
+ 'Modalidade licitatória que contempla uma fase de diálogo com potenciais interessados, na qual são apresentadas soluções técnicas para atender às necessidades da Administração.',
+ 'Princípio aplicável a todas as modalidades licitatórias, voltado à escolha da melhor proposta técnica e econômica.',
+ 'Fase introduzida na modalidade concorrência, posterior à apresentação de propostas, para ajuste da especificação técnica do objeto.',
+ 'Procedimento aplicável exclusivamente a projetos de infraestrutura contratados por concessão administrativa ou patrocinada.',
+ 'B',
+ 'A alternativa B está correta: o diálogo competitivo é modalidade licitatória autônoma (não procedimento auxiliar, princípio ou fase de outra modalidade), caracterizada por uma fase de diálogo estruturado com licitantes previamente selecionados, na qual se buscam soluções técnicas aptas a atender necessidades complexas da Administração. A alternativa A erra ao classificá-lo como "procedimento auxiliar" — ele é modalidade principal, ao lado de pregão, concorrência, concurso e leilão. A alternativa C descreve, de forma genérica, o princípio do julgamento objetivo, não uma modalidade específica. A alternativa D é falsa, pois o diálogo competitivo não é uma fase da concorrência, mas modalidade distinta. A alternativa E restringe indevidamente seu uso, que não se limita a concessões.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 28, V (elenca o diálogo competitivo entre as modalidades de licitação) c/c art. 6º, XLI e art. 32 (definição e procedimento).',
+ 'Lei 14.133/2021, art. 28, V c/c art. 32',
+ 'medio'),
+
+-- Q15: Diálogo Competitivo — hipótese de cabimento (inovação tecnológica)
+(@cat_lc14,
+ 'Um órgão de segurança pública pretende contratar solução tecnológica de monitoramento territorial ainda inexistente no mercado nos moldes exigidos, sem conseguir, por si só, especificar com precisão técnica a solução mais adequada. Nos termos da nova legislação de licitações, a modalidade licitatória cabível para esse objeto é:',
+ 'Pregão.',
+ 'Concorrência.',
+ 'Concurso.',
+ 'Diálogo competitivo.',
+ 'Leilão.',
+ 'D',
+ 'A alternativa D está correta: a inovação tecnológica ou técnica, somada à impossibilidade de a Administração definir com precisão suficiente as especificações da solução pretendida, é um dos gatilhos específicos que autorizam o uso do Diálogo Competitivo. A alternativa A (pregão) destina-se a bens e serviços comuns, cujo padrão de desempenho é objetivamente definível — o oposto do cenário descrito. A alternativa B (concorrência) é a modalidade padrão para objetos não comuns em geral, mas não contempla a fase de diálogo necessária quando a própria solução técnica é incerta. A alternativa C (concurso) destina-se à escolha de trabalho técnico, científico ou artístico. A alternativa E (leilão) destina-se à alienação de bens.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 32, I, "a" e "c", que autorizam o diálogo competitivo quando o objeto envolver inovação tecnológica ou técnica e quando as especificações não puderem ser definidas com precisão suficiente pela Administração.',
+ 'Lei 14.133/2021, art. 32, I',
+ 'facil'),
+
+-- Q16: Compras — parcelamento e vedação de padronização exclusivista
+(@cat_lc14,
+ 'Um órgão público, ao planejar a aquisição de determinado insumo, avalia se deve ou não parcelar o objeto em lotes menores para ampliar a disputa. Nos termos da nova legislação de licitações, quanto ao princípio do parcelamento nas compras, é correto afirmar que:',
+ 'A Administração está impedida, em qualquer hipótese, de vedar a contratação de marca ou produto específico.',
+ 'O processamento por meio de sistema de registro de preços é sempre obrigatório, independentemente da natureza do objeto.',
+ 'O parcelamento não será adotado quando o processo de padronização ou de escolha de marca levar a fornecedor exclusivo.',
+ 'Não há permissão legal, em nenhuma hipótese, para indicação de marcas ou modelos pela Administração.',
+ 'Poderá ser exigida amostra do bem já na fase de habilitação dos licitantes.',
+ 'C',
+ 'A alternativa C está correta: embora o parcelamento seja a regra (para ampliar a competitividade), a própria lei o excepciona quando o processo de padronização ou de escolha de marca conduzir a fornecedor exclusivo, hipótese em que o parcelamento comprometeria, e não favoreceria, a vantajosidade da contratação. A alternativa A é falsa, pois a lei permite, excepcionalmente e de forma justificada, a indicação de marca (por exemplo, para padronização ou compatibilidade com plataformas já adotadas). A alternativa B erra ao tornar o SRP obrigatório em toda e qualquer compra, quando na verdade seu uso é condicionado à pertinência do objeto. A alternativa D contraria a exceção de indicação de marca. A alternativa E está incorreta porque a exigência de amostra ocorre, tipicamente, na fase de julgamento das propostas ou de lances (ou no procedimento de pré-qualificação), e não na fase de habilitação.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 40, § 3º, III (exceção ao parcelamento por padronização/exclusividade de marca) c/c art. 41, I (hipóteses excepcionais de indicação de marca) e art. 41, II (momento de exigência de amostra).',
+ 'Lei 14.133/2021, art. 40, § 3º, III',
+ 'dificil'),
+
+-- Q17: Consórcios — limite de empresas e substituição de consorciado
+(@cat_lc14,
+ 'Situação Hipotética: Durante a fase de execução de um contrato firmado com um consórcio de empresas, uma das consorciadas deseja se retirar e ser substituída por outra pessoa jurídica, sem qualquer manifestação prévia do órgão contratante. Paralelamente, o edital daquela licitação havia estabelecido, de forma tecnicamente justificada, um número máximo de empresas que poderiam compor cada consórcio participante. Sobre essas duas situações, nos termos da nova legislação de licitações, é correto afirmar que:',
+ 'Ambas as práticas são vedadas: nem o edital pode limitar o número de consorciadas, nem a substituição pode ocorrer em qualquer hipótese, ainda que autorizada.',
+ 'O edital pode, mediante justificativa técnica aprovada pela autoridade competente, estabelecer limite máximo de empresas consorciadas; já a substituição de consorciado depende de autorização expressa do órgão ou entidade contratante, condicionada à comprovação de que a nova empresa mantém, no mínimo, os mesmos requisitos de habilitação da substituída.',
+ 'O edital jamais pode limitar o número de empresas em consórcio, mas a substituição de consorciado pode ocorrer livremente, independentemente de qualquer autorização.',
+ 'A limitação do número de consorciadas é sempre vedada por violar a livre concorrência, e a substituição de consorciado somente pode ocorrer antes da assinatura do contrato.',
+ 'Tanto a limitação do número de consorciadas quanto a substituição de consorciado são matérias estranhas à disciplina legal dos consórcios, cabendo exclusivamente ao edital regulá-las sem parâmetros legais.',
+ 'B',
+ 'A alternativa B está correta: desde que haja justificativa técnica aprovada pela autoridade competente, o edital pode estabelecer limite máximo para o número de empresas consorciadas; e a substituição de consorciado, durante a execução contratual, depende de autorização expressa do órgão ou entidade contratante, exigindo-se a comprovação de que a nova empresa possui, no mínimo, os mesmos quantitativos de habilitação técnica e os mesmos valores de qualificação econômico-financeira da empresa substituída. A alternativa A nega, incorretamente, a possibilidade de limitação editalícia, que é expressamente permitida. A alternativa C erra ao dispensar qualquer autorização para a substituição, o que contraria a exigência legal de controle pelo contratante. A alternativa D também erra ao proibir a limitação de consorciadas e ao restringir indevidamente o momento da substituição. A alternativa E ignora que a lei disciplina expressamente ambos os temas, não os deixando à discricionariedade irrestrita do edital.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 15, § 4º (limite de empresas consorciadas mediante justificativa técnica) c/c § 5º (requisitos para substituição de consorciado durante a execução do contrato).',
+ 'Lei 14.133/2021, art. 15, §§ 4º e 5º',
+ 'dificil'),
+
+-- Q18: Credenciamento — procedimento auxiliar, não modalidade
+(@cat_lc14,
+ 'Determinada Organização Militar Estadual pretende contratar, de forma simultânea, todos os laboratórios de análises clínicas da capital que atendam a requisitos técnicos padronizados no edital, para realização de exames de seus militares conforme a demanda de cada mês. De acordo com a disciplina estabelecida pela nova legislação de licitações, esse instrumento é tecnicamente denominado:',
+ 'Sucedâneo do procedimento licitatório, aplicável a serviços contínuos de pouca complexidade técnica.',
+ 'Procedimento auxiliar, que pode ser utilizado quando se mostrar viável e vantajosa para a Administração a realização de contratações simultâneas em condições padronizadas.',
+ 'Modalidade de licitação aplicável exclusivamente à prestação de serviços técnicos por pessoas físicas.',
+ 'Instrumento admissível apenas nas hipóteses de dispensa de licitação em razão do valor.',
+ 'Procedimento licitatório aplicável à escolha da melhor oferta quando se tratar de serviço de natureza comum.',
+ 'B',
+ 'A alternativa B está correta: o credenciamento é procedimento auxiliar (não modalidade, nem "sucedâneo" do procedimento licitatório) utilizável quando for viável e vantajoso à Administração contratar, de forma simultânea e em condições padronizadas, todos os interessados que atendam aos requisitos do chamamento público — exatamente o caso das clínicas/laboratórios credenciados. A alternativa A erra ao chamá-lo de "sucedâneo" da licitação, quando na verdade é instrumento próprio e disciplinado autonomamente. A alternativa C erra ao classificá-lo como "modalidade" e ao restringi-lo a pessoas físicas. A alternativa D é falsa, pois o credenciamento não se confunde com dispensa por valor — é, tecnicamente, hipótese de inexigibilidade, por inviabilidade de competição entre credenciados. A alternativa E descreve, de forma equivocada, características de outras modalidades (como o pregão).\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 78, I (inclui o credenciamento entre os procedimentos auxiliares) c/c art. 79, I (hipótese de credenciamento "paralela e não excludente", para contratações simultâneas em condições padronizadas).',
+ 'Lei 14.133/2021, art. 78, I c/c art. 79, I',
+ 'medio'),
+
+-- Q19: Projeto Básico — origem no Estudo Técnico Preliminar
+(@cat_lc14,
+ 'Antes de elaborar o projeto básico de uma obra de reforma de um quartel, a equipe técnica de planejamento da corporação produziu um documento que caracterizou o interesse público envolvido, apontou a melhor solução para satisfazê-lo e serviu de base para as peças técnicas subsequentes. Nos termos da nova legislação de licitações, esse documento inicial é denominado:',
+ 'Termo de referência simplificado.',
+ 'Anteprojeto de engenharia definitivo.',
+ 'Estudo técnico preliminar, que caracteriza o interesse público envolvido e aponta a melhor solução para sua satisfação, servindo de base ao anteprojeto, ao termo de referência ou ao projeto básico.',
+ 'Edital de pré-qualificação permanente.',
+ 'Relatório de impacto ambiental obrigatório para qualquer obra pública.',
+ 'C',
+ 'A alternativa C está correta: o Estudo Técnico Preliminar (ETP) é o documento constitutivo da primeira etapa do planejamento de uma contratação, que caracteriza o interesse público envolvido e sua melhor solução, servindo de base para a elaboração do anteprojeto, do termo de referência ou do projeto básico, conforme o caso. A alternativa A confunde o ETP com o termo de referência, que é peça posterior e mais específica. A alternativa B descreve o anteprojeto, que decorre do ETP, mas não se confunde com ele. A alternativa D refere-se a outro instrumento (procedimento auxiliar de pré-qualificação), sem relação com o planejamento técnico da obra. A alternativa E generaliza indevidamente uma exigência que depende da natureza e do impacto específico de cada obra, não sendo automática para "qualquer obra pública".\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 6º, XX (define estudo técnico preliminar) c/c art. 6º, XXV (define projeto básico como decorrência do ETP).',
+ 'Lei 14.133/2021, art. 6º, XX e XXV',
+ 'medio'),
+
+-- Q20: Inexigibilidade — fornecedor exclusivo, vedação de preferência por marca
+(@cat_lc14,
+ 'Situação Hipotética: Uma Polícia Militar deseja contratar a aquisição de determinado equipamento de proteção balística que, comprovadamente, só pode ser fornecido por uma única empresa no mercado nacional. De acordo com o regime jurídico da nova legislação de licitações, tal contratação deve ser feita mediante:',
+ 'Inexigibilidade de licitação, devendo a Administração demonstrar a inviabilidade de competição mediante atestado de exclusividade, contrato de exclusividade, declaração do fabricante ou outro documento idôneo, sendo vedada a preferência por marca específica.',
+ 'Inexigibilidade de licitação, sendo permitida, nesse caso, a preferência expressa por marca específica no edital.',
+ 'Dispensa de licitação, vedada a preferência por marca específica.',
+ 'Dispensa de licitação, permitida a preferência por marca específica.',
+ 'Prévia licitação, obrigatoriamente na modalidade diálogo competitivo.',
+ 'A',
+ 'A alternativa A está correta: a existência de fornecedor exclusivo caracteriza hipótese clássica de inexigibilidade de licitação (inviabilidade de competição), exigindo-se da Administração a comprovação documental idônea da exclusividade (atestado, contrato de exclusividade, declaração do fabricante, entre outros), sendo expressamente vedada a preferência por marca específica nessas contratações, para evitar que a "exclusividade" seja artificialmente direcionada. A alternativa B erra ao permitir a preferência por marca, o que a lei veda expressamente nesta hipótese. As alternativas C e D confundem a hipótese com dispensa, quando na verdade se trata de inexigibilidade (inviabilidade de competição, e não escolha discricionária de não licitar). A alternativa E é incompatível com o cenário, pois o diálogo competitivo pressupõe múltiplos licitantes dialogando, o que é inviável havendo fornecedor único.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 74, I (fornecedor exclusivo como hipótese de inexigibilidade) c/c § 1º do mesmo artigo (exige comprovação documental idônea e veda a preferência por marca específica).',
+ 'Lei 14.133/2021, art. 74, I, § 1º',
+ 'medio'),
+
+-- Q21: Contratação semi-integrada — matriz de riscos obrigatória
+(@cat_lc14,
+ 'Um Estado deseja licitar, na modalidade concorrência, obra de construção de um complexo esportivo, optando pelo regime de contratação semi-integrada, no qual o contratado é responsável pela elaboração dos projetos executivos e pela execução da obra, com base em anteprojeto fornecido pela Administração. Sobre esse regime de contratação, nos termos da nova legislação de licitações, é correto afirmar que:',
+ 'O edital deverá prever, obrigatoriamente, matriz de alocação de riscos, estabelecendo a responsabilidade de cada parte quanto aos riscos e eventos supervenientes à celebração do contrato.',
+ 'O edital deverá prever, como atribuição do contratado, a elaboração de projeto básico e executivo a partir de mero estudo preliminar simplificado, sem necessidade de anteprojeto prévio.',
+ 'O edital deverá prever o sigilo do orçamento estimado da contratação, permitindo seu acesso apenas após a adjudicação do objeto.',
+ 'Esse regime não é aplicável à modalidade concorrência escolhida no caso concreto.',
+ 'Esse regime não é aplicável ao objeto de construção civil descrito na situação hipotética.',
+ 'A',
+ 'A alternativa A está correta: nos regimes de contratação integrada e semi-integrada, a matriz de alocação de riscos é elemento essencial e obrigatório do edital, estabelecendo a responsabilidade de cada parte (Administração e contratado) pelos riscos e eventos supervenientes, de modo a preservar o equilíbrio econômico-financeiro do contrato de forma previamente pactuada. A alternativa B inverte o regime: na contratação semi-integrada, o contratado parte de projeto básico já elaborado pela Administração para desenvolver o projeto executivo (na integrada, é que se parte de anteprojeto para desenvolver projeto básico e executivo). A alternativa C não corresponde a exigência do regime semi-integrado. As alternativas D e E restringem indevidamente a aplicação do regime, que é plenamente compatível com a modalidade concorrência e com obras de construção civil.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 22, § 2º, que torna obrigatória a matriz de alocação de riscos nos contratos de obras e serviços de engenharia sob os regimes de contratação integrada e semi-integrada.',
+ 'Lei 14.133/2021, art. 22, § 2º',
+ 'dificil'),
+
+-- Q22: Dispensa — manutenção de veículos automotores (teto de R$ 100 mil)
+(@cat_lc14,
+ 'Uma Polícia Militar pretende contratar serviços de manutenção de veículos automotores de sua frota oficial. Após os estudos preliminares, concluiu-se que o valor estimado da contratação é de R$ 50.000,00 (cinquenta mil reais). Nos termos da nova legislação de licitações, essa contratação:',
+ 'Pode ser feita mediante dispensa de licitação.',
+ 'Pode ser feita mediante inexigibilidade de licitação.',
+ 'Deve ser feita necessariamente mediante prévia licitação, na modalidade concorrência.',
+ 'Deve ser feita necessariamente mediante prévia licitação, na modalidade pregão, sem possibilidade de contratação direta.',
+ 'Deve ser feita necessariamente mediante prévia licitação, na modalidade diálogo competitivo.',
+ 'A',
+ 'A alternativa A está correta: para serviços de manutenção de veículos automotores, a lei estabelece teto específico e mais elevado (equiparado ao de obras e serviços de engenharia) para fins de dispensa de licitação em razão do valor. Como R$ 50.000,00 está abaixo desse teto, a contratação pode ser feita por dispensa direta. A alternativa B está incorreta, pois não há inviabilidade de competição no cenário (há múltiplas oficinas aptas a prestar o serviço) — o fundamento correto é a dispensa por valor, não a inexigibilidade. As alternativas C, D e E ignoram a possibilidade de contratação direta expressamente autorizada pela lei para esse valor e objeto específicos.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 75, I, que autoriza a dispensa de licitação "para contratação que envolva valores inferiores a R$ 100.000,00 (cem mil reais), no caso de obras e serviços de engenharia ou de serviços de manutenção de veículos automotores".',
+ 'Lei 14.133/2021, art. 75, I',
+ 'medio'),
+
+-- Q23: Equilíbrio econômico-financeiro — reajustamento em sentido estrito x repactuação
+(@cat_lc14,
+ 'Um contrato administrativo de fornecimento contínuo de material de consumo, sem regime de dedicação exclusiva de mão de obra, sofre aumento ordinário e regular do custo dos insumos necessários ao seu cumprimento. Para restabelecer o equilíbrio econômico-financeiro, é aplicado o índice de correção monetária previsto no próprio contrato, admitida a adoção de índices específicos ou setoriais. Esse mecanismo é tecnicamente denominado:',
+ 'Correção monetária judicial.',
+ 'Repactuação.',
+ 'Reajustamento em sentido estrito.',
+ 'Revisão de preços pela teoria da imprevisão.',
+ 'Equilíbrio exorbitante.',
+ 'C',
+ 'A alternativa C está correta: o reajustamento em sentido estrito é a forma de manutenção do equilíbrio econômico-financeiro aplicável, via de regra, quando não há regime de dedicação exclusiva de mão de obra, mediante a aplicação de índice de correção monetária previsto em contrato (geral, específico ou setorial) para compensar a variação ordinária e previsível de custos. A alternativa B (repactuação) é o mecanismo próprio de contratos de serviços contínuos com regime de dedicação exclusiva de mão de obra ou com predominância de mão de obra, hipótese distinta da narrada. A alternativa A não corresponde a instituto próprio da lei de licitações. A alternativa D refere-se a evento imprevisível e extraordinário (álea econômica extraordinária), diferente do aumento ordinário e regular descrito. A alternativa E não é instituto reconhecido pela legislação.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 6º, LVIII (define reajustamento em sentido estrito) e LIX (define repactuação) c/c art. 25, § 8º, I e II (distingue as hipóteses de cabimento de cada instituto conforme haja ou não dedicação exclusiva de mão de obra).',
+ 'Lei 14.133/2021, art. 6º, LVIII c/c art. 25, § 8º, I',
+ 'dificil'),
+
+-- Q24: Diálogo Competitivo — abrangência de objetos (obras, serviços e compras)
+(@cat_lc14,
+ 'Um Município deseja realizar diálogo com licitantes previamente selecionados por critérios objetivos, com o propósito de desenvolver uma ou mais alternativas capazes de atender às necessidades da Administração. Preenchidos os demais requisitos legais, nos termos da nova legislação de licitações, é correto afirmar que:',
+ 'Nenhuma modalidade de licitação se ajusta a esse padrão, pois o diálogo daria ensejo a subjetivismos incompatíveis com a isonomia entre licitantes.',
+ 'É possível a adoção do diálogo competitivo para a contratação de obras, serviços e compras, com licitantes selecionados por critérios objetivos, os quais apresentarão proposta final após o encerramento dos diálogos.',
+ 'É possível a adoção dessa modalidade apenas quando o regime de execução contratual for, obrigatoriamente, a contratação integrada.',
+ 'É possível a adoção dessa modalidade apenas para contratações de caráter não comum, sendo o diálogo aberto a qualquer interessado, sem seleção prévia.',
+ 'É possível a adoção dessa modalidade apenas quando a Administração, e não os licitantes, apresentar o projeto final após o encerramento dos diálogos.',
+ 'B',
+ 'A alternativa B está correta: a nova legislação autoriza expressamente o uso do diálogo competitivo para a contratação de obras, serviços e compras (não apenas serviços), desde que os licitantes sejam previamente selecionados por critérios objetivos definidos em edital, cabendo a eles — e não à Administração — apresentar a proposta final após o encerramento da fase de diálogos. A alternativa A contraria a própria existência legal da modalidade, expressamente prevista e disciplinada. A alternativa C restringe indevidamente o cabimento do diálogo competitivo a um único regime de execução, quando a lei não impõe essa vinculação obrigatória. A alternativa D erra ao dispensar a seleção prévia por critérios objetivos, que é requisito essencial da modalidade. A alternativa E inverte os papéis: é o licitante, e não a Administração, quem apresenta a proposta final.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 32, caput, que autoriza o diálogo competitivo para "a contratação de obras, serviços e compras em que a Administração Pública realiza diálogos com licitantes previamente selecionados mediante critérios objetivos".',
+ 'Lei 14.133/2021, art. 32, caput',
+ 'medio'),
+
+-- Q25: Inexigibilidade — serviços técnicos especializados de notória especialização
+(@cat_lc14,
+ 'Situação Hipotética: Um órgão público necessita contratar parecer técnico de elevada complexidade sobre a viabilidade estrutural de uma edificação histórica, optando por profissional cujo renome na área, decorrente de publicações e de desempenho anterior comprovado, permite inferir que seu trabalho é essencial e adequado à plena satisfação do objeto. Nos termos da nova legislação de licitações, essa contratação configura hipótese de:',
+ 'Dispensa de licitação em razão do baixo valor estimado do serviço técnico contratado.',
+ 'Dispensa de licitação em razão da urgência da situação fática apresentada.',
+ 'Inexigibilidade de licitação, por se tratar de contratação de serviço técnico especializado de natureza predominantemente intelectual com profissional de notória especialização, sendo vedada essa hipótese para serviços de publicidade e divulgação.',
+ 'Licitação obrigatória na modalidade concurso, por se tratar de escolha de trabalho técnico.',
+ 'Licitação obrigatória na modalidade pregão, por se tratar de serviço comum de engenharia.',
+ 'C',
+ 'A alternativa C está correta: a contratação de serviços técnicos especializados de natureza predominantemente intelectual (como pareceres e avaliações técnicas) com profissional de notória especialização é hipótese clássica de inexigibilidade de licitação, por inviabilidade de competição — não se trata de uma "melhor proposta" comparável entre vários interessados, mas da escolha de quem, comprovadamente, é o mais apto a entregar o resultado pretendido. A lei expressamente veda o uso dessa hipótese para contratar serviços de publicidade e divulgação, evitando direcionamentos. As alternativas A e B confundem a hipótese com dispensa (que decorre de valor ou urgência, não de notória especialização). A alternativa D é incorreta porque o concurso destina-se à escolha de trabalho técnico, científico ou artístico mediante prêmio ou remuneração ao vencedor, hipótese distinta da contratação direta de um parecer técnico específico. A alternativa E também é incorreta, pois o serviço narrado não é "comum", mas técnico especializado e de notória especialização, o que afasta o pregão.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 74, III, "b" (pareceres, perícias e avaliações em geral, como hipótese de inexigibilidade por notória especialização) c/c § 3º do mesmo artigo (define notória especialização).',
+ 'Lei 14.133/2021, art. 74, III, "b" c/c § 3º',
+ 'dificil'),
+
+-- Q26: Planejamento de compras — economicidade e paridade com o setor privado
+(@cat_lc14,
+ 'Ao planejar as compras anuais de determinado insumo, o órgão de logística de uma corporação deve considerar a expectativa de consumo e observar determinados requisitos legais. Nos termos da nova legislação de licitações, um desses requisitos consiste em buscar:',
+ 'Condições de aquisição e pagamento semelhantes às praticadas pelo setor privado.',
+ 'O processamento obrigatório de toda e qualquer compra por meio de sistema de registro de preços, independentemente da pertinência ao objeto.',
+ 'Condições de guarda e armazenamento que viabilizem o menor preço, ainda que permitam a deterioração do material.',
+ 'A busca pela economicidade, vedando-se o atendimento ao princípio do parcelamento mesmo quando tecnicamente viável e economicamente vantajoso.',
+ 'A determinação de unidades e quantidades a serem adquiridas, com vedação absoluta ao fornecimento contínuo.',
+ 'A',
+ 'A alternativa A está correta: o planejamento de compras deve buscar condições de aquisição e pagamento semelhantes às praticadas pelo setor privado, refletindo o princípio da economicidade e da eficiência na gestão de recursos públicos. A alternativa B torna o SRP obrigatório de forma absoluta, quando a lei condiciona seu uso à pertinência do objeto ("quando pertinente"). A alternativa C contraria a própria finalidade da norma, que exige condições de guarda que NÃO permitam a deterioração do material. A alternativa D inverte a lógica legal: o parcelamento deve ser buscado, e não vedado, quando tecnicamente viável e economicamente vantajoso. A alternativa E também inverte a regra, pois a lei admite expressamente o fornecimento contínuo na determinação de quantidades.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 40, caput e inciso I, que exige, no planejamento de compras, a busca por "condições de aquisição e pagamento semelhantes às do setor privado".',
+ 'Lei 14.133/2021, art. 40, I',
+ 'medio'),
+
+-- Q27: Dispensa — transferência de tecnologia para o SUS
+(@cat_lc14,
+ 'A União, por meio do Ministério da Saúde, pretende celebrar contratação que envolva transferência de tecnologia de produtos estratégicos para o Sistema Único de Saúde (SUS), conforme elencados em ato da direção nacional do SUS. Nos termos da nova legislação de licitações, essa contratação:',
+ 'Pode ser feita mediante inexigibilidade de licitação, por inviabilidade de competição inerente à transferência tecnológica.',
+ 'Pode ser feita mediante dispensa de licitação, por expressa previsão legal voltada ao fortalecimento do complexo produtivo da saúde.',
+ 'Deve ser feita mediante prévia e indispensável licitação, na modalidade concorrência ou pregão.',
+ 'Deve ser feita mediante prévia e indispensável licitação, na modalidade diálogo competitivo.',
+ 'Deve ser feita mediante prévia e indispensável licitação, na modalidade concorrência, com critério de julgamento de técnica e preço.',
+ 'B',
+ 'A alternativa B está correta: a transferência de tecnologia de produtos estratégicos para o SUS é hipótese expressa e específica de dispensa de licitação, criada para viabilizar políticas públicas de fortalecimento do complexo produtivo e industrial da saúde, distinta das hipóteses genéricas de dispensa por valor. A alternativa A confunde a hipótese com inexigibilidade, quando a própria lei a classifica taxativamente como dispensa. As alternativas C, D e E ignoram a existência dessa hipótese específica de contratação direta, exigindo indevidamente licitação prévia.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 75, XII, que autoriza a dispensa de licitação "para contratação em que houver transferência de tecnologia de produtos estratégicos para o Sistema Único de Saúde (SUS), conforme elencados em ato da direção nacional do SUS".',
+ 'Lei 14.133/2021, art. 75, XII',
+ 'medio'),
+
+-- Q28: Credenciamento — natureza de inexigibilidade
+(@cat_lc14,
+ 'Uma Polícia Militar realizou procedimento de credenciamento, mediante chamamento público, convocando todos os interessados aptos a prestar determinado serviço para que, preenchidos os requisitos do edital de chamamento, se credenciassem para execução do objeto conforme a demanda. Em se tratando de objeto que deva ser contratado por meio de credenciamento, a licitação é, nos termos da nova legislação de licitações:',
+ 'Inexigível, por expressa previsão legal, uma vez que não há competição entre os credenciados por uma vaga exclusiva, mas contratação de todos os que preencherem os requisitos.',
+ 'Dispensável, por expressa previsão legal em razão do baixo valor típico desses serviços.',
+ 'Obrigatória, na modalidade diálogo competitivo, por envolver múltiplos prestadores.',
+ 'Obrigatória, na modalidade pregão, por se tratar de serviço comum.',
+ 'Obrigatória, na modalidade leilão, por envolver seleção de múltiplos interessados.',
+ 'A',
+ 'A alternativa A está correta: o credenciamento é hipótese de inexigibilidade de licitação, porque a Administração contrata todos os interessados que atendam aos requisitos do chamamento público, não havendo disputa por uma vaga exclusiva entre eles — logo, não há competição a ser disciplinada por certame licitatório clássico. A alternativa B erra ao classificá-lo como dispensa (vinculada a valor ou situação excepcional), quando a lei o trata expressamente como inexigibilidade. As alternativas C, D e E erram ao exigir licitação em modalidades incompatíveis com a lógica não competitiva do credenciamento.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 74, IV ("objetos que devam ou possam ser contratados por meio de credenciamento" como hipótese de inexigibilidade) c/c art. 79 (disciplina do credenciamento).',
+ 'Lei 14.133/2021, art. 74, IV',
+ 'medio'),
+
+-- Q29: Aquisição de bens comuns — pregão e critérios de julgamento
+(@cat_lc14,
+ 'Uma corporação pretende adquirir, mediante processo licitatório, viaturas comuns para apoio em atividades administrativas externas, cujas especificações usuais de desempenho e qualidade podem ser objetivamente definidas em edital. Nos termos da nova legislação de licitações, quanto à modalidade licitatória adequada e ao critério de julgamento cabível, deverá ser adotada:',
+ 'A modalidade leilão, podendo o critério de julgamento ser o de maior retorno econômico.',
+ 'A modalidade pregão, podendo o critério de julgamento ser o de menor preço ou o de maior desconto.',
+ 'A modalidade concurso, podendo o critério de julgamento ser o de maior retorno econômico.',
+ 'A modalidade concorrência, sendo o pregão vedado para aquisição de bens comuns.',
+ 'A modalidade diálogo competitivo, devendo o critério de julgamento ser, obrigatoriamente, o de menor preço.',
+ 'B',
+ 'A alternativa B está correta: viaturas comuns, cujas especificações usuais de mercado podem ser objetivamente definidas, caracterizam bem comum, para o qual a lei estabelece o pregão como modalidade obrigatória, admitindo como critérios de julgamento o menor preço ou o maior desconto. A alternativa A (leilão) destina-se à alienação de bens, não à aquisição. A alternativa C (concurso) destina-se à escolha de trabalho técnico, científico ou artístico, incompatível com a aquisição de bens. A alternativa D erra ao vedar o pregão para bens comuns, quando na verdade essa é justamente sua hipótese típica e prioritária de uso. A alternativa E (diálogo competitivo) é incompatível com objetos de especificação padronizada e objetivamente definível, como viaturas comuns.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 6º, XLI (define pregão como modalidade obrigatória para bens e serviços comuns, com critério de menor preço ou maior desconto) c/c art. 28, I (pregão entre as modalidades).',
+ 'Lei 14.133/2021, art. 6º, XLI c/c art. 28, I',
+ 'facil'),
+
+-- Q30: Exclusões expressas à aplicação da lei — operações de crédito
+(@cat_lc14,
+ 'Determinado ente federativo pretende celebrar contrato que tenha por objeto operação de crédito, interno ou externo, e gestão de dívida pública, incluída a contratação de agente financeiro para esse fim. A respeito da aplicabilidade do regime jurídico da nova legislação de licitações a essa contratação, é correto afirmar que:',
+ 'Esses contratos não se sujeitam ao estatuto de licitações e contratos administrativos, por expressa exclusão legal.',
+ 'O rol de modalidades previsto na lei de licitações é meramente exemplificativo, admitindo-se a criação de modalidades específicas para operações de crédito.',
+ 'Nos casos de contratação direta indevida formalizada mediante fraude, o agente público responsável responde apenas subsidiariamente ao contratado pelo dano causado ao erário.',
+ 'O instrumento de contrato é sempre dispensável nas hipóteses de dispensa de licitação em razão do valor, independentemente do objeto contratado.',
+ 'É inexigível a licitação para contratação de operação de crédito, por se tratar de hipótese de inviabilidade de competição.',
+ 'A',
+ 'A alternativa A está correta: os contratos que tenham por objeto operação de crédito, interno ou externo, e gestão de dívida pública, incluídas as contratações de agente financeiro, estão expressamente excluídos da aplicação do regime da nova legislação de licitações, sujeitando-se a disciplina própria (financeira e orçamentária). A alternativa B é falsa, pois o rol de modalidades é taxativo, sendo vedada a criação de modalidades novas ou a combinação entre as existentes. A alternativa C inverte a regra de responsabilização: nos casos de contratação direta indevida por fraude, a responsabilidade do agente público, em regra, não é meramente subsidiária. A alternativa D generaliza indevidamente uma exceção que depende do objeto e das circunstâncias específicas de cada contratação. A alternativa E é incoerente com a própria natureza da exclusão, que retira o objeto do âmbito de incidência da lei, e não o classifica como hipótese de inexigibilidade dentro dela.\n\n📜 Fundamento legal vigente: Lei nº 14.133/2021, art. 3º, I, que exclui expressamente da aplicação da lei "os contratos que tenham por objeto operação de crédito, interno ou externo, e gestão de dívida pública, incluídas as contratações de agente financeiro e a concessão de garantia relacionadas a esses contratos".',
+ 'Lei 14.133/2021, art. 3º, I',
+ 'dificil');
+
+SET foreign_key_checks = 1;

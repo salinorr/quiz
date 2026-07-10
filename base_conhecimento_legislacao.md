@@ -1,7 +1,7 @@
 # Base de Conhecimento -- Legislacao Militar de Roraima
 
 **Documento de referencia para criacao de questoes do Quiz PMRR**
-Ultima atualizacao: 2026-07-09
+Ultima atualizacao: 2026-07-10
 
 ---
 
@@ -23,6 +23,16 @@ Ultima atualizacao: 2026-07-09
 14. [Direito Constitucional (CF/88)](#14-direito-constitucional-cf88)
 15. [Direitos Humanos e Cidadania (DUDH e CADH)](#15-direitos-humanos-e-cidadania-dudh-e-cadh)
 16. [Direitos da Comunidade LGBTQIAPN+](#16-direitos-da-comunidade-lgbtqiapn)
+17. [Ética Profissional](#17-etica-profissional)
+18. [Gestão de Materiais e Patrimônio](#18-gestao-de-materiais-e-patrimonio)
+19. [Improbidade Administrativa (Lei 8.429/1992 e Lei 14.230/2021)](#19-improbidade-administrativa-lei-84291992-e-lei-142302021)
+20. [Licitações e Contratos (Lei 14.133/2021)](#20-licitacoes-e-contratos-lei-141332021)
+21. [Logística Militar](#21-logistica-militar)
+22. [Ordem Unida com Espadas e Honras Fúnebres](#22-ordem-unida-com-espadas-e-honras-funebres)
+23. [Prevenção ao Assédio Sexual e ao Assédio Moral na Caserna](#23-prevencao-ao-assedio-sexual-e-ao-assedio-moral-na-caserna)
+24. [Sindicância Disciplinar Militar (SDM)](#24-sindicancia-disciplinar-militar-sdm)
+25. [Técnica Policial Militar — Blitz Policial](#25-tecnica-policial-militar--blitz-policial)
+26. [Trabalho de Comando](#26-trabalho-de-comando)
 
 ---
 
@@ -1915,6 +1925,802 @@ Disciplina 10/20 do CHO. Trata dos conceitos fundamentais de sexo, gênero e sex
 | Pessoas LGBTI custodiadas/presas | CNJ, Resolução 348/2020; Regras de Bangkok (ONU, 2010) |
 
 **FONTE PRINCIPAL**: Caderno de Questões — Direitos da Comunidade LGBTQIAPN+ (Academia Coronel Walterler).
+
+## 17. Ética Profissional
+
+**Nota de natureza da fonte**: disciplina de fundamentos filosóficos (Sócrates, Aristóteles, Ética Medieval, Rousseau e Kant) e de doutrina de conduta policial (C. de Rover), baseada no Caderno de Questões "Ética Profissional e Cidadania" — Academia Coronel Walterler / CHO. **Não há lei estadual/federal numerada específica**, com **duas exceções pontuais**: (1) a **CF/88, art. 14, §1º e §2º**, citada a respeito do alistamento eleitoral e da facultatividade do voto; e (2) o **Código de Conduta para os Encarregados da Aplicação da Lei (CCEAL)**, Resolução 34/169 da Assembleia Geral da ONU (1979), único instrumento normativo com artigos numerados reais citado nesta disciplina (arts. 3º, 4º e 8º). Texto do CCEAL disponível em `legislacao/CCEAL_ONU_Resolucao34169_1979.txt`.
+
+### 17.1 Cidadania e Evolução Histórico-Política
+
+- **Cidadania** pressupõe a **contrapartida de deveres**: os direitos individuais só se sustentam quando a coletividade cumpre suas obrigações — cidadania não é concessão graciosa do Estado.
+- **Antiguidade e Idade Média**: em Roma, a cidadania nunca foi universal (excluía mulheres e escravos); na Grécia clássica, estrangeiros e escravos eram excluídos da vida política; na **Idade Média**, o feudalismo extinguiu a cidadania ativa dos servos, que ficaram totalmente à margem das decisões.
+- **Cinco revoluções burguesas** superaram o Absolutismo; o **Iluminismo** é tecnicamente identificado como a **"Revolução Filosófica"** desse conjunto (ao lado de Revolução Inglesa, Independência dos EUA, Revolução Francesa e Revolução Industrial).
+- **Cidadania x Capitalismo** — contradição estrutural: a cidadania busca igualdade e bem-estar social, enquanto o capitalismo se nutre da desigualdade de posses e de uma massa de trabalhadores subordinados (se todos fossem empresários, o sistema colapsaria por falta de mão de obra).
+- **Nacionalidade x Cidadania**: nacionalidade é pressuposto da cidadania, mas nem todo nacional é cidadão pleno (ex.: menores de idade, nacionais sem direitos políticos plenos).
+- **Alistamento e voto (CF/88, art. 14)**: voto **facultativo** para analfabetos, maiores de 16 e menores de 18 anos, e maiores de 70 anos; **conscritos** durante o serviço militar obrigatório são **vedados** de se alistar e votar; apenas brasileiros (natos/naturalizados) se alistam eleitoralmente — estrangeiros não votam em eleições nacionais.
+- **Estado de Direito**: pilar fundamental é que **todos têm direitos iguais perante a Constituição**, superando o privilégio absolutista.
+- **Direito de revolta** (Juarez Távora): é o **último direito** de um povo livre e o **mais imperioso dos deveres** para garantir os interesses coletivos, quando esgotados os demais mecanismos institucionais.
+
+### 17.2 Fundamentos Filosóficos da Ética
+
+- **Ética x Moral**: **Moral** (do latim *morus*, costumes) é o conjunto de regras, costumes e valores aceitos por uma comunidade; **Ética** é a reflexão filosófica — "ciência da moral" — que problematiza teoricamente esses valores. Não confundir a raiz etimológica de cada termo.
+- **Peter Singer ("Ética Prática")** — o que a Ética **NÃO** é: não é conjunto de proibições sexuais; não é inútil na prática; não é ininteligível fora da religião; não é relativa/subjetiva.
+- **Intelectualismo Moral de Sócrates**: o mal é subproduto da ignorância — **apenas o ignorante é vicioso**; quem conhece verdadeiramente o bem não pode deixar de agir virtuosamente (conhecimento = virtude).
+- **Aristóteles — tabela de virtudes** (justa medida entre excesso e deficiência):
+
+| Virtude (justa medida) | Excesso | Deficiência |
+|---|---|---|
+| Coragem | Temeridade/Audácia | Covardia |
+| Temperança | Intemperança/Libertinagem | Insensibilidade |
+| Liberalidade | Prodigalidade | Avareza |
+| Modéstia | Timidez/Vergonha excessiva | Falta de vergonha/Desfaçatez |
+
+- **Ética Medieval** (heteronomia): rompe com o racionalismo grego — a fonte do agir ético passa a ser **Deus** (vontade revelada), e a virtude máxima são as virtudes teologais, **Fé e Caridade**.
+- **Rousseau**: o homem é **naturalmente bom**, mas é corrompido pela sociedade e pela **propriedade privada** ("bom selvagem").
+- **Kant — ética do dever / Imperativo Categórico**: a moralidade funda-se na **autonomia da razão** (não na heteronomia religiosa nem nas consequências). **"Agir por dever" ≠ "agir em conformidade com o dever"** — a intencionalidade é central: só tem valor ético genuíno a ação motivada unicamente pelo respeito à lei moral, e não por inclinação (dó/pena), interesse pessoal ou repercussão externa.
+
+### 17.3 Ética Profissional e Códigos de Conduta
+
+- **Requisitos de uma profissão**: operações intelectuais com responsabilidade individual; **aprendizagem especial** e domínio de técnicas transmissíveis; **organização grupal** (conselhos/associações fiscalizatórias).
+- **Códigos de ética mistos**: a maioria combina caráter **normativo** (normas explícitas com sanção) e **descritivo** (valores/princípios orientadores).
+- **Objetivos dos códigos** (Camargo, 2004): estabelecer parâmetros de conduta regular sob o ângulo ético e amparar os interesses de terceiros/clientes.
+- O agir profissional é passível de **valoração ética** porque se inscreve no campo da ação e das escolhas que impactam a vida de outros seres humanos.
+- **Conselhos e associações profissionais**: elementos da organização grupal com papel **normativo, disciplinador e orientador**; órgãos supervisores (ex.: Medicina, Direito) são essenciais porque essas profissões lidam com a **confiança pública**.
+
+### 17.4 Ética na Aplicação da Lei — C. de Rover e Doutrina Policial
+
+- **C. de Rover — "arte" da aplicação da lei**: não existem "soluções-padrão"; o encarregado deve compreender **espírito e forma** da norma e distinguir as **"tonalidades de cinza"** de cada situação concreta (nem formalismo mecânico, nem arbitrariedade).
+- **Distinção entre encarregado da lei e infrator**: reside na **plena legalidade** das ações e na recusa absoluta a práticas arbitrárias ou ilegais — quando o agente recorre à ilegalidade, essa distinção desaparece.
+- **"Ética de Grupo"**: o trabalho policial isolado pode gerar subculturas (rituais, linguagem própria, binômio **"nós contra eles"**), risco de práticas questionáveis e escândalos de corrupção/violência.
+- **Efeito institucional da conduta antiética individual**: mesmo isolada, reflete negativamente em **toda a corporação**, abalando a confiança pública; ordens superiores/circunstâncias excepcionais **não justificam** ilegalidades.
+- **Paradigma "Segurança Pública com Direitos Humanos"**: desafios a superar incluem resquícios autoritários do período ditatorial, a ideologia da Guerra Fria e a crença na truculência em vez da técnica profissional.
+
+### 17.5 Código de Conduta da ONU (CCEAL — Res. 34/169/1979)
+
+Único instrumento normativo com artigos numerados desta disciplina. Texto completo em `legislacao/CCEAL_ONU_Resolucao34169_1979.txt`.
+
+| Artigo | Conteúdo essencial |
+|---|---|
+| **Art. 1º** | Dever de servir a comunidade e proteger todas as pessoas contra atos ilegais |
+| **Art. 2º** | Respeitar e proteger a dignidade humana e os direitos humanos de todas as pessoas |
+| **Art. 3º** | Uso da força **apenas quando estritamente necessário** e na medida exigida pelo dever (proporcionalidade); arma de fogo é medida extrema |
+| **Art. 4º** | **Confidencialidade** de informações obtidas na função, salvo estrita exigência do dever ou da justiça |
+| **Art. 5º** | **Proibição absoluta de tortura** — nenhuma ordem superior ou circunstância excepcional (guerra, instabilidade política) justifica |
+| **Art. 6º** | Garantir proteção à saúde de pessoas sob guarda, com cuidados médicos imediatos quando necessário |
+| **Art. 7º** | Vedação a atos de corrupção; dever de opor-se e combater tais atos |
+| **Art. 8º** | Dever de **prevenir** violações ao Código e, se ocorridas, **comunicar** aos superiores ou a autoridades com poder de revisão/reparação |
+
+### 17.6 Pontos-Chave para Elaboração de Questões
+
+- Cidadania pressupõe contrapartida de deveres; nacionalidade é pressuposto (não sinônimo) de cidadania plena.
+- Iluminismo = "Revolução Filosófica"; Estado de Direito = direitos iguais perante a Constituição.
+- CF/88, art. 14: voto facultativo (analfabetos, 16-18 anos, 70+); conscritos vedados de votar durante o serviço militar.
+- Ética (reflexão filosófica) ≠ Moral (costumes/regras da comunidade) — não inverter a raiz etimológica.
+- Sócrates: conhecimento = virtude (intelectualismo moral). Aristóteles: virtude é o meio-termo entre excesso e deficiência (não inverter os polos na tabela de virtudes). Ética Medieval: heteronomia (Deus/Fé/Caridade). Rousseau: bondade natural corrompida pela sociedade/propriedade. Kant: agir por dever ≠ agir conforme o dever; intenção (não resultado) define o valor ético.
+- Requisitos de profissão: aprendizagem especial + responsabilidade intelectual individual + organização grupal fiscalizatória.
+- C. de Rover: "arte" da aplicação da lei = espírito + forma da norma, sem soluções-padrão. Legalidade plena distingue o agente do infrator.
+- Ética de Grupo: risco de subculturas ("nós contra eles"); conduta antiética individual sempre reflete na corporação.
+- CCEAL (Res. 34/169-ONU, 1979) é a única legislação numerada "pura" desta disciplina: art. 3º (força/proporcionalidade), art. 4º (confidencialidade), art. 5º (proibição absoluta de tortura, sem exceção por ordem superior), art. 8º (prevenção e comunicação de violações).
+- Ao elaborar questões sobre o CCEAL, **não citar o número do artigo no enunciado** — descrever o cenário/conceito e reservar a numeração ao campo de referência legal.
+
+---
+
+## 18. Gestão de Materiais e Patrimônio
+
+**Nota de natureza da fonte**: disciplina baseada em doutrina técnica de **Administração de Materiais e Logística Empresarial** (fundamentos de fatores de produção e sinergia organizacional, teoria de estoques e gestão de custos logísticos — referencial que dialoga com autores como Michael Porter e com ferramentas de gestão como o ciclo PDCA). **Trata-se de doutrina técnico-administrativa, sem lei pública numerada correspondente** — não há legislação para baixar nesta disciplina.
+
+### 18.1 Fatores de Produção e Sinergia
+
+| Fator | Função |
+|---|---|
+| **Natureza** | Fornece as entradas brutas -- energia, matérias-primas -- indispensáveis ao ciclo produtivo |
+| **Capital** | Função **instrumental**: fornece os meios financeiros para aquisição de insumos, pagamento de pessoal e utilização dos demais fatores |
+| **Trabalho** | Atua diretamente sobre os demais fatores, acionando-os e agilizando-os por meio do esforço físico |
+| **Empresa** | Elemento **aglutinador e coordenador** dos demais fatores -- gera o efeito multiplicador (sinergia) |
+
+- **Sinergia**: o resultado do conjunto **supera** a soma aritmética das partes aplicadas isoladamente -- é o efeito multiplicador que justifica a existência da organização como entidade produtiva.
+- **Classificação moderna dos recursos empresariais** (substitui a nomenclatura clássica): **Materiais, Financeiros, Humanos, Mercadológicos e Administrativos**.
+
+### 18.2 Administração de Materiais como Sistema Integrado
+
+- **Objetivo fundamental**: suprir a organização com os meios necessários no **tempo oportuno**, na **quantidade necessária**, na **qualidade requerida** e pelo **menor custo** -- as quatro condições básicas do suprimento (não apenas preço, nem apenas segurança de estoque).
+
+**Subsistemas típicos** e suas atribuições:
+
+| Subsistema | Atribuição central |
+|---|---|
+| **Classificação de Material** | Identificação, especificação e **codificação** dos materiais (evita duplicidade de código para o mesmo item) |
+| **Cadastro** | **Pesquisa de mercado** e **cadastramento de fornecedores**, subsidiando o processo de compras |
+| **Aquisição / Compra** | Gestão e **negociação junto ao mercado** para assegurar insumos nos prazos e preços favoráveis |
+| **Almoxarifado / Armazenagem** | Gestão física dos estoques: **guarda, preservação e embalagem** (exceto produtos em processo) |
+| **Inspeção de Recebimento** | Verificação **física e documental** do material entregue pelo fornecedor, condição para aceite e envio à guarda |
+| **Inspeção de Suprimentos** | Verificação **normativa** do cumprimento dos procedimentos/política de suprimento em toda a organização (função de auditoria interna) |
+| **Padronização e Normalização** | **Unificação** de variedades/especificações técnicas para reduzir a quantidade de itens estocados |
+| **Controle de Estoque** | Gestão quantitativa/financeira do nível de investimento em estoque |
+
+**Ponto-chave**: não confundir Inspeção de Recebimento (verifica o material físico entregue) com Inspeção de Suprimentos (audita procedimentos/política em toda a organização); não confundir Cadastro (pesquisa/cadastra fornecedores) com Aquisição/Compra (negocia e executa a compra).
+
+### 18.3 Objetivos da Administração de Materiais
+
+- **Giro de Estoques**: seu aumento é prioritário porque proporciona **melhor utilização do capital de giro**, elevando o retorno sobre os investimentos (o capital fica menos tempo imobilizado em materiais parados). Não se confunde com compra em grandes lotes, que tende a **reduzir**, não aumentar, o giro.
+- **Relações favoráveis com fornecedores**: garantem prioridade de entrega e continuidade da produção mesmo em crises de abastecimento.
+
+### 18.4 Terminologia Técnica de Estoques
+
+| Termo | Definição |
+|---|---|
+| **Estoque Ativo ou Normal** | Item com entradas e saídas constantes, saldo variando conforme o consumo |
+| **Estoque Morto** | Item sem movimentação e sem previsão de uso |
+| **Estoque Inativo** | Item de baixa ou nenhuma movimentação recente |
+| **Estoque Disponível** | Saldo **livre para uso**, descontadas as reservas já comprometidas (saldo total − empenhado) |
+| **Estoque Empenhado** | Parcela do saldo já **reservada** para uso específico (ex.: manutenção programada) |
+| **Estoque Teórico** | Saldo disponível **+** quantidade já comprada (pedido emitido) aguardando entrega |
+| **Estoque Mínimo** | Nível de segurança definido para prevenir atrasos de entrega |
+| **Ponto de Chamada de Emergência** | Nível de alerta crítico = **metade do Estoque Mínimo**; exige medidas especiais para evitar interrupção total |
+| **Ruptura de Estoque** | Saldo chega a **zero (E = 0)** e a demanda não pode ser atendida |
+| **Tempo de Reposição (Ressuprimento)** | Intervalo entre a emissão da requisição e a efetiva entrega do material -- soma de 3 etapas: **emissão do pedido, preparação do pedido pelo fornecedor e transporte** |
+
+**Exemplo de cálculo cobrado em prova**: saldo disponível 50 + pedido emitido aguardando entrega 30 = **Estoque Teórico de 80** unidades.
+
+### 18.5 Fluxo de Compras -- Documentos
+
+- **Requisição ou Pedido de Compra**: documento **interno** que formaliza a necessidade do material e **desencadeia obrigatoriamente** o processo de aquisição (permite a consulta ao mercado).
+- **Mapa Comparativo de Preços**: documento que **consolida** valores, prazos e condições de pagamento de diferentes fornecedores/orçamentos, subsidiando a decisão de compra -- elaborado **depois** da requisição e da coleta de preços, **antes** do contrato/ordem de fornecimento.
+
+### 18.6 Estrutura de Custos Logísticos
+
+| Custo | Comportamento |
+|---|---|
+| **Custo Fixo** | **Não varia** com o volume estocado ou a quantidade de pedidos (ex.: folha de pagamento administrativa, manutenção predial) |
+| **Custo de Posse** (Manutenção de Estoque) | Decorre da **existência do item em estoque**; varia conforme o **volume/quantidade armazenada** -- cresce com o tempo de permanência, não diminui |
+| **Custo de Aquisição** (ou de Obtenção) | Varia em função do **número de pedidos emitidos** ou das quantidades compradas (despesas de processamento de cada compra) |
+| **Custo Ideal** | Ponto de **interseção das curvas** de custo de posse e custo de aquisição -- representa o **menor custo total** (posse cresce com o volume; aquisição decresce com lotes maiores/menos pedidos) |
+
+### 18.7 Funções do Estoque
+
+- **Cobertura de risco**: o investimento em estoque é estrategicamente equiparado a investimentos em máquinas/equipamentos porque cobre fatores de risco em circunstâncias imprevisíveis, evitando prejuízos por falta de material ou paralisação de serviços.
+- **Função amortecedora**: os estoques atuam como "amortecedores" entre compra, produção e venda, **minimizando** os efeitos de erros de planejamento e de oscilações inesperadas de mercado, **isolando** as partes da organização entre si.
+- **Controle de Estoques -- decisão de "QUANTO" comprar**: definir a quantidade necessária para suprir a organização por um **período predeterminado**, e não por critérios aleatórios, estéticos ou por interesse externo de fornecedores.
+
+### 18.8 Pontos-Chave para Elaboração de Questões
+
+- Fatores clássicos de produção (natureza, capital, trabalho) x classificação moderna de recursos empresariais (Materiais, Financeiros, Humanos, Mercadológicos, Administrativos) -- não confundir as duas nomenclaturas.
+- Sinergia = resultado do conjunto **supera** a soma das partes isoladas; a Empresa é o fator aglutinador/coordenador.
+- Objetivo do sistema integrado = tempo + quantidade + qualidade + **menor custo** (não apenas um desses critérios isoladamente).
+- Subsistemas: Classificação (codificação) x Cadastro (pesquisa/cadastro de fornecedores) x Aquisição/Compra (negociação) x Almoxarifado (guarda física) x Inspeção de Recebimento (verificação do material entregue) x Inspeção de Suprimentos (auditoria de procedimentos) x Padronização/Normalização (unificação de itens) x Controle de Estoque (gestão quantitativa/financeira).
+- Terminologia de estoque: Disponível (livre) ≠ Empenhado (reservado) ≠ Teórico (disponível + em trânsito); Estoque Mínimo ≠ Ponto de Chamada de Emergência (= metade do mínimo) ≠ Ruptura (E=0).
+- Tempo de Reposição = emissão do pedido + preparação pelo fornecedor + transporte (três etapas, cobrado em cálculo de prazo).
+- Documentos: Requisição/Pedido de Compra (interno, deflagra o processo) x Mapa Comparativo de Preços (consolida orçamentos para decisão).
+- Custos: Fixo (não varia com volume/pedidos) x Posse (varia com o volume estocado, cresce com o tempo) x Aquisição (varia com o nº de pedidos) x Custo Ideal (interseção Posse × Aquisição = menor custo total).
+- Estoques como cobertura de risco (equiparado a investimento produtivo) e como amortecedor (isola compra/produção/venda de oscilações e erros de planejamento).
+- Esta disciplina é **doutrina técnica de Administração de Materiais e Logística Empresarial**, sem lei pública numerada -- não citar artigos/leis nesta disciplina; a referência padrão nas questões é "Doutrina de Administração de Materiais".
+
+---
+
+## 19. Improbidade Administrativa (Lei 8.429/1992 e Lei 14.230/2021)
+
+A Lei nº 8.429/1992 (Lei de Improbidade Administrativa -- LIA) dispoe sobre as sancoes aplicaveis em virtude da pratica de atos de improbidade administrativa (CF/88, art. 37, §4). Foi profundamente reformada pela **Lei nº 14.230/2021**, que extinguiu a modalidade culposa em todas as categorias de improbidade, exigiu dolo especifico, tornou taxativo o rol do art. 11 e alterou prazos sancionatorios. **Ponto-chave para provas**: quase todo o conteudo cobravel desta disciplina decorre justamente das mudancas trazidas pela Lei 14.230/2021 em relacao a redacao original de 1992 -- ao formular ou responder questoes, presumir que a pergunta testa a redacao ATUAL, salvo se pedir expressamente a "redacao original".
+
+Texto de referencia baixado em `legislacao/Lei_8429_1992_ImprobidadeAdministrativa_atualizada.html` (texto compilado do Portal da Legislacao/Planalto, ja incorporando as alteracoes da Lei 14.230/2021).
+
+---
+
+### 19.1 Dolo Especifico e Excludentes de Responsabilidade (art. 1)
+
+- **Objeto da lei** (art. 1, caput, com redacao da Lei 14.230/2021): o sistema de responsabilizacao por improbidade tutela a probidade na organizacao do Estado e no exercicio de suas funcoes, para assegurar a integridade do patrimonio publico e social.
+- **§1**: sao atos de improbidade **apenas** as condutas **dolosas** tipificadas nos arts. 9, 10 e 11 -- a modalidade culposa foi **extinta** para todas as categorias (inclusive o antigo prejuizo ao erario culposo do art. 10, que antes a admitia).
+- **§2 -- conceito de dolo** (o mais cobrado): "a vontade livre e consciente de alcancar o resultado ilicito tipificado nos arts. 9, 10 e 11 desta Lei, **nao bastando a voluntariedade do agente**". Ou seja, nao basta querer praticar a conduta -- e preciso querer o resultado ilicito (dolo especifico).
+- **§3 -- excludente do mero exercicio da funcao**: o mero exercicio da funcao ou desempenho de competencias publicas, **sem comprovacao de ato doloso com fim ilicito**, afasta a responsabilidade.
+- **§8 -- vedacao ao "crime de hermeneutica" civil**: nao configura improbidade a acao ou omissao decorrente de **divergencia interpretativa da lei, baseada em jurisprudencia, ainda que nao pacificada**, mesmo que nao venha a prevalecer posteriormente nos tribunais.
+- **§6**: sujeitam-se as sancoes da lei os atos de improbidade contra o patrimonio de **entidade privada que receba subvencao, beneficio ou incentivo, fiscal ou crediticio**, de entes publicos ou governamentais.
+
+### 19.2 Sujeitos Ativo e Passivo (arts. 1 a 3)
+
+- **Sujeito ativo -- agente publico (art. 2)**: conceito amplissimo -- "o agente politico, o servidor publico e **todo aquele que exerce, ainda que transitoriamente ou sem remuneracao**, por eleicao, nomeacao, designacao, contratacao ou qualquer outra forma de investidura ou vinculo, mandato, cargo, emprego ou funcao" nas entidades do art. 1. Abrange, por exemplo, **estagiarios** (mesmo sem vinculo estatutario/empregaticio e mesmo sem remuneracao).
+- **Terceiros (art. 3, caput)**: a lei aplica-se, no que couber, "aquele que, mesmo nao sendo agente publico, **induza ou concorra dolosamente** para a pratica do ato de improbidade" -- a Lei 14.230/2021 suprimiu a hipotese de mero "beneficio" e exigiu dolo tambem do terceiro.
+- **Socios, cotistas, diretores e colaboradores de PJ (art. 3, §1)**: **nao respondem automaticamente** pelo ato imputado a pessoa juridica, salvo se comprovadamente houver **participacao e beneficios diretos**, respondendo nesse caso nos limites de sua participacao.
+- **Non bis in idem PJ x Lei Anticorrupcao (art. 3, §2)**: as sancoes da LIA **nao se aplicam** a pessoa juridica se o mesmo ato ja for sancionado como ato lesivo pela **Lei 12.846/2013** (Lei Anticorrupcao).
+- **Sucessao empresarial (art. 8-A)**: em fusao/incorporacao, a responsabilidade da sucessora fica **restrita a reparacao integral do dano, ate o limite do patrimonio transferido**, nao se aplicando as demais sancoes por atos anteriores -- **exceto em caso de simulacao ou evidente fraude, comprovadas**.
+
+### 19.3 Enriquecimento Ilicito (art. 9)
+
+- Constitui ato de improbidade **auferir, mediante pratica de ato doloso, qualquer vantagem patrimonial indevida** em razao do cargo, mandato, funcao, emprego ou atividade.
+- **Nao exige lesao ao erario** -- categoria autonoma, focada no acrescimo patrimonial indevido do agente.
+- Hipoteses mais cobradas: (VI) receber vantagem para fazer declaracao falsa sobre **dado tecnico** de obra publica ou sobre quantidade/qualidade de bens fornecidos; (VII) adquirir bens de **valor desproporcional a evolucao do patrimonio/renda**, "assegurada a demonstracao pelo agente da licitude da origem" (inversao do onus da prova, mas nao presuncao absoluta de culpa); (VIII) aceitar emprego, comissao ou exercer **consultoria/assessoramento** para quem tenha interesse atingivel pelas atribuicoes do agente, durante a atividade.
+
+### 19.4 Prejuizo ao Erario (art. 10)
+
+- Constitui ato de improbidade **acao ou omissao dolosa** que enseje, **efetiva e comprovadamente**, perda patrimonial, desvio, apropriacao, malbaratamento ou dilapidacao dos bens/haveres publicos. O **dano presumido (in re ipsa)** foi superado -- exige-se prova do prejuizo efetivo.
+- **§1**: se a inobservancia de formalidades legais **nao implicar perda patrimonial efetiva**, nao ha imposicao de ressarcimento (vedado, porem, o enriquecimento sem causa das entidades publicas).
+- **§2**: a **mera perda patrimonial decorrente da atividade economica** (risco do negocio) nao acarreta improbidade, salvo se comprovado ato doloso praticado com essa finalidade.
+- Inciso VIII (fraude/dispensa indevida de licitacao ou processo seletivo de parceria): so configura prejuizo ao erario se **acarretar perda patrimonial efetiva** (requisito incluido em 2021).
+- Inciso XIII: **permitir** que terceiro utilize, em obra/servico particular, bem publico ou trabalho de servidor -- se o proprio agente usar para si, a hipotese e enriquecimento ilicito (art. 9); se permite a terceiro, e prejuizo ao erario (art. 10).
+
+### 19.5 Violacao aos Principios da Administracao Publica (art. 11)
+
+- **Mudanca estrutural mais importante da reforma**: o rol deixou de ser exemplificativo ("notadamente") e passou a ser **taxativo** ("caracterizada por uma das seguintes condutas"). O dever de **"lealdade as instituicoes"**, previsto na redacao original, foi **suprimido** -- remanescem apenas honestidade, imparcialidade e legalidade.
+- **§1 (dolo especifico, insirado na Convencao da ONU contra a Corrupcao)**: so ha improbidade nesta categoria quando comprovado, na conduta funcional do agente, **o fim de obter proveito ou beneficio indevido** para si ou para outrem.
+- **§3**: exige-se **demonstracao objetiva da pratica de ilegalidade**, com indicacao das normas constitucionais, legais ou infralegais violadas -- nao basta alegar "ma gestao".
+- **§4**: exige-se **lesividade relevante** ao bem juridico tutelado; **independe** de dano ao erario ou de enriquecimento ilicito do agente.
+- **§5**: **nao configura improbidade a mera nomeacao ou indicacao politica** por detentor de mandato eletivo, salvo aferido dolo com finalidade ilicita.
+- Inciso IV: negar publicidade aos atos oficiais e improbidade, **exceto** se imprescindivel a seguranca da sociedade e do Estado.
+- Inciso XI (**nepotismo**): nomear conjuge, companheiro ou parente em linha reta, colateral ou por afinidade **ate o terceiro grau**, inclusive, para cargo em comissao, funcao de confianca ou funcao gratificada -- abrange expressamente o **nepotismo cruzado** ("ajuste mediante designacoes reciprocas").
+
+### 19.6 Sancoes (art. 12) -- Tabela de Prazos Pos-Reforma
+
+| Categoria | Suspensao de direitos politicos | Multa civil | Perda da funcao publica | Proibicao de contratar com Poder Publico |
+|---|---|---|---|---|
+| **Enriquecimento ilicito** (art. 9) | **ate 14 anos** | equivalente ao acrescimo patrimonial | sim | ate 14 anos |
+| **Prejuizo ao erario** (art. 10) | **ate 12 anos** | equivalente ao valor do dano | sim | ate 12 anos |
+| **Violacao a principios** (art. 11) | **extinta** (nao ha mais) | ate **24 vezes** a remuneracao | **nao consta** mais como obrigatoria | ate **4 anos** |
+
+- **Redacao anterior (pre-2021, cuidado com distratores)**: os prazos eram fixados em faixas -- enriquecimento 8 a 10 anos, prejuizo ao erario 5 a 8 anos, principios 3 a 5 anos, multa de principios ate 100x a remuneracao. A reforma trocou faixas por **tetos maximos** e retirou a suspensao de direitos politicos da categoria de principios.
+- **§3**: na responsabilizacao de PJ, o juiz deve considerar os **efeitos economicos e sociais** das sancoes, para viabilizar a manutencao das atividades da empresa (protecao a funcao social).
+- **§7**: sancoes a PJ com base na LIA e na Lei 12.846/2013 devem observar o **non bis in idem**.
+- **§10**: no computo do prazo de suspensao de direitos politicos, computa-se **retroativamente** o intervalo entre a decisao colegiada e o transito em julgado.
+
+### 19.7 Indisponibilidade de Bens -- Medida Cautelar (art. 16)
+
+- Pode ser requerida em carater antecedente ou incidente, para garantir a integral recomposicao do erario ou do acrescimo patrimonial.
+- **§3**: exige demonstracao **concreta** de perigo de dano irreparavel ou risco ao resultado util do processo -- a urgencia **nao pode ser presumida**.
+- **§13**: e **vedada** a indisponibilidade da quantia de ate **40 salarios minimos** depositados em poupanca, outras aplicacoes financeiras ou conta-corrente.
+- **§14**: e vedada a indisponibilidade do **bem de familia** do reu, salvo se comprovado que o imovel e fruto de vantagem patrimonial indevida (art. 9).
+
+### 19.8 Categorias Vigentes -- Resumo para Revisao Rapida
+
+As **tres** categorias vigentes de atos de improbidade sao: **Enriquecimento Ilicito** (art. 9), **Prejuizo ao Erario** (art. 10) e **Violacao aos Principios da Administracao Publica** (art. 11) -- todas exigindo dolo. O antigo art. 10-A (concessao indevida de beneficio financeiro/tributario do ISS) foi **revogado** pela Lei 14.230/2021 e sua materia foi absorvida pelo regime geral do art. 10.
+
+**Observacao sobre a fonte**: caderno de questoes (Improbidade Administrativa.pdf -- Academia Coronel Walterler) com 30 questoes, gabarito e justificativa de professor, reformatadas para o Quiz PMRR com fundamentacao legal vigente verificada diretamente no texto compilado da Lei 8.429/1992 no Planalto (arquivo salvo em `legislacao/Lei_8429_1992_ImprobidadeAdministrativa_atualizada.html`).
+
+---
+
+## 20. Licitações e Contratos (Lei 14.133/2021)
+
+**Fontes principais**: Lei nº 14.133/2021 (Nova Lei de Licitações e Contratos Administrativos), texto compilado e atualizado (planalto.gov.br), salvo em `legislacao/Lei_14133_2021_NovaLeiLicitacoes.html`; Caderno de Questões "Licitações e Contratos Administrativos" — Academia Coronel Walterler (CHO).
+
+### 20.1 Modalidades de Licitação
+
+- **Rol taxativo (art. 28)**: pregão, concorrência, concurso, leilão e diálogo competitivo. A Lei 14.133/2021 **extinguiu** o convite e a tomada de preços, que existiam na Lei 8.666/1993. É vedada a criação de novas modalidades ou a combinação entre as existentes.
+- **Pregão (art. 6º, XLI)**: modalidade **obrigatória** para aquisição de bens e serviços comuns, cujo critério de julgamento poderá ser o de menor preço ou o de maior desconto.
+- **Concorrência (art. 6º, XXXVIII)**: modalidade para contratação de bens e serviços especiais e de obras e serviços comuns e especiais de engenharia, com critérios de julgamento diversos (menor preço, melhor técnica, técnica e preço, maior retorno econômico, maior desconto).
+- **Concurso (art. 6º, XXXIX)**: escolha de trabalho técnico, científico ou artístico, com instituição de prêmio ou remuneração ao vencedor.
+- **Leilão (art. 6º, XL)**: alienação de bens imóveis ou de bens móveis inservíveis a quem oferecer maior lance.
+- **Diálogo Competitivo (art. 6º, XLI; art. 28, V; art. 32)** — modalidade INÉDITA da nova lei: destinada a obras, serviços e compras em que a Administração realiza diálogos com licitantes previamente selecionados por critérios objetivos, para desenvolver uma ou mais alternativas capazes de atender às suas necessidades. Cabível quando o objeto envolver (art. 32, I): (a) inovação tecnológica ou técnica; (b) impossibilidade de a necessidade ser satisfeita sem adaptação de soluções disponíveis no mercado; (c) impossibilidade de definição precisa das especificações técnicas pela Administração. É **modalidade autônoma**, não procedimento auxiliar — cuidado com essa pegadinha recorrente.
+
+### 20.2 Fases do Processo Licitatório (art. 17)
+
+Sete fases em sequência: **I – preparatória; II – divulgação do edital; III – apresentação de propostas e lances (quando for o caso); IV – julgamento; V – habilitação; VI – recursal; VII – homologação.**
+
+- **Inversão de fases (regra geral)**: diferentemente da Lei 8.666/1993, a habilitação (V) é, em regra, **posterior** ao julgamento (IV) — analisa-se a documentação apenas do licitante mais bem classificado, ganhando celeridade.
+- **Exceção (art. 17, §1º)**: mediante ato motivado, com explicitação dos benefícios, e desde que previsto no edital, a habilitação pode anteceder as fases de propostas/lances e julgamento.
+- Licitações realizadas preferencialmente sob forma eletrônica (art. 17, §2º); a forma presencial é excepcional e motivada, com sessão registrada em ata e gravada em áudio/vídeo.
+
+### 20.3 Contratação Direta — Dispensa x Inexigibilidade (distinção crítica)
+
+| | Dispensa (art. 75) | Inexigibilidade (art. 74) |
+|---|---|---|
+| Competição | Viável, mas a lei autoriza não licitar | Inviável faticamente |
+| Rol legal | **Taxativo** (fechado) | **Exemplificativo** ("em especial") |
+| Exemplos-chave | Valor, situações emergenciais, licitação deserta/fracassada recente | Fornecedor exclusivo, notória especialização, credenciamento, imóvel específico |
+
+**Tetos de dispensa por valor (art. 75, I e II) — os mais cobrados:**
+- **Até R$ 100.000,00**: obras e serviços de engenharia **ou serviços de manutenção de veículos automotores** (art. 75, I) — pegadinha clássica: manutenção de veículos usa o teto MAIOR, não o de "outros serviços".
+- **Até R$ 50.000,00**: outros serviços e compras (art. 75, II).
+- Produtos para pesquisa e desenvolvimento: limitado a R$ 300.000,00 quando envolver obras/serviços de engenharia (art. 75, IV, "c").
+- **Transferência de tecnologia de produtos estratégicos para o SUS** (art. 75, XII) é hipótese específica de **dispensa**, não de inexigibilidade — distinção cobrada em prova.
+
+**Hipóteses de inexigibilidade (art. 74) — rol exemplificativo, mas com 5 incisos centrais:**
+- **I** — fornecedor/produtor/representante comercial exclusivo (exige atestado de exclusividade e **veda preferência por marca específica** — art. 74, §1º).
+- **II** — profissional do setor artístico consagrado, direto ou por empresário exclusivo.
+- **III** — serviços técnicos especializados de natureza predominantemente intelectual, com notória especialização (estudos, projetos, pareceres, perícias, consultorias, fiscalização de obras, patrocínio de causas, treinamento, restauração de obras de arte, controle de qualidade), **vedada para publicidade e divulgação**.
+- **IV** — objetos que devam ou possam ser contratados por **credenciamento**.
+- **V** — aquisição/locação de imóvel de características específicas de instalação/localização.
+
+**⚠️ ATENÇÃO — erro recorrente em material de terceiros**: o **credenciamento é hipótese de INEXIGIBILIDADE** (art. 74, IV), **não de dispensa**. Cadernos de questões desatualizados por vezes classificam o credenciamento como "dispensa" — está errado; sempre confirmar pelo art. 74, IV.
+
+### 20.4 Procedimentos Auxiliares (art. 78)
+
+Cinco procedimentos: **I – credenciamento; II – pré-qualificação; III – procedimento de manifestação de interesse (PMI); IV – sistema de registro de preços (SRP); V – registro cadastral.**
+
+- **Credenciamento (art. 79)**: usado quando viável e vantajosa a contratação simultânea de todos os interessados que atendam a requisitos padronizados do chamamento público (hipótese "paralela e não excludente" — ex.: rede de clínicas/laboratórios credenciados). É procedimento auxiliar, mas sua natureza jurídica de contratação direta é a **inexigibilidade** (não há disputa por vaga exclusiva).
+- **PMI (art. 81)**: procedimento aberto, iniciado com edital de chamamento público, pelo qual a Administração solicita à iniciativa privada estudos, investigações, levantamentos e projetos de soluções inovadoras úteis a uma futura contratação. Não atribui direito de preferência ao realizador; o custo é ressarcido pelo **vencedor do certame** subsequente. Não se confunde com modalidade licitatória nem com o Diálogo Competitivo.
+- **SRP (arts. 82 a 86)**: conjunto de procedimentos para registro formal de preços, fornecedores e condições para contratações futuras; divulgação obrigatória no Portal Nacional de Contratações Públicas (PNCP). A lei NÃO veda o uso do SRP — pelo contrário, o incentiva.
+
+### 20.5 Planejamento da Contratação
+
+- **Estudo Técnico Preliminar — ETP (art. 6º, XX)**: primeira etapa do planejamento; caracteriza o interesse público e a melhor solução; dá base ao anteprojeto, termo de referência ou projeto básico.
+- **Anteprojeto (art. 6º, XXIV)**: peça técnica com subsídios para elaborar o projeto básico — típica da **contratação integrada**.
+- **Projeto Básico (art. 6º, XXV)**: conjunto de elementos necessários e suficientes para caracterizar a obra/serviço, decorrente do ETP — típico da **contratação semi-integrada** (contratado parte do projeto básico já pronto para elaborar o executivo).
+- **Planejamento de compras (art. 40)**: deve buscar condições de aquisição/pagamento semelhantes às do setor privado (inciso I); processamento por SRP "quando pertinente" (não é sempre obrigatório); condições de guarda que NÃO permitam deterioração; parcelamento quando tecnicamente viável e economicamente vantajoso.
+  - **Parcelamento NÃO é adotado (art. 40, §3º)** quando: economia de escala recomendar compra do mesmo fornecedor; objeto configurar sistema único e integrado com risco ao conjunto; ou **padronização/escolha de marca levar a fornecedor exclusivo**.
+  - **Indicação de marca (art. 41)**: excepcionalmente permitida, com justificativa formal, em casos de padronização, compatibilidade com plataformas já adotadas, ou quando apenas determinada marca atender à necessidade. Exigência de amostra ocorre no julgamento das propostas/lances (ou pré-qualificação), **não** na habilitação.
+
+### 20.6 Regimes de Execução e Matriz de Riscos
+
+- **Contratação Integrada**: contratado elabora e executa projeto básico E executivo a partir de **anteprojeto** da Administração.
+- **Contratação Semi-integrada**: contratado elabora e executa projeto **executivo** a partir de **projeto básico** já elaborado pela Administração.
+- **Matriz de Alocação de Riscos (art. 22, §2º)**: **obrigatória** em contratos de obras/serviços de engenharia sob os regimes de contratação integrada e semi-integrada; define a responsabilidade de cada parte pelos riscos e eventos supervenientes, preservando o equilíbrio econômico-financeiro pactuado.
+
+### 20.7 Equilíbrio Econômico-Financeiro do Contrato (art. 6º, LVIII e LIX; art. 25, §8º)
+
+| Instituto | Quando se aplica | Natureza da variação |
+|---|---|---|
+| **Reajustamento em sentido estrito** | Contratos SEM dedicação exclusiva de mão de obra | Variação ORDINÁRIA e previsível de custos, por índice contratual |
+| **Repactuação** | Contratos DE SERVIÇOS CONTÍNUOS COM dedicação exclusiva de mão de obra (ou predominância de mão de obra) | Também variação ordinária, mas de custos de mão de obra/insumos específicos do setor |
+| **Revisão (teoria da imprevisão)** | Qualquer contrato | Álea econômica EXTRAORDINÁRIA e imprevisível |
+
+### 20.8 Consórcios (art. 15) e Cooperativas (art. 16)
+
+- Pessoa jurídica pode participar em consórcio, salvo vedação justificada no edital.
+- **Acréscimo de 10%** sobre o valor exigido de licitante individual para habilitação econômico-financeira do consórcio (art. 15, §1º) — **EXCEÇÃO**: não se aplica a consórcios compostos integralmente por ME/EPP (art. 15, §2º).
+- Edital PODE fixar limite máximo de empresas consorciadas, desde que haja **justificativa técnica aprovada** pela autoridade competente (art. 15, §4º).
+- Substituição de consorciado exige **autorização expressa** do órgão/entidade contratante, condicionada à comprovação de que a nova empresa mantém, no mínimo, os mesmos requisitos de habilitação da substituída (art. 15, §5º).
+- Responsabilidade dos integrantes do consórcio é **solidária** pelos atos praticados, tanto na licitação quanto na execução do contrato.
+- **Cooperativas** podem participar de licitações (art. 16), desde que atendam a requisitos específicos (regularidade do regime cooperado, compatibilidade do objeto com atuação cooperada) — não há vedação genérica à participação de cooperativas.
+
+### 20.9 Exclusões da Lei (art. 3º)
+
+- Contratos que tenham por objeto **operação de crédito** (interno ou externo) e **gestão de dívida pública**, incluídas contratações de agente financeiro, estão **excluídos** da aplicação da Lei 14.133/2021.
+
+### 20.10 Pontos-Chave para Elaboração de Questões
+
+- Diálogo Competitivo é MODALIDADE (art. 28, V), não procedimento auxiliar — confusão recorrente em questões de banca.
+- Credenciamento é procedimento auxiliar (art. 78, I) cuja contratação decorrente é hipótese de INEXIGIBILIDADE (art. 74, IV), nunca dispensa — checar sempre antes de afirmar o contrário.
+- Tetos de dispensa: R$ 100 mil para obras/engenharia E manutenção de veículos automotores (art. 75, I); R$ 50 mil para outros serviços e compras (art. 75, II) — não confundir os dois grupos.
+- PMI (art. 81) ≠ Diálogo Competitivo ≠ modalidade licitatória — é procedimento auxiliar de coleta de estudos, com ressarcimento pelo vencedor do certame.
+- Inversão de fases (habilitação após julgamento) é a REGRA (art. 17, V); antecipação da habilitação é exceção motivada e prevista em edital (art. 17, §1º).
+- Reajustamento em sentido estrito (sem dedicação exclusiva de mão de obra) x Repactuação (com dedicação exclusiva de mão de obra) — não trocar os conceitos.
+- Matriz de risco é obrigatória apenas nos regimes de contratação integrada e semi-integrada (art. 22, §2º), não em todo e qualquer contrato.
+- Consórcio de ME/EPP: dispensa apenas o acréscimo de 10% na habilitação econômico-financeira, não dispensa a exigência de habilitação em si.
+- Art. 3º, I exclui operações de crédito e gestão de dívida pública do âmbito da lei de licitações.
+
+---
+
+## 21. Logística Militar
+
+**Nota de natureza da fonte**: disciplina baseada na apostila técnica do CHO "Logística Militar.pdf" (Academia Coronel Walterler) -- doutrina de administração/logística militar e gestão patrimonial, majoritariamente **sem lei publica numerada correspondente** (fundamentos historicos da logistica, cadeia de abastecimento, planejamento logistico, gestao de estoques, administracao patrimonial e teoria administrativa geral -- Henry Eccles, Jomini, Michael Porter). Apenas o **fluxo de execucao da despesa publica** (requisicao, Termo de Referencia, Projeto Basico) toca, de forma generica e por analogia, a **Lei n. 14.133/2021** (Nova Lei de Licitacoes e Contratos Administrativos), sem que o material de origem especifique numero de artigo exato. Por analogia tambem, a distincao entre Fiscal Administrativo e Almoxarife corresponde a atribuicoes ja documentadas no **RAE (Decreto federal n. 98.820/1990), arts. 30-31** -- ver secao 11 desta base.
+
+### 21.1 Fundamentos Históricos e Cadeia de Abastecimento
+
+- A logística militar se confunde com a própria evolução da Arte da Guerra: sua essência histórica é o planejamento do **abastecimento e da movimentação de materiais no lugar certo e no tempo certo**, viabilizando o combate.
+- **Distinções doutrinárias históricas** (tema de questão difícil, cobrado por eliminação/atribuição correta de autoria):
+
+| Teórico | Contribuição |
+|---|---|
+| **Jomini** | Introduziu o **termo "logística"** na literatura militar |
+| **Almirante Henry Eccles** | Considerado o **"pai da logística moderna"**, por sistematizar cientificamente a disciplina no séc. XX |
+| **Tenente-Coronel Thorpe** | Publicou "Logística Pura", buscando **elevar** o status da logística (não subordiná-la à tática/estratégia) |
+| Missão militar estrangeira (Brasil, início séc. XX) | **Fortaleceu**, não extinguiu, os serviços de intendência e suprimento |
+
+- **Cadeia de Abastecimento (Supply Chain)**: integração de **informações, transporte, estoque, armazenamento, manuseio de materiais e embalagem**.
+- **Nível de serviço logístico**: indicador que mede o **desempenho oferecido pelos fornecedores aos clientes** no atendimento de pedidos -- não se confunde com negociação de preços (compras) nem com eficácia produtiva interna do fornecedor.
+
+### 21.2 Planejamento Logístico
+
+- Desdobra-se em **três níveis**: **Estratégico, Tático e Operacional**, respondendo em profundidades diferentes a "o que, como, quando e quanto" suprir.
+- **Estratégias centrais** do planejamento logístico: **Localização, Estoque e Transporte**.
+- **Estratégias genéricas de Michael Porter**, incorporadas pela doutrina administrativa: **Liderança em Custos, Diferenciação e Foco**.
+- **Ciclo administrativo clássico (PODC)**: **Planejamento, Organização, Direção e Controle** -- funções básicas de coordenação de recursos, aplicáveis a qualquer nível de gestão.
+
+### 21.3 Recebimento, Estoques e Situação Patrimonial
+
+- **Recebimento**: identificação do material, conferência do documento fiscal com o pedido, inspeção quantitativa e qualitativa, e aceitação final -- distinto de "Procurement" (fase de aquisição/compra, anterior) e de "distribuição física" (saída para usuários finais).
+- **Estoques**: definidos como **todos os bens e materiais mantidos por uma organização para atender demandas futuras**.
+- **Políticas de estoque**: variam **de organização para organização**, conforme a **missão e o objetivo estratégico** de cada uma -- não há modelo único aplicável a todos os órgãos públicos.
+- **Depreciação**: diminuição do valor dos bens por **desgaste, perda de utilidade, ação da natureza ou obsolescência** -- não decorre apenas de mau uso, nem se confunde com financiamento ou garantia comercial do fabricante.
+- **Situação patrimonial dos bens** (classificação para decisão de permanência/descarte):
+
+| Classificação | Critério |
+|---|---|
+| **Bom** | Em condições de uso normal |
+| **Ocioso** | Em perfeitas condições, mas sem demanda na unidade |
+| **Antieconômico** | Manutenção onerosa **ou** recuperação orça **mais de 50% do valor de mercado** |
+| **Irrecuperável** | Perdeu totalmente as características físicas, não podendo mais ser identificado |
+
+- **Classificação técnica de produtos**: **Bens de Consumo** e **Bens Industriais**.
+
+### 21.4 Administração de Materiais e Almoxarifado
+
+- **Layout**: representação gráfica, esboço ou projeto do local e das partes componentes de uma unidade (não se confunde com sistema informatizado de gestão de armazéns nem com codificação de materiais).
+- **Ponto de Ressuprimento**: gatilho que, ao ser atingido pelo estoque em declínio, determina a adoção de medidas de ressuprimento -- deve ser **inferior** ao Nível Máximo.
+- **Duplo Controle**: baseia-se na utilização **conjunta** da Ficha de Controle Geral **e** da Ficha de Prateleira (esta última deve permanecer junto ao local físico de estocagem) -- não é exclusividade de uma delas.
+- **Funções primordiais da gestão de estoques**: **Obtenção** e **Sistema de Endereçamento**.
+- **Aprovisionamento -- zonas térmicas**: a **"Área Fria"** deve ser mantida **obrigatoriamente abaixo de 20ºC**; gêneros alimentícios não devem ficar em contato direto com paredes (ventilação/higiene); pragas (insetos/roedores) configuram deterioração **biológica**, distinta da deterioração química (ferimentos físicos nos tecidos).
+
+### 21.5 Órgãos da Administração e da Diretoria de Apoio Logístico (DAL)
+
+- **Fiscal Administrativo x Almoxarife**: o **Fiscal Administrativo** gerencia o sistema de suprimentos e **fiscaliza permanentemente os registros contábeis** de administração patrimonial (função que, por analogia, corresponde ao RAE, Decreto n. 98.820/1990, arts. 30-31 -- ver seção 11). O Almoxarife não acumula essa função de assessoramento financeiro-patrimonial nem a competência de designar comissões de inventário/descarga (atribuição da autoridade administrativa/Agente Diretor).
+- **Centro de Suprimento e Manutenção de Intendência (CSM/Int)**, órgão subordinado à DAL: executa o **suprimento e manutenção de material de transporte e o apoio de subsistência** -- distinto dos órgãos de material bélico, engenharia ou comunicações.
+
+### 21.6 Fluxo de Execução da Despesa Pública (analogia Lei n. 14.133/2021)
+
+- **Requisição (Pedido)**: fase inicial do fluxo de despesa, que exige **registro prévio da existência de dotação orçamentária** para fazer face à despesa pretendida. A indicação de marca/modelo preferencial sem justificativa técnica é prática **vedada** (fere impessoalidade e competitividade).
+- **Termo de Referência (TR) x Projeto Básico (PB)**: por analogia doutrinária, **o TR está para o Pregão assim como o PB está para as modalidades licitatórias clássicas** -- correspondência funcional mantida mesmo após a unificação de regime pela Lei n. 14.133/2021.
+- Tema tratado de forma **genérica, por analogia**, já que o material de origem (apostila de Logística Militar) não especifica número exato de artigo da Lei n. 14.133/2021.
+
+### 21.7 Tombamento e Baixa Patrimonial
+
+- **Tombamento**: ato administrativo que atribui **número de patrimônio definitivo e imutável** durante toda a existência do bem. Extravio de plaqueta **não implica descarga automática** do bem em uso. Cada item de um conjunto computacional (CPU, monitor, teclado) deve ser tombado **individualmente**. Não cabe tombamento provisório sobre bem ainda não recebido fisicamente.
+- **Baixa patrimonial (descarga)**: a instauração de **processo investigativo pode ser dispensada** quando o próprio usuário responsável se prontifica voluntariamente a **indenizar o Estado** pelo prejuízo causado -- simplificação do procedimento nesse caso específico.
+
+### 21.8 Gestão de Pessoas e Conceitos Complementares de Administração
+
+- **Recrutamento e Seleção**: escolha dos candidatos mais adequados ao perfil das vagas (etapa anterior à capacitação técnica).
+- **Treinamento**: desenvolvimento do capital humano para excelência técnica e administrativa.
+- **Empreendedorismo Corporativo** (intraempreendedorismo): postura proativa do colaborador que contribui para inovações/melhorias nos processos internos da própria instituição.
+- **Cultura organizacional**: conjunto de crenças, costumes, sistemas de valores e normas de comportamento que direcionam as decisões de uma organização.
+- **Escola Japonesa de Administração da Produção**: técnicas de **Just in Time** e **Kanban**.
+- **Comércio eletrônico**: siglas **B2B, B2C, C2B, C2C, G2C** e **M-COMMERCE**.
+
+### 21.9 Pontos-Chave para Elaboração de Questões
+
+- Jomini = introduziu o termo "logística"; Henry Eccles = "pai da logística moderna" -- não inverter os dois.
+- Recebimento (identificação + conferência fiscal + inspeção) ≠ Procurement (compra, fase anterior) ≠ Distribuição física (saída, fase posterior).
+- Políticas de estoque variam por organização/missão -- não existe modelo único para todos os órgãos públicos.
+- Depreciação: desgaste, perda de utilidade, ação da natureza ou obsolescência -- não é sinônimo de mau uso.
+- Situação patrimonial: Bom x Ocioso (sem demanda) x Antieconômico (recuperação > 50% do valor de mercado) x Irrecuperável (perda total de identidade física) -- não confundir os quatro.
+- Ponto de Ressuprimento é sempre inferior ao Nível Máximo; Duplo Controle exige Ficha de Controle Geral **e** Ficha de Prateleira (ambas, não uma isolada).
+- Área Fria do aprovisionamento: abaixo de 20ºC.
+- Fiscal Administrativo (fiscaliza registros contábeis/patrimoniais, gerencia suprimentos) ≠ Almoxarife (sem essa competência de assessoramento financeiro nem de designar comissões) -- analogia com RAE arts. 30-31 (seção 11).
+- CSM/Int (DAL): material de transporte + apoio de subsistência -- não confundir com órgãos de material bélico, engenharia ou comunicações.
+- Requisição exige registro prévio de dotação orçamentária (analogia Lei 14.133/2021, sem artigo específico do material-fonte).
+- TR está para o Pregão assim como PB está para as modalidades clássicas (analogia Lei 14.133/2021).
+- Tombamento: número definitivo e imutável; conjuntos computacionais tombados item a item; extravio de plaqueta não gera descarga automática.
+- Baixa patrimonial: investigação pode ser dispensada se o usuário se prontificar a indenizar o Estado.
+- Esta disciplina é majoritariamente **doutrina técnica de administração/logística**, sem lei pública numerada -- as únicas referências legais admitidas são a analogia genérica com a Lei n. 14.133/2021 (fluxo de despesa pública) e com o RAE (Decreto n. 98.820/1990, arts. 30-31, já documentado na seção 11), sem inventar artigos não constantes do material de origem.
+
+---
+
+## 22. Ordem Unida com Espadas e Honras Fúnebres
+
+**Nota de natureza da fonte**: disciplina 16 do CHO. Baseada em **doutrina interna do Exército Brasileiro** — Manual **C 22-5** (Ordem Unida com Espadas) e **Vade-Mécum 09 / VM 09** (Honras Fúnebres). Cerimonial militar, **sem lei pública numerada** para o manejo de espada. A **única norma legal** aplicável é a **Lei n. 5.700/1971** (símbolos nacionais), que rege o hasteamento da Bandeira Nacional em funeral e luto — arquivo `legislacao/Lei_5700_1971_SimbolosNacionais.html`.
+
+### 22.1 Posições e Movimentos com Espada (C 22-5)
+
+- **Sentido, espada embainhada**: mão esquerda segura a bainha **abaixo da braçadeira**, braço ligeiramente curvo, dedos unidos voltados para baixo, **polegar entre a bainha e o corpo**.
+- **Sentido, espada desembainhada**: espada ao longo do corpo, **ponta no solo junto ao pé direito**, **fio voltado para trás**.
+- **Descansar (embainhada)**: a espada mantém a configuração de "Sentido"; a **mão direita** cai naturalmente ao lado do corpo, **dorso para a frente**.
+- **Desembainhar-Arma**: após retirar a lâmina com energia e enfiar a mão no fiador, cabe à **mão esquerda prender a bainha no gancho**.
+- **Embainhar-Arma**: o oficial **deve olhar para a bainha** ao introduzir a lâmina (não é erro olhar — é o procedimento correto; o erro é manter o olhar fixo à frente).
+- **Ombro-Arma** (partindo de Sentido): **quatro tempos**. No 1º, a mão esquerda segura a lâmina mantendo-a **paralela ao solo**. No 3º, empunha-se pelos dedos **polegar e indicador**, demais unidos e distendidos, copo na altura do quadril.
+- **Apresentar-Arma**: **três tempos**. No 1º, espada à frente do rosto, braço unido ao corpo, copo à altura do queixo, **fio para a esquerda**. Posição final: lâmina a **45º** com a linha dos ombros, ponta no prolongamento do **pé direito**.
+- **Arma Suspensa**: ponta afastada do solo em **aproximadamente 20 cm**.
+- **Em Funeral-Arma** (1º tempo): espada trazida à frente do corpo e **girada 180º**, ficando o **copo voltado para a frente**.
+- **Espada em Marcha**: lâmina encostada na **parte interna do braço e no ombro direito**. Em passo ordinário, o braço direito oscila **~45º à frente e ~30º atrás**.
+- **"Sem Cadência!"**: oficiais com espada desembainhada **embainham a espada antes** de romper a marcha.
+- **"Cobrir!"**: o oficial faz **Espada Suspensa** e volta a frente para a tropa para corrigir a cobertura.
+- **Oficiais sem comando** em formaturas e desfiles: **não desembainham** a espada e prestam continência **como se estivessem desarmados**.
+
+### 22.2 Honras Fúnebres (VM 09)
+
+- **Restrições de data**: não há honras fúnebres em Grandes Datas (07 set / 15 nov), feriados nacionais específicos, datas festivas, no aniversário da OM do extinto (a critério do Comandante) ou em caso de perturbação da ordem pública.
+- **Cobertura do ataúde**: Bandeira Nacional com a **tralha na cabeceira** e a **estrela isolada (espiga) à direita**.
+- **Comissões de Pêsames**: no mínimo **três militares da ativa**.
+- **Toque de Silêncio**: além de militares da ativa, fazem jus os militares que **integraram o Alto-Comando do Exército** ou **exerceram cargo de Ministro de Estado**, se o ataúde for coberto pela Bandeira Nacional.
+- **Guarda Fúnebre** para Oficial Superior: **duas subunidades**.
+- **Escolta Fúnebre**: Oficiais Intermediários → **dois Grupos de Combate**; **praças não têm direito** a escolta fúnebre.
+- **Descargas de fuzil**: **três descargas**, quando o féretro alcança a **direita** da guarda.
+- **Salvas de artilharia**: General-de-Exército → **17 tiros**; General-de-Brigada → **13 tiros**.
+
+### 22.3 Bandeira Nacional em Luto (Lei n. 5.700/1971 — VERIFICADO)
+
+- **Art. 17**: "Quando em funeral, a Bandeira fica a meio-mastro ou a meia-adriça. Nesse caso, **no hasteamento ou arriamento, deve ser levada inicialmente até o tope**."
+- Ou seja: hasteia-se **até o tope** e desce-se ao meio-mastro; na arriação, **sobe-se novamente ao tope** e só então se arria. Não existe hasteamento direto ao meio-mastro.
+- **Art. 16**: quando várias bandeiras são hasteadas simultaneamente, a Bandeira Nacional é a **primeira a atingir o tope e a última a dele descer**.
+
+### 22.4 Pontos-Chave para Elaboração de Questões
+
+- Sentido embainhada: polegar **entre a bainha e o corpo**, mão **abaixo** da braçadeira.
+- Sentido desembainhada: ponta no solo junto ao **pé direito**, fio para **trás**.
+- Ombro-Arma = **4 tempos**; Apresentar-Arma = **3 tempos**. Não trocar.
+- Apresentar-Arma final: **45º** com a linha dos ombros.
+- Arma Suspensa: **20 cm** do solo.
+- Ao embainhar, **olha-se para a bainha** — enunciado que afirma o contrário está errado.
+- "Sem Cadência!" → **embainhar antes** de romper marcha.
+- Oficiais sem comando **não desembainham**.
+- Guarda fúnebre de Oficial Superior = 2 subunidades; escolta de Oficial Intermediário = 2 GC; **praça não tem escolta fúnebre**.
+- Salvas: 17 (Gen-Ex) e 13 (Gen-Bda).
+- Luto: **sempre ao tope primeiro**, tanto no hasteamento quanto na arriação (Lei 5.700/1971, art. 17). Este é o único ponto da disciplina com **lei pública**; o restante é doutrina (C 22-5 / VM 09) e **não se deve inventar artigo de lei** para ele.
+
+---
+
+## 23. Prevenção ao Assédio Sexual e ao Assédio Moral na Caserna
+
+**Nota de natureza da fonte**: disciplina 17 do CHO. Diferente das disciplinas 16 e 20, esta tem **forte lastro legal**: Código Penal (arts. 215-A e 216-A), Código Penal Militar (arts. 174 e 175), CF/88 (art. 1º, III e art. 37, §6º), Lei n. 9.029/1995, CEDM/RR (Lei n. 963/2014, arts. 15 e 17) e Decreto n. 20.910/1932 (prescrição quinquenal).
+
+### 23.1 Assédio Moral — Conceito e Elementos
+
+- **Violência psicológica** manifestada por palavras, gestos ou atitudes **repetidas e prolongadas**, com **intenção** de humilhar, constranger, isolar ou desestabilizar emocionalmente a vítima e degradar o ambiente de trabalho.
+- **Dois elementos configuradores**: (1) **reiteração** e (2) **intencionalidade**. Não é acidente nem cobrança legítima.
+- **Exceção importante**: um **ato isolado de altíssima gravidade** pode configurar assédio moral se violar frontalmente a dignidade da vítima. A repetição é a **regra**, não requisito absoluto.
+- **Direções do assédio moral**:
+
+| Modalidade | Quem agride quem | Exemplo |
+|---|---|---|
+| **Vertical descendente** | Superior → subordinado | Abuso de autoridade, cobranças humilhantes |
+| **Vertical ascendente** | Subordinado(s) → superior | Grupo de soldados boicota/deslegitima o sargento |
+| **Horizontal** | Entre pares (mesmo posto/graduação) | Hostilidade, exclusão do grupo, apelidos pejorativos |
+| **Misto** | Convergência de vertical + horizontal | Vítima pressionada pelo superior **e** isolada pelos colegas |
+
+> **⚠ Correção à fonte**: o slide da disciplina traz, na caixa rotulada "Vertical Ascendente", o **texto descritivo do assédio Misto** ("Combinação de direções"). A definição correta de **vertical ascendente** é a de subordinados agindo contra o superior — o que o próprio caderno confirma na questão sobre o Sargento assediado por um grupo de Soldados.
+
+### 23.2 A Linha na Areia — Rigor Legítimo x Assédio Moral
+
+| Rigor legítimo (DEVE ser feito) | Assédio moral (crime/transgressão) |
+|---|---|
+| Feedback construtivo, apontando erros com respeito | Críticas ofensivas repetidas, apelidos depreciativos |
+| Atribuir tarefas **compatíveis** com função e treinamento | Isolar o militar, excluí-lo de atividades (esvaziamento/ócio forçado) |
+| Corrigir erros de execução de forma objetiva | Desqualificar o trabalho diante da tropa, repetidamente |
+| Aplicar sanções **previstas em regulamento** | Ameaçar continuamente com punições sem fundamento |
+
+- **Não** são assédio: exigir cumprimento rigoroso do **horário de expediente**; convocar para **serviço extra** por necessidade real do serviço e com amparo legal; **transferir** militar por necessidade do serviço/adequação ao QO; repreender em **local reservado**, de forma técnica.
+- **São** assédio: restringir de forma vexatória o **uso do banheiro**; impor **punições vexatórias** (ex.: "dancinhas" ridicularizantes); usar **informação sigilosa como chantagem**; **ciberbullying** em grupos de mensagens da corporação; discriminação de gênero reiterada.
+
+### 23.3 Assédio Sexual x Importunação Sexual (VERIFICADO no Código Penal)
+
+| | **Assédio Sexual** (CP, art. 216-A) | **Importunação Sexual** (CP, art. 215-A) |
+|---|---|---|
+| **Conduta** | Constranger alguém com o intuito de obter vantagem ou favorecimento sexual | Praticar ato libidinoso contra alguém, **sem sua anuência**, para satisfazer a própria lascívia ou a de terceiro |
+| **Relação de poder** | **Exige** prevalecer-se da condição de superior hierárquico ou ascendência | **Não exige** hierarquia — pode ocorrer entre pares ou desconhecidos |
+| **Contato físico** | **Não exige** | **Exige** ato libidinoso |
+| **Repetição** | **Não exige** | Não exige |
+| **Palavra-chave** | Abuso do **poder** | Ausência de **consentimento** |
+| **Pena** | **Detenção, de 1 a 2 anos** | **Reclusão, de 1 a 5 anos**, se o ato não constitui crime mais grave |
+
+- **Contraintuitivo, e por isso ótimo para questão**: a **importunação sexual é punida mais gravemente** (reclusão 1-5) que o **assédio sexual** (detenção 1-2), embora o assédio envolva abuso de hierarquia.
+- **Matriz de decisão — Paquera x Importunação x Assédio**: o divisor entre paquera e importunação é o **consentimento** (a paquera é recíproca e aceita o "não" de imediato); o divisor entre importunação e assédio é o **uso da autoridade** para obter favorecimento sexual.
+- O assédio sexual **não deixa de ser crime** por ocorrer fora do horário de expediente ou fora da unidade, se o agente se valeu da patente/hierarquia.
+
+### 23.4 Enquadramento no Código Penal Militar (VERIFICADO)
+
+O CPM **não tipifica "assédio moral"** com esse nome. As condutas são enquadradas por tipos específicos:
+
+| Artigo CPM | Tipo | Pena (redação da Lei n. 14.688/2023) |
+|---|---|---|
+| **Art. 174** | **Rigor excessivo** — exceder a faculdade de punir o subordinado, fazendo-o com rigor não permitido, ou ofendendo-o por palavra, ato ou escrito | Detenção, de 1 a 2 anos, se o fato não constitui crime mais grave |
+| **Art. 175** | **Violência contra inferior hierárquico** | Detenção, de 3 meses a 2 anos |
+
+> **⚠ Correção à fonte**: o caderno da disciplina 17 (questão 28) atribui o "rigor excessivo" ao **art. 322 do CPM**. Isso está **errado**. O art. 322 do CPM tipifica *"deixar de responsabilizar subordinado que comete infração no exercício do cargo, ou, quando lhe falte competência, não levar o fato ao conhecimento da autoridade competente"*. **Rigor excessivo é o art. 174.** Toda questão sobre o tema deve usar o 174.
+
+- No **Código Penal comum**, as condutas de assédio moral podem configurar **injúria**, **ameaça** e **constrangimento ilegal**.
+
+### 23.5 Danos, Responsabilidade do Estado e Prescrição
+
+- **Danos**: psicológico (ansiedade, depressão, estresse pós-traumático, ideação suicida); físico (insônia, fadiga crônica, distúrbios gastrointestinais — **somatização**); e **operacional** (queda de desempenho, absenteísmo, quebra da coesão do pelotão e perda de confiança na cadeia de comando).
+- **Responsabilidade Civil do Estado**: **objetiva**, com base na **Teoria do Risco Administrativo** (**CF/88, art. 37, §6º**). Comprovados conduta, dano e nexo causal, o Estado indeniza **independentemente de dolo ou culpa**, cabendo **ação de regresso** contra o agente que agiu com dolo ou culpa.
+- **Prescrição**: **5 anos** contra a Fazenda Pública (Decreto n. 20.910/1932). Sendo o assédio conduta de **trato sucessivo**, o marco inicial é o **último ato lesivo**, não o primeiro.
+- **Lei n. 9.029/1995**: veda práticas discriminatórias e limitativas para efeito de acesso ou manutenção da relação de trabalho (sexo, origem, raça, cor, estado civil, situação familiar, deficiência, idade).
+- **CEDM/RR (Lei n. 963/2014), arts. 15 e 17**: a subordinação **não afeta a dignidade pessoal**; é dever do superior tratar o subordinado com **justiça, consideração e urbanidade**.
+
+### 23.6 POP de Reação e Canais de Denúncia
+
+- **Se você é a vítima**: (1) **Interromper** — dizer "não" de forma firme e direta; (2) **Registrar** — guardar e-mails, prints, áudios e listar testemunhas.
+- **Se você é testemunha**: (1) **Intervir** — não ser conivente com o silêncio; (2) **Apoiar** — oferecer suporte e encorajar o relato. A **omissão reforça a impunidade**; a camaradagem **não** justifica acobertar assédio.
+- **Escalonamento (comum a ambos)**: (3) buscar **apoio institucional** (Seção de Assistência Social); (4) **oficializar** a denúncia na cadeia de comando ou em órgão externo.
+- **Canais**: **Cadeia de Comando** (primeiro nível de blindagem) → **Corregedoria** (canal interno, formal e sigiloso) → **instância externa e judicial**. O **sigilo** e a **proteção contra retaliações** são deveres da Instituição.
+- Registros documentais (e-mails, mensagens, áudios) **são** relevantes: consubstanciam a materialidade da denúncia.
+
+> **⚠ Correção à fonte**: o slide e o caderno indicam o **Ministério Público Militar (MPM)** como instância externa. Para **militar estadual** (PMRR/CBMRR) isso está **impreciso**: o MPM oficia junto à **Justiça Militar da União** (Forças Armadas). O órgão correto para o militar estadual é o **Ministério Público do Estado**, com atribuição junto à **Justiça Militar Estadual**. Questões novas devem usar "Ministério Público com atribuição junto à Justiça Militar Estadual" ou, se citarem MPM, restringir o cenário a militar federal.
+
+### 23.7 Pontos-Chave para Elaboração de Questões
+
+- Assédio moral = **repetição + intenção**; mas **ato isolado de altíssima gravidade** também pode configurar.
+- **Vertical ascendente** = subordinado contra superior. **Misto** = vertical + horizontal. Não confundir (o slide-fonte confunde).
+- **216-A** = detenção 1-2 anos, **exige hierarquia**, **não exige** contato físico nem repetição.
+- **215-A** = reclusão 1-5 anos, **não exige** hierarquia, **exige** ato libidinoso sem consentimento. **Pena maior que a do assédio** — distrator natural.
+- **Rigor excessivo = CPM art. 174** (não 322). **Violência contra inferior = CPM art. 175.**
+- Responsabilidade do Estado é **objetiva** (CF, art. 37, §6º) + **regresso** contra o agente.
+- Prescrição de **5 anos**, contada do **último** ato (trato sucessivo).
+- Exigir horário, convocar serviço extra por necessidade real, transferir por necessidade do serviço e repreender em reservado **não** são assédio — excelentes distratores "senso comum errado".
+- Para militar estadual, a instância externa é o **MP Estadual junto à JME**, não o MPM.
+
+---
+
+## 24. Sindicância Disciplinar Militar (SDM)
+
+**Nota de natureza da fonte**: disciplina 18 do CHO. Base normativa: **CPPM (Decreto-Lei n. 1.002/1969)**, arts. 348 e 349 (testemunhas); **Súmula Vinculante n. 5 do STF**; jurisprudência do STF (PET 7612, 2ª Turma) sobre natureza inquisitorial do inquérito. Procedimento regulamentado por norma interna da corporação (portaria), não por lei federal específica.
+
+### 24.1 Conceito e Natureza
+
+- **SDM**: instrumento investigativo destinado a apurar **responsabilidade disciplinar** em ocorrências de **maior complexidade e potencial transgressional**. Faltas simples e residuais devem ser resolvidas por meios administrativos menos gravosos.
+- A submissão à SDM, **por si só, não implica afastamento** do militar de suas funções.
+- **Metodologia semelhante à do IPM**, com uma diferença central: na SDM, **ampla defesa e contraditório devem ser observados na literalidade**, sob pena de **nulidade** e de **representação por abuso de autoridade** contra o oficial presidente.
+
+### 24.2 SDM x Instruções Provisórias (IPM, APFDM, PDM)
+
+- **IPM, APFDM e PDM** são classificados como **meras instruções provisórias**, de natureza **inquisitorial**.
+- **STF, PET 7612 (2ª Turma, rel. Min. Edson Fachin)**: por ser o inquérito procedimento destinado a formar o convencimento da acusação, **admite-se a mitigação das garantias do contraditório**. A assistência da defesa mediante razões e quesitos **não se confunde** com um direito subjetivo à **intimação prévia do calendário de inquirições**.
+- Na **SDM**, essa mitigação **não** é admitida: ausência de advogado ou defensor dativo gera **nulidade**.
+- Se o sindicado **não constitui advogado**, o presidente **designa Defensor Dativo** (que pode ser oficial da corporação), com fundamento na **Súmula Vinculante n. 5 do STF** ("A falta de defesa técnica por advogado no processo administrativo disciplinar não ofende a Constituição").
+
+### 24.3 Resultados Possíveis e Conversões
+
+| Situação apurada | Desfecho |
+|---|---|
+| Fatos **improcedentes** | **Arquivamento** |
+| Transgressão comprovada, sem gravidade ético-funcional | **Aplicação de sanção disciplinar** |
+| Sindicado é **praça NÃO estável**, fato contraria a ética/honra | Conversão em **Processo Administrativo Disciplinar (PAD)** |
+| Sindicado é **Aspirante-a-Oficial ou praça ESTÁVEL**, fato contraria o pundonor | Conversão em **Conselho de Disciplina** |
+| Sindicado é **Oficial**, fato atinge a honra pessoal e o decoro da classe | Conversão em **Conselho de Justificação** |
+| Indícios de **crime militar** | Conversão em **Inquérito Policial Militar (IPM)** |
+| Indícios de **crime comum** | Conversão em **Inquérito Policial comum**, com cópia à Corregedoria da SSP |
+
+> Esta tabela é a **espinha dorsal** da disciplina e casa exatamente com o padrão "Nível 3 — Distinção entre Conceitos Similares" do guia de elaboração. Compare com a seção 1 desta base (Estatuto): Conselho de Justificação = **oficiais**; Conselho de Disciplina = **Aspirante-a-Oficial e praças com estabilidade**.
+
+### 24.4 Rito Processual
+
+1. Recebimento dos documentos que narram a ocorrência e **publicação da portaria** de instauração.
+2. **Autuação / Termo de Compromisso**.
+3. **Despacho ordinatório** inicial.
+4. **Mandado de Citação** do sindicado (informa a faculdade de constituir advogado, de exercer autodefesa ou de receber defensor dativo — SV 5/STF).
+5. **Oitivas, nesta ordem**: **sindicado** → **ofendido (vítima)** → **testemunhas de acusação** → **testemunhas de defesa**.
+6. **Juntada** da Ficha Disciplinar / assentamentos (verificação de contumácia, influi na dosimetria e na conversão).
+7. **Alegações finais**: vista à defesa pelo prazo de **5 dias**. Não exercido o direito no prazo, designa-se **Defensor Dativo** (não se aplica revelia).
+8. **Relatório final circunstanciado**, terminando obrigatoriamente com a **sugestão de uma das medidas** da tabela de conversões (24.3).
+
+- **Prazo de conclusão**: **40 dias**, prorrogável mediante ofício justificado à autoridade instauradora.
+- **Testemunhas (CPPM)**: **civis** → cabe ao **acusado apresentá-las** (art. 348). **Militares ou servidores públicos** → o presidente faz **requisição ao chefe imediato** (art. 349).
+- **Perícias**: a defesa deve ser **notificada para apresentar quesitos**.
+
+### 24.5 Pontos-Chave para Elaboração de Questões
+
+- SDM **não afasta** o militar de suas funções.
+- SDM ≠ IPM: na SDM o contraditório é **literal**; no IPM (instrução provisória, inquisitorial) admite-se **mitigação** (STF, PET 7612).
+- Sem advogado → **Defensor Dativo** obrigatório (**SV 5/STF**). Nunca revelia, nunca julgamento sem defesa técnica.
+- Conversões: praça **não** estável → **PAD**; Aspirante/praça **estável** → **Conselho de Disciplina**; **Oficial** → **Conselho de Justificação**; crime militar → **IPM**; crime comum → **IP comum + Corregedoria da SSP**. É o ponto mais cobrável e o mais fácil de errar por troca.
+- Ordem das oitivas: **sindicado primeiro**, testemunhas de defesa por **último**.
+- Testemunha **civil** = o acusado apresenta (CPPM, art. 348); **militar/servidor** = requisição ao chefe (CPPM, art. 349).
+- Prazos: **40 dias** para conclusão; **5 dias** para alegações finais.
+- Violar ampla defesa → **nulidade + abuso de autoridade** contra o presidente.
+
+---
+
+## 25. Técnica Policial Militar — Blitz Policial
+
+**Nota de natureza da fonte**: disciplina 19 do CHO. Predominantemente **doutrina operacional** (Caderno Doutrinário de Técnica Policial Militar). Duas normas legais incidem: **CPPM (Decreto-Lei n. 1.002/1969), art. 180** (busca pessoal) e o **CTB (Lei n. 9.503/1997)**, arts. 165, 165-A, 277 e 306 (embriaguez ao volante).
+
+### 25.1 Conceito, Níveis e Categorias
+
+- **Blitz Policial**: **interrupção parcial e temporária** do fluxo de pessoas ou veículos, mediante **sinalização física, visual e sonora**, para vistorias e checagens. Não se confunde com cerco/bloqueio nem com interrupção total e permanente.
+- **Níveis** (objetivo da operação): **1 — Educativo**; **2 — Preventivo** (ocupação prévia de locais com incidência significativa); **3 — Repressivo** (após a ocorrência do fato).
+- **Categorias** (recursos empregados): a **Categoria 3** exige, além de efetivo e viaturas, **armamento reforçado** e **dispositivos de bloqueio de pista**. Categoria 1 admite guarnição de 2 a 3 policiais.
+- **Migração**: a operação **pode migrar** de categoria e de nível durante a execução (ex.: Categoria 2 preventiva que recebe reforço e passa a repressiva diante de fuga de assaltantes).
+- **Princípio da Universalidade**: constatada qualquer irregularidade — ainda que **estranha ao objetivo primordial** da blitz (ex.: mandado de prisão em aberto numa blitz educativa) — o policial **deve** adotar as providências legais cabíveis.
+- **Zona Quente de Criminalidade (ZQC)**: local onde, **estatisticamente**, há concentração de crimes violentos.
+
+### 25.2 Dispositivo, Funções e Segurança
+
+- **Boxes**: **Box de Abordagem** (triagem e vistoria) e **Box de Registro** (autuações, registro de ocorrências, prisões e apreensões, **após** a detecção da irregularidade).
+- **Acessórios**: mínimo de **oito cones** de sinalização.
+- **Tempo de permanência** no mesmo local: **30 a 60 minutos**, redefinível pelo Comandante no local.
+- **Funções**: **Comandante** (define funções, opera a rede-rádio, coordena); **Selecionador** (escolhe os veículos e sinaliza com gestos e silvos de apito; **interrompe a seleção** se houver acúmulo no Box de Abordagem); **Vistoriador** (busca pessoal e veicular); **Segurança**.
+- **Armamento**: **apenas o PM Segurança** empunha ostensivamente o armamento portátil, mantendo a melhor posição tática — evita-se a **vulgarização do impacto** e o risco de disparo acidental.
+- **Estado de prontidão**: **amarelo (atenção)** durante a operação, passando a **laranja (alerta)** no momento da abordagem.
+- **Inferioridade tática**: em Categoria 1, diante de veículo com vários ocupantes e risco detectado, a conduta correta é **liberar o veículo sem abordá-lo** e cientificar o CICOp com os dados, para abordagem posterior por guarnição reforçada.
+- Com **dois policiais**, acumulam-se funções: um Comandante/Segurança, outro Selecionador/Vistoriador.
+
+### 25.3 Busca Pessoal e Veicular
+
+- **Busca pessoal (CPPM, art. 180)**: procura material nas vestes, pastas, malas e, quando necessário, no próprio corpo. Depende de **fundada suspeita** — o **tirocínio policial** é elemento válido para fundamentá-la.
+- **Veículo automotor não é domicílio** — não exige mandado judicial para busca interna diante de fundada suspeita.
+- **Sequência técnica da busca veicular**: **porta-malas → parte interna (cabine) → região do motor** (se necessário).
+- Vistoria das portas: levantar o vidro, conferir a numeração do chassi e **bater no forro** para verificar se o som é **uniforme** (detecção de compartimentos ocultos).
+
+### 25.4 Embriaguez ao Volante (CTB — VERIFICADO) ⚠
+
+Este é o ponto onde o caderno da disciplina contém **erro técnico relevante**, e onde uma questão bem elaborada tem grande valor.
+
+| Dispositivo | Natureza | Limiar |
+|---|---|---|
+| **Art. 165** | **Infração administrativa** gravíssima — "dirigir sob a influência de álcool ou de qualquer outra substância psicoativa que determine dependência" | **Qualquer concentração** de álcool (observada a margem de tolerância do CONTRAN) |
+| **Art. 306, §1º, I** | **Crime** de trânsito — conduzir com capacidade psicomotora alterada | **Igual ou superior a 6 decigramas por litro de sangue** ou **0,3 mg/L de ar alveolar** |
+| **Art. 165-A** | **Infração administrativa** autônoma | **Recusar-se** a ser submetido a teste, exame clínico, perícia ou outro procedimento do art. 277 |
+| **Art. 277** | Procedimento de fiscalização | Sinais de alteração podem ser constatados por **prova, exame clínico, perícia, vídeo ou notórios sinais** |
+
+> **⚠ Correção à fonte**: o caderno afirma que "a **infração de trânsito** se configura com concentração **igual ou superior a 0,3 mg/L**". Isso **confunde os dois planos**. O patamar de **0,3 mg/L** é o limiar do **crime** do art. 306. Para a **infração administrativa** do art. 165 basta **qualquer concentração** de álcool. Questões novas devem separar claramente "infração administrativa (art. 165)" de "crime (art. 306)".
+
+- **Recusa ao etilômetro**: **não** impede a autuação. A recusa é, ela própria, infração autônoma (**art. 165-A**), e a embriaguez pode ser caracterizada pela **descrição dos notórios sinais** (hálito etílico, agressividade, desordem nas vestes, fala alterada) — art. 277. **Não** se admite forçar o sopro nem extração compulsória de sangue.
+
+### 25.5 Uso da Força, Evasão e Casos Específicos
+
+- **Resistência ativa com agressão não letal**: abordado que desfere chutes contra o policial, sem arma e sem risco de morte iminente. Distinta da **resistência ativa com agressão letal**.
+- **Evasão do veículo (fuga)**: **não** se efetuam disparos intimidativos — nem para o alto, nem contra pneus ou motor. O disparo só é admissível se o veículo representar **risco imediato à vida** (ex.: atropelamento intencional).
+- **Abordagem a autoridades** (ex.: magistrado): usar pronome de tratamento adequado, **identificar-se** e solicitar a apresentação da **carteira funcional**. Não se dispensa a identificação nem se agrava o procedimento.
+- **Oferta de vantagem indevida** (dinheiro entre os documentos): determinar que o condutor **retire pertences particulares** e entregue apenas o solicitado; confirmada a intenção, adotar as medidas legais cabíveis.
+- **Blitz noturna / película escura**: solicitar que o condutor **acenda a luz interna** e mantenha as **mãos visíveis sobre o volante**. Não bater no vidro com tonfa nem ofuscar o condutor com a lanterna.
+- **Barreira linguística** (estrangeiro): utilizar **gestos e sinais** que favoreçam a compreensão da intenção do policial.
+- **Motocicletas**: controlar as mãos do **passageiro** e ordenar que ele **desça primeiro** — é, estatisticamente, quem porta arma de fogo.
+
+### 25.6 Pontos-Chave para Elaboração de Questões
+
+- Blitz = interrupção **parcial e temporária** com sinalização física, visual e sonora.
+- Nível ≠ Categoria. Nível é o **objetivo** (educativo/preventivo/repressivo); Categoria são os **recursos**. Ambos podem **migrar** durante a operação.
+- **Universalidade**: agir diante de qualquer irregularidade, mesmo fora do escopo da blitz.
+- Mínimo de **8 cones**; permanência de **30 a 60 min**.
+- **Só o PM Segurança** empunha arma ostensivamente. Prontidão **amarelo → laranja** na abordagem.
+- Categoria 1 em inferioridade tática: **liberar e reportar ao CICOp**, não abordar.
+- Busca veicular: **porta-malas → cabine → motor**. Veículo **não é domicílio**.
+- **Art. 165 = qualquer concentração (infração)**; **art. 306 = 0,3 mg/L (crime)**; **art. 165-A = recusa (infração autônoma)**. A fonte confunde os dois primeiros — **usar a lei, não o caderno**.
+- Recusa ao etilômetro **não** impede a autuação: notórios sinais (art. 277) bastam.
+- Fuga: **sem** disparos intimidativos.
+- Motocicleta: **passageiro desce primeiro**.
+
+---
+
+## 26. Trabalho de Comando
+
+**Nota de natureza da fonte**: disciplina 20 e última do CHO. Doutrina de liderança militar ("Trabalho de Comando.pdf", Academia Coronel Walterler), da **mesma natureza da disciplina 6** (Chefia e Liderança Militar — ver seção 12). **Não há lei pública numerada correspondente.** Quando o tema for ética e valores militares, a fundamentação legal por analogia é o **Estatuto dos Militares de Roraima (LC n. 194/2012, art. 39)** e o **CEDM/RR (Lei n. 963/2014, arts. 15 a 22)** — ver seções 1 e 2 desta base.
+
+### 26.1 Correntes e Teorias da Liderança
+
+| Corrente | Premissa |
+|---|---|
+| **Centrada na Figura do Líder** | A liderança decorre do que o líder **é** e **faz** (qualidades inatas, traços, estilos) |
+| **Centrada nos Seguidores** | O **líder emergente** é produto do grupo; desponta por representar os anseios da coletividade |
+| **Centrada na Situação** | A liderança **depende do tempo e do lugar**; as competências exigidas variam conforme as circunstâncias |
+| **Integradora** | Sistema com **múltiplas interações** entre líder, liderados, situação e interação |
+
+- **Quatro fatores da liderança**: o **líder**, os **liderados**, a **situação** e a **interação**.
+
+### 26.2 Comando x Liderança
+
+- **Comando**: exercício profissional de um cargo investido de **autoridade legal**; esfera **formal**.
+- **Liderança**: influência interpessoal que emerge do **trato humano e do respeito à pessoa**; elemento **informal, mas desejável**, do comando. Permite mover pessoas **além da força da lei**. Não substitui a autoridade legal.
+- **Liderança Direta**: exercida nos **pequenos escalões** (do cabo ao capitão); instrumento fundamental é o **exemplo pessoal** e a comunicação frequente.
+- **Liderança Indireta**: nos grandes efetivos; exige que os **líderes intermediários aceitem e transmitam** as ideias como se fossem suas, evitando distorções ao longo da cadeia.
+
+### 26.3 Pilares (Saber / Ser / Fazer)
+
+| Pilar | Conteúdo |
+|---|---|
+| **Proficiência Profissional (Saber)** | Capacidade técnica, conhecimento e cultura para o desempenho da função |
+| **Senso Moral (Ser)** | Incorporação de valores e traços de personalidade ao caráter; distingue quem age pelo bem coletivo de quem busca vantagem pessoal |
+| **Atitude Adequada (Fazer)** | Emprego dos valores e competências da personalidade com as ferramentas que o conhecimento oferece |
+
+- Fala-se em desenvolver a **"capacidade de liderança"**, e não a "liderança": o desenvolvimento **contribui** para o fenômeno, mas **não garante** que o indivíduo se torne efetivamente um líder.
+- **Honra** = consciência da própria dignidade. **Honestidade** = senso moral e consciência. **Integridade** = condensa os demais valores. **Espírito de Corpo** = orgulho de pertencer à instituição, alicerçado na camaradagem.
+
+### 26.4 Estilos de Comando e Níveis
+
+- **Autocrático**: centraliza decisões; adequado ao **combate imediato e ao estresse**, mas desgasta os vínculos afetivos se prolongado.
+- **Participativo**: busca engajamento e aproveita ideias do grupo, **sem abrir mão da responsabilidade final**.
+- **Delegativo**: adequado a grupos que tratam de **assuntos de natureza técnica** especializada.
+- A **alternância situacional** de estilos é **recomendada**, não sinal de fraqueza.
+
+| Nível | Forma predominante | Interface / competências |
+|---|---|---|
+| **Pequenos Escalões** (cabo a capitão) | **Liderança direta** | Exemplo pessoal, presença, comunicação |
+| **Organizacional / Tático** (unidades e GU) | Direta + indireta | Boletins, ordens de serviço, diretrizes e **tecnologias de informação** materializam a interface |
+| **Estratégico** | **Liderança indireta** | **Visão prospectiva** e **persuasão estratégica**; valores morais são **não negociáveis** |
+
+### 26.5 Camaradagem, Coesão e Risco
+
+- Em **normalidade**, a **instrução militar** é a oportunidade de excelência para fortalecer laços de liderança.
+- Em **crise**, laços sólidos previnem **omissão, deserção e desobediência**.
+- **Risco e coesão**: quanto mais ansiosas as pessoas ficam por enfrentarem perigos, **mais desejam estar com outras na mesma situação** — o perigo **aumenta**, não extingue, o desejo de união.
+
+### 26.6 Orientações Práticas do Comandante
+
+- Equilibrar dois interesses frequentemente antagônicos: o **interesse do serviço** e o **interesse dos subordinados**.
+- **Não se isolar** no gabinete: quem não dialoga nem explica suas ideias verá a confiança do grupo desaparecer.
+- Evitar **contraordens**: sugerem planejamento malfeito e corroem a credibilidade.
+- **Ponderação**: refletir por tempo **proporcional à gravidade e à urgência** do problema.
+- **Elogio oportuno**: reforça a atitude correta e aumenta a autoconfiança necessária à missão.
+- **Auftragstaktik** (doutrina alemã): incentivo à **iniciativa do subordinado** na busca de soluções — o oposto da obediência cega e da centralização extrema.
+- **Coragem moral**: defender princípios e convicções mesmo com prejuízo de interesses pessoais (distinta da **coragem física**, que enfrenta o dano ao corpo).
+- **Projeto de comando**: o comandante deve ter um projeto para a OM, saber **explicá-lo** e empenhar-se em **formar novos líderes** para a cadeia de liderança.
+
+### 26.7 Pontos-Chave para Elaboração de Questões
+
+- Corrente **centrada no líder** (o que ele é/faz) ≠ **nos seguidores** (líder emergente) ≠ **na situação** (tempo e lugar) ≠ **integradora** (sistema de interações).
+- **Comando = formal/legal**; **liderança = informal/desejável**. Liderança **não substitui** a autoridade legal.
+- Pilares: **Saber** (proficiência) / **Ser** (senso moral) / **Fazer** (atitude). Um oficial tecnicamente excelente e desonesto falha no **Ser**.
+- Estilo **autocrático** é adequado ao combate imediato; **delegativo** a grupos técnicos; a **alternância** é recomendada.
+- Pequenos escalões → liderança **direta**; nível estratégico → **indireta**, com **visão prospectiva** e **persuasão estratégica**.
+- Perigo **aumenta** o desejo de coesão (contraintuitivo — bom distrator).
+- **Auftragstaktik** = iniciativa do subordinado (não obediência cega).
+- **Coragem moral** ≠ coragem física.
+- Disciplina **sem lei pública numerada**: não inventar artigo. Se o tema for ética/valores, ancorar em **LC 194/2012, art. 39** e **Lei 963/2014, arts. 15-22** (seções 1 e 2).
 
 ---
 

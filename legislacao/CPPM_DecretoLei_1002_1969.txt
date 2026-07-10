@@ -1,0 +1,246 @@
+CÓDIGO DE PROCESSO PENAL MILITAR (CPPM)
+Decreto-Lei nº 1.002, de 21 de outubro de 1969
+Status: vigente
+
+============================================================
+NOTA SOBRE ESTE ARQUIVO
+============================================================
+Este arquivo é um EXCERTO CURADO do CPPM, e não a íntegra do Código.
+
+O CPPM é um diploma extenso (Livros I a V, cerca de 600+ artigos,
+cobrindo inquérito policial militar, ação penal, processo penal
+militar em tempo de paz e em tempo de guerra, execução da sentença
+etc.). Diante do tamanho do documento e da indisponibilidade de
+acesso estável às fontes oficiais em HTML/PDF completo no momento
+da coleta (planalto.gov.br retornou falha de conexão; PDFs oficiais
+vieram corrompidos/ilegíveis para extração de texto), priorizou-se
+— conforme o objetivo desta disciplina (Sindicância Disciplinar
+Militar) — a transcrição do CAPÍTULO VI (DAS TESTEMUNHAS), arts.
+347 a 364, que é o núcleo normativo citado nas questões sobre oitiva
+de testemunhas civis e militares/servidores em sindicâncias e
+inquéritos.
+
+Para o texto integral do CPPM, consultar:
+- https://www.planalto.gov.br/ccivil_03/decreto-lei/del1002.htm
+- https://www2.camara.leg.br/legin/fed/declei/1960-1969/decreto-lei-1002-21-outubro-1969-376259-norma-pe.html
+
+Fontes usadas para conferência do texto literal dos artigos abaixo:
+- https://modeloinicial.com.br/lei/CPPM/testemunhas-@__I_XV_VI
+- https://modeloinicial.com.br/lei/CPPM/oferecimento-testemunhas/art-348
+- https://www.legjur.com/legislacao/art/dcl_00010021969-348
+- https://www.legjur.com/legislacao/art/dcl_00010021969-349
+
+============================================================
+ESTRUTURA GERAL DO CPPM (para referência)
+============================================================
+LIVRO I — Parte Geral
+  Título I — Aplicação da Lei de Processo Penal Militar
+  Título II — Polícia Judiciária Militar
+  Título III — Inquérito Policial Militar
+  Título IV — Ação Penal
+  ...
+  Título XV — Da Prova (inclui o Capítulo VI — Das Testemunhas,
+              arts. 347 a 364, transcrito abaixo)
+LIVRO II — Processos em Espécie (ordinário e especiais)
+LIVRO III — Nulidades e Recursos
+LIVRO IV — Execução
+LIVRO V — Da Justiça Militar em Tempo de Guerra
+
+============================================================
+TÍTULO XV — DA PROVA
+CAPÍTULO VI — DAS TESTEMUNHAS (arts. 347 a 364)
+============================================================
+
+Art. 347. Notificação de testemunhas.
+"As testemunhas serão notificadas em decorrência de despacho do
+auditor ou deliberação do Conselho de Justiça, em que será
+declarado o fim da notificação e o lugar, dia e hora em que devem
+comparecer."
+
+§ 1º Comparecimento obrigatório.
+"O comparecimento é obrigatório, nos têrmos da notificação, não
+podendo dêle eximir-se a testemunha, salvo motivo de fôrça maior,
+devidamente justificado."
+
+§ 2º Falta de comparecimento.
+"A testemunha que, notificada regularmente, deixar de comparecer
+sem justo motivo, será conduzida por oficial de justiça e multada
+pela autoridade notificante na quantia de um vigésimo a um décimo
+do salário mínimo vigente no lugar."
+
+------------------------------------------------------------
+
+Art. 348. Oferecimento de testemunhas.
+"A defesa poderá indicar testemunhas, que deverão ser apresentadas
+independentemente de intimação, no dia e hora designados pelo juiz
+para inquirição, ressalvado o disposto no art. 349."
+
+>>> Aplicação prática (disciplina SDM): quando o sindicado/acusado
+arrola testemunha CIVIL, cabe a ele próprio (à defesa) apresentá-la
+no dia e local designados, independentemente de intimação formal
+pela autoridade processante — ressalvada a hipótese do art. 349
+(militar ou funcionário público), que segue rito diverso.
+
+------------------------------------------------------------
+
+Art. 349. Requisição de militar ou funcionário.
+"O comparecimento de militar, assemelhado, ou funcionário público
+será requisitado ao respectivo chefe, pela autoridade que ordenar
+a notificação."
+
+Parágrafo único — Militar de patente superior.
+Quando a testemunha fôr militar de patente superior à autoridade
+notificante, a intimação para comparecimento será feita por
+intermédio da autoridade militar a que estiver imediatamente
+subordinada, sob as penas do § 2º do art. 347.
+
+>>> Aplicação prática (disciplina SDM): quando a testemunha
+indicada é policial militar (de outra unidade) ou servidor público
+civil, NÃO cabe à defesa/sindicado apresentá-la — a autoridade que
+preside o feito deve REQUISITAR o comparecimento diretamente ao
+chefe imediato da testemunha.
+
+------------------------------------------------------------
+
+Art. 350. Dispensa de comparecimento.
+Estão dispensados de comparecer para depor pessoalmente, podendo
+prestar depoimento por escrito ou ser inquiridos em local
+reservado/domicílio, autoridades como o Presidente da República,
+Governadores de Estado, membros do Congresso Nacional, Ministros
+de Estado, membros do Poder Judiciário e do Ministério Público,
+oficiais-generais, entre outras autoridades e pessoas enfermas ou
+impossibilitadas de locomoção, que serão inquiridas onde estiverem.
+
+------------------------------------------------------------
+
+Art. 351. Capacidade para ser testemunha.
+"Qualquer pessoa poderá ser testemunha."
+
+------------------------------------------------------------
+
+Art. 352. Declaração da testemunha.
+Antes de depor, a testemunha é qualificada (nome, idade, estado,
+residência, profissão) e informada sobre as penas do falso
+testemunho, prestando o compromisso de dizer a verdade (ressalvadas
+as exceções legais de testemunhas não compromissadas, como
+parentes próximos do acusado).
+
+------------------------------------------------------------
+
+Art. 353. Inquirição separada.
+"As testemunhas serão inquiridas cada uma de per si, de modo que
+uma não possa ouvir o depoimento da outra."
+
+------------------------------------------------------------
+
+Art. 354. Obrigação e recusa de depor.
+Estabelece que, em regra, ninguém pode eximir-se da obrigação de
+depor, ressalvadas as pessoas que, em razão de parentesco próximo
+com o acusado (ascendente, descendente, afim em linha reta,
+cônjuge, irmão), podem recusar-se a depor, salvo quando não for
+possível, por outro modo, obter-se ou integrar-se a prova do fato
+e de suas circunstâncias.
+
+------------------------------------------------------------
+
+Art. 355. Proibição de depor.
+São proibidas de depor sobre fatos que devam guardar sigilo em
+razão de função, ministério, ofício ou profissão, as pessoas que a
+esse sigilo estejam obrigadas, salvo se, desobrigadas pela parte
+interessada, quiserem dar o seu testemunho.
+
+------------------------------------------------------------
+
+Art. 356. Testemunhas suplementares.
+Faculta ao juiz ou ao Conselho de Justiça ouvir, além das
+testemunhas arroladas pelas partes, outras que entender necessárias
+ao esclarecimento da verdade.
+
+------------------------------------------------------------
+
+Art. 357. Manifestação de opinião pessoal.
+A testemunha deve limitar-se, na resposta, ao objeto da pergunta,
+não devendo emitir opiniões pessoais, salvo quando indissociáveis
+da narrativa do fato.
+
+------------------------------------------------------------
+
+Art. 358. Caso de constrangimento.
+Se a presença do acusado puder causar humilhação, temor ou sério
+constrangimento à testemunha, de modo que prejudique a verdade do
+depoimento, o juiz fará a inquirição sem a presença dele.
+
+------------------------------------------------------------
+
+Art. 359. Expedição de precatória.
+Regula a expedição de carta precatória para inquirição de
+testemunha que resida ou se encontre fora da sede do juízo
+processante.
+
+------------------------------------------------------------
+
+Art. 360. Precatória a juiz do foro comum.
+Disciplina a hipótese de a precatória ser dirigida a juiz de direito
+da justiça comum, quando a testemunha não estiver sujeita à
+jurisdição militar.
+
+------------------------------------------------------------
+
+Art. 361. Precatória a autoridade militar.
+Disciplina a inquirição de testemunhas militares por precatória
+dirigida à autoridade militar competente, inclusive na fase de
+inquérito.
+
+------------------------------------------------------------
+
+Art. 362. Mudança de residência.
+Impõe à testemunha o dever de comunicar, no prazo de um ano, a
+mudança de residência à autoridade processante.
+
+------------------------------------------------------------
+
+Art. 363. Antecipação de depoimento.
+Permite a antecipação da oitiva de testemunha que, por doença ou
+outra circunstância, possa vir a se tornar impossibilitada de depor
+por ocasião do julgamento.
+
+------------------------------------------------------------
+
+Art. 364. Afirmação falsa de testemunha.
+Reconhecido, no depoimento, indício de falso testemunho, os autos
+devem ser remetidos à autoridade competente para apuração do crime
+militar correspondente.
+
+============================================================
+SÚMULA VINCULANTE Nº 5 — SUPREMO TRIBUNAL FEDERAL
+============================================================
+Aprovada em 16/05/2008 (origem: RE 434.059).
+
+Texto:
+"A falta de defesa técnica por advogado no processo administrativo
+disciplinar não ofende a Constituição."
+
+>>> Aplicação prática (disciplina SDM): a Súmula Vinculante nº 5 é
+o fundamento invocado para afastar a nulidade quando o sindicado,
+no rito da Sindicância Disciplinar Militar, opta por autodefesa ou
+tem defensor dativo designado, sem advogado particular constituído
+— desde que a ampla defesa e o contraditório sejam, de algum modo,
+observados no procedimento administrativo. Importante: a
+jurisprudência do STF reconhece exceções a essa súmula em
+procedimentos disciplinares no âmbito da execução penal (presídios),
+onde a defesa técnica por advogado é considerada indispensável —
+o que não é o caso da SDM stricto sensu, procedimento disciplinar
+militar comum.
+
+============================================================
+FONTES CONSULTADAS
+============================================================
+- https://www.planalto.gov.br/ccivil_03/decreto-lei/del1002.htm (íntegra oficial — indisponível para
+  extração automática no momento da coleta)
+- https://modeloinicial.com.br/lei/CPPM/testemunhas-@__I_XV_VI
+- https://modeloinicial.com.br/lei/CPPM/oferecimento-testemunhas/art-348
+- https://www.legjur.com/legislacao/art/dcl_00010021969-348
+- https://cjpol.com.br/leis_comentadas/art-348-testemunhas-da-defesa/
+- https://cjpol.com.br/leis_comentadas/art-349-requisicao-de-militar-ou-funcionario/
+- Busca Dizer o Direito — Súmula Vinculante 5-STF (https://buscadordizerodireito.com.br/jurisprudencia/3919/sumula-vinculante-5-stf)
+- Notícias STF — Súmula Vinculante nº 5 (https://noticias.stf.jus.br/postsnoticias/sumula-vinculante-no-5-stf-decide-que-nao-e-obrigatoria-defesa-elaborada-por-advogado-em-processo-administrativo-disciplinar/)
