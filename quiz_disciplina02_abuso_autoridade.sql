@@ -17,418 +17,201 @@
 --   para separacao de custodiados + sofrimento fisico/mental e o 13 (o 12 trata de repouso
 --   noturno). Ver secao 8.13 de base_conhecimento_legislacao.md.
 -- ============================================================
-SET NAMES utf8mb4;
-SET foreign_key_checks = 0;
+-- (Arquivo regenerado do banco de producao em 2026-07-10: RELOAD FIEL, reflete
+--  as normalizacoes ja aplicadas. Padrao seguro: categoria via WHERE NOT EXISTS e
+--  aposentar via ativa=0 -- ver project_cho_disciplinas na memoria.)
 
--- Cria a categoria apenas se ainda nao existir. NAO usar INSERT IGNORE aqui:
--- a coluna categorias.nome nao tem indice UNIQUE, entao o IGNORE nao dedupe e
--- acaba criando uma categoria duplicada vazia a cada reexecucao.
+SET NAMES utf8mb4;
+
 INSERT INTO categorias (nome, descricao)
 SELECT 'Abuso de Autoridade — CHO 02', 'Disciplina 2/20 do CHO — Lei nº 13.869/2019 (Lei de Abuso de Autoridade)'
-  FROM DUAL
- WHERE NOT EXISTS (SELECT 1 FROM categorias WHERE nome = 'Abuso de Autoridade — CHO 02');
+  FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM categorias WHERE nome = 'Abuso de Autoridade — CHO 02');
 
-SET @cat_aa02 = (SELECT id FROM categorias WHERE nome = 'Abuso de Autoridade — CHO 02' ORDER BY id LIMIT 1);
+SET @cat_reg = (SELECT id FROM categorias WHERE nome = 'Abuso de Autoridade — CHO 02' ORDER BY id LIMIT 1);
 
--- Aposenta as questoes antigas desta categoria em vez de apaga-las: a FK
--- respostas_usuario -> questoes e ON DELETE RESTRICT, e ha historico de tentativas
--- de militares apontando para esses ids. Com ativa=0 elas saem do sorteio
--- (index.php filtra "WHERE q.ativa=1") mas o historico continua legivel.
-UPDATE questoes SET ativa = 0 WHERE categoria_id = @cat_aa02;
+UPDATE questoes SET ativa = 0 WHERE categoria_id = @cat_reg;
 
 INSERT INTO questoes
     (categoria_id, enunciado, opcao_a, opcao_b, opcao_c, opcao_d, opcao_e,
      resposta_correta, explicacao, referencia_legal, nivel)
 VALUES
 
--- Q01: Sujeito ativo — coautoria de particular (comunicabilidade da elementar)
-(@cat_aa02,
- 'Tício, particular sem qualquer vínculo formal com a Administração Pública, atua voluntariamente como colaborador em uma diligência da Polícia Militar. Durante a incursão, ciente da condição de agentes públicos de seus companheiros e em unidade de desígnios, Tício pratica conduta tipificada na Lei nº 13.869/2019 com a finalidade específica de prejudicar um inimigo pessoal. À luz das disposições sobre o sujeito ativo, assinale a alternativa correta:',
- 'Tício não responde por crime de abuso de autoridade, pois a lei exige obrigatoriamente vínculo estatutário ou contratual remunerado.',
- 'Tício responderá apenas por crime comum previsto no Código Penal, dada a natureza de "crime próprio" dos delitos de abuso de autoridade.',
- 'Tício pode responder pelo crime de abuso de autoridade em coautoria, uma vez que a condição de agente público é elementar do crime e se comunica aos demais agentes, desde que conhecida por eles.',
- 'O crime de abuso de autoridade admite participação de particulares, mas nunca a coautoria, restringindo-se a pena de Tício à metade.',
- 'Por ser voluntário, Tício é equiparado a agente público apenas para fins civis e administrativos, mas não para fins penais na Lei de Abuso de Autoridade.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta pois, conforme a observação do material de referência, os crimes de abuso de autoridade são próprios, mas admitem coautoria com particulares via arts. 29 e 30 do Código Penal, desde que o particular conheça a condição de agente público do comparsa. As demais alternativas estão incorretas: A exige indevidamente vínculo remunerado; B ignora a possibilidade de coautoria; D inventa uma redução de pena inexistente; E restringe sem base a equiparação apenas à esfera civil/administrativa.\n\n📜 Fundamento legal vigente: a Lei nº 13.869/2019, art. 2º, parágrafo único, conceitua agente público de forma ampla ("todo aquele que exerce, ainda que transitoriamente ou sem remuneração... mandato, cargo, emprego ou função"). Por se tratar de elementar do tipo, essa condição comunica-se ao coautor particular nos termos do art. 30 do Código Penal ("não se comunicam as circunstâncias e as condições de caráter pessoal, salvo quando elementares do crime"), combinado com o art. 29 do CP (concurso de pessoas).',
- 'Lei 13.869/2019, art. 2º, § único; CP, arts. 29 e 30 (comunicabilidade de elementares)',
- 'dificil'),
+-- Q01
+(@cat_reg, 'Tício, particular sem qualquer vínculo formal com a Administração Pública, atua voluntariamente como colaborador em uma diligência da Polícia Militar. Durante a incursão, ciente da condição de agentes públicos de seus companheiros e em unidade de desígnios, Tício pratica conduta tipificada na Lei nº 13.869/2019 com a finalidade específica de prejudicar um inimigo pessoal. À luz das disposições sobre o sujeito ativo, assinale a alternativa correta:', 'Tício não responde por crime de abuso de autoridade, pois a lei exige obrigatoriamente vínculo estatutário ou contratual remunerado.', 'Tício responderá apenas por crime comum previsto no Código Penal, dada a natureza de "crime próprio" dos delitos de abuso de autoridade.', 'Tício pode responder pelo crime de abuso de autoridade em coautoria, uma vez que a condição de agente público é elementar do crime e se comunica aos demais agentes, desde que conhecida por eles.', 'O crime de abuso de autoridade admite participação de particulares, mas nunca a coautoria, restringindo-se a pena de Tício à metade.', 'Por ser voluntário, Tício é equiparado a agente público apenas para fins civis e administrativos, mas não para fins penais na Lei de Abuso de Autoridade.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta pois, conforme a observação do material de referência, os crimes de abuso de autoridade são próprios, mas admitem coautoria com particulares via arts. 29 e 30 do Código Penal, desde que o particular conheça a condição de agente público do comparsa. As demais alternativas estão incorretas: A exige indevidamente vínculo remunerado; B ignora a possibilidade de coautoria; D inventa uma redução de pena inexistente; E restringe sem base a equiparação apenas à esfera civil/administrativa.
 
--- Q02: Conceito amplo de agente público (art. 2º)
-(@cat_aa02,
- 'Em uma sindicância, discute-se quem pode figurar como autor de crime de abuso de autoridade. Um dos membros sustenta que a lei alcança apenas servidores aprovados em concurso e remunerados pelos cofres públicos. Qual das descrições abaixo corresponde ao conceito legal de agente público para efeito desses crimes?',
- 'Somente servidores públicos da administração direta da União e dos Estados.',
- 'Todo aquele que exerce mandato, cargo, emprego ou função, desde que mediante prévia aprovação em concurso público de provas e títulos.',
- 'Apenas agentes que percebam remuneração dos cofres públicos, excluindo-se estagiários e voluntários.',
- 'Todo aquele que exerce, ainda que transitoriamente ou sem remuneração, por eleição, nomeação, designação, contratação ou qualquer outra forma de investidura ou vínculo, mandato, cargo, emprego ou função.',
- 'Exclusivamente os membros das carreiras de segurança pública e do Poder Judiciário.',
- 'D',
- 'Justificativa doutrinária (apostila): a alternativa D é a reprodução literal do conceito amplo do art. 2º, parágrafo único. A está incorreta por restringir a administração direta da União/Estados; B está incorreta pois não se exige concurso público; C está incorreta pois inclui expressamente quem atua sem remuneração; E está incorreta por restringir indevidamente o rol, que é exemplificativo.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 2º, parágrafo único: "Reputa-se agente público, para os efeitos desta Lei, todo aquele que exerce, ainda que transitoriamente ou sem remuneração, por eleição, nomeação, designação, contratação ou qualquer outra forma de investidura ou vínculo, mandato, cargo, emprego ou função em órgão ou entidade abrangidos pelo caput deste artigo."',
- 'Lei 13.869/2019, art. 2º, parágrafo único',
- 'medio'),
+📜 Fundamento legal vigente: a Lei nº 13.869/2019, art. 2º, parágrafo único, conceitua agente público de forma ampla ("todo aquele que exerce, ainda que transitoriamente ou sem remuneração... mandato, cargo, emprego ou função"). Por se tratar de elementar do tipo, essa condição comunica-se ao coautor particular nos termos do art. 30 do Código Penal ("não se comunicam as circunstâncias e as condições de caráter pessoal, salvo quando elementares do crime"), combinado com o art. 29 do CP (concurso de pessoas).', 'Lei 13.869/2019, art. 2º, § único; CP, arts. 29 e 30 (comunicabilidade de elementares)', 'dificil'),
 
--- Q03: Mesário como agente público (colaborador eventual)
-(@cat_aa02,
- 'Durante o pleito eleitoral, um cidadão convocado como mesário utiliza-se de sua prerrogativa funcional para impedir, por mero capricho, o exercício do voto de um desafeto. Sobre a possibilidade de responsabilizá-lo por abuso de autoridade, o mesário:',
- 'É considerado agente público para fins da Lei de Abuso de Autoridade, independentemente da transitoriedade e da ausência de remuneração.',
- 'Não pode ser sujeito ativo da referida lei, pois o vínculo com o Estado é meramente honorífico.',
- 'Responde apenas por crime eleitoral, havendo bis in idem na aplicação da Lei de Abuso de Autoridade.',
- 'Só seria punido se o ato fosse praticado por ordem de um Juiz Eleitoral.',
- 'Está isento de responsabilidade penal, respondendo apenas na esfera administrativa perante o TRE.',
- 'A',
- 'Justificativa doutrinária (apostila): a alternativa A está correta; mesários são citados como exemplo expresso de particulares em colaboração eventual com o Estado que se enquadram no conceito amplo de agente público. As demais alternativas negam indevidamente essa condição ou criam excludentes/condicionantes inexistentes no texto legal.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 2º, parágrafo único, abrange expressamente quem exerce função "ainda que transitoriamente ou sem remuneração" e "por designação" — hipótese que alcança o mesário, convocado para exercer função eleitoral transitória e não remunerada, sem prejuízo de eventual concurso com tipos da legislação eleitoral.',
- 'Lei 13.869/2019, art. 2º, parágrafo único',
- 'medio'),
+-- Q02
+(@cat_reg, 'Em uma sindicância, discute-se quem pode figurar como autor de crime de abuso de autoridade. Um dos membros sustenta que a lei alcança apenas servidores aprovados em concurso e remunerados pelos cofres públicos. Qual das descrições abaixo corresponde ao conceito legal de agente público para efeito desses crimes?', 'Somente servidores públicos da administração direta da União e dos Estados.', 'Todo aquele que exerce mandato, cargo, emprego ou função, desde que mediante prévia aprovação em concurso público de provas e títulos.', 'Apenas agentes que percebam remuneração dos cofres públicos, excluindo-se estagiários e voluntários.', 'Todo aquele que exerce, ainda que transitoriamente ou sem remuneração, por eleição, nomeação, designação, contratação ou qualquer outra forma de investidura ou vínculo, mandato, cargo, emprego ou função.', 'Exclusivamente os membros das carreiras de segurança pública e do Poder Judiciário.',
+ 'D', 'Justificativa doutrinária (apostila): a alternativa D é a reprodução literal do conceito amplo do art. 2º, parágrafo único. A está incorreta por restringir a administração direta da União/Estados; B está incorreta pois não se exige concurso público; C está incorreta pois inclui expressamente quem atua sem remuneração; E está incorreta por restringir indevidamente o rol, que é exemplificativo.
 
--- Q04: Elemento subjetivo especial — dolo específico
-(@cat_aa02,
- 'Um oficial cumpre um mandado de forma tecnicamente equivocada e causa constrangimento ao alvo da diligência. A apuração não identifica qualquer intenção de prejudicá-lo, de obter proveito próprio ou de satisfazer capricho pessoal. Sobre o que a lei exige para que a conduta se torne crime de abuso de autoridade, assinale a alternativa correta.',
- 'O dolo genérico (vontade livre e consciente de praticar a conduta) é suficiente para a condenação.',
- 'Admite-se a modalidade culposa quando o agente atua com negligência crassa no cumprimento de mandado.',
- 'A conduta só é criminosa se praticada com a finalidade específica de prejudicar outrem, beneficiar a si mesmo ou a terceiro, ou por mero capricho ou satisfação pessoal.',
- 'A prova da finalidade específica é dispensável quando a ilegalidade do ato for manifesta.',
- 'O benefício a si mesmo ou a terceiro deve ser obrigatoriamente de cunho financeiro para atrair a incidência da lei.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta, pois o art. 1º, § 1º, exige o dolo específico, inexistindo modalidade culposa no abuso de autoridade. A está incorreta pois dolo genérico não basta; B está incorreta pois não há forma culposa; D está incorreta pois a finalidade específica sempre deve ser demonstrada; E está incorreta pois o benefício pode ser moral, não apenas financeiro.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 1º, § 1º: "As condutas descritas nesta Lei constituem crime de abuso de autoridade quando praticadas pelo agente com a finalidade específica de prejudicar outrem ou beneficiar a si mesmo ou a terceiro, ou, ainda, por mero capricho ou satisfação pessoal." A lei não prevê forma culposa para nenhum dos tipos do Capítulo VI.',
- 'Lei 13.869/2019, art. 1º, § 1º',
- 'medio'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 2º, parágrafo único: "Reputa-se agente público, para os efeitos desta Lei, todo aquele que exerce, ainda que transitoriamente ou sem remuneração, por eleição, nomeação, designação, contratação ou qualquer outra forma de investidura ou vínculo, mandato, cargo, emprego ou função em órgão ou entidade abrangidos pelo caput deste artigo."', 'Lei 13.869/2019, art. 2º, parágrafo único', 'medio'),
 
--- Q05: Benefício moral (vantagem não financeira) como finalidade específica
-(@cat_aa02,
- 'Um Delegado de Polícia, buscando notoriedade e seguidores em suas redes sociais, divulga imagens de uma apreensão vultosa e, ao fazê-lo, expõe desnecessariamente a intimidade do investigado. Não há qualquer proveito financeiro envolvido. Sobre a tipicidade dessa conduta, assinale a alternativa correta.',
- 'A conduta é atípica, pois a finalidade de "ganhar visibilidade social" não se enquadra no dolo específico da lei.',
- 'O benefício moral, como a busca por visibilidade, configura a finalidade específica de "beneficiar a si mesmo", tipificando o abuso.',
- 'Só haveria crime se o Delegado recebesse valores monetários pela divulgação das imagens.',
- 'A conduta configura dolo genérico, sendo punível apenas na esfera administrativa por falta de previsão de benefício moral na LAA.',
- 'A conduta configura apenas o crime de divulgação indevida de imagem, que absorve o abuso de autoridade.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — vantagens morais, como visibilidade social e notoriedade, preenchem o requisito de "beneficiar a si" do art. 1º, § 1º, tipificando o abuso de autoridade independentemente de proveito financeiro. A e C restringem indevidamente o conceito de benefício a proveito monetário, o que não encontra amparo na lei; D confunde dolo específico com dolo genérico e nega a esfera penal; E supõe uma absorção entre tipos que a lei não estabelece — a exposição indevida da intimidade (art. 28) pode, ao contrário, concorrer com o abuso de autoridade.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 1º, § 1º, não distingue a natureza do benefício buscado pelo agente ("beneficiar a si mesmo ou a terceiro"), abrangendo tanto vantagem patrimonial quanto vantagem moral. A exposição desnecessária da intimidade do investigado, sem relação com a prova a produzir, ainda pode atrair o tipo do art. 28 da mesma lei (divulgação de gravação/imagem expondo intimidade ou vida privada).',
- 'Lei 13.869/2019, art. 1º, § 1º c/c art. 28',
- 'dificil'),
+-- Q03
+(@cat_reg, 'Durante o pleito eleitoral, um cidadão convocado como mesário utiliza-se de sua prerrogativa funcional para impedir, por mero capricho, o exercício do voto de um desafeto. Sobre a possibilidade de responsabilizá-lo por abuso de autoridade, o mesário:', 'É considerado agente público para fins da Lei de Abuso de Autoridade, independentemente da transitoriedade e da ausência de remuneração.', 'Não pode ser sujeito ativo da referida lei, pois o vínculo com o Estado é meramente honorífico.', 'Responde apenas por crime eleitoral, havendo bis in idem na aplicação da Lei de Abuso de Autoridade.', 'Só seria punido se o ato fosse praticado por ordem de um Juiz Eleitoral.', 'Está isento de responsabilidade penal, respondendo apenas na esfera administrativa perante o TRE.',
+ 'A', 'Justificativa doutrinária (apostila): a alternativa A está correta; mesários são citados como exemplo expresso de particulares em colaboração eventual com o Estado que se enquadram no conceito amplo de agente público. As demais alternativas negam indevidamente essa condição ou criam excludentes/condicionantes inexistentes no texto legal.
 
--- Q06: Concurso de crimes — abuso de autoridade e concussão/corrupção
-(@cat_aa02,
- 'Determinada autoridade policial, ao realizar uma diligência, exige de um comerciante o pagamento de quantia em dinheiro para não interditar abusivamente seu estabelecimento. Sobre a responsabilização penal do agente nessa situação, é correto afirmar que ele:',
- 'Responderá apenas pelo crime de Abuso de Autoridade, que absorve o crime de concussão.',
- 'Responderá apenas pelo crime de concussão (art. 316 do CP), por ser norma especial em relação à LAA.',
- 'Responderá pelo crime de abuso de autoridade em concurso com o crime de concussão ou corrupção passiva, conforme o caso.',
- 'Terá a pena do abuso de autoridade aumentada de um terço, sem responder pelo Código Penal.',
- 'Fica isento de pena se provar que a interdição teria fundamentos técnicos, apesar da exigência do valor.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta — a solicitação/exigência de vantagem indevida no bojo da conduta abusiva gera concurso entre a LAA e os crimes contra a Administração Pública, não havendo absorção automática de um tipo pelo outro. As demais alternativas presumem indevidamente relação de especialidade ou consunção que a lei não estabelece, ou criam excludente inexistente (a eventual licitude técnica da interdição não afasta a exigência de vantagem indevida já consumada).\n\n📜 Fundamento legal vigente: a Lei 13.869/2019 não contém cláusula de subsidiariedade ou absorção em relação aos crimes contra a Administração Pública; aplicam-se as regras gerais de concurso material do Código Penal (art. 69), respondendo o agente, a depender do caso concreto, pelo abuso de autoridade (art. 1º, § 1º) em concurso com concussão (CP, art. 316: "exigir, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas em razão dela, vantagem indevida") ou corrupção passiva (CP, art. 317).',
- 'Lei 13.869/2019, art. 1º, § 1º c/c CP, arts. 69, 316 e 317',
- 'dificil'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 2º, parágrafo único, abrange expressamente quem exerce função "ainda que transitoriamente ou sem remuneração" e "por designação" — hipótese que alcança o mesário, convocado para exercer função eleitoral transitória e não remunerada, sem prejuízo de eventual concurso com tipos da legislação eleitoral.', 'Lei 13.869/2019, art. 2º, parágrafo único', 'medio'),
 
--- Q07: Sujeito passivo — dupla subjetividade passiva
-(@cat_aa02,
- 'Agentes públicos invadem, sem mandado, a residência de um investigado, e a empresa da qual ele é sócio tem sua imagem atingida pela repercussão do caso. Na denúncia, discute-se quem foi ofendido pelo crime de abuso de autoridade. Assinale a alternativa correta.',
- 'Existe uma subjetividade passiva única, centrada na pessoa física atingida.',
- 'O Estado é o único sujeito passivo, pois é o detentor do jus puniendi.',
- 'Ocorre dupla subjetividade passiva: o indivíduo (física ou jurídica) prejudicado e o Estado, que tem sua imagem e confiabilidade ofendidas.',
- 'Pessoas jurídicas não podem ser sujeitos passivos de abuso de autoridade.',
- 'A vítima direta deve obrigatoriamente representar criminalmente para que haja ação penal.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta conforme a dupla subjetividade passiva descrita no Tópico 2.2.1 — o indivíduo diretamente prejudicado (pessoa física ou jurídica) e o Estado, que tem sua imagem e confiabilidade institucional ofendidas pelo desvio de conduta do agente. As demais alternativas restringem indevidamente a um único sujeito passivo ou exigem representação, que não é exigida (ação penal pública incondicionada).\n\n📜 Fundamento legal vigente: a dupla subjetividade passiva decorre do próprio bem jurídico tutelado pelo art. 1º da Lei 13.869/2019 (o regular exercício da função pública e os direitos e garantias fundamentais do cidadão), sendo consequência doutrinária amplamente aceita e reforçada pelo fato de a ação penal ser pública incondicionada (art. 3º), o que evidencia o interesse estatal direto na repressão da conduta, para além do interesse da vítima individual.',
- 'Lei 13.869/2019, arts. 1º e 3º (doutrina — dupla subjetividade passiva)',
- 'medio'),
+-- Q04
+(@cat_reg, 'Um oficial cumpre um mandado de forma tecnicamente equivocada e causa constrangimento ao alvo da diligência. A apuração não identifica qualquer intenção de prejudicá-lo, de obter proveito próprio ou de satisfazer capricho pessoal. Sobre o que a lei exige para que a conduta se torne crime de abuso de autoridade, assinale a alternativa correta.', 'O dolo genérico (vontade livre e consciente de praticar a conduta) é suficiente para a condenação.', 'Admite-se a modalidade culposa quando o agente atua com negligência crassa no cumprimento de mandado.', 'A conduta só é criminosa se praticada com a finalidade específica de prejudicar outrem, beneficiar a si mesmo ou a terceiro, ou por mero capricho ou satisfação pessoal.', 'A prova da finalidade específica é dispensável quando a ilegalidade do ato for manifesta.', 'O benefício a si mesmo ou a terceiro deve ser obrigatoriamente de cunho financeiro para atrair a incidência da lei.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta, pois o art. 1º, § 1º, exige o dolo específico, inexistindo modalidade culposa no abuso de autoridade. A está incorreta pois dolo genérico não basta; B está incorreta pois não há forma culposa; D está incorreta pois a finalidade específica sempre deve ser demonstrada; E está incorreta pois o benefício pode ser moral, não apenas financeiro.
 
--- Q08: Ação penal pública incondicionada
-(@cat_aa02,
- 'A vítima de um abuso de autoridade decide não representar contra o agente. O Ministério Público, regularmente cientificado, deixa escoar o prazo legal sem oferecer denúncia e sem qualquer outra manifestação nos autos. Sobre a ação penal nesses crimes, assinale a alternativa correta.',
- 'Pública condicionada à representação do ofendido no prazo de 6 meses.',
- 'Pública incondicionada, admitindo-se ação privada subsidiária da pública em caso de inércia do Ministério Público.',
- 'Privada personalíssima, cabendo apenas ao ofendido o oferecimento da queixa.',
- 'Pública incondicionada, vedada qualquer hipótese de ação privada.',
- 'Pública condicionada à requisição do Poder Judiciário.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — o art. 3º define a ação penal pública incondicionada, admitindo-se a queixa subsidiária em caso de inércia do Ministério Público. A, C e E inventam condicionantes inexistentes; D nega indevidamente a hipótese de ação privada subsidiária, que está expressamente prevista.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 3º, caput: "Os crimes previstos nesta Lei são de ação penal pública incondicionada." § 1º: admite-se ação privada subsidiária "se a ação penal pública não for intentada no prazo legal". § 2º: prazo de 6 (seis) meses para a ação privada subsidiária, contado do esgotamento do prazo para a denúncia. O Enunciado 3/GNCCRIM esclarece que a inércia exigida pressupõe a "inexistência de qualquer manifestação ministerial".',
- 'Lei 13.869/2019, art. 3º, §§ 1º e 2º; Enunciado 3/GNCCRIM',
- 'medio'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 1º, § 1º: "As condutas descritas nesta Lei constituem crime de abuso de autoridade quando praticadas pelo agente com a finalidade específica de prejudicar outrem ou beneficiar a si mesmo ou a terceiro, ou, ainda, por mero capricho ou satisfação pessoal." A lei não prevê forma culposa para nenhum dos tipos do Capítulo VI.', 'Lei 13.869/2019, art. 1º, § 1º', 'medio'),
 
--- Q09: Vedação ao "crime de hermenêutica" (art. 1º, § 2º)
-(@cat_aa02,
- 'Um magistrado profere decisão fundamentada, amparada em corrente doutrinária respeitável, que vem a ser reformada pelo tribunal por interpretação diversa da lei. O Ministério Público cogita responsabilizá-lo criminalmente pela decisão reformada. Sobre essa possibilidade, assinale a alternativa correta.',
- 'O agente público pode ser punido por qualquer interpretação que venha a ser reformada por tribunal superior.',
- 'A divergência na interpretação de lei ou na avaliação de fatos e provas não configura abuso de autoridade.',
- 'A lei permite a criminalização da interpretação sempre que houver prejuízo ao réu, independentemente de dolo.',
- 'O magistrado responde por abuso de autoridade sempre que proferir decisão com vício in judicando.',
- 'A proteção à hermenêutica é absoluta, impedindo a punição mesmo em casos de má-fé evidente.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta, reproduzindo o art. 1º, § 2º, que veda a criminalização da hermenêutica. A, C e D punem indevidamente a mera reforma de decisão ou o vício in judicando, sem exigir o dolo específico; E erra ao tornar a proteção absoluta, ignorando a ressalva doutrinária quanto à decisão teratológica (evidenciadora de dolo).\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 1º, § 2º: "A divergência na interpretação de lei ou na avaliação de fatos e provas não configura abuso de autoridade." O Enunciado 2/GNCCRIM complementa: essa divergência, "salvo quando teratológica", não configura abuso, ficando excluído o dolo — ou seja, a proteção não é absoluta diante de decisão manifestamente aberrante que revele o dolo específico do § 1º.',
- 'Lei 13.869/2019, art. 1º, § 2º; Enunciado 2/GNCCRIM',
- 'medio'),
+-- Q05
+(@cat_reg, 'Um Delegado de Polícia, buscando notoriedade e seguidores em suas redes sociais, divulga imagens de uma apreensão vultosa e, ao fazê-lo, expõe desnecessariamente a intimidade do investigado. Não há qualquer proveito financeiro envolvido. Sobre a tipicidade dessa conduta, assinale a alternativa correta.', 'A conduta é atípica, pois a finalidade de "ganhar visibilidade social" não se enquadra no dolo específico da lei.', 'O benefício moral, como a busca por visibilidade, configura a finalidade específica de "beneficiar a si mesmo", tipificando o abuso.', 'Só haveria crime se o Delegado recebesse valores monetários pela divulgação das imagens.', 'A conduta configura dolo genérico, sendo punível apenas na esfera administrativa por falta de previsão de benefício moral na LAA.', 'A conduta configura apenas o crime de divulgação indevida de imagem, que absorve o abuso de autoridade.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — vantagens morais, como visibilidade social e notoriedade, preenchem o requisito de "beneficiar a si" do art. 1º, § 1º, tipificando o abuso de autoridade independentemente de proveito financeiro. A e C restringem indevidamente o conceito de benefício a proveito monetário, o que não encontra amparo na lei; D confunde dolo específico com dolo genérico e nega a esfera penal; E supõe uma absorção entre tipos que a lei não estabelece — a exposição indevida da intimidade (art. 28) pode, ao contrário, concorrer com o abuso de autoridade.
 
--- Q10: Limites da atividade interpretativa legítima
-(@cat_aa02,
- 'Ao decidir um caso concreto, o agente público sustenta que sua leitura da lei é apenas uma interpretação divergente e que, por isso, não pode ser criminalizada. Para que essa tese se sustente, a interpretação adotada deve respeitar:',
- 'Apenas a consciência individual do agente público.',
- 'Os limites materiais (texto da lei) e os limites jurisprudenciais (entendimentos vinculantes).',
- 'Exclusivamente a orientação verbal do superior hierárquico imediato.',
- 'A conveniência política do ato administrativo, independentemente da literalidade da norma.',
- 'Apenas as decisões de tribunais internacionais, desconsiderando a jurisprudência nacional.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — a interpretação legítima deve observar o limite material (o texto da lei) e o limite jurisprudencial (entendimentos vinculantes dos tribunais superiores). As demais alternativas substituem esses parâmetros objetivos por critérios subjetivos, hierárquicos informais, políticos ou estrangeiros, que não são os balizadores reconhecidos pela doutrina.\n\n📜 Fundamento legal vigente: decorre da leitura sistemática do art. 1º, § 2º, da Lei 13.869/2019 (que protege a divergência interpretativa razoável) combinado com o dever geral de legalidade da atuação do agente público — a interpretação que extrapola o texto legal ou contraria entendimento vinculante (súmula vinculante, decisão em controle concentrado de constitucionalidade, por exemplo) deixa de ser "divergência legítima" e passa a evidenciar possível dolo específico.',
- 'Lei 13.869/2019, art. 1º, § 2º (doutrina — limites da interpretação legítima)',
- 'medio'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 1º, § 1º, não distingue a natureza do benefício buscado pelo agente ("beneficiar a si mesmo ou a terceiro"), abrangendo tanto vantagem patrimonial quanto vantagem moral. A exposição desnecessária da intimidade do investigado, sem relação com a prova a produzir, ainda pode atrair o tipo do art. 28 da mesma lei (divulgação de gravação/imagem expondo intimidade ou vida privada).', 'Lei 13.869/2019, art. 1º, § 1º c/c art. 28', 'dificil'),
 
--- Q11: Art. 9º, caput x parágrafo único — Enunciado 5/GNCCRIM
-(@cat_aa02,
- 'Em um caso, um Delegado de Polícia ordena a custódia de um suspeito fora de qualquer hipótese legal de prisão. Em outro, um juiz, ciente de prisão manifestamente ilegal, deixa de relaxá-la dentro de prazo razoável. Sobre quem pode ser autor de cada uma dessas condutas, assinale a alternativa correta.',
- 'O sujeito ativo do caput é restrito a juízes, enquanto o parágrafo único alcança qualquer agente público.',
- 'O sujeito ativo do caput não alcança somente a autoridade judiciária, podendo ser praticado por qualquer agente público que determine, decida ou ordene a privação; já o parágrafo único é restrito à autoridade judiciária.',
- 'Ambos os dispositivos são crimes de mão própria, exigindo que o agente seja magistrado de carreira.',
- 'O crime do art. 9º exige que o preso seja inocente, sob pena de atipicidade.',
- 'A autoridade judiciária que deixa de relaxar prisão ilegal responde por prevaricação, e não por abuso de autoridade.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta, com base na diferenciação técnica do Enunciado 5 do GNCCRIM. A inverte a lógica do dispositivo; C exige indevidamente magistratura de carreira para o caput; D cria requisito de inocência inexistente na lei (o que se pune é a desconformidade com as hipóteses legais, não a culpabilidade do preso); E erra ao afastar a incidência da LAA, quando na verdade o parágrafo único tipifica exatamente essa omissão da autoridade judiciária.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 9º, caput: "Decretar medida de privação da liberdade em manifesta desconformidade com as hipóteses legais". O Enunciado 5/GNCCRIM esclarece que o verbo nuclear "decretar" tem sentido de determinar, decidir e ordenar a medida, alcançando qualquer agente público competente, e não somente autoridade judiciária. Já o parágrafo único é expressamente restrito à "autoridade judiciária que, dentro de prazo razoável, deixar de: I - relaxar a prisão manifestamente ilegal; II - substituir a prisão preventiva...; III - deferir liminar ou ordem de habeas corpus".',
- 'Lei 13.869/2019, art. 9º, caput e § único; Enunciado 5/GNCCRIM',
- 'dificil'),
+-- Q06
+(@cat_reg, 'Determinada autoridade policial, ao realizar uma diligência, exige de um comerciante o pagamento de quantia em dinheiro para não interditar abusivamente seu estabelecimento. Sobre a responsabilização penal do agente nessa situação, é correto afirmar que ele:', 'Responderá apenas pelo crime de Abuso de Autoridade, que absorve o crime de concussão.', 'Responderá apenas pelo crime de concussão (art. 316 do CP), por ser norma especial em relação à LAA.', 'Responderá pelo crime de abuso de autoridade em concurso com o crime de concussão ou corrupção passiva, conforme o caso.', 'Terá a pena do abuso de autoridade aumentada de um terço, sem responder pelo Código Penal.', 'Fica isento de pena se provar que a interdição teria fundamentos técnicos, apesar da exigência do valor.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta — a solicitação/exigência de vantagem indevida no bojo da conduta abusiva gera concurso entre a LAA e os crimes contra a Administração Pública, não havendo absorção automática de um tipo pelo outro. As demais alternativas presumem indevidamente relação de especialidade ou consunção que a lei não estabelece, ou criam excludente inexistente (a eventual licitude técnica da interdição não afasta a exigência de vantagem indevida já consumada).
 
--- Q12: Condução coercitiva — Enunciados 6 e 7/GNCCRIM
-(@cat_aa02,
- 'Um investigado, regularmente intimado, é levado à força até a delegacia para ser interrogado. Em outro procedimento, uma testemunha que descumpriu notificação prévia é conduzida, mediante decisão motivada, para ato de reconhecimento pessoal. Considerando as balizas fixadas pelo Supremo Tribunal Federal sobre a condução coercitiva, ela é criminosa quando:',
- 'Realizada para interrogatório de investigado ou réu, ainda que haja prévia intimação.',
- 'Realizada para qualquer ato processual, mesmo que o réu tenha faltado injustificadamente.',
- 'O agente público deixa de algemar o conduzido durante o trajeto.',
- 'Decretada de forma motivada após o descumprimento de prévia notificação para ato diverso do interrogatório.',
- 'O Ministério Público a determina sem a concordância expressa da autoridade policial.',
- 'A',
- 'Justificativa doutrinária (apostila): a alternativa A está correta — o Enunciado 6/GNCCRIM veda, em qualquer hipótese, a condução coercitiva de investigados e réus para interrogatório, ainda que precedida de intimação; já o Enunciado 7 admite a condução coercitiva para outros atos, desde que motivada e após descumprimento de prévia notificação — situação descrita (licitamente) na alternativa D, que por isso não configura crime. B, C e E descrevem situações não tratadas pelos enunciados como criminosas per se.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 10: "Decretar a condução coercitiva de testemunha ou investigado manifestamente descabida ou sem prévia intimação de comparecimento ao juízo". O Enunciado 6/GNCCRIM (em linha com as ADPFs 395 e 444/STF) fixa que investigados e réus não podem ser conduzidos coercitivamente à presença de autoridade policial ou judicial para serem interrogados; o Enunciado 7/GNCCRIM permite a condução coercitiva para outros atos, desde que motivada e após o descumprimento de prévia notificação.',
- 'Lei 13.869/2019, art. 10; Enunciados 6 e 7/GNCCRIM (ADPFs 395 e 444/STF)',
- 'dificil'),
+📜 Fundamento legal vigente: a Lei 13.869/2019 não contém cláusula de subsidiariedade ou absorção em relação aos crimes contra a Administração Pública; aplicam-se as regras gerais de concurso material do Código Penal (art. 69), respondendo o agente, a depender do caso concreto, pelo abuso de autoridade (art. 1º, § 1º) em concurso com concussão (CP, art. 316: "exigir, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas em razão dela, vantagem indevida") ou corrupção passiva (CP, art. 317).', 'Lei 13.869/2019, art. 1º, § 1º c/c CP, arts. 69, 316 e 317', 'dificil'),
 
--- Q13: Nota de culpa — prazo de 24 horas (art. 12, § único, III)
-(@cat_aa02,
- 'Um homem é preso em flagrante numa sexta-feira, às 10h. A autoridade responsável só lhe entrega a nota de culpa na segunda-feira seguinte. Sobre o prazo legal dessa entrega e o conteúdo obrigatório do documento, assinale a alternativa correta.',
- 'Imediatamente, sob pena de relaxamento automático.',
- '12 (doze) horas, contado da lavratura do auto.',
- '24 (vinte e quatro) horas, assinada pela autoridade, contendo o motivo da prisão e nomes de condutor e testemunhas.',
- '48 (quarenta e oito) horas, para coincidir com o prazo do Habeas Corpus.',
- 'Até a realização da audiência de custódia, que deve ocorrer em até 24 (vinte e quatro) horas da prisão.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo o prazo e o conteúdo exigidos pelo art. 12, parágrafo único, III. As demais alternativas apresentam prazos inventados (12h, 48h) ou vinculam o prazo a eventos processuais (audiência de custódia) sem previsão legal nesse sentido.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 12, parágrafo único, III: incorre na mesma pena do caput quem "deixa de entregar ao preso, no prazo de 24 (vinte e quatro) horas, a nota de culpa, assinada pela autoridade, com o motivo da prisão e os nomes do condutor e das testemunhas". O Enunciado 8/GNCCRIM admite, nas exceções legais, a omissão do nome do condutor, testemunhas e vítimas para preservar identidade/segurança.',
- 'Lei 13.869/2019, art. 12, § único, III; Enunciado 8/GNCCRIM',
- 'medio'),
+-- Q07
+(@cat_reg, 'Agentes públicos invadem, sem mandado, a residência de um investigado, e a empresa da qual ele é sócio tem sua imagem atingida pela repercussão do caso. Na denúncia, discute-se quem foi ofendido pelo crime de abuso de autoridade. Assinale a alternativa correta.', 'Existe uma subjetividade passiva única, centrada na pessoa física atingida.', 'O Estado é o único sujeito passivo, pois é o detentor do jus puniendi.', 'Ocorre dupla subjetividade passiva: o indivíduo (física ou jurídica) prejudicado e o Estado, que tem sua imagem e confiabilidade ofendidas.', 'Pessoas jurídicas não podem ser sujeitos passivos de abuso de autoridade.', 'A vítima direta deve obrigatoriamente representar criminalmente para que haja ação penal.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta conforme a dupla subjetividade passiva descrita no Tópico 2.2.1 — o indivíduo diretamente prejudicado (pessoa física ou jurídica) e o Estado, que tem sua imagem e confiabilidade institucional ofendidas pelo desvio de conduta do agente. As demais alternativas restringem indevidamente a um único sujeito passivo ou exigem representação, que não é exigida (ação penal pública incondicionada).
 
--- Q14: Comunicação imediata de prisão temporária/preventiva (art. 12, § único, I)
-(@cat_aa02,
- 'Uma guarnição cumpre mandado de prisão preventiva expedido por juiz. Sobre as condutas que, no contexto da comunicação da prisão, sujeitam o agente às mesmas penas do crime de omissão de comunicação, é correto afirmar que incorre no crime o agente que:',
- 'Comunica imediatamente a prisão ao juiz que a decretou, mas deixa de registrar o horário exato da captura no boletim de ocorrência.',
- 'Deixa de comunicar, imediatamente, a execução de prisão temporária ou preventiva à autoridade judiciária que a decretou.',
- 'Deixa de comunicar a prisão ao Ministério Público no prazo de 24 (vinte e quatro) horas.',
- 'Comunica a prisão à família, mas oculta o local para fins de segurança orgânica.',
- 'Entrega a nota de culpa sem a assinatura de duas testemunhas civis.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta, reproduzindo o art. 12, parágrafo único, I. A descreve falha meramente formal de registro, sem tipicidade penal — a comunicação exigida pela lei foi feita a tempo. C cria um dever de comunicação ao Ministério Público em 24 horas que a lei não prevê: o destinatário legal da comunicação é a autoridade judiciária. D e E descrevem condutas que, embora possam ter relevância disciplinar, não correspondem ao texto legal do inciso.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 12, parágrafo único, I: incorre na mesma pena quem "deixa de comunicar, imediatamente, a execução de prisão temporária ou preventiva à autoridade judiciária que a decretou". A comunicação da prisão e do local de custódia à família ou pessoa indicada está prevista, à parte, no inciso II do mesmo parágrafo.',
- 'Lei 13.869/2019, art. 12, § único, I',
- 'medio'),
+📜 Fundamento legal vigente: a dupla subjetividade passiva decorre do próprio bem jurídico tutelado pelo art. 1º da Lei 13.869/2019 (o regular exercício da função pública e os direitos e garantias fundamentais do cidadão), sendo consequência doutrinária amplamente aceita e reforçada pelo fato de a ação penal ser pública incondicionada (art. 3º), o que evidencia o interesse estatal direto na repressão da conduta, para além do interesse da vítima individual.', 'Lei 13.869/2019, arts. 1º e 3º (doutrina — dupla subjetividade passiva)', 'medio'),
 
--- Q15: Prolongamento indevido da prisão / atraso na soltura (art. 12, § único, IV)
-(@cat_aa02,
- 'Esgotado o prazo judicial da prisão preventiva, a autoridade policial recebe o alvará de soltura às 9h e só promove a soltura do preso no dia seguinte. Questionada, alega unicamente a sobrecarga de trabalho da unidade. Sobre a responsabilização penal da autoridade, assinale a alternativa correta.',
- 'Não comete crime, pois o tempo necessário à checagem de outras ordens de prisão e da autenticidade do alvará afasta a exigência de soltura imediata.',
- 'Comete crime de abuso de autoridade, pois somente motivo justo e excepcionalíssimo afastaria a conduta, e a sobrecarga de trabalho não se enquadra nessa hipótese.',
- 'Não responde por crime se houver intenção de colher novos depoimentos antes da soltura.',
- 'Comete infração administrativa disciplinar, mas não crime, pois a lei não pune omissões relativas ao cumprimento do alvará.',
- 'Responde apenas por sequestro e cárcere privado, com a pena aumentada pela condição de agente público.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — o tipo só é afastado por "motivo justo e excepcionalíssimo", e sobrecarga de trabalho ou mero esquecimento não preenchem esse padrão. A alternativa A é a pegadinha central: a checagem de segurança realmente é admitida, mas como janela mínima e não como salvo-conduto para um dia inteiro de atraso — e, no caso, a autoridade sequer a invocou. C admite indevidamente a colheita de depoimentos como justificativa; D nega, sem razão, a tipicidade penal da conduta; E desconsidera o tipo específico da lei em favor de tipos comuns incompatíveis com o caso.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 12, parágrafo único, IV: incorre na mesma pena quem "prolonga a execução de pena privativa de liberdade, de prisão temporária, de prisão preventiva, de medida de segurança ou de internação, deixando, sem motivo justo e excepcionalíssimo, de executar o alvará de soltura imediatamente após recebido ou de promover a soltura do preso quando esgotado o prazo judicial ou legal." O Enunciado 9/GNCCRIM ressalva apenas o tempo necessário aos procedimentos de segurança (checagem de outras ordens de prisão e autenticidade do alvará) — a lei não estabelece prazo em horas para essa checagem, e ela não autoriza postergar a soltura por conveniência administrativa.',
- 'Lei 13.869/2019, art. 12, § único, IV; Enunciado 9/GNCCRIM',
- 'medio'),
+-- Q08
+(@cat_reg, 'A vítima de um abuso de autoridade decide não representar contra o agente. O Ministério Público, regularmente cientificado, deixa escoar o prazo legal sem oferecer denúncia e sem qualquer outra manifestação nos autos. Sobre a ação penal nesses crimes, assinale a alternativa correta.', 'Pública condicionada à representação do ofendido no prazo de 6 meses.', 'Pública incondicionada, admitindo-se ação privada subsidiária da pública em caso de inércia do Ministério Público.', 'Privada personalíssima, cabendo apenas ao ofendido o oferecimento da queixa.', 'Pública incondicionada, vedada qualquer hipótese de ação privada.', 'Pública condicionada à requisição do Poder Judiciário.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — o art. 3º define a ação penal pública incondicionada, admitindo-se a queixa subsidiária em caso de inércia do Ministério Público. A, C e E inventam condicionantes inexistentes; D nega indevidamente a hipótese de ação privada subsidiária, que está expressamente prevista.
 
--- Q16: Espetacularização do preso (art. 13)
-(@cat_aa02,
- 'Durante a custódia, agentes de segurança submetem o preso a situação vexatória, obrigando-o a posar para fotos em posição degradante, destinadas a exibição em grupos internos de mensagens da corporação. Sobre essa conduta, assinale a alternativa correta.',
- 'É justificável para fins de identificação criminal se o preso não possuir documentos.',
- 'Configura crime, devendo o responsável pelo custodiado evitar a espetacularização e a curiosidade pública.',
- 'Só é crime se houver violência física que resulte em lesão corporal grave.',
- 'Trata-se de mero exercício regular do direito de informar.',
- 'É permitida se houver autorização verbal do Delegado de Plantão.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — o art. 13 e as orientações doutrinárias vedam a espetacularização e a exposição à curiosidade pública do custodiado, ainda que para fins internos (grupos de mensagens). A cria justificativa inexistente para a identificação criminal; C exige indevidamente lesão corporal grave, quando a lei já pune a exibição/situação vexatória independentemente de lesão; D e E tentam legitimar a conduta com base em "direito de informar" ou autorização informal, sem amparo legal.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 13: "Constranger o preso ou o detento, mediante violência, grave ameaça ou redução de sua capacidade de resistência, a: I - exibir-se ou ter seu corpo ou parte dele exibido à curiosidade pública; II - submeter-se a situação vexatória ou a constrangimento não autorizado em lei". A exibição para grupos internos de mensagens, sem qualquer finalidade probatória ou de identificação formal, se enquadra na "curiosidade pública" e na "situação vexatória" vedadas pelo tipo.',
- 'Lei 13.869/2019, art. 13, I e II',
- 'dificil'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 3º, caput: "Os crimes previstos nesta Lei são de ação penal pública incondicionada." § 1º: admite-se ação privada subsidiária "se a ação penal pública não for intentada no prazo legal". § 2º: prazo de 6 (seis) meses para a ação privada subsidiária, contado do esgotamento do prazo para a denúncia. O Enunciado 3/GNCCRIM esclarece que a inércia exigida pressupõe a "inexistência de qualquer manifestação ministerial".', 'Lei 13.869/2019, art. 3º, §§ 1º e 2º; Enunciado 3/GNCCRIM', 'medio'),
 
--- Q17: Enunciado 10/GNCCRIM — abuso de autoridade x tortura
-(@cat_aa02,
- 'Durante um interrogatório, agentes constrangem o detento, mediante violência e grave ameaça, a produzir prova contra si mesmo. Sobre o enquadramento penal desse ato, assinale a alternativa correta.',
- 'É conduta abrangida exclusivamente pela Lei de Tortura, independentemente do dolo.',
- 'Pode configurar abuso de autoridade ou crime de tortura, a depender das circunstâncias do caso concreto.',
- 'É atípico se a prova for essencial para a resolução de crime hediondo.',
- 'Só é punível se houver redução da capacidade de resistência por uso de substâncias químicas.',
- 'Configura sempre abuso de autoridade, sendo vedada a desclassificação para o crime de tortura.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — o Enunciado 10/GNCCRIM aponta a possibilidade de subsunção da conduta tanto à Lei de Abuso de Autoridade quanto à Lei de Tortura, conforme as circunstâncias do caso concreto (intensidade do meio empregado, finalidade, gravidade do sofrimento imposto). A exclui indevidamente a LAA; C cria excludente por relevância do crime investigado, incompatível com o sistema de garantias; D restringe sem base o meio de execução a substâncias químicas; E fecha indevidamente a porta da desclassificação, quando é exatamente a gravidade do meio e a finalidade do agente que decidem entre abuso de autoridade e tortura.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 13, III: "produzir prova contra si mesmo ou contra terceiro" mediante violência, grave ameaça ou redução da capacidade de resistência. O Enunciado 10/GNCCRIM esclarece: "Constranger o preso ou o detento, mediante violência ou grave ameaça, a produzir prova contra si mesmo ou contra terceiro pode configurar delito de abuso de autoridade (Lei 13.869/19) ou crime de tortura (Lei 9.455/97), a depender das circunstâncias do caso concreto."',
- 'Lei 13.869/2019, art. 13, III; Enunciado 10/GNCCRIM; Lei 9.455/1997, art. 1º',
- 'dificil'),
+-- Q09
+(@cat_reg, 'Um magistrado profere decisão fundamentada, amparada em corrente doutrinária respeitável, que vem a ser reformada pelo tribunal por interpretação diversa da lei. O Ministério Público cogita responsabilizá-lo criminalmente pela decisão reformada. Sobre essa possibilidade, assinale a alternativa correta.', 'O agente público pode ser punido por qualquer interpretação que venha a ser reformada por tribunal superior.', 'A divergência na interpretação de lei ou na avaliação de fatos e provas não configura abuso de autoridade.', 'A lei permite a criminalização da interpretação sempre que houver prejuízo ao réu, independentemente de dolo.', 'O magistrado responde por abuso de autoridade sempre que proferir decisão com vício in judicando.', 'A proteção à hermenêutica é absoluta, impedindo a punição mesmo em casos de má-fé evidente.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta, reproduzindo o art. 1º, § 2º, que veda a criminalização da hermenêutica. A, C e D punem indevidamente a mera reforma de decisão ou o vício in judicando, sem exigir o dolo específico; E erra ao tornar a proteção absoluta, ignorando a ressalva doutrinária quanto à decisão teratológica (evidenciadora de dolo).
 
--- Q18: Sigilo profissional (art. 15)
-(@cat_aa02,
- 'Um agente público ameaça prender um profissional caso este não revele, em depoimento, informação que lhe foi confiada em razão de seu ofício. A lei tipifica essa conduta como crime. Estão entre os profissionais protegidos por esse dever de sigilo:',
- 'Apenas advogados e médicos em exercício.',
- 'Advogados, médicos, parlamentares, psicólogos, sacerdotes e jornalistas.',
- 'Exclusivamente membros do Poder Judiciário e Ministério Público.',
- 'Somente policiais que atuaram disfarçados em infiltração.',
- 'Qualquer cidadão que tenha presenciado o crime, independentemente da profissão.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta, reproduzindo o rol exemplificativo do material com base no art. 207 do CPP, que arrola as pessoas com dever de sigilo profissional. As demais alternativas restringem indevidamente o rol (A e C) ou o descaracterizam por completo (D e E), atribuindo dever de sigilo a quem não o possui em razão de ofício.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 15: "Constranger a depor, sob ameaça de prisão, pessoa que, em razão de função, ministério, ofício ou profissão, deva guardar segredo ou resguardar sigilo". O rol de profissionais com dever de sigilo é buscado, por integração, no art. 207 do Código de Processo Penal ("são proibidas de depor as pessoas que, em razão de função, ministério, ofício ou profissão, devam guardar segredo"), doutrinariamente exemplificado com advogados, médicos, parlamentares, psicólogos, sacerdotes e jornalistas, entre outros.',
- 'Lei 13.869/2019, art. 15; CPP, art. 207',
- 'medio'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 1º, § 2º: "A divergência na interpretação de lei ou na avaliação de fatos e provas não configura abuso de autoridade." O Enunciado 2/GNCCRIM complementa: essa divergência, "salvo quando teratológica", não configura abuso, ficando excluído o dolo — ou seja, a proteção não é absoluta diante de decisão manifestamente aberrante que revele o dolo específico do § 1º.', 'Lei 13.869/2019, art. 1º, § 2º; Enunciado 2/GNCCRIM', 'medio'),
 
--- Q19: Direito ao silêncio (art. 15, § único, I)
-(@cat_aa02,
- 'Caso um investigado opte por exercer seu direito constitucional ao silêncio, a autoridade que prossegue com o interrogatório:',
- 'Comete crime de abuso de autoridade (art. 15, parágrafo único).',
- 'Atua corretamente na busca da elucidação dos fatos.',
- 'Pode ser punida apenas se houver agressão física comprovada.',
- 'Deve consignar a recusa e continuar as perguntas para fins de registro.',
- 'Só comete crime se o investigado for assistido por dois advogados simultaneamente.',
- 'A',
- 'Justificativa doutrinária (apostila): a alternativa A está correta — a tipificação é direta, prevista no art. 15, parágrafo único, I. B nega indevidamente a proteção constitucional ao silêncio; C exige elemento (agressão física) não previsto no tipo, que se consuma com o mero prosseguimento do interrogatório; D e E criam condutas ou requisitos sem qualquer amparo legal.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 15, parágrafo único: "Incorre na mesma pena quem prossegue com o interrogatório: I - de pessoa que tenha decidido exercer o direito ao silêncio; ou II - de pessoa que tenha optado por ser assistida por advogado ou defensor público, sem a presença de seu patrono."',
- 'Lei 13.869/2019, art. 15, § único, I',
- 'medio'),
+-- Q10
+(@cat_reg, 'Ao decidir um caso concreto, o agente público sustenta que sua leitura da lei é apenas uma interpretação divergente e que, por isso, não pode ser criminalizada. Para que essa tese se sustente, a interpretação adotada deve respeitar:', 'Apenas a consciência individual do agente público.', 'Os limites materiais (texto da lei) e os limites jurisprudenciais (entendimentos vinculantes).', 'Exclusivamente a orientação verbal do superior hierárquico imediato.', 'A conveniência política do ato administrativo, independentemente da literalidade da norma.', 'Apenas as decisões de tribunais internacionais, desconsiderando a jurisprudência nacional.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — a interpretação legítima deve observar o limite material (o texto da lei) e o limite jurisprudencial (entendimentos vinculantes dos tribunais superiores). As demais alternativas substituem esses parâmetros objetivos por critérios subjetivos, hierárquicos informais, políticos ou estrangeiros, que não são os balizadores reconhecidos pela doutrina.
 
--- Q20: Identificação do agente público perante o preso (art. 16)
-(@cat_aa02,
- 'Ao efetuar a captura de um suspeito, o policial recusa-se a informar seu nome e sua função quando questionado pelo preso, e mantém a tarjeta de identificação encoberta pelo colete balístico. Sobre o dever de identificação do agente público perante o preso, assinale a alternativa correta.',
- 'O agente não precisa se identificar caso esteja usando colete balístico.',
- 'O direito à identificação restringe-se exclusivamente ao momento da captura em flagrante.',
- 'Agentes de segurança devem usar sempre sua tarjeta de identificação, inclusive sobre o colete, de modo visível.',
- 'A identificação falsa é permitida para proteger a integridade física de policiais infiltrados em qualquer situação.',
- 'O crime do art. 16 abrange depoimentos prestados em qualquer esfera, inclusive administrativa ou cível.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta, conforme as orientações sobre o uso obrigatório e visível da tarjeta de identificação, inclusive sobre o colete balístico, durante a atuação do agente. A cria exceção inexistente (o uso do colete não dispensa a identificação); B restringe indevidamente o direito apenas ao flagrante, quando o tipo também abrange a detenção/prisão em geral; D permite falsa identidade sem qualquer ressalva legal; E extrapola o alcance do tipo, que trata de identificação perante o preso, não de depoimentos em qualquer esfera.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 16: "Deixar de identificar-se ou identificar-se falsamente ao preso por ocasião de sua captura ou quando deva fazê-lo durante sua detenção ou prisão." Parágrafo único: mesma pena a quem, como responsável por interrogatório em procedimento investigatório, deixa de se identificar ao preso ou atribui a si falsa identidade, cargo ou função.',
- 'Lei 13.869/2019, art. 16, caput e § único',
- 'medio'),
+📜 Fundamento legal vigente: decorre da leitura sistemática do art. 1º, § 2º, da Lei 13.869/2019 (que protege a divergência interpretativa razoável) combinado com o dever geral de legalidade da atuação do agente público — a interpretação que extrapola o texto legal ou contraria entendimento vinculante (súmula vinculante, decisão em controle concentrado de constitucionalidade, por exemplo) deixa de ser "divergência legítima" e passa a evidenciar possível dolo específico.', 'Lei 13.869/2019, art. 1º, § 2º (doutrina — limites da interpretação legítima)', 'medio'),
 
--- Q21: Enunciado 11/GNCCRIM — período de repouso noturno
-(@cat_aa02,
- 'Um preso que não foi capturado em flagrante e que não consentiu em prestar declarações é submetido a interrogatório policial às 22h30. A conduta é criminosa porque invadiu o período de repouso noturno, que compreende o intervalo entre:',
- '18h00 e 06h00.',
- '22h00 e 07h00.',
- '21h00 e 05h00.',
- '20h00 e 06h00.',
- 'O pôr do sol e o nascer do sol, conforme o horário local.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta — o Enunciado 11/GNCCRIM define o período de repouso noturno entre 21h00 e 5h00. As demais alternativas apresentam horários incorretos ou vinculam o critério a fatores variáveis (pôr e nascer do sol), incompatíveis com a definição objetiva fixada pelo enunciado.\n\n📜 Fundamento legal vigente: Enunciado 11/GNCCRIM: "Para efeitos do artigo 18 da Lei de Abuso de Autoridade, compreende-se por repouso noturno o período de 21h00 a 5h00, nos termos do artigo 22, § 1º, III, da mesma Lei." O art. 18 da Lei 13.869/2019 não define expressamente o período; a definição é extraída, por integração sistemática, do art. 22, § 1º, III (horário do cumprimento de mandado de busca domiciliar).',
- 'Lei 13.869/2019, art. 18 c/c art. 22, § 1º, III; Enunciado 11/GNCCRIM',
- 'medio'),
+-- Q11
+(@cat_reg, 'Em um caso, um Delegado de Polícia ordena a custódia de um suspeito fora de qualquer hipótese legal de prisão. Em outro, um juiz, ciente de prisão manifestamente ilegal, deixa de relaxá-la dentro de prazo razoável. Sobre quem pode ser autor de cada uma dessas condutas, assinale a alternativa correta.', 'O sujeito ativo do caput é restrito a juízes, enquanto o parágrafo único alcança qualquer agente público.', 'O sujeito ativo do caput não alcança somente a autoridade judiciária, podendo ser praticado por qualquer agente público que determine, decida ou ordene a privação; já o parágrafo único é restrito à autoridade judiciária.', 'Ambos os dispositivos são crimes de mão própria, exigindo que o agente seja magistrado de carreira.', 'O crime do art. 9º exige que o preso seja inocente, sob pena de atipicidade.', 'A autoridade judiciária que deixa de relaxar prisão ilegal responde por prevaricação, e não por abuso de autoridade.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta, com base na diferenciação técnica do Enunciado 5 do GNCCRIM. A inverte a lógica do dispositivo; C exige indevidamente magistratura de carreira para o caput; D cria requisito de inocência inexistente na lei (o que se pune é a desconformidade com as hipóteses legais, não a culpabilidade do preso); E erra ao afastar a incidência da LAA, quando na verdade o parágrafo único tipifica exatamente essa omissão da autoridade judiciária.
 
--- Q22: Causas excludentes do atraso no envio de pleito de preso (art. 19)
-(@cat_aa02,
- 'Um agente público retarda o envio, ao juiz competente, de pleito no qual o preso questiona a legalidade de sua prisão. Sabendo que apenas situações excepcionalíssimas e comprovadas afastam o crime, assinale a alternativa que descreve uma causa apta a excluí-lo:',
- 'Esquecimento do agente devido ao excesso de trabalho.',
- 'Greve geral no sistema postal ou falha crítica e comprovada nos sistemas de informática.',
- 'Decisão discricionária do Diretor do Presídio por considerar o pedido infundado.',
- 'O fato de o pedido ter sido feito de forma verbal pelo preso.',
- 'Ausência de advogado constituído para subscrever o pleito formulado pelo preso.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — apenas causas excepcionalíssimas e devidamente comprovadas (como greve geral no sistema postal ou falha crítica de informática) afastam a tipicidade. A, C e D descrevem mera desorganização administrativa, discricionariedade indevida ou formalidade não exigida em lei; E inventa a exigência de advogado constituído para subscrever o pleito, quando o preso pode formulá-lo pessoalmente. Nenhuma delas exclui o crime.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 19: "Impedir ou retardar, injustificadamente, o envio de pleito de preso à autoridade judiciária competente para a apreciação da legalidade de sua prisão ou das circunstâncias de sua custódia". O termo "injustificadamente" exige justa causa comprovada e excepcional para afastar a tipicidade; a doutrina admite apenas eventos externos e verificáveis (falha sistêmica grave, força maior), jamais mera conveniência administrativa.',
- 'Lei 13.869/2019, art. 19, caput',
- 'medio'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 9º, caput: "Decretar medida de privação da liberdade em manifesta desconformidade com as hipóteses legais". O Enunciado 5/GNCCRIM esclarece que o verbo nuclear "decretar" tem sentido de determinar, decidir e ordenar a medida, alcançando qualquer agente público competente, e não somente autoridade judiciária. Já o parágrafo único é expressamente restrito à "autoridade judiciária que, dentro de prazo razoável, deixar de: I - relaxar a prisão manifestamente ilegal; II - substituir a prisão preventiva...; III - deferir liminar ou ordem de habeas corpus".', 'Lei 13.869/2019, art. 9º, caput e § único; Enunciado 5/GNCCRIM', 'dificil'),
 
--- Q23: Entrevista pessoal e reservada com advogado (art. 20)
-(@cat_aa02,
- 'Um advogado comparece à unidade prisional para entrevistar-se com seu cliente. O diretor informa que as entrevistas ocorrem apenas em horário e local previamente designados e que, no momento, não há parlatório disponível. Sobre a entrevista pessoal e reservada entre preso e advogado, é correto afirmar que:',
- 'As unidades prisionais não podem estabelecer qualquer horário ou data para visitas, sob pena de crime.',
- 'O agendamento prévio é obrigatório em todas as situações, sem exceção.',
- 'A regulamentação (horários, local, duração) é permitida, desde que não desnature o conteúdo da garantia nem impeça necessidades urgentes.',
- 'O crime só ocorre se o advogado não for revistado antes da entrevista.',
- 'O agente comete crime se exigir que a entrevista ocorra em local com câmeras de vídeo sem áudio.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta — a regulamentação administrativa é legítima desde que não desnature a garantia nem impeça necessidades urgentes de comunicação entre preso e advogado. A e B extrapolam ao vedar toda e qualquer regulamentação ou exigir agendamento sem exceção; D e E introduzem requisitos (revista, ausência de câmeras) não tratados como elemento do tipo.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 20: "Impedir, sem justa causa, a entrevista pessoal e reservada do preso com seu advogado". A doutrina interpreta que a regulamentação razoável de horário, local e duração da entrevista não configura, por si só, o impedimento vedado pelo tipo, desde que preserve o núcleo da garantia (reserva e possibilidade de comunicação efetiva) e não impeça situações urgentes.',
- 'Lei 13.869/2019, art. 20, caput',
- 'medio'),
+-- Q12
+(@cat_reg, 'Um investigado, regularmente intimado, é levado à força até a delegacia para ser interrogado. Em outro procedimento, uma testemunha que descumpriu notificação prévia é conduzida, mediante decisão motivada, para ato de reconhecimento pessoal. Considerando as balizas fixadas pelo Supremo Tribunal Federal sobre a condução coercitiva, ela é criminosa quando:', 'Realizada para interrogatório de investigado ou réu, ainda que haja prévia intimação.', 'Realizada para qualquer ato processual, mesmo que o réu tenha faltado injustificadamente.', 'O agente público deixa de algemar o conduzido durante o trajeto.', 'Decretada de forma motivada após o descumprimento de prévia notificação para ato diverso do interrogatório.', 'O Ministério Público a determina sem a concordância expressa da autoridade policial.',
+ 'A', 'Justificativa doutrinária (apostila): a alternativa A está correta — o Enunciado 6/GNCCRIM veda, em qualquer hipótese, a condução coercitiva de investigados e réus para interrogatório, ainda que precedida de intimação; já o Enunciado 7 admite a condução coercitiva para outros atos, desde que motivada e após descumprimento de prévia notificação — situação descrita (licitamente) na alternativa D, que por isso não configura crime. B, C e E descrevem situações não tratadas pelos enunciados como criminosas per se.
 
--- Q24: Sentar-se ao lado do defensor em audiência (art. 20, § único) — exceções taxativas
-(@cat_aa02,
- 'Durante audiência criminal, o magistrado determina que o réu permaneça afastado de seu defensor, impedindo-os de sentar lado a lado e de se comunicar. Em regra, essa determinação configura abuso de autoridade. A conduta é legítima, contudo:',
- 'Em casos de crimes violentos ou hediondos.',
- 'Se o réu estiver algemado por ordem fundamentada.',
- 'No curso do interrogatório ou no caso de audiência realizada por videoconferência.',
- 'Se houver risco de fuga devidamente atestado pela escolta.',
- 'Quando a audiência ocorrer em sala de segurança máxima, por determinação da direção do estabelecimento prisional.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo as duas exceções taxativas do art. 20, parágrafo único. As demais alternativas (natureza do crime, uso de algemas, risco de fuga, sala de segurança máxima) não constam do rol legal, que é taxativo e não pode ser ampliado por analogia in malam partem contra o réu.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 20, parágrafo único: incorre na mesma pena quem impede o preso, o réu solto ou o investigado "de sentar-se ao seu lado e com ele comunicar-se durante a audiência, salvo no curso de interrogatório ou no caso de audiência realizada por videoconferência." São as duas únicas exceções previstas em lei.',
- 'Lei 13.869/2019, art. 20, § único',
- 'medio'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 10: "Decretar a condução coercitiva de testemunha ou investigado manifestamente descabida ou sem prévia intimação de comparecimento ao juízo". O Enunciado 6/GNCCRIM (em linha com as ADPFs 395 e 444/STF) fixa que investigados e réus não podem ser conduzidos coercitivamente à presença de autoridade policial ou judicial para serem interrogados; o Enunciado 7/GNCCRIM permite a condução coercitiva para outros atos, desde que motivada e após o descumprimento de prévia notificação.', 'Lei 13.869/2019, art. 10; Enunciados 6 e 7/GNCCRIM (ADPFs 395 e 444/STF)', 'dificil'),
 
--- Q25: Ausência de parlatório adequado (art. 20 — doutrina complementar)
-(@cat_aa02,
- 'No caso de inexistência de parlatório adequado na unidade prisional, qual a orientação correta para o agente público evitar a prática de abuso de autoridade?',
- 'Suspender a entrevista até que o Estado realize as obras necessárias.',
- 'Permitir a conversa apenas na presença de um policial para garantir a ordem.',
- 'Conduzir o advogado e o preso a um local apropriado que garanta a privacidade e o caráter reservado da conversa.',
- 'Exigir que a entrevista seja feita por escrito através das grades da cela.',
- 'Permitir a entrevista apenas se o advogado assinar termo de responsabilidade por eventual fuga.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta — a orientação complementar recomenda que, na ausência de parlatório, o agente providencie local alternativo que assegure privacidade e reserva, em vez de simplesmente negar a entrevista. A nega a garantia por tempo indeterminado; B contraria o caráter reservado exigido pela lei (presença de terceiro descaracteriza a reserva); D e E impõem formalidades (entrevista escrita, termo de responsabilidade por fuga) sem previsão e incompatíveis com a garantia.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 20, caput e parágrafo único, exige entrevista "pessoal e reservada"; a inexistência de estrutura física dedicada (parlatório) não afasta o dever do agente público de viabilizar, por meios alternativos, um ambiente que garanta a reserva da comunicação entre preso/investigado e seu advogado, sob pena de configurar o impedimento vedado pelo tipo.',
- 'Lei 13.869/2019, art. 20',
- 'medio'),
+-- Q13
+(@cat_reg, 'Um homem é preso em flagrante numa sexta-feira, às 10h. A autoridade responsável só lhe entrega a nota de culpa na segunda-feira seguinte. Sobre o prazo legal dessa entrega e o conteúdo obrigatório do documento, assinale a alternativa correta.', 'Imediatamente, sob pena de relaxamento automático.', '12 (doze) horas, contado da lavratura do auto.', '24 (vinte e quatro) horas, assinada pela autoridade, contendo o motivo da prisão e nomes de condutor e testemunhas.', '48 (quarenta e oito) horas, para coincidir com o prazo do Habeas Corpus.', 'Até a realização da audiência de custódia, que deve ocorrer em até 24 (vinte e quatro) horas da prisão.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo o prazo e o conteúdo exigidos pelo art. 12, parágrafo único, III. As demais alternativas apresentam prazos inventados (12h, 48h) ou vinculam o prazo a eventos processuais (audiência de custódia) sem previsão legal nesse sentido.
 
--- Q26: Separação de custodiados por sexo (art. 21) — extensão ao compartimento de viatura
-(@cat_aa02,
- 'Um agente de segurança mantém deliberadamente detidos de sexos diferentes no mesmo compartimento de viatura durante uma transferência prolongada. Sobre o enquadramento dessa conduta, assinale a alternativa correta.',
- 'Não há crime, pois a separação só é exigida dentro de celas de delegacias ou presídios.',
- 'Comete crime, pois a custódia deve ser efetuada em compartimentos distintos desde a condução.',
- 'O crime só se configura se houver conjunção carnal entre os detidos.',
- 'Age em estrito cumprimento do dever legal se não houver outra viatura disponível.',
- 'Trata-se de conduta atípica, punível apenas se um dos detidos for menor de idade.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — a expressão legal "espaço de confinamento" é interpretada de forma ampla pela doutrina, abrangendo também o compartimento de viatura durante a condução/transferência, e não apenas celas de unidades prisionais. A restringe indevidamente o alcance do tipo; C exige elemento (conjunção carnal) não previsto na lei; D cria excludente inexistente (a falta de outra viatura não afasta o dever de observar meios alternativos de separação); E condiciona a tipicidade à idade dos detidos, quando o tipo do caput já pune a mistura de sexos, independentemente de idade.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 21, caput: "Manter presos de ambos os sexos na mesma cela ou espaço de confinamento". A expressão "espaço de confinamento" é doutrinariamente compreendida de forma extensiva, alcançando qualquer ambiente de custódia compartilhada, inclusive o compartimento de transporte de uma viatura.',
- 'Lei 13.869/2019, art. 21, caput',
- 'dificil'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 12, parágrafo único, III: incorre na mesma pena do caput quem "deixa de entregar ao preso, no prazo de 24 (vinte e quatro) horas, a nota de culpa, assinada pela autoridade, com o motivo da prisão e os nomes do condutor e das testemunhas". O Enunciado 8/GNCCRIM admite, nas exceções legais, a omissão do nome do condutor, testemunhas e vítimas para preservar identidade/segurança.', 'Lei 13.869/2019, art. 12, § único, III; Enunciado 8/GNCCRIM', 'medio'),
 
--- Q27: Separação de custodiados com sofrimento físico/mental — desclassificação para tortura
-(@cat_aa02,
- 'Em uma unidade prisional, a regra de separação de custodiados é deliberadamente violada e, em razão disso, um dos presos sofre intenso sofrimento físico e mental. Sobre o enquadramento penal dessa conduta, assinale a alternativa correta.',
- 'O agente responde por crime de abuso de autoridade com causa de aumento.',
- 'A conduta é absorvida pelo crime de maus-tratos.',
- 'Tipifica-se o crime de tortura (Lei nº 9.455/97), infração equiparada a hediondo.',
- 'O agente fica isento de pena se alegar superlotação da unidade.',
- 'O crime de abuso de autoridade é excluído por falta de dolo específico.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta — quando a violação da regra de separação de custodiados vem acompanhada de sofrimento físico ou mental do preso, a conduta se desclassifica do art. 21 da LAA para o crime de tortura, infração equiparada a hedionda. A mantém indevidamente o enquadramento na LAA com mera causa de aumento; B aponta absorção por tipo incompatível (maus-tratos, CP, art. 136, é norma geral menos grave que a tortura); D cria excludente de superlotação sem amparo legal; E nega a tipicidade penal da conduta, quando na verdade há, sim, crime — apenas de natureza diversa (tortura, não abuso de autoridade).\n\n📜 Fundamento legal vigente: atenção — o enunciado do GNCCRIM que trata exatamente deste tema (violação da separação de custodiados do art. 21 da LAA acompanhada de sofrimento físico/mental) é o Enunciado 13/GNCCRIM, e não o de nº 12 (este trata do art. 18, sobre o limite do interrogatório no período de repouso noturno) — possível imprecisão de numeração no enunciado da questão, mas o conteúdo doutrinário é correto. Enunciado 13/GNCCRIM: "A violação à regra de separação de custodiados, acompanhada de sofrimento físico ou mental do preso, conforme as circunstâncias do caso, não tipifica o crime do art. 21 da Lei de Abuso de Autoridade, mas o delito de tortura (art. 1º, caput, inciso I, da Lei nº 9.455/97), infração penal equiparada a hediondo, sofrendo os consectários da Lei 8.072/1990."',
- 'Lei 13.869/2019, art. 21; Enunciado 13/GNCCRIM (numeração correta); Lei 9.455/1997, art. 1º, I',
- 'dificil'),
+-- Q14
+(@cat_reg, 'Uma guarnição cumpre mandado de prisão preventiva expedido por juiz. Sobre as condutas que, no contexto da comunicação da prisão, sujeitam o agente às mesmas penas do crime de omissão de comunicação, é correto afirmar que incorre no crime o agente que:', 'Comunica imediatamente a prisão ao juiz que a decretou, mas deixa de registrar o horário exato da captura no boletim de ocorrência.', 'Deixa de comunicar, imediatamente, a execução de prisão temporária ou preventiva à autoridade judiciária que a decretou.', 'Deixa de comunicar a prisão ao Ministério Público no prazo de 24 (vinte e quatro) horas.', 'Comunica a prisão à família, mas oculta o local para fins de segurança orgânica.', 'Entrega a nota de culpa sem a assinatura de duas testemunhas civis.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta, reproduzindo o art. 12, parágrafo único, I. A descreve falha meramente formal de registro, sem tipicidade penal — a comunicação exigida pela lei foi feita a tempo. C cria um dever de comunicação ao Ministério Público em 24 horas que a lei não prevê: o destinatário legal da comunicação é a autoridade judiciária. D e E descrevem condutas que, embora possam ter relevância disciplinar, não correspondem ao texto legal do inciso.
 
--- Q28: Horário de cumprimento de mandado de busca domiciliar (art. 22, § 1º, III)
-(@cat_aa02,
- 'Uma equipe policial, munida de mandado judicial de busca e apreensão domiciliar, decide cumpri-lo às 22h, alegando que ainda havia claridade natural suficiente. Sobre o horário de cumprimento, o mandado configura abuso de autoridade se executado:',
- 'Entre 18h00 e 06h00.',
- 'Fora do horário comercial (08h às 18h).',
- 'Após as 21h00 ou antes das 05h00.',
- 'Apenas durante os finais de semana e feriados.',
- 'Sempre que o morador não estiver presente no imóvel.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo o horário vedado pelo art. 22, § 1º, III. As demais alternativas apresentam horários ou condições (horário comercial, fins de semana, ausência do morador) sem correspondência com o texto legal.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 22, § 1º: "Incorre na mesma pena, na forma prevista no caput deste artigo, quem: (...) III - cumpre mandado de busca e apreensão domiciliar após as 21h (vinte e uma horas) ou antes das 5h (cinco horas)." O Enunciado 15/GNCCRIM reforça: o mandado deve ser cumprido durante o dia (CF, art. 5º, XI), sendo vedado o cumprimento entre 21h00 e 5h00 mesmo havendo luz solar.',
- 'Lei 13.869/2019, art. 22, § 1º, III; Enunciado 15/GNCCRIM; CF, art. 5º, XI',
- 'medio'),
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 12, parágrafo único, I: incorre na mesma pena quem "deixa de comunicar, imediatamente, a execução de prisão temporária ou preventiva à autoridade judiciária que a decretou". A comunicação da prisão e do local de custódia à família ou pessoa indicada está prevista, à parte, no inciso II do mesmo parágrafo.', 'Lei 13.869/2019, art. 12, § único, I', 'medio'),
 
--- Q29: Excludentes de tipicidade da violação de domicílio (art. 22, § 2º)
-(@cat_aa02,
- 'O agente público que ingressa em imóvel alheio sem determinação judicial não cometerá crime se a finalidade for:',
- 'Realizar vistoria administrativa de rotina contra a vontade do morador.',
- 'Investigar crime de menor potencial ofensivo ocorrido no dia anterior.',
- 'Prestar socorro, ou quando houver fundados indícios de flagrante delito ou desastre.',
- 'Cumprir ordem verbal de autoridade superior emitida às 22h00.',
- 'Efetuar a prisão de indivíduo com mandado de prisão em aberto durante o repouso noturno.',
- 'C',
- 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo as excludentes do art. 22, § 2º. A e B descrevem hipóteses não amparadas pelas excludentes legais (vistoria de rotina e infração de menor gravidade não urgente); D invoca ordem verbal, insuficiente para afastar a exigência de determinação judicial; E, embora trate de mandado de prisão (não de busca domiciliar), não se enquadra automaticamente nas excludentes do art. 22, § 2º, que são taxativas.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 22, § 2º: "Não haverá crime se o ingresso for para prestar socorro, ou quando houver fundados indícios que indiquem a necessidade do ingresso em razão de situação de flagrante delito ou de desastre." Trata-se de rol de excludentes de tipicidade, interpretado restritivamente por se tratar de exceção à inviolabilidade domiciliar (CF, art. 5º, XI).',
- 'Lei 13.869/2019, art. 22, § 2º; CF, art. 5º, XI',
- 'medio'),
+-- Q15
+(@cat_reg, 'Esgotado o prazo judicial da prisão preventiva, a autoridade policial recebe o alvará de soltura às 9h e só promove a soltura do preso no dia seguinte. Questionada, alega unicamente a sobrecarga de trabalho da unidade. Sobre a responsabilização penal da autoridade, assinale a alternativa correta.', 'Não comete crime, pois o tempo necessário à checagem de outras ordens de prisão e da autenticidade do alvará afasta a exigência de soltura imediata.', 'Comete crime de abuso de autoridade, pois somente motivo justo e excepcionalíssimo afastaria a conduta, e a sobrecarga de trabalho não se enquadra nessa hipótese.', 'Não responde por crime se houver intenção de colher novos depoimentos antes da soltura.', 'Comete infração administrativa disciplinar, mas não crime, pois a lei não pune omissões relativas ao cumprimento do alvará.', 'Responde apenas por sequestro e cárcere privado, com a pena aumentada pela condição de agente público.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — o tipo só é afastado por "motivo justo e excepcionalíssimo", e sobrecarga de trabalho ou mero esquecimento não preenchem esse padrão. A alternativa A é a pegadinha central: a checagem de segurança realmente é admitida, mas como janela mínima e não como salvo-conduto para um dia inteiro de atraso — e, no caso, a autoridade sequer a invocou. C admite indevidamente a colheita de depoimentos como justificativa; D nega, sem razão, a tipicidade penal da conduta; E desconsidera o tipo específico da lei em favor de tipos comuns incompatíveis com o caso.
 
--- Q30: Ingresso consentido em domicílio — boa prática doutrinária
-(@cat_aa02,
- 'Uma guarnição pretende ingressar em residência sem mandado judicial, apoiada apenas no consentimento do morador. Para prevenir futura responsabilização por violação de domicílio, o agente público deve:',
- 'Presumir o consentimento caso a porta esteja apenas encostada.',
- 'Obter autorização expressa, preferencialmente com a assinatura de um termo, para evitar futura responsabilização.',
- 'Utilizar-se de astúcia para convencer o morador a franquear a entrada.',
- 'Entrar no imóvel e, caso questionado, alegar que ouviu pedidos de socorro inexistentes.',
- 'Dispensar formalidades, pois o testemunho do policial possui fé pública absoluta e inquestionável.',
- 'B',
- 'Justificativa doutrinária (apostila): a alternativa B está correta — a boa prática recomendada é a obtenção de autorização expressa, idealmente documentada por termo assinado, para resguardar o agente e comprovar a licitude do ingresso. A presume consentimento de forma indevida; C descreve conduta que o próprio art. 22, caput, tipifica como crime ("astuciosamente"); D descreve fraude para simular excludente (socorro inexistente), o que agrava a responsabilidade; E atribui fé pública absoluta ao relato do agente, o que não existe no sistema de provas.\n\n📜 Fundamento legal vigente: Lei 13.869/2019, art. 22, caput, tipifica justamente o ingresso "clandestina ou astuciosamente, ou à revelia da vontade do ocupante" — a contrario sensu, o ingresso amparado no consentimento livre e inequívoco do morador afasta a tipicidade, sendo recomendável, por cautela probatória, documentar essa anuência.',
- 'Lei 13.869/2019, art. 22, caput',
- 'medio');
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 12, parágrafo único, IV: incorre na mesma pena quem "prolonga a execução de pena privativa de liberdade, de prisão temporária, de prisão preventiva, de medida de segurança ou de internação, deixando, sem motivo justo e excepcionalíssimo, de executar o alvará de soltura imediatamente após recebido ou de promover a soltura do preso quando esgotado o prazo judicial ou legal." O Enunciado 9/GNCCRIM ressalva apenas o tempo necessário aos procedimentos de segurança (checagem de outras ordens de prisão e autenticidade do alvará) — a lei não estabelece prazo em horas para essa checagem, e ela não autoriza postergar a soltura por conveniência administrativa.', 'Lei 13.869/2019, art. 12, § único, IV; Enunciado 9/GNCCRIM', 'medio'),
 
-SET foreign_key_checks = 1;
+-- Q16
+(@cat_reg, 'Durante a custódia, agentes de segurança submetem o preso a situação vexatória, obrigando-o a posar para fotos em posição degradante, destinadas a exibição em grupos internos de mensagens da corporação. Sobre essa conduta, assinale a alternativa correta.', 'É justificável para fins de identificação criminal se o preso não possuir documentos.', 'Configura crime, devendo o responsável pelo custodiado evitar a espetacularização e a curiosidade pública.', 'Só é crime se houver violência física que resulte em lesão corporal grave.', 'Trata-se de mero exercício regular do direito de informar.', 'É permitida se houver autorização verbal do Delegado de Plantão.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — o art. 13 e as orientações doutrinárias vedam a espetacularização e a exposição à curiosidade pública do custodiado, ainda que para fins internos (grupos de mensagens). A cria justificativa inexistente para a identificação criminal; C exige indevidamente lesão corporal grave, quando a lei já pune a exibição/situação vexatória independentemente de lesão; D e E tentam legitimar a conduta com base em "direito de informar" ou autorização informal, sem amparo legal.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 13: "Constranger o preso ou o detento, mediante violência, grave ameaça ou redução de sua capacidade de resistência, a: I - exibir-se ou ter seu corpo ou parte dele exibido à curiosidade pública; II - submeter-se a situação vexatória ou a constrangimento não autorizado em lei". A exibição para grupos internos de mensagens, sem qualquer finalidade probatória ou de identificação formal, se enquadra na "curiosidade pública" e na "situação vexatória" vedadas pelo tipo.', 'Lei 13.869/2019, art. 13, I e II', 'dificil'),
+
+-- Q17
+(@cat_reg, 'Durante um interrogatório, agentes constrangem o detento, mediante violência e grave ameaça, a produzir prova contra si mesmo. Sobre o enquadramento penal desse ato, assinale a alternativa correta.', 'É conduta abrangida exclusivamente pela Lei de Tortura, independentemente do dolo.', 'Pode configurar abuso de autoridade ou crime de tortura, a depender das circunstâncias do caso concreto.', 'É atípico se a prova for essencial para a resolução de crime hediondo.', 'Só é punível se houver redução da capacidade de resistência por uso de substâncias químicas.', 'Configura sempre abuso de autoridade, sendo vedada a desclassificação para o crime de tortura.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — o Enunciado 10/GNCCRIM aponta a possibilidade de subsunção da conduta tanto à Lei de Abuso de Autoridade quanto à Lei de Tortura, conforme as circunstâncias do caso concreto (intensidade do meio empregado, finalidade, gravidade do sofrimento imposto). A exclui indevidamente a LAA; C cria excludente por relevância do crime investigado, incompatível com o sistema de garantias; D restringe sem base o meio de execução a substâncias químicas; E fecha indevidamente a porta da desclassificação, quando é exatamente a gravidade do meio e a finalidade do agente que decidem entre abuso de autoridade e tortura.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 13, III: "produzir prova contra si mesmo ou contra terceiro" mediante violência, grave ameaça ou redução da capacidade de resistência. O Enunciado 10/GNCCRIM esclarece: "Constranger o preso ou o detento, mediante violência ou grave ameaça, a produzir prova contra si mesmo ou contra terceiro pode configurar delito de abuso de autoridade (Lei 13.869/19) ou crime de tortura (Lei 9.455/97), a depender das circunstâncias do caso concreto."', 'Lei 13.869/2019, art. 13, III; Enunciado 10/GNCCRIM; Lei 9.455/1997, art. 1º', 'dificil'),
+
+-- Q18
+(@cat_reg, 'Um agente público ameaça prender um profissional caso este não revele, em depoimento, informação que lhe foi confiada em razão de seu ofício. A lei tipifica essa conduta como crime. Estão entre os profissionais protegidos por esse dever de sigilo:', 'Apenas advogados e médicos em exercício.', 'Advogados, médicos, parlamentares, psicólogos, sacerdotes e jornalistas.', 'Exclusivamente membros do Poder Judiciário e Ministério Público.', 'Somente policiais que atuaram disfarçados em infiltração.', 'Qualquer cidadão que tenha presenciado o crime, independentemente da profissão.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta, reproduzindo o rol exemplificativo do material com base no art. 207 do CPP, que arrola as pessoas com dever de sigilo profissional. As demais alternativas restringem indevidamente o rol (A e C) ou o descaracterizam por completo (D e E), atribuindo dever de sigilo a quem não o possui em razão de ofício.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 15: "Constranger a depor, sob ameaça de prisão, pessoa que, em razão de função, ministério, ofício ou profissão, deva guardar segredo ou resguardar sigilo". O rol de profissionais com dever de sigilo é buscado, por integração, no art. 207 do Código de Processo Penal ("são proibidas de depor as pessoas que, em razão de função, ministério, ofício ou profissão, devam guardar segredo"), doutrinariamente exemplificado com advogados, médicos, parlamentares, psicólogos, sacerdotes e jornalistas, entre outros.', 'Lei 13.869/2019, art. 15; CPP, art. 207', 'medio'),
+
+-- Q19
+(@cat_reg, 'Caso um investigado opte por exercer seu direito constitucional ao silêncio, a autoridade que prossegue com o interrogatório:', 'Comete crime de abuso de autoridade.', 'Atua corretamente na busca da elucidação dos fatos.', 'Pode ser punida apenas se houver agressão física comprovada.', 'Deve consignar a recusa e continuar as perguntas para fins de registro.', 'Só comete crime se o investigado for assistido por dois advogados simultaneamente.',
+ 'A', 'Justificativa doutrinária (apostila): a alternativa A está correta — a tipificação é direta, prevista no art. 15, parágrafo único, I. B nega indevidamente a proteção constitucional ao silêncio; C exige elemento (agressão física) não previsto no tipo, que se consuma com o mero prosseguimento do interrogatório; D e E criam condutas ou requisitos sem qualquer amparo legal.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 15, parágrafo único: "Incorre na mesma pena quem prossegue com o interrogatório: I - de pessoa que tenha decidido exercer o direito ao silêncio; ou II - de pessoa que tenha optado por ser assistida por advogado ou defensor público, sem a presença de seu patrono."', 'Lei 13.869/2019, art. 15, § único, I', 'medio'),
+
+-- Q20
+(@cat_reg, 'Ao efetuar a captura de um suspeito, o policial recusa-se a informar seu nome e sua função quando questionado pelo preso, e mantém a tarjeta de identificação encoberta pelo colete balístico. Sobre o dever de identificação do agente público perante o preso, assinale a alternativa correta.', 'O agente não precisa se identificar caso esteja usando colete balístico.', 'O direito à identificação restringe-se exclusivamente ao momento da captura em flagrante.', 'Agentes de segurança devem usar sempre sua tarjeta de identificação, inclusive sobre o colete, de modo visível.', 'A identificação falsa é permitida para proteger a integridade física de policiais infiltrados em qualquer situação.', 'O crime do art. 16 abrange depoimentos prestados em qualquer esfera, inclusive administrativa ou cível.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta, conforme as orientações sobre o uso obrigatório e visível da tarjeta de identificação, inclusive sobre o colete balístico, durante a atuação do agente. A cria exceção inexistente (o uso do colete não dispensa a identificação); B restringe indevidamente o direito apenas ao flagrante, quando o tipo também abrange a detenção/prisão em geral; D permite falsa identidade sem qualquer ressalva legal; E extrapola o alcance do tipo, que trata de identificação perante o preso, não de depoimentos em qualquer esfera.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 16: "Deixar de identificar-se ou identificar-se falsamente ao preso por ocasião de sua captura ou quando deva fazê-lo durante sua detenção ou prisão." Parágrafo único: mesma pena a quem, como responsável por interrogatório em procedimento investigatório, deixa de se identificar ao preso ou atribui a si falsa identidade, cargo ou função.', 'Lei 13.869/2019, art. 16, caput e § único', 'medio'),
+
+-- Q21
+(@cat_reg, 'Um preso que não foi capturado em flagrante e que não consentiu em prestar declarações é submetido a interrogatório policial às 22h30. A conduta é criminosa porque invadiu o período de repouso noturno, que compreende o intervalo entre:', '18h00 e 06h00.', '22h00 e 07h00.', '21h00 e 05h00.', '20h00 e 06h00.', 'O pôr do sol e o nascer do sol, conforme o horário local.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta — o Enunciado 11/GNCCRIM define o período de repouso noturno entre 21h00 e 5h00. As demais alternativas apresentam horários incorretos ou vinculam o critério a fatores variáveis (pôr e nascer do sol), incompatíveis com a definição objetiva fixada pelo enunciado.
+
+📜 Fundamento legal vigente: Enunciado 11/GNCCRIM: "Para efeitos do artigo 18 da Lei de Abuso de Autoridade, compreende-se por repouso noturno o período de 21h00 a 5h00, nos termos do artigo 22, § 1º, III, da mesma Lei." O art. 18 da Lei 13.869/2019 não define expressamente o período; a definição é extraída, por integração sistemática, do art. 22, § 1º, III (horário do cumprimento de mandado de busca domiciliar).', 'Lei 13.869/2019, art. 18 c/c art. 22, § 1º, III; Enunciado 11/GNCCRIM', 'medio'),
+
+-- Q22
+(@cat_reg, 'Um agente público retarda o envio, ao juiz competente, de pleito no qual o preso questiona a legalidade de sua prisão. Sabendo que apenas situações excepcionalíssimas e comprovadas afastam o crime, assinale a alternativa que descreve uma causa apta a excluí-lo:', 'Esquecimento do agente devido ao excesso de trabalho.', 'Greve geral no sistema postal ou falha crítica e comprovada nos sistemas de informática.', 'Decisão discricionária do Diretor do Presídio por considerar o pedido infundado.', 'O fato de o pedido ter sido feito de forma verbal pelo preso.', 'Ausência de advogado constituído para subscrever o pleito formulado pelo preso.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — apenas causas excepcionalíssimas e devidamente comprovadas (como greve geral no sistema postal ou falha crítica de informática) afastam a tipicidade. A, C e D descrevem mera desorganização administrativa, discricionariedade indevida ou formalidade não exigida em lei; E inventa a exigência de advogado constituído para subscrever o pleito, quando o preso pode formulá-lo pessoalmente. Nenhuma delas exclui o crime.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 19: "Impedir ou retardar, injustificadamente, o envio de pleito de preso à autoridade judiciária competente para a apreciação da legalidade de sua prisão ou das circunstâncias de sua custódia". O termo "injustificadamente" exige justa causa comprovada e excepcional para afastar a tipicidade; a doutrina admite apenas eventos externos e verificáveis (falha sistêmica grave, força maior), jamais mera conveniência administrativa.', 'Lei 13.869/2019, art. 19, caput', 'medio'),
+
+-- Q23
+(@cat_reg, 'Um advogado comparece à unidade prisional para entrevistar-se com seu cliente. O diretor informa que as entrevistas ocorrem apenas em horário e local previamente designados e que, no momento, não há parlatório disponível. Sobre a entrevista pessoal e reservada entre preso e advogado, é correto afirmar que:', 'As unidades prisionais não podem estabelecer qualquer horário ou data para visitas, sob pena de crime.', 'O agendamento prévio é obrigatório em todas as situações, sem exceção.', 'A regulamentação (horários, local, duração) é permitida, desde que não desnature o conteúdo da garantia nem impeça necessidades urgentes.', 'O crime só ocorre se o advogado não for revistado antes da entrevista.', 'O agente comete crime se exigir que a entrevista ocorra em local com câmeras de vídeo sem áudio.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta — a regulamentação administrativa é legítima desde que não desnature a garantia nem impeça necessidades urgentes de comunicação entre preso e advogado. A e B extrapolam ao vedar toda e qualquer regulamentação ou exigir agendamento sem exceção; D e E introduzem requisitos (revista, ausência de câmeras) não tratados como elemento do tipo.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 20: "Impedir, sem justa causa, a entrevista pessoal e reservada do preso com seu advogado". A doutrina interpreta que a regulamentação razoável de horário, local e duração da entrevista não configura, por si só, o impedimento vedado pelo tipo, desde que preserve o núcleo da garantia (reserva e possibilidade de comunicação efetiva) e não impeça situações urgentes.', 'Lei 13.869/2019, art. 20, caput', 'medio'),
+
+-- Q24
+(@cat_reg, 'Durante audiência criminal, o magistrado determina que o réu permaneça afastado de seu defensor, impedindo-os de sentar lado a lado e de se comunicar. Em regra, essa determinação configura abuso de autoridade. A conduta é legítima, contudo:', 'Em casos de crimes violentos ou hediondos.', 'Se o réu estiver algemado por ordem fundamentada.', 'No curso do interrogatório ou no caso de audiência realizada por videoconferência.', 'Se houver risco de fuga devidamente atestado pela escolta.', 'Quando a audiência ocorrer em sala de segurança máxima, por determinação da direção do estabelecimento prisional.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo as duas exceções taxativas do art. 20, parágrafo único. As demais alternativas (natureza do crime, uso de algemas, risco de fuga, sala de segurança máxima) não constam do rol legal, que é taxativo e não pode ser ampliado por analogia in malam partem contra o réu.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 20, parágrafo único: incorre na mesma pena quem impede o preso, o réu solto ou o investigado "de sentar-se ao seu lado e com ele comunicar-se durante a audiência, salvo no curso de interrogatório ou no caso de audiência realizada por videoconferência." São as duas únicas exceções previstas em lei.', 'Lei 13.869/2019, art. 20, § único', 'medio'),
+
+-- Q25
+(@cat_reg, 'No caso de inexistência de parlatório adequado na unidade prisional, qual a orientação correta para o agente público evitar a prática de abuso de autoridade?', 'Suspender a entrevista até que o Estado realize as obras necessárias.', 'Permitir a conversa apenas na presença de um policial para garantir a ordem.', 'Conduzir o advogado e o preso a um local apropriado que garanta a privacidade e o caráter reservado da conversa.', 'Exigir que a entrevista seja feita por escrito através das grades da cela.', 'Permitir a entrevista apenas se o advogado assinar termo de responsabilidade por eventual fuga.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta — a orientação complementar recomenda que, na ausência de parlatório, o agente providencie local alternativo que assegure privacidade e reserva, em vez de simplesmente negar a entrevista. A nega a garantia por tempo indeterminado; B contraria o caráter reservado exigido pela lei (presença de terceiro descaracteriza a reserva); D e E impõem formalidades (entrevista escrita, termo de responsabilidade por fuga) sem previsão e incompatíveis com a garantia.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 20, caput e parágrafo único, exige entrevista "pessoal e reservada"; a inexistência de estrutura física dedicada (parlatório) não afasta o dever do agente público de viabilizar, por meios alternativos, um ambiente que garanta a reserva da comunicação entre preso/investigado e seu advogado, sob pena de configurar o impedimento vedado pelo tipo.', 'Lei 13.869/2019, art. 20', 'medio'),
+
+-- Q26
+(@cat_reg, 'Um agente de segurança mantém deliberadamente detidos de sexos diferentes no mesmo compartimento de viatura durante uma transferência prolongada. Sobre o enquadramento dessa conduta, assinale a alternativa correta.', 'Não há crime, pois a separação só é exigida dentro de celas de delegacias ou presídios.', 'Comete crime, pois a custódia deve ser efetuada em compartimentos distintos desde a condução.', 'O crime só se configura se houver conjunção carnal entre os detidos.', 'Age em estrito cumprimento do dever legal se não houver outra viatura disponível.', 'Trata-se de conduta atípica, punível apenas se um dos detidos for menor de idade.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — a expressão legal "espaço de confinamento" é interpretada de forma ampla pela doutrina, abrangendo também o compartimento de viatura durante a condução/transferência, e não apenas celas de unidades prisionais. A restringe indevidamente o alcance do tipo; C exige elemento (conjunção carnal) não previsto na lei; D cria excludente inexistente (a falta de outra viatura não afasta o dever de observar meios alternativos de separação); E condiciona a tipicidade à idade dos detidos, quando o tipo do caput já pune a mistura de sexos, independentemente de idade.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 21, caput: "Manter presos de ambos os sexos na mesma cela ou espaço de confinamento". A expressão "espaço de confinamento" é doutrinariamente compreendida de forma extensiva, alcançando qualquer ambiente de custódia compartilhada, inclusive o compartimento de transporte de uma viatura.', 'Lei 13.869/2019, art. 21, caput', 'dificil'),
+
+-- Q27
+(@cat_reg, 'Em uma unidade prisional, a regra de separação de custodiados é deliberadamente violada e, em razão disso, um dos presos sofre intenso sofrimento físico e mental. Sobre o enquadramento penal dessa conduta, assinale a alternativa correta.', 'O agente responde por crime de abuso de autoridade com causa de aumento.', 'A conduta é absorvida pelo crime de maus-tratos.', 'Tipifica-se o crime de tortura (Lei nº 9.455/97), infração equiparada a hediondo.', 'O agente fica isento de pena se alegar superlotação da unidade.', 'O crime de abuso de autoridade é excluído por falta de dolo específico.',
+ 'C', 'A alternativa C está correta — quando a violação da regra de separação de custodiados vem acompanhada de sofrimento físico ou mental do preso, a conduta se desclassifica do abuso de autoridade para o crime de tortura, infração equiparada a hedionda. A mantém indevidamente o enquadramento na Lei de Abuso de Autoridade com mera causa de aumento; B aponta absorção por tipo incompatível (maus-tratos é norma geral menos grave que a tortura); D cria excludente de superlotação sem amparo legal; E nega a tipicidade penal da conduta, quando na verdade há crime — apenas de natureza diversa (tortura, não abuso de autoridade).
+
+📜 Fundamento legal vigente: Lei nº 9.455/1997 (Lei de Tortura), art. 1º, I. A violação à regra de separação de custodiados acompanhada de sofrimento físico ou mental do preso não tipifica o crime de manutenção de presos de ambos os sexos no mesmo espaço, mas o delito de tortura, infração equiparada a hediondo (Lei nº 8.072/1990).', 'Lei 13.869/2019, art. 21; Enunciado 13/GNCCRIM (numeração correta); Lei 9.455/1997, art. 1º, I', 'dificil'),
+
+-- Q28
+(@cat_reg, 'Uma equipe policial, munida de mandado judicial de busca e apreensão domiciliar, decide cumpri-lo às 22h, alegando que ainda havia claridade natural suficiente. Sobre o horário de cumprimento, o mandado configura abuso de autoridade se executado:', 'Entre 18h00 e 06h00.', 'Fora do horário comercial (08h às 18h).', 'Após as 21h00 ou antes das 05h00.', 'Apenas durante os finais de semana e feriados.', 'Sempre que o morador não estiver presente no imóvel.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo o horário vedado pelo art. 22, § 1º, III. As demais alternativas apresentam horários ou condições (horário comercial, fins de semana, ausência do morador) sem correspondência com o texto legal.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 22, § 1º: "Incorre na mesma pena, na forma prevista no caput deste artigo, quem: (...) III - cumpre mandado de busca e apreensão domiciliar após as 21h (vinte e uma horas) ou antes das 5h (cinco horas)." O Enunciado 15/GNCCRIM reforça: o mandado deve ser cumprido durante o dia (CF, art. 5º, XI), sendo vedado o cumprimento entre 21h00 e 5h00 mesmo havendo luz solar.', 'Lei 13.869/2019, art. 22, § 1º, III; Enunciado 15/GNCCRIM; CF, art. 5º, XI', 'medio'),
+
+-- Q29
+(@cat_reg, 'O agente público que ingressa em imóvel alheio sem determinação judicial não cometerá crime se a finalidade for:', 'Realizar vistoria administrativa de rotina contra a vontade do morador.', 'Investigar crime de menor potencial ofensivo ocorrido no dia anterior.', 'Prestar socorro, ou quando houver fundados indícios de flagrante delito ou desastre.', 'Cumprir ordem verbal de autoridade superior emitida às 22h00.', 'Efetuar a prisão de indivíduo com mandado de prisão em aberto durante o repouso noturno.',
+ 'C', 'Justificativa doutrinária (apostila): a alternativa C está correta, reproduzindo as excludentes do art. 22, § 2º. A e B descrevem hipóteses não amparadas pelas excludentes legais (vistoria de rotina e infração de menor gravidade não urgente); D invoca ordem verbal, insuficiente para afastar a exigência de determinação judicial; E, embora trate de mandado de prisão (não de busca domiciliar), não se enquadra automaticamente nas excludentes do art. 22, § 2º, que são taxativas.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 22, § 2º: "Não haverá crime se o ingresso for para prestar socorro, ou quando houver fundados indícios que indiquem a necessidade do ingresso em razão de situação de flagrante delito ou de desastre." Trata-se de rol de excludentes de tipicidade, interpretado restritivamente por se tratar de exceção à inviolabilidade domiciliar (CF, art. 5º, XI).', 'Lei 13.869/2019, art. 22, § 2º; CF, art. 5º, XI', 'medio'),
+
+-- Q30
+(@cat_reg, 'Uma guarnição pretende ingressar em residência sem mandado judicial, apoiada apenas no consentimento do morador. Para prevenir futura responsabilização por violação de domicílio, o agente público deve:', 'Presumir o consentimento caso a porta esteja apenas encostada.', 'Obter autorização expressa, preferencialmente com a assinatura de um termo, para evitar futura responsabilização.', 'Utilizar-se de astúcia para convencer o morador a franquear a entrada.', 'Entrar no imóvel e, caso questionado, alegar que ouviu pedidos de socorro inexistentes.', 'Dispensar formalidades, pois o testemunho do policial possui fé pública absoluta e inquestionável.',
+ 'B', 'Justificativa doutrinária (apostila): a alternativa B está correta — a boa prática recomendada é a obtenção de autorização expressa, idealmente documentada por termo assinado, para resguardar o agente e comprovar a licitude do ingresso. A presume consentimento de forma indevida; C descreve conduta que o próprio art. 22, caput, tipifica como crime ("astuciosamente"); D descreve fraude para simular excludente (socorro inexistente), o que agrava a responsabilidade; E atribui fé pública absoluta ao relato do agente, o que não existe no sistema de provas.
+
+📜 Fundamento legal vigente: Lei 13.869/2019, art. 22, caput, tipifica justamente o ingresso "clandestina ou astuciosamente, ou à revelia da vontade do ocupante" — a contrario sensu, o ingresso amparado no consentimento livre e inequívoco do morador afasta a tipicidade, sendo recomendável, por cautela probatória, documentar essa anuência.', 'Lei 13.869/2019, art. 22, caput', 'medio');
