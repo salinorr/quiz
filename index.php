@@ -1644,25 +1644,31 @@ $audiosCatalog = [
                 <div style="font-size:.78rem;color:#666"><?= e($g['lei']) ?></div>
             </div>
         </div>
-        <?php if (count($g['itens']) > 6): ?>
-        <input type="text" placeholder="🔎 Buscar disciplina..." oninput="audiosFiltrar(<?= $i ?>, this)"
+        <?php if (count($g['itens']) > 5): ?>
+        <input id="audios-busca-<?= $i ?>" type="text" placeholder="🔎 Buscar disciplina..." oninput="audiosFiltrar(<?= $i ?>)"
                style="width:100%;box-sizing:border-box;padding:10px 14px;border:2px solid <?= e($g['cor_lt']) ?>;border-radius:10px;margin-bottom:14px;font-size:.85rem;outline:none">
         <?php endif; ?>
         <?php if (empty($g['itens'])): ?>
         <p style="color:#888;text-align:center;padding:30px">Nenhum áudio encontrado.</p>
         <?php else: ?>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px">
-        <?php foreach ($g['itens'] as $m): $dirEnc = implode('/', array_map('rawurlencode', explode('/', $g['dir']))); $url = 'audios/'.$dirEnc.rawurlencode($m['file']); ?>
+        <?php foreach ($g['itens'] as $ci => $m): $dirEnc = implode('/', array_map('rawurlencode', explode('/', $g['dir']))); $url = 'audios/'.$dirEnc.rawurlencode($m['file']); ?>
         <div class="audios-card" data-nome="<?= e(mb_strtolower($m['badge'].' '.$m['titulo'], 'UTF-8')) ?>"
-             style="background:#fff;border:2px solid <?= e($g['cor_lt']) ?>;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.07)">
+             style="<?= $ci >= 5 ? 'display:none;' : '' ?>background:#fff;border:2px solid <?= e($g['cor_lt']) ?>;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.07)">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
                 <span style="background:<?= e($g['cor']) ?>;color:#fff;border-radius:7px;padding:3px 10px;font-size:.73rem;font-weight:700;white-space:nowrap"><?= e($m['badge']) ?></span>
                 <span style="font-size:.82rem;color:#555;font-weight:600;overflow-wrap:break-word"><?= e($m['titulo']) ?></span>
             </div>
-            <audio controls style="width:100%;height:36px;margin-bottom:10px" preload="metadata">
-                <source src="<?= e($url) ?>" type="audio/mp4">
-                Navegador não suporta áudio HTML5.
-            </audio>
+            <!-- Lazy-load: o src fica em data-src e so e ativado quando o card entra
+                 na pagina visivel (5 por vez), para nao baixar os 20 metadados de uma vez. -->
+            <div style="margin-bottom:10px">
+                <div class="audios-spin" style="display:none;align-items:center;justify-content:center;gap:8px;height:36px;color:#999;font-size:.78rem">
+                    <span class="audios-spinner" style="border-color:<?= e($g['cor_lt']) ?>;border-top-color:<?= e($g['cor']) ?>"></span> carregando áudio…
+                </div>
+                <audio class="audios-player" controls preload="none" data-src="<?= e($url) ?>" style="width:100%;height:36px;display:none">
+                    Navegador não suporta áudio HTML5.
+                </audio>
+            </div>
             <a href="<?= e($url) ?>" download="<?= e($m['file']) ?>"
                style="display:flex;align-items:center;justify-content:center;gap:6px;background:<?= e($g['cor_lt']) ?>;color:<?= e($g['cor']) ?>;border:2px solid <?= e($g['cor']) ?>;border-radius:8px;padding:7px 10px;font-size:.8rem;font-weight:700;text-decoration:none">
                 ⬇️ Download
@@ -1670,11 +1676,94 @@ $audiosCatalog = [
         </div>
         <?php endforeach; ?>
         </div>
+        <p id="audios-vazio-<?= $i ?>" style="display:none;color:#888;text-align:center;padding:30px">Nenhum áudio encontrado para a busca.</p>
+        <div id="audios-pag-<?= $i ?>" style="display:none;align-items:center;justify-content:center;gap:14px;margin-top:18px">
+            <button type="button" data-dir="prev" onclick="audiosPagina(<?= $i ?>,-1)"
+                    style="border:2px solid <?= e($g['cor']) ?>;background:#fff;color:<?= e($g['cor']) ?>;border-radius:8px;padding:7px 14px;font-size:.82rem;font-weight:700;cursor:pointer">◀ Anterior</button>
+            <span id="audios-pag-ind-<?= $i ?>" style="font-size:.82rem;color:#666;font-weight:600;min-width:110px;text-align:center"></span>
+            <button type="button" data-dir="next" onclick="audiosPagina(<?= $i ?>,1)"
+                    style="border:2px solid <?= e($g['cor']) ?>;background:#fff;color:<?= e($g['cor']) ?>;border-radius:8px;padding:7px 14px;font-size:.82rem;font-weight:700;cursor:pointer">Próximo ▶</button>
+        </div>
         <?php endif; ?>
     </div>
 <?php endforeach; ?>
 </div>
+<style>
+.audios-spinner{width:16px;height:16px;border:2px solid #eee;border-top-color:#999;border-radius:50%;display:inline-block;animation:audios-rot .7s linear infinite}
+@keyframes audios-rot{to{transform:rotate(360deg)}}
+.audios-pag-btn:disabled,#audios-pag-0 button:disabled,#audios-pag-1 button:disabled,#audios-pag-2 button:disabled{opacity:.4;cursor:default}
+</style>
 <script>
+var AUDIOS_PAGE_SIZE = 5;
+var audiosPag = {};
+
+// Ativa o carregamento de um card (define o src e mostra o spinner ate os metadados chegarem).
+function audiosLazyLoad(card) {
+    var a = card.querySelector('audio.audios-player');
+    if (!a || a.getAttribute('src') || !a.getAttribute('data-src')) return;
+    var spin = card.querySelector('.audios-spin');
+    if (spin) spin.style.display = 'flex';
+    a.addEventListener('loadedmetadata', function () {
+        if (spin) spin.style.display = 'none';
+        a.style.display = '';
+    }, { once: true });
+    a.addEventListener('error', function () {
+        if (spin) spin.innerHTML = '⚠️ não foi possível carregar';
+    }, { once: true });
+    // preload=metadata para o player buscar os cabecalhos AGORA (fica pronto p/ 1
+    // clique). So os 5 visiveis chegam aqui; os demais nunca recebem src.
+    a.preload = 'metadata';
+    a.setAttribute('src', a.getAttribute('data-src'));
+    a.load();
+}
+
+function audiosCardsVisiveis(idx) {
+    var busca = document.getElementById('audios-busca-' + idx);
+    var q = busca ? busca.value.toLowerCase().trim() : '';
+    var todos = Array.prototype.slice.call(document.querySelectorAll('#audios-painel-' + idx + ' .audios-card'));
+    return todos.filter(function (c) { return !q || c.getAttribute('data-nome').indexOf(q) !== -1; });
+}
+
+function audiosRender(idx) {
+    var visiveis = audiosCardsVisiveis(idx);
+    document.querySelectorAll('#audios-painel-' + idx + ' .audios-card').forEach(function (c) { c.style.display = 'none'; });
+
+    var totalPag = Math.max(1, Math.ceil(visiveis.length / AUDIOS_PAGE_SIZE));
+    var pag = Math.min(Math.max(1, audiosPag[idx] || 1), totalPag);
+    audiosPag[idx] = pag;
+
+    var inicio = (pag - 1) * AUDIOS_PAGE_SIZE;
+    visiveis.slice(inicio, inicio + AUDIOS_PAGE_SIZE).forEach(function (c) {
+        c.style.display = '';
+        audiosLazyLoad(c);
+    });
+
+    var vazio = document.getElementById('audios-vazio-' + idx);
+    if (vazio) vazio.style.display = visiveis.length === 0 ? '' : 'none';
+
+    var ctrl = document.getElementById('audios-pag-' + idx);
+    if (ctrl) {
+        ctrl.style.display = visiveis.length > AUDIOS_PAGE_SIZE ? 'flex' : 'none';
+        var ind = document.getElementById('audios-pag-ind-' + idx);
+        if (ind) ind.textContent = 'Página ' + pag + ' de ' + totalPag;
+        var prev = ctrl.querySelector('[data-dir="prev"]'), next = ctrl.querySelector('[data-dir="next"]');
+        if (prev) prev.disabled = pag <= 1;
+        if (next) next.disabled = pag >= totalPag;
+    }
+}
+
+function audiosPagina(idx, delta) {
+    audiosPag[idx] = (audiosPag[idx] || 1) + delta;
+    audiosRender(idx);
+    var p = document.getElementById('audios-painel-' + idx);
+    if (p) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function audiosFiltrar(idx) {
+    audiosPag[idx] = 1;
+    audiosRender(idx);
+}
+
 function audiosTab(idx, btn) {
     document.querySelectorAll('.audios-painel').forEach(function (p) { p.style.display = 'none'; });
     document.getElementById('audios-painel-' + idx).style.display = '';
@@ -1684,13 +1773,11 @@ function audiosTab(idx, btn) {
     });
     btn.style.background = btn.getAttribute('data-cor');
     btn.style.color = '#fff';
+    audiosRender(idx); // carrega apenas a pagina 1 deste painel (5 audios)
 }
-function audiosFiltrar(idx, input) {
-    var q = input.value.toLowerCase().trim();
-    document.querySelectorAll('#audios-painel-' + idx + ' .audios-card').forEach(function (c) {
-        c.style.display = (!q || c.getAttribute('data-nome').indexOf(q) !== -1) ? '' : 'none';
-    });
-}
+
+// Ao abrir a pagina, renderiza so o primeiro painel (5 audios), nao os 20 de uma vez.
+document.addEventListener('DOMContentLoaded', function () { audiosRender(0); });
 </script>
 
 <?php else: // ── QUIZ / INÍCIO ─────────────────────────────── ?>
