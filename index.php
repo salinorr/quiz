@@ -1186,6 +1186,7 @@ window.addEventListener('unhandledrejection', function(e) {
         <aside class="sidebar" id="sidebar-nav">
             <nav class="menu">
                 <a href="?p=cursos" class="<?= $cur==='cursos' ? 'active':'' ?>"><span class="icon">🎓</span><span class="label">Meus Cursos</span></a>
+                <?php if ($cur !== 'cursos'): // módulos aparecem só depois de entrar no curso ?>
                 <div class="menu-curso-label label"><?= e($CURSO_ATIVO['sigla']) ?> · <?= e($CURSO_ATIVO['nome']) ?></div>
                 <a href="?p=inicio&modo=quiz" class="<?= ($cur==='inicio' && $modoParam==='quiz') ? 'active':'' ?>"><span class="icon">📚</span><span class="label">Quiz</span></a>
                 <a href="?p=inicio&modo=prova" class="<?= ($cur==='inicio' && $modoParam==='prova') ? 'active':'' ?>"><span class="icon">🎯</span><span class="label">Provas</span></a>
@@ -1193,6 +1194,7 @@ window.addEventListener('unhandledrejection', function(e) {
                 <a href="?p=leis" class="<?= $cur==='leis' ? 'active':'' ?>"><span class="icon">📜</span><span class="label">Leis</span></a>
                 <a href="?p=slides" class="<?= $cur==='slides' ? 'active':'' ?>"><span class="icon">🖥️</span><span class="label">Slides</span></a>
                 <a href="?p=historico" class="<?= $cur==='historico' ? 'active':'' ?>"><span class="icon">📋</span><span class="label">Histórico</span></a>
+                <?php endif; ?>
                 <?php if (isAdmin()): ?><a href="?p=admin" class="<?= $cur==='admin' ? 'active':'' ?>"><span class="icon">⚙️</span><span class="label">Admin</span></a><?php endif; ?>
             </nav>
         </aside>
