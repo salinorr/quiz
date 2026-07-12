@@ -364,8 +364,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $host = $_SERVER['HTTP_HOST'] ?? 'cacresportes.com.br';
             $path = strtok($_SERVER['REQUEST_URI'], '?');
             $link = 'https://' . $host . $path . '?p=reset&token=' . $rToken;
-            $subject = 'Recuperação de Senha — Quiz PMRR';
-            $body    = "Olá, {$m['nome_guerra']}!\n\nClique no link para redefinir sua senha (válido por 1 hora):\n\n{$link}\n\nSe não solicitou, ignore este e-mail.\n\nQuiz PMRR — Legislações Militares de Roraima";
+            $subject = 'Recuperação de Senha — Portal de Cursos PMRR';
+            $body    = "Olá, {$m['nome_guerra']}!\n\nClique no link para redefinir sua senha (válido por 1 hora):\n\n{$link}\n\nSe não solicitou, ignore este e-mail.\n\nPortal de Cursos PMRR — Roraima";
             if (!sendEmail($email, $subject, $body)) {
                 error_log("Falha ao enviar e-mail de recuperacao para: $email");
             }
@@ -808,7 +808,7 @@ if (isset($_GET['logout']) && isLogado()) {
 $page = $_GET['p'] ?? 'inicio';
 
 // Páginas que exigem conta aprovada
-$pagesRequireApproval = ['quiz','prova','provas','leis','slides','audios','historico','admin'];
+$pagesRequireApproval = ['cursos','quiz','prova','provas','leis','slides','audios','historico','admin'];
 if (in_array($page, $pagesRequireApproval, true)) {
     if (!isLogado()) {
         header('Location: ?p=inicio'); exit;
@@ -832,6 +832,29 @@ if ($page === 'admin' && isAdmin()) {
     $pendentes = $db->query("SELECT * FROM militares WHERE status='pendente' ORDER BY created_at DESC")->fetchAll();
     $aprovados = $db->query("SELECT id, nome_completo, nome_guerra, email, matricula, created_at, approved_at FROM militares WHERE status='aprovado' ORDER BY nome_guerra")->fetchAll();
 }
+
+// ============================================================
+// PLATAFORMA — catálogo de cursos (fonte única de verdade)
+// A plataforma pode hospedar 1+ cursos. Por ora só o CHO concentra todo o
+// material (Quiz, Provas, Áudios, Leis, Slides). Para adicionar um novo curso,
+// basta acrescentar outra entrada neste array.
+// ============================================================
+$PLATAFORMA_NOME = 'Portal de Cursos PMRR';
+$CURSOS = [
+    'cho' => [
+        'sigla'      => 'CHO',
+        'nome'       => 'Curso de Habilitação de Oficiais',
+        'icone'      => '🎓',
+        'descricao'  => 'Preparação em legislações militares de Roraima: estude por slides e áudios, consulte as leis e teste-se com quiz e provas.',
+        'legislacao' => 'Portaria 1717/2023 · Portaria 685/2024 · LC 194/2012 · Lei 963/2014',
+        'modulos'    => ['📚 Quiz', '🎯 Provas', '🎧 Áudios', '📜 Leis', '🖥️ Slides'],
+        'entrar'     => '?p=inicio&modo=quiz',
+    ],
+];
+// Curso ativo do contexto atual (único enquanto houver só um curso).
+$CURSO_ATIVO = $CURSOS['cho'];
+// Páginas que fazem parte da área interna de um curso (para o header/subtítulo).
+$paginasDoCurso = ['inicio','quiz','prova','provas','leis','slides','audios','historico'];
 
 // Dados para histórico
 $historico = [];
@@ -902,7 +925,7 @@ if ($page === 'reset' && strlen($resetToken) === 64) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz PMRR – Legislações Militares</title>
+<title>Portal de Cursos PMRR</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -974,7 +997,21 @@ main{width:100%;padding:0;margin:0;flex:1;}
 .sidebar.collapsed .menu a .label{opacity:0;width:0;overflow:hidden;}
 .sidebar .menu a:hover{background:#e8f5e9;}
 .sidebar .menu a.active{background:var(--verde-md);color:#fff;box-shadow:0 2px 8px rgba(46,125,71,.2)}
+.sidebar .menu .menu-curso-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:#8aa;padding:10px 12px 4px;margin-top:4px;border-top:1px solid #eef2ef;white-space:normal;line-height:1.3;}
+.sidebar.collapsed .menu .menu-curso-label{opacity:0;height:0;padding:0;overflow:hidden;}
 .content{flex:1;min-width:0;padding:24px 28px 60px;}
+.cursos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.curso-card{background:#fff;border:1px solid #e3ece5;border-radius:14px;padding:20px;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(46,125,71,.06);transition:var(--tr);}
+.curso-card:hover{box-shadow:0 6px 20px rgba(46,125,71,.14);transform:translateY(-2px);}
+.curso-card-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.curso-icone{font-size:2.2rem;line-height:1;}
+.curso-nome{color:var(--verde);font-size:1.05rem;margin:0;line-height:1.25;}
+.curso-sigla{display:inline-block;margin-top:4px;background:var(--verde-md);color:#fff;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.04em;}
+.curso-desc{color:#555;font-size:.86rem;line-height:1.45;margin:0 0 14px;}
+.curso-modulos{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.curso-chip{background:#eef6f0;color:var(--verde-md);font-size:.74rem;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.curso-legislacao{color:#8a9a8f;font-size:.74rem;line-height:1.4;margin:0 0 16px;}
+.curso-entrar{margin-top:auto;text-decoration:none;text-align:center;}
 .menu-overlay{display:none;}
 @media(max-width:768px){
   .sidebar{position:fixed;top:var(--hdr-h);left:-260px;width:240px;height:calc(100vh - var(--hdr-h));box-shadow:4px 0 24px rgba(0,0,0,.15);transition:left .3s ease;overflow-y:auto;border-right:none;}
@@ -1118,8 +1155,18 @@ window.addEventListener('unhandledrejection', function(e) {
     <button class="hdr-toggle" onclick="toggleSidebar()" title="Menu">☰</button>
     <?php endif; ?>
     <div style="min-width:0">
-        <h1>Quiz PMRR – Legislações Militares</h1>
-        <p>Portaria 1717/2023 · Portaria 685/2024 · LC 194/2012 · Lei 963/2014</p>
+        <h1><?= e($PLATAFORMA_NOME) ?></h1>
+        <?php
+            // Subtítulo: dentro de um curso mostra o curso ativo; na vitrine, um convite.
+            if (isLogado() && isAprovado() && in_array($page, $paginasDoCurso, true)) {
+                $subheader = $CURSO_ATIVO['nome'] . ' — ' . $CURSO_ATIVO['sigla'];
+            } elseif (isLogado() && isAprovado() && $page === 'cursos') {
+                $subheader = 'Selecione um curso';
+            } else {
+                $subheader = 'Cursos de formação e legislação — PMRR';
+            }
+        ?>
+        <p><?= e($subheader) ?></p>
     </div>
     <?php if (isLogado()): ?>
     <div class="hdr-nav">
@@ -1138,6 +1185,8 @@ window.addEventListener('unhandledrejection', function(e) {
         <div class="menu-overlay" id="menu-overlay" onclick="toggleSidebar()"></div>
         <aside class="sidebar" id="sidebar-nav">
             <nav class="menu">
+                <a href="?p=cursos" class="<?= $cur==='cursos' ? 'active':'' ?>"><span class="icon">🎓</span><span class="label">Meus Cursos</span></a>
+                <div class="menu-curso-label label"><?= e($CURSO_ATIVO['sigla']) ?> · <?= e($CURSO_ATIVO['nome']) ?></div>
                 <a href="?p=inicio&modo=quiz" class="<?= ($cur==='inicio' && $modoParam==='quiz') ? 'active':'' ?>"><span class="icon">📚</span><span class="label">Quiz</span></a>
                 <a href="?p=inicio&modo=prova" class="<?= ($cur==='inicio' && $modoParam==='prova') ? 'active':'' ?>"><span class="icon">🎯</span><span class="label">Provas</span></a>
                 <a href="?p=audios" class="<?= $cur==='audios' ? 'active':'' ?>"><span class="icon">🎧</span><span class="label">Áudios</span></a>
@@ -1185,8 +1234,8 @@ window.addEventListener('unhandledrejection', function(e) {
 <div id="tela-auth" class="card" style="max-width:480px;margin:0 auto">
     <div class="auth-header">
         <span class="shield">🎖️</span>
-        <h2>Quiz PMRR</h2>
-        <p>Legislações Militares de Roraima</p>
+        <h2>Portal de Cursos PMRR</h2>
+        <p>Cursos de formação e legislação — Roraima</p>
     </div>
     <div class="tabs">
         <div class="tab ativa" id="tab-login" onclick="mostraTab('login')">Entrar</div>
@@ -1284,6 +1333,31 @@ window.addEventListener('unhandledrejection', function(e) {
         <p>Olá, <strong><?= e(militar()['nome_guerra']) ?></strong>!</p>
         <p style="margin-top:8px">Seu cadastro está sendo verificado pelo administrador.<br>Você receberá acesso assim que for aprovado.</p>
         <a href="?logout=1" class="btn btn-outline" style="margin-top:20px;display:inline-block;text-decoration:none">Sair</a>
+    </div>
+</div>
+
+<?php elseif ($page === 'cursos' && isAprovado()): // ── MEUS CURSOS (vitrine da plataforma) ── ?>
+<div style="max-width:900px;margin:0 auto">
+    <h2 style="color:var(--verde);margin-bottom:4px">🎓 Meus Cursos</h2>
+    <p style="color:#666;font-size:.9rem;margin-bottom:22px">Escolha um curso para acessar seus materiais.</p>
+    <div class="cursos-grid">
+        <?php foreach ($CURSOS as $c): ?>
+        <div class="curso-card">
+            <div class="curso-card-top">
+                <span class="curso-icone"><?= e($c['icone']) ?></span>
+                <div style="min-width:0">
+                    <h3 class="curso-nome"><?= e($c['nome']) ?></h3>
+                    <span class="curso-sigla"><?= e($c['sigla']) ?></span>
+                </div>
+            </div>
+            <p class="curso-desc"><?= e($c['descricao']) ?></p>
+            <div class="curso-modulos">
+                <?php foreach ($c['modulos'] as $m): ?><span class="curso-chip"><?= e($m) ?></span><?php endforeach; ?>
+            </div>
+            <p class="curso-legislacao"><?= e($c['legislacao']) ?></p>
+            <a href="<?= e($c['entrar']) ?>" class="btn btn-primary curso-entrar">Entrar ▸</a>
+        </div>
+        <?php endforeach; ?>
     </div>
 </div>
 
@@ -2003,7 +2077,7 @@ async function fazerLogin() {
     const resp    = await post({ acao:'login', email, senha });
     if (resp.erro) { mostrarMsg('err', resp.erro); return; }
     if (lembrar) { localStorage.setItem('quiz_email', email); } else { localStorage.removeItem('quiz_email'); }
-    window.location.href = resp.status === 'aprovado' ? '?p=inicio' : window.location.pathname;
+    window.location.href = resp.status === 'aprovado' ? '?p=cursos' : window.location.pathname;
 }
 
 async function esqueceuSenha() {
