@@ -1339,7 +1339,7 @@ window.addEventListener('unhandledrejection', function(e) {
 </div>
 
 <?php elseif ($page === 'cursos' && isAprovado()): // ── MEUS CURSOS (vitrine da plataforma) ── ?>
-<div style="max-width:900px;margin:0 auto">
+<div style="max-width:1100px">
     <h2 style="color:var(--verde);margin-bottom:4px">🎓 Meus Cursos</h2>
     <p style="color:#666;font-size:.9rem;margin-bottom:22px">Escolha um curso para acessar seus materiais.</p>
     <div class="cursos-grid">
