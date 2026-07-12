@@ -177,7 +177,7 @@ function sendEmail(string $to, string $subject, string $body): bool {
 function restoreSessaoByID(int $sessaoId): void {
     $db = getDB();
     $stmt = $db->prepare(
-        "SELECT s.id, s.tipo, s.numero_tentativa, s.total_respondidas,
+        "SELECT s.id, s.tipo, s.numero_tentativa, s.total_respondidas, s.categorias_nomes,
                 GROUP_CONCAT(DISTINCT r.questao_id) AS respondidas_ids
          FROM sessoes s
          LEFT JOIN respostas_usuario r ON r.sessao_id = s.id
@@ -188,14 +188,29 @@ function restoreSessaoByID(int $sessaoId): void {
     $sessao = $stmt->fetch();
     if (!$sessao) return;
 
+    // Categorias da sessão = as que foram SELECIONADAS ao criar (guardadas por nome),
+    // reconstruídas para IDs. Não derivar só das questões já respondidas: numa sessão
+    // recém-criada (0 respondidas) isso caía no fallback de "todas as categorias".
     $cats = [];
+    if (!empty($sessao['categorias_nomes'])) {
+        $nomes = array_values(array_filter(array_map('trim', explode(', ', $sessao['categorias_nomes'])), 'strlen'));
+        if ($nomes) {
+            $ph = implode(',', array_fill(0, count($nomes), '?'));
+            $catStmt = $db->prepare("SELECT id FROM categorias WHERE nome IN ($ph)");
+            $catStmt->execute($nomes);
+            $cats = array_column($catStmt->fetchAll(), 'id');
+        }
+    }
+    // Defensivo: inclui categorias de questões já respondidas (caso alguma tenha
+    // sido renomeada após o início da sessão) sem duplicar.
     if ($sessao['respondidas_ids']) {
         $ids = explode(',', $sessao['respondidas_ids']);
         $ph = implode(',', array_fill(0, count($ids), '?'));
         $catStmt = $db->prepare("SELECT DISTINCT categoria_id FROM questoes WHERE id IN ($ph)");
         $catStmt->execute($ids);
-        $cats = array_column($catStmt->fetchAll(), 'categoria_id');
+        $cats = array_values(array_unique(array_merge($cats, array_column($catStmt->fetchAll(), 'categoria_id'))));
     }
+    // Último recurso (não deveria ocorrer): sessão sem nomes e sem respostas.
     if (empty($cats)) {
         $cats = array_column($db->query("SELECT id FROM categorias")->fetchAll(), 'id');
     }
