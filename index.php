@@ -518,7 +518,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $respCorreta = $questao['resposta_correta'];
                 unset($questao['resposta_correta'], $questao['explicacao'], $questao['referencia_legal']);
                 if (($questao['opcao_e'] ?? null) === null) unset($questao['opcao_e']);
-                echo json_encode(['questao' => $questao, 'total_questoes' => $_SESSION['total_questoes'] ?? 0]);
+                echo json_encode(['questao' => $questao, 'total_questoes' => $_SESSION['total_questoes'] ?? 0, 'respondidas' => count($respondidas)]);
                 exit;
             }
             unset($_SESSION['questao_atual']);
@@ -555,7 +555,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['questao_atual'] = ['id' => $questao['id'], 'correta' => $respCorreta];
 
-        echo json_encode(['questao' => $questao, 'total_questoes' => $_SESSION['total_questoes'] ?? 0]);
+        echo json_encode(['questao' => $questao, 'total_questoes' => $_SESSION['total_questoes'] ?? 0, 'respondidas' => count($respondidas)]);
         exit;
     }
 
@@ -2473,7 +2473,10 @@ async function proximaQuestao() {
     mostrarCarregando(false);
     if (resp.fim) { await finalizarQuiz(); return; }
     if (resp.erro) { await modalAlert(resp.erro, '❌'); return; }
-    numQuestao++;
+    // Posicao vem da contagem real do servidor (questoes distintas ja respondidas
+    // + a que esta sendo servida agora), para nunca ultrapassar o total mesmo que
+    // uma questao seja servida novamente.
+    numQuestao = (resp.respondidas != null) ? resp.respondidas + 1 : numQuestao + 1;
     if (resp.total_questoes) totalQuestoes = resp.total_questoes;
     renderizarQuestao(resp.questao);
 }
