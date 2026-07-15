@@ -864,7 +864,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db = getDB();
         $rows = $db->query(
             "SELECT r.id, r.questao_id, r.justificativa, r.created_at, r.resolvida,
-                    q.enunciado, q.resposta_correta, q.ativa,
+                    q.enunciado, q.opcao_a, q.opcao_b, q.opcao_c, q.opcao_d, q.opcao_e,
+                    q.resposta_correta, q.explicacao, q.referencia_legal, q.ativa,
                     m.nome_guerra
              FROM questoes_reportadas r
              JOIN questoes q ON q.id = r.questao_id
@@ -2438,18 +2439,53 @@ async function carregarReportadas() {
         list.innerHTML = '<p style="color:#888;text-align:center;padding:30px">Nenhuma questão reportada. ✅</p>';
         return;
     }
-    let html = '<div style="overflow-x:auto"><table class="admin-tabela"><thead><tr><th>ID</th><th>Questão (resumo)</th><th>Resposta</th><th>Reportado por</th><th>Justificativa</th><th>Data</th><th>Status</th><th>Ações</th></tr></thead><tbody>';
+    let html = '';
     resp.reportadas.forEach(r => {
-        const enunc = (r.enunciado || '').substring(0, 120) + ((r.enunciado||'').length > 120 ? '...' : '');
-        const status = r.resolvida == 1
-            ? '<span style="background:#e8f5e9;color:#1a5c2e;padding:3px 8px;border-radius:8px;font-size:.75rem">Resolvida</span>'
-            : '<span style="background:#fff3e0;color:#e65100;padding:3px 8px;border-radius:8px;font-size:.75rem">Pendente</span>';
-        const acoes = r.resolvida == 1 ? '—' :
-            '<button class="btn-aprovar" onclick="reativarQuestao('+r.questao_id+','+r.id+')" style="font-size:.72rem">✅ Reativar</button> ' +
-            '<button class="btn-rejeitar" onclick="descartarQuestao('+r.id+')" style="font-size:.72rem">🗑️ Manter inativa</button>';
-        html += '<tr id="rpt-'+r.id+'"><td>'+r.questao_id+'</td><td style="max-width:300px;font-size:.82rem">'+escHtml(enunc)+'</td><td style="text-align:center;font-weight:700">'+escHtml(r.resposta_correta)+'</td><td>'+escHtml(r.nome_guerra)+'</td><td style="max-width:200px;font-size:.82rem">'+(r.justificativa ? escHtml(r.justificativa) : '<em style="color:#aaa">—</em>')+'</td><td style="white-space:nowrap;font-size:.82rem">'+r.created_at+'</td><td>'+status+'</td><td style="white-space:nowrap">'+acoes+'</td></tr>';
+        const correta = (r.resposta_correta || '').toUpperCase();
+        const resolvida = r.resolvida == 1;
+        const status = resolvida
+            ? '<span style="background:#e8f5e9;color:#1a5c2e;padding:3px 10px;border-radius:8px;font-size:.75rem">✔ Resolvida</span>'
+            : '<span style="background:#fff3e0;color:#e65100;padding:3px 10px;border-radius:8px;font-size:.75rem">⏳ Pendente</span>';
+        const ativa = r.ativa == 1
+            ? '<span style="color:#1a5c2e;font-size:.72rem">● ativa no quiz</span>'
+            : '<span style="color:#c62828;font-size:.72rem">● inativa (fora do quiz)</span>';
+
+        // Alternativas — destaca o gabarito
+        let alts = '';
+        ['a','b','c','d','e'].forEach(letra => {
+            const txt = r['opcao_' + letra];
+            if (txt === null || txt === undefined || txt === '') return;
+            const isCorreta = letra.toUpperCase() === correta;
+            const estilo = isCorreta
+                ? 'background:#e8f5e9;border:1px solid #a5d6a7;font-weight:600;color:#1a5c2e'
+                : 'background:#fafafa;border:1px solid #eee;color:#444';
+            alts += '<div style="'+estilo+';border-radius:6px;padding:7px 10px;margin-bottom:5px;font-size:.85rem">'
+                  + '<strong>'+letra.toUpperCase()+')</strong> '+escHtml(txt)
+                  + (isCorreta ? ' &nbsp;✅ <em style="font-weight:400">(gabarito)</em>' : '')
+                  + '</div>';
+        });
+
+        const acoes = resolvida ? '' :
+            '<button class="btn-aprovar" onclick="reativarQuestao('+r.questao_id+','+r.id+')" style="font-size:.78rem">✅ Reativar</button> ' +
+            '<button class="btn-rejeitar" onclick="descartarQuestao('+r.id+')" style="font-size:.78rem;margin-left:6px">🗄️ Manter inativa</button>';
+
+        html += '<div id="rpt-'+r.id+'" style="border:1px solid #e0e0e0;border-left:4px solid '+(resolvida?'#a5d6a7':'#ffb74d')+';border-radius:10px;padding:16px;margin-bottom:16px;background:#fff">'
+            + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">'
+            +   '<code style="background:#f0f0f0;padding:2px 8px;border-radius:6px;font-size:.8rem">Questão #'+r.questao_id+'</code>'
+            +   status + ativa
+            +   '<span style="margin-left:auto;font-size:.75rem;color:#999;white-space:nowrap">'+escHtml(r.created_at)+'</span>'
+            + '</div>'
+            + '<p style="font-size:.95rem;line-height:1.6;color:#222;margin-bottom:12px;font-weight:500">'+escHtml(r.enunciado||'')+'</p>'
+            + alts
+            + (r.explicacao ? '<div style="margin-top:10px;font-size:.82rem;color:#555;background:#f5f9f6;border-radius:6px;padding:8px 10px"><strong>💡 Explicação:</strong> '+escHtml(r.explicacao)+'</div>' : '')
+            + (r.referencia_legal ? '<div style="margin-top:6px;font-size:.8rem;color:#00695c"><strong>📖 Base legal:</strong> '+escHtml(r.referencia_legal)+'</div>' : '')
+            + '<div style="margin-top:12px;background:#fff8f0;border:1px dashed #ffcc80;border-radius:8px;padding:10px 12px">'
+            +   '<div style="font-size:.78rem;color:#e65100;font-weight:700;margin-bottom:3px">⚠️ Reportado por '+escHtml(r.nome_guerra)+'</div>'
+            +   '<div style="font-size:.85rem;color:#5d4037">'+(r.justificativa ? escHtml(r.justificativa) : '<em style="color:#aaa">Sem justificativa informada.</em>')+'</div>'
+            + '</div>'
+            + (acoes ? '<div style="margin-top:12px">'+acoes+'</div>' : '')
+            + '</div>';
     });
-    html += '</tbody></table></div>';
     list.innerHTML = html;
 }
 async function reativarQuestao(qId, rId) {
