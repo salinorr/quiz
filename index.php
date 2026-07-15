@@ -48,12 +48,75 @@ function ensureSessionTokenColumn(): void {
     $done = true;
 }
 
+// ── Garantir tabela de atividades (log de eventos) ──────────
+function ensureAtividadesTable(): void {
+    static $done = false;
+    if ($done) return;
+    try {
+        getDB()->exec(
+            "CREATE TABLE IF NOT EXISTS atividades (
+                id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                militar_id INT             NOT NULL,
+                evento     VARCHAR(40)     NOT NULL,
+                detalhe    VARCHAR(255)    NULL,
+                pagina     VARCHAR(40)     NULL,
+                ip         VARCHAR(45)     NULL,
+                criado_em  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                INDEX idx_militar (militar_id, criado_em),
+                INDEX idx_criado (criado_em)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
+        );
+    } catch (PDOException $e) { /* já existe / sem permissão */ }
+    $done = true;
+}
+
+// Dias de retenção do log de atividades (eventos mais antigos são removidos).
+if (!defined('ATIVIDADES_RETENCAO_DIAS')) define('ATIVIDADES_RETENCAO_DIAS', 90);
+
+// Remove atividades além do período de retenção. Roda no máximo 1x/hora (via sessão).
+function purgarAtividadesAntigas(): void {
+    if (isset($_SESSION['ultima_purga_ativ']) && (time() - $_SESSION['ultima_purga_ativ']) < 3600) return;
+    $_SESSION['ultima_purga_ativ'] = time();
+    try {
+        $dias = (int)ATIVIDADES_RETENCAO_DIAS;
+        getDB()->exec("DELETE FROM atividades WHERE criado_em < DATE_SUB(NOW(), INTERVAL $dias DAY)");
+    } catch (PDOException $e) { /* best-effort */ }
+}
+
+// Monta cláusula WHERE + params para filtrar atividades por militar e período.
+// Aceita data no formato YYYY-MM-DD (data_fim é inclusiva até o fim do dia).
+function filtroAtividades(int $militarId, string $dataIni, string $dataFim): array {
+    $cond = []; $params = [];
+    if ($militarId > 0) { $cond[] = 'a.militar_id = ?'; $params[] = $militarId; }
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $dataIni)) { $cond[] = 'a.criado_em >= ?'; $params[] = $dataIni . ' 00:00:00'; }
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $dataFim)) { $cond[] = 'a.criado_em <= ?'; $params[] = $dataFim . ' 23:59:59'; }
+    $where = $cond ? ('WHERE ' . implode(' AND ', $cond)) : '';
+    return [$where, $params];
+}
+
+// Registra uma atividade do militar logado. Nunca lança exceção (best-effort).
+function logAtividade(string $evento, ?string $detalhe = null, ?string $pagina = null): void {
+    if (!isLogado()) return;
+    try {
+        getDB()->prepare(
+            "INSERT INTO atividades (militar_id, evento, detalhe, pagina, ip) VALUES (?,?,?,?,?)"
+        )->execute([
+            militar()['id'],
+            mb_substr($evento, 0, 40),
+            $detalhe !== null ? mb_substr($detalhe, 0, 255) : null,
+            $pagina  !== null ? mb_substr($pagina, 0, 40)   : null,
+            $_SERVER['REMOTE_ADDR'] ?? null,
+        ]);
+    } catch (PDOException $e) { /* best-effort, não interrompe a página */ }
+}
+
 // ── "Lembrar-me" agora é apenas client-side (localStorage) ───
 // Não faz auto-login — só preenche o campo de e-mail.
 
 // ── Sessão ───────────────────────────────────────────────────
 session_start();
 ensureSessionTokenColumn();
+ensureAtividadesTable();
 
 function militar(): ?array {
     return $_SESSION['militar'] ?? null;
@@ -691,6 +754,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // ── Registrar evento de atividade (clique, download, play, etc.) ──
+    if ($acao === 'log_evento') {
+        if (!isLogado()) { echo json_encode(['erro' => 'não autenticado']); exit; }
+        $evento  = trim($_POST['evento'] ?? '');
+        $detalhe = trim($_POST['detalhe'] ?? '');
+        $pagina  = trim($_POST['pagina'] ?? '');
+        if ($evento === '') { echo json_encode(['erro' => 'evento vazio']); exit; }
+        logAtividade($evento, $detalhe !== '' ? $detalhe : null, $pagina !== '' ? $pagina : null);
+        echo json_encode(['ok' => true]);
+        exit;
+    }
+
+    // ── Admin: listar atividades (timeline por usuário, tempo real) ──
+    if ($acao === 'listar_atividades' && isAdmin()) {
+        $db = getDB();
+        purgarAtividadesAntigas();   // retenção: remove eventos além do período configurado
+        $militarId = isset($_POST['militar_id']) ? (int)$_POST['militar_id'] : 0;
+        $limite = min(500, max(10, (int)($_POST['limite'] ?? 60)));
+        [$where, $params] = filtroAtividades($militarId, $_POST['data_ini'] ?? '', $_POST['data_fim'] ?? '');
+        $stmt = $db->prepare(
+            "SELECT a.id, a.militar_id, a.evento, a.detalhe, a.pagina, a.criado_em,
+                    m.nome_guerra, m.matricula
+               FROM atividades a JOIN militares m ON m.id = a.militar_id
+              $where
+           ORDER BY a.id DESC LIMIT $limite"
+        );
+        $stmt->execute($params);
+        echo json_encode(['ok' => true, 'atividades' => $stmt->fetchAll()]);
+        exit;
+    }
+
     // ── Admin: listar militares online (ativos nos últimos 10 min) ──
     if ($acao === 'listar_online' && isAdmin()) {
         $db = getDB();
@@ -702,7 +796,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     TIMESTAMPDIFF(SECOND, m.last_activity, NOW()) AS segundos_inativo,
                     (SELECT CONCAT(UPPER(s2.tipo), ' — ', COALESCE(s2.categorias_nomes,''))
                      FROM sessoes s2 WHERE s2.militar_id = m.id AND s2.finalizado_em IS NULL
-                     ORDER BY s2.id DESC LIMIT 1) AS sessao_aberta
+                     ORDER BY s2.id DESC LIMIT 1) AS sessao_aberta,
+                    (SELECT CONCAT(a2.evento, CASE WHEN a2.detalhe IS NOT NULL AND a2.detalhe<>'' THEN CONCAT(': ', a2.detalhe) ELSE '' END)
+                     FROM atividades a2 WHERE a2.militar_id = m.id
+                     ORDER BY a2.id DESC LIMIT 1) AS ultimo_evento
              FROM militares m
              WHERE m.session_token IS NOT NULL AND m.status = 'aprovado'
                AND m.last_activity >= DATE_SUB(NOW(), INTERVAL 10 MINUTE)
@@ -822,6 +919,30 @@ if (isset($_GET['logout']) && isLogado()) {
 // ============================================================
 $page = $_GET['p'] ?? 'inicio';
 
+// ── Admin: exportar atividades em CSV ────────────────────────
+if (($_GET['export'] ?? '') === 'atividades') {
+    if (!isLogado() || !isAdmin()) { header('Location: ?p=inicio'); exit; }
+    $militarId = isset($_GET['militar_id']) ? (int)$_GET['militar_id'] : 0;
+    [$where, $params] = filtroAtividades($militarId, $_GET['data_ini'] ?? '', $_GET['data_fim'] ?? '');
+    $stmt = getDB()->prepare(
+        "SELECT a.criado_em, m.nome_guerra, m.matricula, a.evento, a.detalhe, a.pagina, a.ip
+           FROM atividades a JOIN militares m ON m.id = a.militar_id
+          $where
+       ORDER BY a.id DESC LIMIT 20000"
+    );
+    $stmt->execute($params);
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="atividades_' . date('Y-m-d_His') . '.csv"');
+    $out = fopen('php://output', 'w');
+    fwrite($out, "\xEF\xBB\xBF"); // BOM p/ acentos no Excel
+    fputcsv($out, ['Data/Hora', 'Nome Guerra', 'Matrícula', 'Evento', 'Detalhe', 'Página', 'IP'], ';');
+    while ($r = $stmt->fetch()) {
+        fputcsv($out, [$r['criado_em'], $r['nome_guerra'], $r['matricula'], $r['evento'], $r['detalhe'], $r['pagina'], $r['ip']], ';');
+    }
+    fclose($out);
+    exit;
+}
+
 // Páginas que exigem conta aprovada
 $pagesRequireApproval = ['cursos','quiz','prova','provas','leis','slides','audios','historico','admin'];
 if (in_array($page, $pagesRequireApproval, true)) {
@@ -837,6 +958,20 @@ if (in_array($page, $pagesRequireApproval, true)) {
 // Proteger admin
 if ($page === 'admin' && (!isLogado() || !isAdmin())) {
     header('Location: ?p=inicio'); exit;
+}
+
+// ── Registro server-side de navegação (cada abertura de página) ──
+// Captura de forma confiável qual menu/opção o militar acessou, mesmo sem JS.
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isLogado() && isAprovado()) {
+    $labelPaginas = [
+        'inicio' => 'Tela inicial', 'cursos' => 'Meus Cursos', 'quiz' => 'Quiz',
+        'prova' => 'Prova', 'provas' => 'Provas', 'audios' => 'Áudios',
+        'leis' => 'Legislações', 'slides' => 'Slides', 'historico' => 'Histórico',
+        'admin' => 'Admin',
+    ];
+    $labelPag = $labelPaginas[$page] ?? $page;
+    if (isset($_GET['modo'])) $labelPag .= ' (' . trim($_GET['modo']) . ')';
+    logAtividade('navegou', $labelPag, $page);
 }
 
 // Dados para página admin
@@ -1398,6 +1533,7 @@ window.addEventListener('unhandledrejection', function(e) {
         <button class="admin-tab" id="atab-aprov" onclick="showAdminTab('aprovados')">Aprovados (<?= count($aprovados) ?>)</button>
         <button class="admin-tab" id="atab-report" onclick="showAdminTab('reportadas')">⚠️ Reportadas</button>
         <button class="admin-tab" id="atab-online" onclick="showAdminTab('online')">🟢 Online</button>
+        <button class="admin-tab" id="atab-ativ" onclick="showAdminTab('atividades')">📜 Atividades</button>
     </div>
 
     <div id="admin-pendentes">
@@ -1435,6 +1571,32 @@ window.addEventListener('unhandledrejection', function(e) {
     <div id="admin-online" style="display:none">
         <p style="color:#888;text-align:center;padding:20px" id="online-loading">Carregando...</p>
         <div id="online-list"></div>
+    </div>
+
+    <div id="admin-atividades" style="display:none">
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+            <label style="font-size:.85rem;color:#444">Militar:
+                <select id="ativ-militar" onchange="carregarAtividades()" style="margin-left:6px;padding:6px;border-radius:6px;border:1px solid #ddd">
+                    <option value="0">Todos</option>
+                    <?php foreach($aprovados as $m): ?>
+                        <option value="<?= (int)$m['id'] ?>"><?= e($m['nome_guerra']) ?> (<?= e($m['matricula']) ?>)</option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+            <label style="font-size:.82rem;color:#444">De:
+                <input type="date" id="ativ-ini" onchange="carregarAtividades()" style="margin-left:4px;padding:5px;border-radius:6px;border:1px solid #ddd">
+            </label>
+            <label style="font-size:.82rem;color:#444">Até:
+                <input type="date" id="ativ-fim" onchange="carregarAtividades()" style="margin-left:4px;padding:5px;border-radius:6px;border:1px solid #ddd">
+            </label>
+            <label style="font-size:.8rem;color:#666;display:flex;align-items:center;gap:4px">
+                <input type="checkbox" id="ativ-auto" checked> Tempo real (5s)
+            </label>
+            <button class="btn-aprovar" onclick="carregarAtividades()" style="font-size:.75rem;padding:5px 10px">🔄 Atualizar</button>
+            <button class="btn-aprovar" onclick="exportarAtividades()" style="font-size:.75rem;padding:5px 10px;background:#eef7f0;color:#1a5c2e;border:1px solid #c8e6c9">⬇️ Exportar CSV</button>
+            <span id="ativ-status" style="margin-left:auto;font-size:.72rem;color:#aaa"></span>
+        </div>
+        <div id="ativ-list"><p style="color:#888;text-align:center;padding:20px">Selecione um militar ou veja todos.</p></div>
     </div>
 
     <div id="admin-aprovados" style="display:none">
@@ -2196,15 +2358,76 @@ function showAdminTab(tab) {
     if (repDiv) repDiv.style.display = tab === 'reportadas' ? '' : 'none';
     const onlDiv = document.getElementById('admin-online');
     if (onlDiv) onlDiv.style.display = tab === 'online' ? '' : 'none';
+    const ativDiv = document.getElementById('admin-atividades');
+    if (ativDiv) ativDiv.style.display = tab === 'atividades' ? '' : 'none';
     document.getElementById('atab-pend').classList.toggle('ativo', tab === 'pendentes');
     document.getElementById('atab-aprov').classList.toggle('ativo', tab === 'aprovados');
     const repTab = document.getElementById('atab-report');
     if (repTab) repTab.classList.toggle('ativo', tab === 'reportadas');
     const onlTab = document.getElementById('atab-online');
     if (onlTab) onlTab.classList.toggle('ativo', tab === 'online');
+    const ativTab = document.getElementById('atab-ativ');
+    if (ativTab) ativTab.classList.toggle('ativo', tab === 'atividades');
     if (tab === 'reportadas') carregarReportadas();
     if (tab === 'online') carregarOnline();
+    if (tab === 'atividades') carregarAtividades();
 }
+
+// ── Timeline de atividades (tempo real) ──────────────────────
+const EVENTO_ICONES = {
+    navegou:'🧭', download:'⬇️', abriu_documento:'📄', ouviu_audio:'🎧',
+    iniciou_quiz:'🚀', finalizou_quiz:'🏁', iniciou_prova:'🎯', finalizou_prova:'🏆'
+};
+function iconeEvento(ev){ return EVENTO_ICONES[ev] || '•'; }
+function rotuloEvento(ev){
+    const r = {navegou:'Navegou',download:'Baixou',abriu_documento:'Abriu documento',ouviu_audio:'Ouviu áudio',
+        iniciou_quiz:'Iniciou quiz',finalizou_quiz:'Finalizou quiz',iniciou_prova:'Iniciou prova',finalizou_prova:'Finalizou prova'};
+    return r[ev] || ev;
+}
+async function carregarAtividades() {
+    const sel = document.getElementById('ativ-militar');
+    const list = document.getElementById('ativ-list');
+    const status = document.getElementById('ativ-status');
+    if (!list) return;
+    const militarId = sel ? sel.value : 0;
+    const dataIni = (document.getElementById('ativ-ini')||{}).value || '';
+    const dataFim = (document.getElementById('ativ-fim')||{}).value || '';
+    const resp = await postRaw({ acao:'listar_atividades', militar_id: militarId, data_ini: dataIni, data_fim: dataFim, limite: (dataIni||dataFim) ? 500 : 80 });
+    if (!resp.ok) { list.innerHTML = '<p style="color:#c62828;text-align:center;padding:20px">Erro ao carregar.</p>'; return; }
+    const ats = resp.atividades || [];
+    if (status) status.textContent = 'Atualizado agora · ' + ats.length + ' evento(s)';
+    if (ats.length === 0) { list.innerHTML = '<p style="color:#888;text-align:center;padding:20px">Nenhuma atividade registrada.</p>'; return; }
+    const todos = militarId === '0' || militarId === 0;
+    let html = '<div style="overflow-x:auto"><table class="admin-tabela"><thead><tr><th>Quando</th>'+(todos?'<th>Militar</th>':'')+'<th>Evento</th><th>Detalhe</th></tr></thead><tbody>';
+    ats.forEach(a => {
+        html += '<tr><td style="white-space:nowrap;font-size:.8rem;color:#555">'+escHtml(a.criado_em||'')+'</td>';
+        if (todos) html += '<td style="font-weight:600;font-size:.82rem">'+escHtml(a.nome_guerra||'')+'</td>';
+        html += '<td style="white-space:nowrap;font-size:.82rem">'+iconeEvento(a.evento)+' '+escHtml(rotuloEvento(a.evento))+'</td>';
+        html += '<td style="font-size:.82rem;color:#333">'+(a.detalhe?escHtml(a.detalhe):'<em style="color:#aaa">—</em>')+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    list.innerHTML = html;
+}
+// Exporta as atividades filtradas (militar + período) em CSV.
+function exportarAtividades() {
+    const sel = document.getElementById('ativ-militar');
+    const params = new URLSearchParams({
+        export: 'atividades',
+        militar_id: sel ? sel.value : '0',
+        data_ini: (document.getElementById('ativ-ini')||{}).value || '',
+        data_fim: (document.getElementById('ativ-fim')||{}).value || ''
+    });
+    window.location.href = window.location.pathname + '?' + params.toString();
+}
+// Auto-refresh a cada 5s enquanto a aba Atividades estiver ativa, o checkbox marcado
+// e sem filtro de período aplicado (para não sobrescrever consultas históricas).
+setInterval(function(){
+    const div = document.getElementById('admin-atividades');
+    const auto = document.getElementById('ativ-auto');
+    const ini = (document.getElementById('ativ-ini')||{}).value || '';
+    const fim = (document.getElementById('ativ-fim')||{}).value || '';
+    if (div && div.style.display !== 'none' && auto && auto.checked && !ini && !fim) carregarAtividades();
+}, 5000);
 async function carregarReportadas() {
     const resp = await postRaw({ acao: 'listar_reportadas' });
     const list = document.getElementById('report-list');
@@ -2339,6 +2562,7 @@ async function carregarOnline() {
             html += '<code style="font-size:.72rem;color:#888">'+escHtml(u.matricula)+'</code>';
             html += '</div>';
             html += '<div style="font-size:.8rem;color:#555">📍 '+escHtml(atividade)+'</div>';
+            if (u.ultimo_evento) html += '<div style="font-size:.75rem;color:#00695c;margin-top:3px">⚡ '+escHtml(u.ultimo_evento)+'</div>';
             if (sessao) html += '<div style="font-size:.75rem;color:#888;margin-top:3px">📝 '+escHtml(sessao)+'</div>';
             html += '<div style="font-size:.72rem;margin-top:4px">'+status+'</div>';
             html += '</div>';
@@ -2350,10 +2574,10 @@ async function carregarOnline() {
     // Renderizar tabela no admin (se existir)
     if (adminList) {
         if (adminLoad) adminLoad.style.display='none';
-        let html = '<div style="overflow-x:auto"><table class="admin-tabela"><thead><tr><th>Status</th><th>Nome Guerra</th><th>Matrícula</th><th>Atividade</th><th>Sessão</th><th>Inativo</th></tr></thead><tbody>';
+        let html = '<div style="overflow-x:auto"><table class="admin-tabela"><thead><tr><th>Status</th><th>Nome Guerra</th><th>Matrícula</th><th>Página</th><th>Último evento</th><th>Sessão</th><th>Inativo</th></tr></thead><tbody>';
         users.forEach(u => {
             const status = formatInativo(u.segundos_inativo);
-            html += '<tr><td>'+status+'</td><td style="font-weight:700">'+escHtml(u.nome_guerra)+'</td><td><code>'+escHtml(u.matricula)+'</code></td><td style="font-size:.82rem">'+escHtml(u.current_page||'—')+'</td><td style="font-size:.82rem">'+(u.sessao_aberta?escHtml(u.sessao_aberta):'—')+'</td><td style="font-size:.82rem;white-space:nowrap">'+(u.last_activity||'—')+'</td></tr>';
+            html += '<tr><td>'+status+'</td><td style="font-weight:700">'+escHtml(u.nome_guerra)+'</td><td><code>'+escHtml(u.matricula)+'</code></td><td style="font-size:.82rem">'+escHtml(u.current_page||'—')+'</td><td style="font-size:.82rem;color:#00695c">'+(u.ultimo_evento?escHtml(u.ultimo_evento):'—')+'</td><td style="font-size:.82rem">'+(u.sessao_aberta?escHtml(u.sessao_aberta):'—')+'</td><td style="font-size:.82rem;white-space:nowrap">'+(u.last_activity||'—')+'</td></tr>';
         });
         html += '</tbody></table></div>';
         adminList.innerHTML = html;
@@ -2545,6 +2769,8 @@ async function iniciarQuiz() {
     numTentativa  = resp.tentativa;
     totalQuestoes = resp.total_questoes || 0;
 
+    if (window.logEvento) logEvento('iniciou_' + modo, 'Tentativa #' + numTentativa + ' · ' + cats.length + ' legislação(ões)');
+
     document.getElementById('tela-inicio').style.display   = 'none';
     document.getElementById('tela-quiz').style.display     = 'block';
     const ph = document.getElementById('placar-header');
@@ -2697,6 +2923,7 @@ async function finalizarQuiz() {
     if (ph) ph.style.display = 'none';
     renderRevisaoErros(resp.erros_detalhe || []);
     window.scrollTo({ top:0, behavior:'smooth' });
+    if (window.logEvento) logEvento('finalizou_' + tipoSessao, 'Tentativa #' + numTentativa + ' · ' + acertos + '/' + total + ' (' + pct + '%)');
     sessaoId = null;
 }
 
@@ -2881,6 +3108,62 @@ async function post(data) {
 
     sendHeartbeat();
     setInterval(sendHeartbeat, 30000);
+})();
+</script>
+
+<!-- Registro de atividades do usuário (cliques, downloads, play de áudio, PDFs) -->
+<script>
+(function(){
+    function paginaAtual() {
+        const u = new URLSearchParams(window.location.search);
+        return u.get('p') || 'inicio';
+    }
+    // Envia um evento de atividade para o servidor (best-effort, não bloqueia a UI).
+    window.logEvento = function(evento, detalhe) {
+        if (!evento) return;
+        const fd = new FormData();
+        fd.append('acao', 'log_evento');
+        fd.append('evento', evento);
+        if (detalhe) fd.append('detalhe', detalhe);
+        fd.append('pagina', paginaAtual());
+        try {
+            if (navigator.sendBeacon) navigator.sendBeacon(window.location.pathname, fd);
+            else fetch(window.location.pathname, {method:'POST', body:fd, keepalive:true});
+        } catch(e){}
+    };
+
+    function nomeArquivo(url) {
+        try { return decodeURIComponent((url||'').split('/').pop().split('?')[0]) || url; }
+        catch(e){ return url; }
+    }
+
+    // Captura de cliques: data-log explícito, downloads e abertura de PDFs.
+    document.addEventListener('click', function(e){
+        const el = e.target.closest('[data-log-evento], a[download], a[target="_blank"]');
+        if (!el) return;
+        if (el.hasAttribute('data-log-evento')) {
+            logEvento(el.getAttribute('data-log-evento'), el.getAttribute('data-log-detalhe') || el.textContent.trim().slice(0,120));
+            return;
+        }
+        const href = el.getAttribute('href') || '';
+        if (el.hasAttribute('download')) {
+            logEvento('download', el.getAttribute('download') || nomeArquivo(href));
+        } else if (/\.pdf(\?|$)/i.test(href)) {
+            logEvento('abriu_documento', nomeArquivo(href));
+        }
+    }, true);
+
+    // Play de áudio (evento de mídia dispara na fase de captura).
+    const audiosTocados = new Set();
+    document.addEventListener('play', function(e){
+        const a = e.target;
+        if (!a || a.tagName !== 'AUDIO') return;
+        const src = a.getAttribute('data-src') || a.getAttribute('src') || '';
+        const nome = nomeArquivo(src);
+        if (audiosTocados.has(nome)) return;   // evita spam ao pausar/retomar
+        audiosTocados.add(nome);
+        logEvento('ouviu_audio', nome);
+    }, true);
 })();
 </script>
 
