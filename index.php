@@ -843,6 +843,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // ── Admin: promover / rebaixar administrador ───────────
+    if ($acao === 'admin_toggle_admin' && isAdmin()) {
+        $id      = (int)($_POST['id'] ?? 0);
+        $tornar  = (int)($_POST['tornar'] ?? 0) === 1;   // 1 = promover, 0 = rebaixar
+        if ($id <= 0) { echo json_encode(['erro' => 'ID inválido.']); exit; }
+        // Trava de segurança: não permitir rebaixar a si mesmo (evita perder o próprio acesso)
+        if (!$tornar && $id === (int)militar()['id']) {
+            echo json_encode(['erro' => 'Você não pode remover o seu próprio acesso de administrador.']); exit;
+        }
+        $db = getDB();
+        // Verificar se o alvo existe e está aprovado
+        $alvo = $db->prepare("SELECT id, nome_guerra, status, is_admin FROM militares WHERE id=? LIMIT 1");
+        $alvo->execute([$id]);
+        $u = $alvo->fetch();
+        if (!$u)                       { echo json_encode(['erro' => 'Militar não encontrado.']); exit; }
+        if ($u['status'] !== 'aprovado') { echo json_encode(['erro' => 'Só é possível promover militares aprovados.']); exit; }
+        // Trava: não deixar o sistema ficar sem nenhum admin
+        if (!$tornar) {
+            $totAdmins = (int)$db->query("SELECT COUNT(*) FROM militares WHERE is_admin=1")->fetchColumn();
+            if ($totAdmins <= 1) { echo json_encode(['erro' => 'Não é possível rebaixar o último administrador do sistema.']); exit; }
+        }
+        // Ao rebaixar, também derruba a sessão do alvo para recarregar as permissões
+        if ($tornar) {
+            $db->prepare("UPDATE militares SET is_admin=1 WHERE id=?")->execute([$id]);
+        } else {
+            $db->prepare("UPDATE militares SET is_admin=0, session_token=NULL WHERE id=?")->execute([$id]);
+        }
+        logAtividade($tornar ? 'promoveu_admin' : 'rebaixou_admin', $u['nome_guerra'] . ' (#' . $id . ')');
+        echo json_encode(['ok' => true, 'is_admin' => $tornar ? 1 : 0,
+            'msg' => $u['nome_guerra'] . ($tornar ? ' agora é administrador.' : ' deixou de ser administrador.')]);
+        exit;
+    }
+
     // ── Reportar questão incorreta ────────────────────────
     if ($acao === 'reportar_questao') {
         $questaoId     = (int)($_POST['questao_id'] ?? 0);
@@ -1045,7 +1078,7 @@ $aprovados = [];
 if ($page === 'admin' && isAdmin()) {
     $db = getDB();
     $pendentes = $db->query("SELECT * FROM militares WHERE status='pendente' ORDER BY created_at DESC")->fetchAll();
-    $aprovados = $db->query("SELECT id, nome_completo, nome_guerra, email, matricula, created_at, approved_at FROM militares WHERE status='aprovado' ORDER BY nome_guerra")->fetchAll();
+    $aprovados = $db->query("SELECT id, nome_completo, nome_guerra, email, matricula, created_at, approved_at, is_admin FROM militares WHERE status='aprovado' ORDER BY nome_guerra")->fetchAll();
 }
 
 // ============================================================
@@ -1685,16 +1718,32 @@ window.addEventListener('unhandledrejection', function(e) {
     <?php else: ?>
     <div style="overflow-x:auto">
     <table class="admin-tabela">
-        <thead><tr><th>Nome</th><th>Guerra</th><th>Matrícula</th><th>E-mail</th><th>Aprovado em</th><th>Ações</th></tr></thead>
+        <thead><tr><th>Nome</th><th>Guerra</th><th>Matrícula</th><th>E-mail</th><th>Aprovado em</th><th>Perfil</th><th>Ações</th></tr></thead>
         <tbody>
-        <?php foreach($aprovados as $m): ?>
-        <tr>
+        <?php foreach($aprovados as $m): $ehAdmin = (int)$m['is_admin'] === 1; $euMesmo = (int)$m['id'] === (int)militar()['id']; ?>
+        <tr id="urow-<?= (int)$m['id'] ?>">
             <td><?= e($m['nome_completo']) ?></td>
             <td><?= e($m['nome_guerra']) ?></td>
             <td><code><?= e($m['matricula']) ?></code></td>
             <td><?= e($m['email']) ?></td>
             <td><?= $m['approved_at'] ? date('d/m/Y', strtotime($m['approved_at'])) : '—' ?></td>
-            <td><button class="btn-aprovar" onclick="alterarSenhaAdmin(<?= (int)$m['id'] ?>, '<?= e($m['nome_guerra']) ?>')" style="font-size:.75rem;padding:4px 8px">🔑 Senha</button></td>
+            <td id="perfil-<?= (int)$m['id'] ?>">
+                <?php if ($ehAdmin): ?>
+                    <span style="background:#e8eaf6;color:#283593;padding:2px 8px;border-radius:8px;font-size:.72rem;font-weight:700">⭐ Admin</span>
+                <?php else: ?>
+                    <span style="color:#888;font-size:.75rem">Militar</span>
+                <?php endif; ?>
+            </td>
+            <td style="white-space:nowrap">
+                <button class="btn-aprovar" onclick="alterarSenhaAdmin(<?= (int)$m['id'] ?>, '<?= e($m['nome_guerra']) ?>')" style="font-size:.75rem;padding:4px 8px">🔑 Senha</button>
+                <?php if ($euMesmo): ?>
+                    <span style="font-size:.7rem;color:#aaa;margin-left:4px">(você)</span>
+                <?php elseif ($ehAdmin): ?>
+                    <button class="btn-rejeitar" id="btnadmin-<?= (int)$m['id'] ?>" onclick="toggleAdmin(<?= (int)$m['id'] ?>, 0, '<?= e($m['nome_guerra']) ?>')" style="font-size:.75rem;padding:4px 8px;margin-left:4px">⬇️ Rebaixar</button>
+                <?php else: ?>
+                    <button class="btn-aprovar" id="btnadmin-<?= (int)$m['id'] ?>" onclick="toggleAdmin(<?= (int)$m['id'] ?>, 1, '<?= e($m['nome_guerra']) ?>')" style="font-size:.75rem;padding:4px 8px;margin-left:4px;background:#e8eaf6;color:#283593;border:1px solid #c5cae9">⭐ Tornar admin</button>
+                <?php endif; ?>
+            </td>
         </tr>
         <?php endforeach; ?>
         </tbody>
@@ -2892,6 +2941,36 @@ async function alterarSenhaAdmin(id, nome) {
     const res = await post({ acao: 'admin_alterar_senha', id, nova_senha: nova });
     if (res && res.ok) {
         await modalAlert(res.msg, '✅');
+    } else {
+        await modalAlert('Erro: ' + (res.erro || 'falha'), '❌');
+    }
+}
+
+async function toggleAdmin(id, tornar, nome) {
+    const acaoTxt = tornar ? 'tornar <strong>' + escHtml(nome) + '</strong> administrador' : 'remover o acesso de administrador de <strong>' + escHtml(nome) + '</strong>';
+    const aviso = tornar ? '<br><small style="color:#666">Ele passará a ver o Painel Admin e poderá gerenciar o sistema.</small>'
+                         : '<br><small style="color:#666">A sessão dele será encerrada para aplicar a mudança.</small>';
+    if (!await modalConfirm('Deseja ' + acaoTxt + '?' + aviso, tornar ? '⭐' : '⬇️')) return;
+    const res = await post({ acao: 'admin_toggle_admin', id, tornar });
+    if (res && res.ok) {
+        await modalAlert(res.msg, '✅');
+        // Atualiza a linha sem recarregar a página inteira
+        const perfil = document.getElementById('perfil-' + id);
+        const btn = document.getElementById('btnadmin-' + id);
+        if (perfil) perfil.innerHTML = res.is_admin
+            ? '<span style="background:#e8eaf6;color:#283593;padding:2px 8px;border-radius:8px;font-size:.72rem;font-weight:700">⭐ Admin</span>'
+            : '<span style="color:#888;font-size:.75rem">Militar</span>';
+        if (btn) {
+            if (res.is_admin) {
+                btn.textContent = '⬇️ Rebaixar'; btn.className = 'btn-rejeitar';
+                btn.setAttribute('style', 'font-size:.75rem;padding:4px 8px;margin-left:4px');
+                btn.onclick = () => toggleAdmin(id, 0, nome);
+            } else {
+                btn.textContent = '⭐ Tornar admin'; btn.className = 'btn-aprovar';
+                btn.setAttribute('style', 'font-size:.75rem;padding:4px 8px;margin-left:4px;background:#e8eaf6;color:#283593;border:1px solid #c5cae9');
+                btn.onclick = () => toggleAdmin(id, 1, nome);
+            }
+        }
     } else {
         await modalAlert('Erro: ' + (res.erro || 'falha'), '❌');
     }
