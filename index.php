@@ -2208,6 +2208,7 @@ const MODO_ATUAL = <?= json_encode($modoAtual) ?>;
             <span id="q-nivel-badge" class="q-nivel">Nível</span>
             <span id="q-num" class="q-num">#1</span>
             <?php if (isAdmin()): ?>
+            <span id="q-id-badge" title="ID da questão no banco (use no painel Admin › Questões)" style="background:#e8eaf6;color:#283593;border:1px solid #c5cae9;border-radius:6px;padding:2px 8px;font-size:.72rem;font-weight:700;cursor:pointer" onclick="copiarIdQuestao()">ID #—</span>
             <button onclick="editarQuestaoAtual()" title="Editar esta questão" style="margin-left:auto;background:#eef2ff;color:#3949ab;border:1px solid #c5cae9;border-radius:6px;padding:3px 10px;font-size:.75rem;cursor:pointer">✏️ Editar</button>
             <?php endif; ?>
         </div>
@@ -2592,6 +2593,12 @@ async function editarQuestaoAtual() {
 function fecharEditorQuestao() {
     const ov = document.getElementById('modal-editor-questao');
     if (ov) ov.style.display = 'none';
+}
+// Copia o ID da questão atual (para colar no painel Admin › Questões).
+async function copiarIdQuestao() {
+    if (!questaoAtualId) return;
+    try { await navigator.clipboard.writeText(String(questaoAtualId)); } catch(e) {}
+    await modalAlert('ID da questão: <strong>#' + questaoAtualId + '</strong><br>Copiado! Cole no painel Admin › Questões para editar.', '📋');
 }
 
 async function salvarQuestao(id, fromModal) {
@@ -3098,6 +3105,8 @@ function renderizarQuestao(q) {
         ? 'Questão ' + numQuestao + ' de ' + totalQuestoes
         : 'Questão #' + numQuestao;
     document.getElementById('enunciado').textContent = q.enunciado || '';
+    const idBadge = document.getElementById('q-id-badge');
+    if (idBadge) idBadge.textContent = 'ID #' + q.id;
 
     const container = document.getElementById('opcoes-container');
     container.innerHTML = '';
