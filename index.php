@@ -877,6 +877,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // ── Admin: buscar questões por texto (para edição) ──────
+    if ($acao === 'buscar_questoes' && isAdmin()) {
+        $db = getDB();
+        $termo   = trim($_POST['termo'] ?? '');
+        $filtro  = $_POST['filtro'] ?? 'todas';   // todas | ativas | inativas
+        $cond = []; $params = [];
+        if ($termo !== '') {
+            // busca por ID exato ou por trecho do enunciado
+            if (ctype_digit($termo)) { $cond[] = '(q.id = ? OR q.enunciado LIKE ?)'; $params[] = (int)$termo; $params[] = '%' . $termo . '%'; }
+            else { $cond[] = 'q.enunciado LIKE ?'; $params[] = '%' . $termo . '%'; }
+        }
+        if ($filtro === 'ativas')   $cond[] = 'q.ativa = 1';
+        if ($filtro === 'inativas') $cond[] = 'q.ativa = 0';
+        $where = $cond ? ('WHERE ' . implode(' AND ', $cond)) : '';
+        $stmt = $db->prepare(
+            "SELECT q.id, q.categoria_id, q.enunciado, q.opcao_a, q.opcao_b, q.opcao_c,
+                    q.opcao_d, q.opcao_e, q.resposta_correta, q.explicacao,
+                    q.referencia_legal, q.nivel, q.ativa,
+                    c.nome AS categoria_nome
+               FROM questoes q
+          LEFT JOIN categorias c ON c.id = q.categoria_id
+              $where
+           ORDER BY q.id DESC LIMIT 50"
+        );
+        $stmt->execute($params);
+        echo json_encode(['ok' => true, 'questoes' => $stmt->fetchAll()]);
+        exit;
+    }
+
+    // ── Admin: salvar edição de questão ─────────────────────
+    if ($acao === 'salvar_questao' && isAdmin()) {
+        $db = getDB();
+        $id        = (int)($_POST['id'] ?? 0);
+        $enunciado = trim($_POST['enunciado'] ?? '');
+        $opA = trim($_POST['opcao_a'] ?? '');
+        $opB = trim($_POST['opcao_b'] ?? '');
+        $opC = trim($_POST['opcao_c'] ?? '');
+        $opD = trim($_POST['opcao_d'] ?? '');
+        $opE = trim($_POST['opcao_e'] ?? '');
+        $correta = strtoupper(trim($_POST['resposta_correta'] ?? ''));
+        $explic  = trim($_POST['explicacao'] ?? '');
+        $refLegal = trim($_POST['referencia_legal'] ?? '');
+        $nivel   = $_POST['nivel'] ?? 'medio';
+
+        if ($id <= 0)          { echo json_encode(['erro' => 'ID inválido.']); exit; }
+        if ($enunciado === '') { echo json_encode(['erro' => 'O enunciado não pode ficar vazio.']); exit; }
+        if (!in_array($correta, ['A','B','C','D','E'], true)) { echo json_encode(['erro' => 'Resposta correta deve ser A, B, C, D ou E.']); exit; }
+        // a alternativa marcada como correta precisa ter texto
+        $mapa = ['A'=>$opA,'B'=>$opB,'C'=>$opC,'D'=>$opD,'E'=>$opE];
+        if (trim($mapa[$correta]) === '') { echo json_encode(['erro' => 'A alternativa marcada como correta ('.$correta.') está vazia.']); exit; }
+        if (!in_array($nivel, ['facil','medio','dificil'], true)) $nivel = 'medio';
+
+        $stmt = $db->prepare(
+            "UPDATE questoes SET enunciado=?, opcao_a=?, opcao_b=?, opcao_c=?, opcao_d=?,
+                    opcao_e=?, resposta_correta=?, explicacao=?, referencia_legal=?, nivel=?
+              WHERE id=?"
+        );
+        $stmt->execute([$enunciado, $opA, $opB, $opC, $opD, $opE ?: null, $correta,
+                        $explic, $refLegal ?: null, $nivel, $id]);
+        logAtividade('editou_questao', 'Questão #' . $id);
+        echo json_encode(['ok' => true, 'msg' => 'Questão #' . $id . ' atualizada com sucesso.']);
+        exit;
+    }
+
     // ── Admin: reativar questão reportada ────────────────
     if ($acao === 'reativar_questao' && isAdmin()) {
         $questaoId = (int)($_POST['questao_id'] ?? 0);
@@ -1535,6 +1599,7 @@ window.addEventListener('unhandledrejection', function(e) {
         <button class="admin-tab" id="atab-report" onclick="showAdminTab('reportadas')">⚠️ Reportadas</button>
         <button class="admin-tab" id="atab-online" onclick="showAdminTab('online')">🟢 Online</button>
         <button class="admin-tab" id="atab-ativ" onclick="showAdminTab('atividades')">📜 Atividades</button>
+        <button class="admin-tab" id="atab-quest" onclick="showAdminTab('questoes')">✏️ Questões</button>
     </div>
 
     <div id="admin-pendentes">
@@ -1598,6 +1663,20 @@ window.addEventListener('unhandledrejection', function(e) {
             <span id="ativ-status" style="margin-left:auto;font-size:.72rem;color:#aaa"></span>
         </div>
         <div id="ativ-list"><p style="color:#888;text-align:center;padding:20px">Selecione um militar ou veja todos.</p></div>
+    </div>
+
+    <div id="admin-questoes" style="display:none">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+            <input type="text" id="quest-termo" placeholder="Buscar por texto do enunciado ou nº da questão…" onkeydown="if(event.key==='Enter')buscarQuestoes()" style="flex:1;min-width:240px;padding:8px 12px;border-radius:8px;border:1px solid #ddd;font-size:.9rem">
+            <select id="quest-filtro" onchange="buscarQuestoes()" style="padding:8px;border-radius:8px;border:1px solid #ddd">
+                <option value="todas">Todas</option>
+                <option value="ativas">Só ativas</option>
+                <option value="inativas">Só inativas</option>
+            </select>
+            <button class="btn-aprovar" onclick="buscarQuestoes()" style="font-size:.8rem;padding:8px 14px">🔍 Buscar</button>
+        </div>
+        <p style="font-size:.76rem;color:#999;margin-bottom:12px">Dica: digite parte do enunciado (ex.: "desobediência") ou o número da questão. Mostra até 50 resultados.</p>
+        <div id="quest-list"><p style="color:#888;text-align:center;padding:20px">Faça uma busca para encontrar a questão que deseja editar.</p></div>
     </div>
 
     <div id="admin-aprovados" style="display:none">
@@ -2128,6 +2207,9 @@ const MODO_ATUAL = <?= json_encode($modoAtual) ?>;
             <span id="q-categoria-badge" class="q-categoria">Categoria</span>
             <span id="q-nivel-badge" class="q-nivel">Nível</span>
             <span id="q-num" class="q-num">#1</span>
+            <?php if (isAdmin()): ?>
+            <button onclick="editarQuestaoAtual()" title="Editar esta questão" style="margin-left:auto;background:#eef2ff;color:#3949ab;border:1px solid #c5cae9;border-radius:6px;padding:3px 10px;font-size:.75rem;cursor:pointer">✏️ Editar</button>
+            <?php endif; ?>
         </div>
         <div id="enunciado">Carregando...</div>
         <div class="opcoes" id="opcoes-container"></div>
@@ -2153,6 +2235,9 @@ const MODO_ATUAL = <?= json_encode($modoAtual) ?>;
                     <button class="btn btn-primary" onclick="proximaQuestao()">➡️ Próxima</button>
                     <button class="btn btn-outline" onclick="finalizarQuiz()">🏁 Finalizar</button>
                     <button class="btn btn-sm" style="background:#fff3e0;color:#e65100;border:1px solid #ffb74d;margin-left:auto" onclick="abrirReporte()">⚠️ Reportar erro</button>
+                    <?php if (isAdmin()): ?>
+                    <button class="btn btn-sm" style="background:#eef2ff;color:#3949ab;border:1px solid #c5cae9" onclick="editarQuestaoAtual()">✏️ Editar questão</button>
+                    <?php endif; ?>
                 </div>
                 <!-- Modal reportar -->
                 <div id="modal-reportar" style="display:none;margin-top:14px;background:#fff8e1;border:2px solid #ffb74d;border-radius:10px;padding:16px">
@@ -2361,6 +2446,8 @@ function showAdminTab(tab) {
     if (onlDiv) onlDiv.style.display = tab === 'online' ? '' : 'none';
     const ativDiv = document.getElementById('admin-atividades');
     if (ativDiv) ativDiv.style.display = tab === 'atividades' ? '' : 'none';
+    const questDiv = document.getElementById('admin-questoes');
+    if (questDiv) questDiv.style.display = tab === 'questoes' ? '' : 'none';
     document.getElementById('atab-pend').classList.toggle('ativo', tab === 'pendentes');
     document.getElementById('atab-aprov').classList.toggle('ativo', tab === 'aprovados');
     const repTab = document.getElementById('atab-report');
@@ -2369,9 +2456,171 @@ function showAdminTab(tab) {
     if (onlTab) onlTab.classList.toggle('ativo', tab === 'online');
     const ativTab = document.getElementById('atab-ativ');
     if (ativTab) ativTab.classList.toggle('ativo', tab === 'atividades');
+    const questTab = document.getElementById('atab-quest');
+    if (questTab) questTab.classList.toggle('ativo', tab === 'questoes');
     if (tab === 'reportadas') carregarReportadas();
     if (tab === 'online') carregarOnline();
     if (tab === 'atividades') carregarAtividades();
+}
+
+// ── Edição de questões pelo admin ────────────────────────────
+async function buscarQuestoes() {
+    const termo  = (document.getElementById('quest-termo')||{}).value || '';
+    const filtro = (document.getElementById('quest-filtro')||{}).value || 'todas';
+    const list = document.getElementById('quest-list');
+    if (!list) return;
+    list.innerHTML = '<p style="color:#888;text-align:center;padding:20px">Buscando…</p>';
+    const resp = await postRaw({ acao:'buscar_questoes', termo: termo, filtro: filtro });
+    if (!resp.ok) { list.innerHTML = '<p style="color:#c62828;text-align:center;padding:20px">Erro na busca.</p>'; return; }
+    const qs = resp.questoes || [];
+    if (qs.length === 0) { list.innerHTML = '<p style="color:#888;text-align:center;padding:20px">Nenhuma questão encontrada.</p>'; return; }
+    QUESTOES_CACHE = {};
+    let html = '';
+    qs.forEach(q => {
+        QUESTOES_CACHE[q.id] = q;
+        const resumo = (q.enunciado||'').substring(0,140) + ((q.enunciado||'').length>140?'…':'');
+        const ativa = q.ativa == 1
+            ? '<span style="color:#1a5c2e;font-size:.72rem">● ativa</span>'
+            : '<span style="color:#c62828;font-size:.72rem">● inativa</span>';
+        html += '<div id="qedit-wrap-'+q.id+'" style="border:1px solid #e0e0e0;border-radius:10px;padding:14px;margin-bottom:12px;background:#fff">'
+            + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+            +   '<code style="background:#f0f0f0;padding:2px 8px;border-radius:6px;font-size:.8rem">#'+q.id+'</code>'
+            +   ativa
+            +   '<span style="font-size:.72rem;color:#999">'+escHtml(q.categoria_nome||'')+'</span>'
+            +   '<span style="font-size:.72rem;color:#bbb">gabarito: <strong>'+escHtml(q.resposta_correta||'')+'</strong></span>'
+            +   '<button class="btn-aprovar" onclick="abrirEditorQuestao('+q.id+')" style="margin-left:auto;font-size:.75rem;padding:5px 12px">✏️ Editar</button>'
+            + '</div>'
+            + '<p style="font-size:.86rem;color:#333;margin-top:8px;line-height:1.5">'+escHtml(resumo)+'</p>'
+            + '<div id="qedit-form-'+q.id+'"></div>'
+            + '</div>';
+    });
+    list.innerHTML = html;
+}
+
+let QUESTOES_CACHE = {};
+
+// A partir de um card reportado, abre a aba Questões já com o editor da questão aberto.
+async function editarQuestaoReportada(qId) {
+    showAdminTab('questoes');
+    const campo = document.getElementById('quest-termo');
+    if (campo) campo.value = String(qId);
+    const filtro = document.getElementById('quest-filtro');
+    if (filtro) filtro.value = 'todas';
+    await buscarQuestoes();
+    abrirEditorQuestao(qId);
+    const wrap = document.getElementById('qedit-wrap-'+qId);
+    if (wrap) wrap.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function campoOpcao(id, letra, valor, correta) {
+    const checked = (letra === correta) ? 'checked' : '';
+    return '<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px">'
+        + '<label style="display:flex;align-items:center;gap:4px;font-weight:700;color:#1a5c2e;padding-top:8px;white-space:nowrap">'
+        +   '<input type="radio" name="qcorreta-'+id+'" value="'+letra+'" '+checked+'> '+letra+')'
+        + '</label>'
+        + '<textarea id="qop-'+letra+'-'+id+'" rows="2" style="flex:1;padding:7px 9px;border-radius:6px;border:1px solid #ddd;font-size:.85rem;font-family:inherit;resize:vertical">'+escHtml(valor||'')+'</textarea>'
+        + '</div>';
+}
+
+// Campos do formulário de edição (reutilizado no painel e no modal do quiz).
+function htmlCamposQuestao(q) {
+    const id = q.id;
+    const c = (q.resposta_correta||'').toUpperCase();
+    return '<label style="font-size:.78rem;color:#555;font-weight:600">Enunciado</label>'
+        + '<textarea id="qenun-'+id+'" rows="4" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ddd;font-size:.88rem;font-family:inherit;resize:vertical;margin-bottom:10px">'+escHtml(q.enunciado||'')+'</textarea>'
+        + '<label style="font-size:.78rem;color:#555;font-weight:600">Alternativas <span style="font-weight:400;color:#999">(marque a correta à esquerda; deixe em branco para não usar)</span></label>'
+        + '<div style="margin:6px 0 10px">'
+        +   campoOpcao(id,'A',q.opcao_a,c) + campoOpcao(id,'B',q.opcao_b,c) + campoOpcao(id,'C',q.opcao_c,c)
+        +   campoOpcao(id,'D',q.opcao_d,c) + campoOpcao(id,'E',q.opcao_e,c)
+        + '</div>'
+        + '<label style="font-size:.78rem;color:#555;font-weight:600">Explicação</label>'
+        + '<textarea id="qexp-'+id+'" rows="4" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ddd;font-size:.86rem;font-family:inherit;resize:vertical;margin-bottom:10px">'+escHtml(q.explicacao||'')+'</textarea>'
+        + '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">'
+        +   '<div style="flex:1;min-width:200px"><label style="font-size:.78rem;color:#555;font-weight:600">Referência legal</label>'
+        +     '<input type="text" id="qref-'+id+'" value="'+escHtml(q.referencia_legal||'')+'" style="width:100%;padding:7px 9px;border-radius:6px;border:1px solid #ddd;font-size:.85rem"></div>'
+        +   '<div><label style="font-size:.78rem;color:#555;font-weight:600">Nível</label><br>'
+        +     '<select id="qniv-'+id+'" style="padding:7px;border-radius:6px;border:1px solid #ddd">'
+        +       '<option value="facil" '+(q.nivel==='facil'?'selected':'')+'>Fácil</option>'
+        +       '<option value="medio" '+(q.nivel==='medio'?'selected':'')+'>Médio</option>'
+        +       '<option value="dificil" '+(q.nivel==='dificil'?'selected':'')+'>Difícil</option>'
+        +     '</select></div>'
+        + '</div>';
+}
+
+function abrirEditorQuestao(id) {
+    const q = QUESTOES_CACHE[id];
+    const box = document.getElementById('qedit-form-'+id);
+    if (!q || !box) return;
+    if (box.innerHTML) { box.innerHTML = ''; return; }   // toggle: fecha se já aberto
+    box.innerHTML =
+        '<div style="border-top:1px dashed #ddd;margin-top:12px;padding-top:12px">'
+        + htmlCamposQuestao(q)
+        + '<button class="btn-aprovar" onclick="salvarQuestao('+id+')" style="font-size:.82rem;padding:8px 18px">💾 Salvar alterações</button>'
+        + '<button class="btn-rejeitar" onclick="abrirEditorQuestao('+id+')" style="font-size:.82rem;padding:8px 14px;margin-left:8px">Cancelar</button>'
+        + '</div>';
+}
+
+// ── Editor em modal (usado na tela do quiz, ao responder) ────
+async function editarQuestaoAtual() {
+    if (!questaoAtualId) { await modalAlert('Nenhuma questão carregada.', '⚠️'); return; }
+    const id = questaoAtualId;
+    // Busca a questão completa (o quiz não expõe gabarito/explicação ao cliente).
+    const resp = await postRaw({ acao:'buscar_questoes', termo: String(id), filtro:'todas' });
+    const q = (resp.questoes || []).find(x => String(x.id) === String(id));
+    if (!q) { await modalAlert('Não foi possível carregar a questão para edição.', '❌'); return; }
+    QUESTOES_CACHE[id] = q;
+    let ov = document.getElementById('modal-editor-questao');
+    if (!ov) {
+        ov = document.createElement('div');
+        ov.id = 'modal-editor-questao';
+        ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:30px 12px';
+        document.body.appendChild(ov);
+    }
+    ov.innerHTML = '<div style="background:#fff;border-radius:12px;max-width:720px;width:100%;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.3)">'
+        + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">'
+        +   '<h3 style="color:var(--verde);margin:0">✏️ Editar questão</h3>'
+        +   '<code style="background:#f0f0f0;padding:2px 8px;border-radius:6px;font-size:.8rem">#'+id+'</code>'
+        +   '<button onclick="fecharEditorQuestao()" style="margin-left:auto;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#999">×</button>'
+        + '</div>'
+        + htmlCamposQuestao(q)
+        + '<div style="display:flex;gap:8px;margin-top:6px">'
+        +   '<button class="btn-aprovar" onclick="salvarQuestao('+id+', true)" style="font-size:.85rem;padding:9px 20px">💾 Salvar alterações</button>'
+        +   '<button class="btn-rejeitar" onclick="fecharEditorQuestao()" style="font-size:.85rem;padding:9px 16px">Cancelar</button>'
+        + '</div></div>';
+    ov.style.display = 'flex';
+}
+function fecharEditorQuestao() {
+    const ov = document.getElementById('modal-editor-questao');
+    if (ov) ov.style.display = 'none';
+}
+
+async function salvarQuestao(id, fromModal) {
+    const val = sel => (document.getElementById(sel)||{}).value || '';
+    const correta = (document.querySelector('input[name="qcorreta-'+id+'"]:checked')||{}).value || '';
+    if (!correta) { await modalAlert('Marque qual alternativa é a correta.', '⚠️'); return; }
+    const dados = {
+        acao: 'salvar_questao', id: id,
+        enunciado: val('qenun-'+id),
+        opcao_a: val('qop-A-'+id), opcao_b: val('qop-B-'+id), opcao_c: val('qop-C-'+id),
+        opcao_d: val('qop-D-'+id), opcao_e: val('qop-E-'+id),
+        resposta_correta: correta,
+        explicacao: val('qexp-'+id),
+        referencia_legal: val('qref-'+id),
+        nivel: val('qniv-'+id)
+    };
+    const resp = await postRaw(dados);
+    if (resp.ok) {
+        if (fromModal) {
+            fecharEditorQuestao();
+            // Atualiza a explicação/feedback exibido se a questão já foi respondida.
+            const fbExp = document.getElementById('fb-explicacao');
+            if (fbExp && dados.explicacao) fbExp.textContent = dados.explicacao;
+        }
+        await modalAlert(resp.msg || 'Salvo!', '✅');
+        if (!fromModal && typeof buscarQuestoes === 'function' && document.getElementById('quest-list')) buscarQuestoes();
+    } else {
+        await modalAlert(resp.erro || 'Falha ao salvar.', '❌');
+    }
 }
 
 // ── Timeline de atividades (tempo real) ──────────────────────
@@ -2465,9 +2714,10 @@ async function carregarReportadas() {
                   + '</div>';
         });
 
-        const acoes = resolvida ? '' :
+        const btnEditar = '<button class="btn-aprovar" onclick="editarQuestaoReportada('+r.questao_id+')" style="font-size:.78rem;margin-left:6px;background:#eef2ff;color:#3949ab;border:1px solid #c5cae9">✏️ Editar questão</button>';
+        const acoes = (resolvida ? '' :
             '<button class="btn-aprovar" onclick="reativarQuestao('+r.questao_id+','+r.id+')" style="font-size:.78rem">✅ Reativar</button> ' +
-            '<button class="btn-rejeitar" onclick="descartarQuestao('+r.id+')" style="font-size:.78rem;margin-left:6px">🗄️ Manter inativa</button>';
+            '<button class="btn-rejeitar" onclick="descartarQuestao('+r.id+')" style="font-size:.78rem;margin-left:6px">🗄️ Manter inativa</button>') + btnEditar;
 
         html += '<div id="rpt-'+r.id+'" style="border:1px solid #e0e0e0;border-left:4px solid '+(resolvida?'#a5d6a7':'#ffb74d')+';border-radius:10px;padding:16px;margin-bottom:16px;background:#fff">'
             + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">'
