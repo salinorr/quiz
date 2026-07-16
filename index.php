@@ -1294,7 +1294,7 @@ main{width:100%;padding:0;margin:0;flex:1;}
 .nivel-medio{background:#fff3e0;color:#e65100;}
 .nivel-dificil{background:#fce4ec;color:#c62828;}
 .q-num{margin-left:auto;font-size:.8rem;color:#999;}
-#enunciado{font-size:1.05rem;line-height:1.7;color:var(--texto);margin-bottom:20px;font-weight:500;}
+#enunciado{font-size:1.05rem;line-height:1.7;color:var(--texto);margin-bottom:20px;font-weight:500;white-space:pre-line;}
 .opcoes{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
 .opcao{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:2px solid #e0e0e0;border-radius:10px;cursor:pointer;transition:var(--tr);}
 .opcao:hover:not(.bloqueada){border-color:var(--verde-md);background:#f0faf3;}
@@ -1304,7 +1304,7 @@ main{width:100%;padding:0;margin:0;flex:1;}
 .opcao-letra{width:32px;height:32px;background:#e8f5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;color:var(--verde);flex-shrink:0;}
 .opcao.correta .opcao-letra{background:var(--verde-md);color:#fff;}
 .opcao.errada .opcao-letra{background:var(--vermelho);color:#fff;}
-.opcao-texto{font-size:.92rem;line-height:1.55;padding-top:5px;}
+.opcao-texto{font-size:.92rem;line-height:1.55;padding-top:5px;white-space:pre-line;}
 #feedback{display:none;border-radius:12px;overflow:hidden;margin-top:8px;}
 .fb-header{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;}
 .fb-header.acertou{background:#e8f5e9;}
@@ -1321,7 +1321,7 @@ main{width:100%;padding:0;margin:0;flex:1;}
 .fb-resp-certa{background:#e8f5e9;}
 .fb-resp-errada{background:#fff5f5;}
 .fb-explicacao-titulo{font-size:.82rem;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 6px;}
-.fb-explicacao{font-size:.93rem;line-height:1.7;color:#333;}
+.fb-explicacao{font-size:.93rem;line-height:1.7;color:#333;white-space:pre-line;}
 .fb-referencia{margin-top:10px;background:#f3f4f6;border-radius:8px;padding:7px 12px;font-size:.8rem;color:#666;}
 .fb-referencia strong{color:var(--verde);}
 .fb-acoes{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;}
@@ -3332,7 +3332,7 @@ function renderRevisaoErros(erros) {
         html += `
         <div style="background:#fafafa;border:1px solid #e0e0e0;border-radius:10px;padding:16px;margin-bottom:14px">
             <p style="font-size:.75rem;color:#888;margin-bottom:6px">${escHtml(q.categoria || '')}</p>
-            <p style="font-weight:700;margin-bottom:10px">${i + 1}. ${escHtml(q.enunciado || '')}</p>
+            <p style="font-weight:700;margin-bottom:10px;white-space:pre-line">${i + 1}. ${escHtml(q.enunciado || '')}</p>
             ${alternativas}
             <p style="margin-top:10px;font-size:.85rem"><strong>❌ Sua resposta:</strong> ${dada}) ${escHtml(q['opcao_' + dada.toLowerCase()] || '')}</p>
             <p style="font-size:.85rem"><strong>✅ Resposta correta:</strong> ${correta}) ${escHtml(q['opcao_' + correta.toLowerCase()] || '')}</p>
