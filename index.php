@@ -1708,8 +1708,8 @@ window.addEventListener('unhandledrejection', function(e) {
             </select>
             <button class="btn-aprovar" onclick="buscarQuestoes()" style="font-size:.8rem;padding:8px 14px">🔍 Buscar</button>
         </div>
-        <p style="font-size:.76rem;color:#999;margin-bottom:12px">Dica: digite parte do enunciado (ex.: "desobediência") ou o número da questão. Mostra até 50 resultados.</p>
-        <div id="quest-list"><p style="color:#888;text-align:center;padding:20px">Faça uma busca para encontrar a questão que deseja editar.</p></div>
+        <p style="font-size:.76rem;color:#999;margin-bottom:6px">Digite <strong>parte do texto</strong> da questão (ex.: "sindicância", "depósito infiel") ou o <strong>nº/ID</strong>. Clique no resultado (ou em 🔍 Analisar) para ver a questão inteira; em ✏️ Editar para alterar. Mostra até 50 ocorrências. <span id="quest-count" style="color:#1a5c2e;font-weight:600"></span></p>
+        <div id="quest-list"><p style="color:#888;text-align:center;padding:20px">Faça uma busca por texto ou ID para localizar a questão.</p></div>
     </div>
 
     <div id="admin-aprovados" style="display:none">
@@ -2525,10 +2525,12 @@ async function buscarQuestoes() {
     const qs = resp.questoes || [];
     if (qs.length === 0) { list.innerHTML = '<p style="color:#888;text-align:center;padding:20px">Nenhuma questão encontrada.</p>'; return; }
     QUESTOES_CACHE = {};
+    const isNum = /^\d+$/.test(termo.trim());
+    const termoBusca = isNum ? '' : termo.trim();   // destaque só para busca textual
+    document.getElementById('quest-count') && (document.getElementById('quest-count').textContent = qs.length + ' resultado(s)');
     let html = '';
     qs.forEach(q => {
         QUESTOES_CACHE[q.id] = q;
-        const resumo = (q.enunciado||'').substring(0,140) + ((q.enunciado||'').length>140?'…':'');
         const ativa = q.ativa == 1
             ? '<span style="color:#1a5c2e;font-size:.72rem">● ativa</span>'
             : '<span style="color:#c62828;font-size:.72rem">● inativa</span>';
@@ -2538,13 +2540,73 @@ async function buscarQuestoes() {
             +   ativa
             +   '<span style="font-size:.72rem;color:#999">'+escHtml(q.categoria_nome||'')+'</span>'
             +   '<span style="font-size:.72rem;color:#bbb">gabarito: <strong>'+escHtml(q.resposta_correta||'')+'</strong></span>'
-            +   '<button class="btn-aprovar" onclick="abrirEditorQuestao('+q.id+')" style="margin-left:auto;font-size:.75rem;padding:5px 12px">✏️ Editar</button>'
+            +   '<span style="margin-left:auto;display:flex;gap:6px">'
+            +     '<button class="btn-aprovar" onclick="analisarQuestao('+q.id+')" style="font-size:.75rem;padding:5px 12px;background:#eef7f0;color:#1a5c2e;border:1px solid #c8e6c9">🔍 Analisar</button>'
+            +     '<button class="btn-aprovar" onclick="abrirEditorQuestao('+q.id+')" style="font-size:.75rem;padding:5px 12px">✏️ Editar</button>'
+            +   '</span>'
             + '</div>'
-            + '<p style="font-size:.86rem;color:#333;margin-top:8px;line-height:1.5">'+escHtml(resumo)+'</p>'
+            + '<p style="font-size:.86rem;color:#333;margin-top:8px;line-height:1.5;cursor:pointer" onclick="analisarQuestao('+q.id+')">'+trechoDestacado(q.enunciado||'', termoBusca)+'</p>'
+            + '<div id="qview-'+q.id+'"></div>'
             + '<div id="qedit-form-'+q.id+'"></div>'
             + '</div>';
     });
     list.innerHTML = html;
+}
+
+// Gera um trecho do enunciado centrado no termo buscado, com destaque (<mark>).
+function trechoDestacado(texto, termo) {
+    texto = texto || '';
+    if (!termo) {
+        const r = texto.substring(0,150) + (texto.length>150?'…':'');
+        return escHtml(r);
+    }
+    const norm = s => s.toLowerCase();
+    const pos = norm(texto).indexOf(norm(termo));
+    let ini = 0, trecho = texto;
+    if (pos >= 0) {
+        ini = Math.max(0, pos - 60);
+        trecho = (ini>0?'…':'') + texto.substring(ini, pos + termo.length + 90) + (pos+termo.length+90<texto.length?'…':'');
+    } else {
+        trecho = texto.substring(0,150) + (texto.length>150?'…':'');
+    }
+    // escapa e depois destaca as ocorrências do termo
+    let esc = escHtml(trecho);
+    try {
+        const re = new RegExp('(' + termo.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+        esc = esc.replace(re, '<mark style="background:#fff59d;padding:0 2px;border-radius:3px">$1</mark>');
+    } catch(e){}
+    return esc;
+}
+
+// Abre uma visão READ-ONLY da questão (para conferência), sem entrar no editor.
+function analisarQuestao(id) {
+    const q = QUESTOES_CACHE[id];
+    const view = document.getElementById('qview-'+id);
+    if (!q || !view) return;
+    // fecha o editor se estiver aberto nesta questão
+    const form = document.getElementById('qedit-form-'+id);
+    if (form) form.innerHTML = '';
+    if (view.innerHTML) { view.innerHTML = ''; return; }   // toggle
+    const c = (q.resposta_correta||'').toUpperCase();
+    let alts = '';
+    ['a','b','c','d','e'].forEach(l => {
+        const t = q['opcao_'+l];
+        if (t === null || t === undefined || t === '') return;
+        const ok = l.toUpperCase() === c;
+        const estilo = ok ? 'background:#e8f5e9;border:1px solid #a5d6a7;font-weight:600;color:#1a5c2e'
+                          : 'background:#fafafa;border:1px solid #eee;color:#444';
+        alts += '<div style="'+estilo+';border-radius:6px;padding:7px 10px;margin-bottom:5px;font-size:.85rem">'
+              + '<strong>'+l.toUpperCase()+')</strong> '+escHtml(t) + (ok?' &nbsp;✅':'') + '</div>';
+    });
+    view.innerHTML = '<div style="border-top:1px dashed #ddd;margin-top:12px;padding-top:12px">'
+        + '<p style="font-size:.9rem;line-height:1.6;color:#222;margin-bottom:10px;white-space:pre-line;font-weight:500">'+escHtml(q.enunciado||'')+'</p>'
+        + alts
+        + '<div style="margin-top:8px;font-size:.8rem;color:#1a5c2e"><strong>Gabarito:</strong> '+escHtml(c)+'</div>'
+        + (q.explicacao ? '<div style="margin-top:8px;font-size:.83rem;color:#555;background:#f5f9f6;border-radius:6px;padding:8px 10px"><strong>💡 Explicação:</strong> '+escHtml(q.explicacao)+'</div>' : '')
+        + (q.referencia_legal ? '<div style="margin-top:6px;font-size:.8rem;color:#00695c"><strong>📖 Base legal:</strong> '+escHtml(q.referencia_legal)+'</div>' : '')
+        + '<div style="margin-top:6px;font-size:.72rem;color:#aaa">Categoria: '+escHtml(q.categoria_nome||'—')+' · nível: '+escHtml(q.nivel||'—')+'</div>'
+        + '<button class="btn-aprovar" onclick="abrirEditorQuestao('+id+')" style="margin-top:10px;font-size:.78rem;padding:6px 14px">✏️ Editar esta questão</button>'
+        + '</div>';
 }
 
 let QUESTOES_CACHE = {};
@@ -2601,6 +2663,8 @@ function abrirEditorQuestao(id) {
     const q = QUESTOES_CACHE[id];
     const box = document.getElementById('qedit-form-'+id);
     if (!q || !box) return;
+    const view = document.getElementById('qview-'+id);   // fecha a análise read-only, se aberta
+    if (view) view.innerHTML = '';
     if (box.innerHTML) { box.innerHTML = ''; return; }   // toggle: fecha se já aberto
     box.innerHTML =
         '<div style="border-top:1px dashed #ddd;margin-top:12px;padding-top:12px">'
