@@ -917,9 +917,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $filtro  = $_POST['filtro'] ?? 'todas';   // todas | ativas | inativas
         $cond = []; $params = [];
         if ($termo !== '') {
-            // busca por ID exato ou por trecho do enunciado
-            if (ctype_digit($termo)) { $cond[] = '(q.id = ? OR q.enunciado LIKE ?)'; $params[] = (int)$termo; $params[] = '%' . $termo . '%'; }
-            else { $cond[] = 'q.enunciado LIKE ?'; $params[] = '%' . $termo . '%'; }
+            // busca por trecho no enunciado E nas alternativas (A–E) e na explicação
+            $like = '%' . $termo . '%';
+            $campos = '(q.enunciado LIKE ? OR q.opcao_a LIKE ? OR q.opcao_b LIKE ? OR q.opcao_c LIKE ? OR q.opcao_d LIKE ? OR q.opcao_e LIKE ? OR q.explicacao LIKE ?)';
+            if (ctype_digit($termo)) {
+                $cond[] = '(q.id = ? OR ' . $campos . ')';
+                $params[] = (int)$termo;
+            } else {
+                $cond[] = $campos;
+            }
+            for ($i = 0; $i < 7; $i++) $params[] = $like;
         }
         if ($filtro === 'ativas')   $cond[] = 'q.ativa = 1';
         if ($filtro === 'inativas') $cond[] = 'q.ativa = 0';
@@ -2546,6 +2553,7 @@ async function buscarQuestoes() {
             +   '</span>'
             + '</div>'
             + '<p style="font-size:.86rem;color:#333;margin-top:8px;line-height:1.5;cursor:pointer" onclick="analisarQuestao('+q.id+')">'+trechoDestacado(q.enunciado||'', termoBusca)+'</p>'
+            + matchFora(q, termoBusca)
             + '<div id="qview-'+q.id+'"></div>'
             + '<div id="qedit-form-'+q.id+'"></div>'
             + '</div>';
@@ -2576,6 +2584,30 @@ function trechoDestacado(texto, termo) {
         esc = esc.replace(re, '<mark style="background:#fff59d;padding:0 2px;border-radius:3px">$1</mark>');
     } catch(e){}
     return esc;
+}
+
+// Se o termo foi encontrado FORA do enunciado (numa alternativa/explicação),
+// mostra em qual campo, com o trecho destacado.
+function matchFora(q, termo) {
+    if (!termo) return '';
+    const t = termo.toLowerCase();
+    if ((q.enunciado||'').toLowerCase().indexOf(t) >= 0) return '';  // já aparece no enunciado
+    const campos = [
+        ['A', q.opcao_a], ['B', q.opcao_b], ['C', q.opcao_c], ['D', q.opcao_d], ['E', q.opcao_e],
+        ['Explicação', q.explicacao]
+    ];
+    let achou = '';
+    campos.forEach(([rot, txt]) => {
+        if (txt && txt.toLowerCase().indexOf(t) >= 0) {
+            achou += '<div style="font-size:.78rem;color:#555;margin-top:3px">'
+                   + '<span style="color:#00695c;font-weight:600">'+ (rot.length===1?'alternativa '+rot+')':rot) +':</span> '
+                   + trechoDestacado(txt, termo) + '</div>';
+        }
+    });
+    if (!achou) return '';
+    return '<div style="background:#fffde7;border:1px dashed #ffe082;border-radius:6px;padding:6px 9px;margin-top:6px">'
+         + '<div style="font-size:.72rem;color:#f57f17;font-weight:600;margin-bottom:2px">🔎 termo encontrado em:</div>'
+         + achou + '</div>';
 }
 
 // Abre uma visão READ-ONLY da questão (para conferência), sem entrar no editor.
