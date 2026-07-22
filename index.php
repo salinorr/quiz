@@ -515,7 +515,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ── Iniciar sessão de quiz/prova ──────────────────────
     if ($acao === 'iniciar') {
         $nome  = militar()['nome_guerra'];
-        $tipo  = in_array($_POST['tipo'] ?? '', ['quiz', 'prova']) ? $_POST['tipo'] : 'quiz';
+        $tipo  = in_array($_POST['tipo'] ?? '', ['quiz', 'prova', 'exercicio']) ? $_POST['tipo'] : 'quiz';
         $cats  = array_map('intval', (array)($_POST['categorias'] ?? []));
         $cats  = array_values(array_filter($cats, fn($id) => $id > 0));
 
@@ -660,7 +660,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$qAtual['id']]);
         $qCompleta = $stmt->fetch();
 
-        $acertou = ($resposta === $qCompleta['resposta_correta']) ? 1 : 0;
+        // Sentinela '*' = questão de resposta livre/dissertativa (todas as alternativas são aceitas).
+        $acertou = ($qCompleta['resposta_correta'] === '*' || $resposta === $qCompleta['resposta_correta']) ? 1 : 0;
 
         $ins = $db->prepare("INSERT INTO respostas_usuario (sessao_id,questao_id,resposta_dada,acertou) VALUES (?,?,?,?)");
         $ins->execute([$sessaoId, $qAtual['id'], $resposta, $acertou]);
@@ -674,7 +675,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['respondidas'][] = $qAtual['id'];
         unset($_SESSION['questao_atual']);
 
-        $opcCorreta = $qCompleta['opcao_' . strtolower($qCompleta['resposta_correta'])] ?? '';
+        $livre = ($qCompleta['resposta_correta'] === '*');
+        $opcCorreta = $livre ? 'Todas as redações/respostas são válidas — você escolheu um modelo correto.'
+                             : ($qCompleta['opcao_' . strtolower($qCompleta['resposta_correta'])] ?? '');
         $opcUsuario = $qCompleta['opcao_' . strtolower($resposta)] ?? '';
 
         $stmt = $db->prepare("SELECT total_acertos, total_erros, total_respondidas FROM sessoes WHERE id=?");
@@ -1445,6 +1448,7 @@ window.addEventListener('unhandledrejection', function(e) {
                 <div class="menu-curso-label label"><?= e($CURSO_ATIVO['sigla']) ?> · <?= e($CURSO_ATIVO['nome']) ?></div>
                 <a href="?p=inicio&modo=quiz" class="<?= ($cur==='inicio' && $modoParam==='quiz') ? 'active':'' ?>"><span class="icon">📚</span><span class="label">Quiz</span></a>
                 <a href="?p=inicio&modo=prova" class="<?= ($cur==='inicio' && $modoParam==='prova') ? 'active':'' ?>"><span class="icon">🎯</span><span class="label">Provas</span></a>
+                <a href="?p=inicio&modo=exercicio" class="<?= ($cur==='inicio' && $modoParam==='exercicio') ? 'active':'' ?>"><span class="icon">🧩</span><span class="label">Exercícios</span></a>
                 <a href="?p=audios" class="<?= $cur==='audios' ? 'active':'' ?>"><span class="icon">🎧</span><span class="label">Áudios</span></a>
                 <a href="?p=leis" class="<?= $cur==='leis' ? 'active':'' ?>"><span class="icon">📜</span><span class="label">Leis</span></a>
                 <a href="?p=slides" class="<?= $cur==='slides' ? 'active':'' ?>"><span class="icon">🖥️</span><span class="label">Slides</span></a>
@@ -2209,22 +2213,32 @@ window.openSessionsExist = true;
 
 <!-- TELA INICIAL -->
 <?php
-$modoAtual   = $modoParam === 'prova' ? 'prova' : 'quiz';
+$modoAtual   = in_array($modoParam, ['prova','exercicio'], true) ? $modoParam : 'quiz';
 $categoriasModo = array_values(array_filter($categorias, function($c) use ($modoAtual) {
-    $isProva = stripos($c['nome'], 'prova') !== false;
-    return $modoAtual === 'prova' ? $isProva : !$isProva;
+    $isExerc = stripos($c['nome'], 'exerc') !== false;
+    $isProva = !$isExerc && stripos($c['nome'], 'prova') !== false;
+    if ($modoAtual === 'exercicio') return $isExerc;
+    if ($modoAtual === 'prova')     return $isProva;
+    return !$isProva && !$isExerc;   // quiz = tudo que não é prova nem exercício
 }));
+// Rótulos por modalidade
+$modoIcone = ['quiz'=>'📚','prova'=>'🎯','exercicio'=>'🧩'][$modoAtual];
+$modoTitulo = ['quiz'=>'Quiz de Legislações da PMRR','prova'=>'Provas da PMRR','exercicio'=>'Exercícios das 20 Disciplinas'][$modoAtual];
+$modoSub = [
+    'quiz'=>'Selecione as legislações que deseja estudar. Perguntas aleatórias com feedback imediato.',
+    'prova'=>'Selecione a prova que deseja realizar. Questões revisadas com gabarito e justificativa.',
+    'exercicio'=>'Selecione o exercício. Itens com gabarito, explicação e base legal (artigo, parágrafo e inciso).',
+][$modoAtual];
+$modoSecao = ['quiz'=>'📚 Legislações','prova'=>'🎯 Provas','exercicio'=>'🧩 Exercícios'][$modoAtual];
 ?>
 <div id="tela-inicio" class="card">
     <div style="text-align:center;margin-bottom:24px">
-        <span style="font-size:52px;display:block;margin-bottom:8px"><?= $modoAtual === 'prova' ? '🎯' : '📚' ?></span>
-        <h2 style="color:var(--verde);font-size:1.5rem"><?= $modoAtual === 'prova' ? 'Provas da PMRR' : 'Quiz de Legislações da PMRR' ?></h2>
-        <p style="color:#666;margin-top:6px"><?= $modoAtual === 'prova'
-            ? 'Selecione a prova que deseja realizar. Questões revisadas com gabarito e justificativa.'
-            : 'Selecione as legislações que deseja estudar. Perguntas aleatórias com feedback imediato.' ?></p>
+        <span style="font-size:52px;display:block;margin-bottom:8px"><?= $modoIcone ?></span>
+        <h2 style="color:var(--verde);font-size:1.5rem"><?= e($modoTitulo) ?></h2>
+        <p style="color:#666;margin-top:6px"><?= e($modoSub) ?></p>
     </div>
 
-    <p class="section-titulo"><?= $modoAtual === 'prova' ? '🎯 Provas' : '📚 Legislações' ?></p>
+    <p class="section-titulo"><?= $modoSecao ?></p>
     <?php if ($modoAtual === 'quiz'): ?>
     <div class="cats-acoes">
         <button class="btn-link" onclick="toggleTodas(true)">Marcar todas</button>
@@ -3352,7 +3366,9 @@ function mostrarFeedback(resp) {
         document.getElementById('fb-resp-errada-texto').textContent = resp.resposta_usuario + ') ' + (resp.opcao_usuario_texto || '');
     }
 
-    document.getElementById('fb-resp-certa-texto').textContent = resp.resposta_correta + ') ' + (resp.opcao_correta_texto || '');
+    document.getElementById('fb-resp-certa-texto').textContent = (resp.resposta_correta === '*')
+        ? (resp.opcao_correta_texto || 'Resposta livre')
+        : resp.resposta_correta + ') ' + (resp.opcao_correta_texto || '');
     document.getElementById('fb-explicacao').textContent       = resp.explicacao || '';
     document.getElementById('fb-referencia').innerHTML         = '<strong>📌 Referência Legal:</strong> ' + escHtml(resp.referencia_legal || '');
 
