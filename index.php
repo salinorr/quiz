@@ -94,6 +94,84 @@ function filtroAtividades(int $militarId, string $dataIni, string $dataFim): arr
     return [$where, $params];
 }
 
+// Descobre o IP real do cliente, considerando proxies/CDN (Cloudflare etc.).
+// Sem isto, atrás de proxy o REMOTE_ADDR seria sempre o IP do proxy, não o do militar.
+function clientIp(): ?string {
+    foreach (['HTTP_CF_CONNECTING_IP','HTTP_X_FORWARDED_FOR','HTTP_X_REAL_IP','REMOTE_ADDR'] as $k) {
+        if (empty($_SERVER[$k])) continue;
+        $ip = trim(explode(',', $_SERVER[$k])[0]); // X-Forwarded-For pode ter lista: pega o 1º
+        if (filter_var($ip, FILTER_VALIDATE_IP)) return $ip;
+    }
+    return $_SERVER['REMOTE_ADDR'] ?? null;
+}
+
+// Cache de geolocalização de IPs (evita consultar a API externa repetidamente).
+function ensureIpGeoTable(): void {
+    static $done = false;
+    if ($done) return;
+    try {
+        getDB()->exec(
+            "CREATE TABLE IF NOT EXISTS ip_geo (
+                ip            VARCHAR(45)  NOT NULL PRIMARY KEY,
+                cidade        VARCHAR(80)  NULL,
+                regiao        VARCHAR(80)  NULL,
+                pais          VARCHAR(60)  NULL,
+                isp           VARCHAR(120) NULL,
+                atualizado_em DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
+        );
+    } catch (PDOException $e) { /* já existe / sem permissão */ }
+    $done = true;
+}
+
+// Resolve a geolocalização de um IP (cache local + API ip-api.com). Best-effort.
+// Retorna ['cidade','regiao','pais','isp'] ou null. Só consulta a API se $permitirConsulta.
+function resolverGeoIp(string $ip, bool $permitirConsulta = true): ?array {
+    static $mem = [];
+    if (isset($mem[$ip])) return $mem[$ip];
+    if (!filter_var($ip, FILTER_VALIDATE_IP)) return null;
+    // IPs privados/reservados não têm geolocalização pública.
+    if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+        return $mem[$ip] = ['cidade'=>null,'regiao'=>null,'pais'=>'Rede local/privada','isp'=>null];
+    }
+    ensureIpGeoTable();
+    try {
+        $st = getDB()->prepare("SELECT cidade,regiao,pais,isp FROM ip_geo WHERE ip=?");
+        $st->execute([$ip]);
+        if ($row = $st->fetch(PDO::FETCH_ASSOC)) return $mem[$ip] = $row;
+    } catch (PDOException $e) { /* segue */ }
+    if (!$permitirConsulta) return null;
+    $geo = null;
+    try {
+        $ctx = stream_context_create(['http'=>['timeout'=>3,'ignore_errors'=>true],
+                                      'https'=>['timeout'=>3,'ignore_errors'=>true]]);
+        $url = 'http://ip-api.com/json/' . rawurlencode($ip) . '?fields=status,country,regionName,city,isp&lang=pt-BR';
+        $json = @file_get_contents($url, false, $ctx);
+        if ($json !== false) {
+            $d = json_decode($json, true);
+            if (is_array($d) && ($d['status'] ?? '') === 'success') {
+                $geo = ['cidade'=>$d['city']??null,'regiao'=>$d['regionName']??null,
+                        'pais'=>$d['country']??null,'isp'=>$d['isp']??null];
+            }
+        }
+    } catch (\Throwable $e) { /* best-effort */ }
+    if ($geo === null) return null; // não cacheia falha (tenta de novo depois)
+    try {
+        getDB()->prepare(
+            "INSERT INTO ip_geo (ip,cidade,regiao,pais,isp) VALUES (?,?,?,?,?)
+             ON DUPLICATE KEY UPDATE cidade=VALUES(cidade),regiao=VALUES(regiao),
+                pais=VALUES(pais),isp=VALUES(isp),atualizado_em=NOW()"
+        )->execute([$ip,$geo['cidade'],$geo['regiao'],$geo['pais'],$geo['isp']]);
+    } catch (PDOException $e) { /* best-effort */ }
+    return $mem[$ip] = $geo;
+}
+
+// Rótulo curto de localização a partir do array de geo.
+function geoLabel(?array $g): string {
+    if (!$g) return '';
+    return implode(', ', array_filter([$g['cidade']??null, $g['regiao']??null, $g['pais']??null]));
+}
+
 // Registra uma atividade do militar logado. Nunca lança exceção (best-effort).
 function logAtividade(string $evento, ?string $detalhe = null, ?string $pagina = null): void {
     if (!isLogado()) return;
@@ -105,7 +183,7 @@ function logAtividade(string $evento, ?string $detalhe = null, ?string $pagina =
             mb_substr($evento, 0, 40),
             $detalhe !== null ? mb_substr($detalhe, 0, 255) : null,
             $pagina  !== null ? mb_substr($pagina, 0, 40)   : null,
-            $_SERVER['REMOTE_ADDR'] ?? null,
+            clientIp(),
         ]);
     } catch (PDOException $e) { /* best-effort, não interrompe a página */ }
 }
@@ -840,14 +918,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $limite = min(500, max(10, (int)($_POST['limite'] ?? 60)));
         [$where, $params] = filtroAtividades($militarId, $_POST['data_ini'] ?? '', $_POST['data_fim'] ?? '');
         $stmt = $db->prepare(
-            "SELECT a.id, a.militar_id, a.evento, a.detalhe, a.pagina, a.criado_em,
+            "SELECT a.id, a.militar_id, a.evento, a.detalhe, a.pagina, a.criado_em, a.ip,
                     m.nome_guerra, m.matricula
                FROM atividades a JOIN militares m ON m.id = a.militar_id
               $where
            ORDER BY a.id DESC LIMIT $limite"
         );
         $stmt->execute($params);
-        echo json_encode(['ok' => true, 'atividades' => $stmt->fetchAll()]);
+        $ats = $stmt->fetchAll();
+        // Anexa geolocalização: usa cache do banco; consulta externa limitada por request
+        // (para não travar o refresh de 5s). IPs novos são resolvidos aos poucos e cacheados.
+        $orcamento = 8;
+        foreach ($ats as &$a) {
+            $a['local'] = ''; $a['isp'] = '';
+            $ip = $a['ip'] ?? '';
+            if ($ip === '') continue;
+            $g = resolverGeoIp($ip, false);                 // só cache/privado
+            if ($g === null && $orcamento > 0) { $g = resolverGeoIp($ip, true); $orcamento--; }
+            if ($g) { $a['local'] = geoLabel($g); $a['isp'] = $g['isp'] ?? ''; }
+        }
+        unset($a);
+        echo json_encode(['ok' => true, 'atividades' => $ats]);
         exit;
     }
 
@@ -1095,9 +1186,12 @@ if (($_GET['export'] ?? '') === 'atividades') {
     if (!isLogado() || !isAdmin()) { header('Location: ?p=inicio'); exit; }
     $militarId = isset($_GET['militar_id']) ? (int)$_GET['militar_id'] : 0;
     [$where, $params] = filtroAtividades($militarId, $_GET['data_ini'] ?? '', $_GET['data_fim'] ?? '');
+    ensureIpGeoTable();
     $stmt = getDB()->prepare(
-        "SELECT a.criado_em, m.nome_guerra, m.matricula, a.evento, a.detalhe, a.pagina, a.ip
+        "SELECT a.criado_em, m.nome_guerra, m.matricula, a.evento, a.detalhe, a.pagina, a.ip,
+                g.cidade, g.regiao, g.pais, g.isp
            FROM atividades a JOIN militares m ON m.id = a.militar_id
+           LEFT JOIN ip_geo g ON g.ip = a.ip
           $where
        ORDER BY a.id DESC LIMIT 20000"
     );
@@ -1106,9 +1200,9 @@ if (($_GET['export'] ?? '') === 'atividades') {
     header('Content-Disposition: attachment; filename="atividades_' . date('Y-m-d_His') . '.csv"');
     $out = fopen('php://output', 'w');
     fwrite($out, "\xEF\xBB\xBF"); // BOM p/ acentos no Excel
-    fputcsv($out, ['Data/Hora', 'Nome Guerra', 'Matrícula', 'Evento', 'Detalhe', 'Página', 'IP'], ';');
+    fputcsv($out, ['Data/Hora', 'Nome Guerra', 'Matrícula', 'Evento', 'Detalhe', 'Página', 'IP', 'Cidade', 'Região', 'País', 'Provedor (ISP)'], ';');
     while ($r = $stmt->fetch()) {
-        fputcsv($out, [$r['criado_em'], $r['nome_guerra'], $r['matricula'], $r['evento'], $r['detalhe'], $r['pagina'], $r['ip']], ';');
+        fputcsv($out, [$r['criado_em'], $r['nome_guerra'], $r['matricula'], $r['evento'], $r['detalhe'], $r['pagina'], $r['ip'], $r['cidade'], $r['regiao'], $r['pais'], $r['isp']], ';');
     }
     fclose($out);
     exit;
@@ -2984,12 +3078,15 @@ async function carregarAtividades() {
     if (status) status.textContent = 'Atualizado agora · ' + ats.length + ' evento(s)';
     if (ats.length === 0) { list.innerHTML = '<p style="color:#888;text-align:center;padding:20px">Nenhuma atividade registrada.</p>'; return; }
     const todos = militarId === '0' || militarId === 0;
-    let html = '<div style="overflow-x:auto"><table class="admin-tabela"><thead><tr><th>Quando</th>'+(todos?'<th>Militar</th>':'')+'<th>Evento</th><th>Detalhe</th></tr></thead><tbody>';
+    let html = '<div style="overflow-x:auto"><table class="admin-tabela"><thead><tr><th>Quando</th>'+(todos?'<th>Militar</th>':'')+'<th>Evento</th><th>Detalhe</th><th>Origem (IP / Local)</th></tr></thead><tbody>';
     ats.forEach(a => {
         html += '<tr><td style="white-space:nowrap;font-size:.8rem;color:#555">'+escHtml(a.criado_em||'')+'</td>';
         if (todos) html += '<td style="font-weight:600;font-size:.82rem">'+escHtml(a.nome_guerra||'')+'</td>';
         html += '<td style="white-space:nowrap;font-size:.82rem">'+iconeEvento(a.evento)+' '+escHtml(rotuloEvento(a.evento))+'</td>';
-        html += '<td style="font-size:.82rem;color:#333">'+(a.detalhe?escHtml(a.detalhe):'<em style="color:#aaa">—</em>')+'</td></tr>';
+        html += '<td style="font-size:.82rem;color:#333">'+(a.detalhe?escHtml(a.detalhe):'<em style="color:#aaa">—</em>')+'</td>';
+        let origem = a.ip ? '<span style="font-family:monospace;font-size:.78rem">'+escHtml(a.ip)+'</span>' : '<em style="color:#aaa">—</em>';
+        if (a.local) origem += '<br><span style="color:#777;font-size:.72rem">📍 '+escHtml(a.local)+(a.isp?' · '+escHtml(a.isp):'')+'</span>';
+        html += '<td style="white-space:nowrap">'+origem+'</td></tr>';
     });
     html += '</tbody></table></div>';
     list.innerHTML = html;
