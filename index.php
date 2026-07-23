@@ -529,6 +529,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($cats)) { echo json_encode(['erro' => 'Categorias inválidas.']); exit; }
 
         $militarId = militar()['id'];
+        // Invariante: apenas 1 sessão aberta por militar — encerra quaisquer abertas antes de criar a nova.
+        $db->prepare("UPDATE sessoes SET finalizado_em=NOW() WHERE militar_id=? AND finalizado_em IS NULL")->execute([$militarId]);
         $numTent   = proximaTentativa($militarId, $tipo);
 
         // Buscar nomes das categorias selecionadas
@@ -1186,7 +1188,7 @@ if ($page === 'historico' && isLogado() && isAprovado()) {
 
         $sql = "SELECT s.id, s.tipo, s.numero_tentativa, s.total_acertos, s.total_erros,
                     s.total_respondidas, s.finalizado_em, s.created_at,
-                    s.categorias_nomes,
+                    s.categorias_nomes, s.militar_id,
                     COALESCE(m.nome_guerra, s.nome_usuario) AS nome_guerra, m.matricula
              FROM sessoes s
              LEFT JOIN militares m ON m.id = s.militar_id";
@@ -1914,7 +1916,7 @@ window.addEventListener('unhandledrejection', function(e) {
             <td style="font-size:.78rem;max-width:200px;color:#555"><?= e($h['categorias_nomes'] ?? '—') ?></td>
             <td style="text-align:center">Tentativa #<?= (int)$h['numero_tentativa'] ?></td>
             <td style="text-align:center"><?= $total ?></td>
-            <td style="text-align:center"><span style="<?= $sessStyle ?>"><?= $sessStatus ?></span></td>
+            <td style="text-align:center"><?php if (empty($h['finalizado_em']) && (!isAdmin() || (int)($h['militar_id'] ?? 0) === (int)militar()['id'])): ?><a href="?p=inicio&modo=<?= e($h['tipo']) ?>&retomar=<?= (int)$h['id'] ?>" style="<?= $sessStyle ?>;text-decoration:none;cursor:pointer" title="Clique para retomar esta tentativa (as outras abertas serão encerradas)">▶️ <?= $sessStatus ?></a><?php else: ?><span style="<?= $sessStyle ?>"><?= $sessStatus ?></span><?php endif; ?></td>
             <td style="text-align:center;color:var(--verde-md);font-weight:700"><?= $ac ?></td>
             <td style="text-align:center;color:var(--vermelho);font-weight:700"><?php $er=(int)$h['total_erros']; if($er>0): ?><a href="?p=revisar&s=<?= (int)$h['id'] ?>" title="Treinar só as questões que você errou (não altera nada)" style="color:var(--vermelho);text-decoration:none;border-bottom:1px dashed var(--vermelho)">🔁 <?= $er ?></a><?php else: ?><?= $er ?><?php endif; ?></td>
             <td style="text-align:center"><span class="pct-badge <?= $pctCls ?>"><?= $pct ?>%</span></td>
@@ -3398,11 +3400,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const ini = document.getElementById('tela-inicio');
         if (ret) { ret.style.display = ''; }
         if (ini) { ini.style.display = 'none'; }
-        // Pre-selecionar a primeira sessão
+        // Retomada direta vinda do Histórico (?retomar=<id>): pergunta e, se sim, encerra as outras e continua
+        const retSid = parseInt(new URLSearchParams(location.search).get('retomar') || 0);
+        const target = retSid ? document.querySelector('.open-session-item[data-id="'+retSid+'"]') : null;
+        // Pre-selecionar a primeira sessão (comportamento padrão do seletor)
         const first = document.querySelector('.open-session-item');
         if (first) selectOpenSession(first, parseInt(first.dataset.id));
+        if (target) confirmarRetomadaDoHistorico(retSid);
     }
 });
+// Retomada vinda do Histórico: confirma, marca as OUTRAS para encerrar (só 1 aberta) e continua.
+async function confirmarRetomadaDoHistorico(sid){
+    if(!await modalConfirm('Deseja retomar esta tentativa?<br><small style="color:#666">Qualquer outra tentativa em aberto será encerrada — o sistema mantém apenas 1 aberta por vez.</small>','▶️')){
+        return; // fica no seletor normal de sessões
+    }
+    document.querySelectorAll('.open-session-item').forEach(el => {
+        const isTarget = parseInt(el.dataset.id) === sid;
+        const radio = el.querySelector('input[name=pick_session]');
+        const rm = el.querySelector('.remove-session');
+        if (radio) radio.checked = isTarget;
+        if (rm) rm.checked = !isTarget;   // encerra as outras abertas
+    });
+    confirmarRetomada();
+}
 
 // ── INICIAR ───────────────────────────────────────────────────
 async function iniciarQuiz() {
