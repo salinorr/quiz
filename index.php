@@ -728,6 +728,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // ─── Revisar erros: treino das questões erradas de uma tentativa (NÃO grava nada) ───
+    if ($acao === 'rev_iniciar') {
+        if (!isLogado() || !isAprovado()) { echo json_encode(['erro' => 'Não autorizado.']); exit; }
+        $sid = (int)($_POST['sessao_id'] ?? 0);
+        $db  = getDB();
+        $own = $db->prepare("SELECT militar_id FROM sessoes WHERE id=? LIMIT 1");
+        $own->execute([$sid]);
+        $mid = $own->fetchColumn();
+        if ($mid === false) { echo json_encode(['erro' => 'Tentativa não encontrada.']); exit; }
+        if ((int)$mid !== (int)militar()['id'] && !isAdmin()) { echo json_encode(['erro' => 'Esta tentativa é de outro militar.']); exit; }
+        $st = $db->prepare("SELECT DISTINCT r.questao_id FROM respostas_usuario r JOIN questoes q ON q.id=r.questao_id WHERE r.sessao_id=? AND r.acertou=0 AND q.ativa=1");
+        $st->execute([$sid]);
+        $ids = array_map('intval', array_column($st->fetchAll(), 'questao_id'));
+        shuffle($ids);
+        $_SESSION['rev'] = ['ids' => $ids, 'idx' => 0, 'total' => count($ids), 'acertos' => 0, 'src' => $sid, 'atual' => null];
+        echo json_encode(['ok' => true, 'total' => count($ids)]);
+        exit;
+    }
+    if ($acao === 'rev_proxima') {
+        if (empty($_SESSION['rev'])) { echo json_encode(['erro' => 'Revisão não iniciada.']); exit; }
+        $rev = $_SESSION['rev'];
+        if ($rev['idx'] >= $rev['total']) { echo json_encode(['fim' => true, 'acertos' => $rev['acertos'], 'total' => $rev['total']]); exit; }
+        $qid = $rev['ids'][$rev['idx']];
+        $db  = getDB();
+        $stmt = $db->prepare("SELECT q.*, c.nome AS categoria_nome FROM questoes q JOIN categorias c ON c.id=q.categoria_id WHERE q.id=? LIMIT 1");
+        $stmt->execute([$qid]);
+        $q = $stmt->fetch();
+        if (!$q) { $_SESSION['rev']['idx']++; echo json_encode(['skip' => true]); exit; }
+        $_SESSION['rev']['atual'] = ['id' => $q['id'], 'correta' => $q['resposta_correta']];
+        unset($q['resposta_correta'], $q['explicacao'], $q['referencia_legal']);
+        if (($q['opcao_e'] ?? null) === null) unset($q['opcao_e']);
+        echo json_encode(['questao' => $q, 'pos' => $rev['idx'] + 1, 'total' => $rev['total'], 'acertos' => $rev['acertos']]);
+        exit;
+    }
+    if ($acao === 'rev_responder') {
+        if (empty($_SESSION['rev']) || empty($_SESSION['rev']['atual'])) { echo json_encode(['erro' => 'Sessão de revisão inválida.']); exit; }
+        $resp = strtoupper(trim($_POST['resposta'] ?? ''));
+        if (!in_array($resp, ['A','B','C','D','E'], true)) { echo json_encode(['erro' => 'Resposta inválida.']); exit; }
+        $qid = $_SESSION['rev']['atual']['id'];
+        $db  = getDB();
+        $stmt = $db->prepare("SELECT enunciado, opcao_a, opcao_b, opcao_c, opcao_d, opcao_e, resposta_correta, explicacao, referencia_legal FROM questoes WHERE id=?");
+        $stmt->execute([$qid]);
+        $q = $stmt->fetch();
+        $livre   = ($q['resposta_correta'] === '*');
+        $acertou = ($livre || $resp === $q['resposta_correta']) ? 1 : 0;
+        if ($acertou) $_SESSION['rev']['acertos']++;
+        $_SESSION['rev']['idx']++;
+        $_SESSION['rev']['atual'] = null;   // NÃO grava em respostas_usuario nem em sessoes
+        $opcCorreta = $livre ? 'Todas as respostas são válidas.' : ($q['opcao_' . strtolower($q['resposta_correta'])] ?? '');
+        echo json_encode([
+            'acertou' => (bool)$acertou,
+            'resposta_correta' => $q['resposta_correta'],
+            'resposta_usuario' => $resp,
+            'opcao_correta_texto' => $opcCorreta,
+            'opcao_usuario_texto' => $q['opcao_' . strtolower($resp)] ?? '',
+            'explicacao' => $q['explicacao'],
+            'referencia_legal' => $q['referencia_legal'],
+        ]);
+        exit;
+    }
+
     // ─── Admin: aprovar / rejeitar ───────────────────────
     if (($acao === 'aprovar' || $acao === 'rejeitar') && isAdmin()) {
         $id    = (int)($_POST['id'] ?? 0);
@@ -1052,7 +1113,7 @@ if (($_GET['export'] ?? '') === 'atividades') {
 }
 
 // Páginas que exigem conta aprovada
-$pagesRequireApproval = ['cursos','quiz','prova','provas','leis','slides','audios','historico','admin'];
+$pagesRequireApproval = ['cursos','quiz','prova','provas','leis','slides','audios','historico','admin','revisar'];
 if (in_array($page, $pagesRequireApproval, true)) {
     if (!isLogado()) {
         header('Location: ?p=inicio'); exit;
@@ -1855,7 +1916,7 @@ window.addEventListener('unhandledrejection', function(e) {
             <td style="text-align:center"><?= $total ?></td>
             <td style="text-align:center"><span style="<?= $sessStyle ?>"><?= $sessStatus ?></span></td>
             <td style="text-align:center;color:var(--verde-md);font-weight:700"><?= $ac ?></td>
-            <td style="text-align:center;color:var(--vermelho);font-weight:700"><?= (int)$h['total_erros'] ?></td>
+            <td style="text-align:center;color:var(--vermelho);font-weight:700"><?php $er=(int)$h['total_erros']; if($er>0): ?><a href="?p=revisar&s=<?= (int)$h['id'] ?>" title="Treinar só as questões que você errou (não altera nada)" style="color:var(--vermelho);text-decoration:none;border-bottom:1px dashed var(--vermelho)">🔁 <?= $er ?></a><?php else: ?><?= $er ?><?php endif; ?></td>
             <td style="text-align:center"><span class="pct-badge <?= $pctCls ?>"><?= $pct ?>%</span></td>
             <td style="white-space:nowrap"><?= $data ?></td>
         </tr>
@@ -1865,6 +1926,113 @@ window.addEventListener('unhandledrejection', function(e) {
     </div>
     <?php endif; ?>
 </div>
+
+<?php elseif ($page === 'revisar' && isAprovado()): // ── REVISAR ERROS (treino, não grava nada) ──
+$revSid = (int)($_GET['s'] ?? 0);
+?>
+<div class="card" id="rev-card">
+    <div style="text-align:center;margin-bottom:16px">
+        <span style="font-size:44px;display:block">🔁</span>
+        <h2 style="color:var(--verde);font-size:1.35rem">Revisar questões erradas</h2>
+        <p style="color:#666;margin-top:4px;font-size:.9rem">Treino das questões que você errou nesta tentativa. <strong>Nada é gravado</strong> — repita quantas vezes quiser até memorizar.</p>
+    </div>
+    <div id="rev-loading" style="text-align:center;padding:20px;color:#888"><div class="spinner"></div>Carregando questões erradas…</div>
+
+    <div id="rev-quiz" style="display:none">
+        <div class="q-meta" style="align-items:center">
+            <span id="rev-cat" class="q-categoria">Categoria</span>
+            <span id="rev-pos" class="q-num">#1</span>
+            <span id="rev-placar" style="margin-left:auto;font-size:.8rem;color:#1a5c2e;font-weight:700"></span>
+        </div>
+        <div id="rev-enunciado" style="font-size:1.05rem;line-height:1.7;margin:12px 0 18px;white-space:pre-line;font-weight:500"></div>
+        <div class="opcoes" id="rev-opcoes"></div>
+        <div id="rev-feedback" style="display:none;margin-top:16px">
+            <div id="rev-fb-head" style="border-radius:10px;padding:12px 16px;font-weight:700"></div>
+            <div style="margin-top:10px;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:8px 12px;font-size:.9rem"><strong>✅ Resposta correta:</strong> <span id="rev-correta"></span></div>
+            <div style="margin-top:8px;background:#f5f9f6;border-radius:8px;padding:10px 12px;font-size:.9rem"><strong>💡 Explicação:</strong> <span id="rev-exp"></span></div>
+            <div id="rev-ref" style="margin-top:6px;font-size:.82rem;color:#00695c"></div>
+            <button class="btn btn-primary" style="margin-top:14px" onclick="revProxima()">➡️ Próxima</button>
+        </div>
+    </div>
+
+    <div id="rev-fim" style="display:none;text-align:center;padding:20px">
+        <span style="font-size:52px;display:block">🎯</span>
+        <h3 style="color:var(--verde)">Revisão concluída!</h3>
+        <p id="rev-fim-placar" style="font-size:1.1rem;margin:8px 0"></p>
+        <p style="color:#666;font-size:.88rem">Lembrete: isto foi só treino — sua tentativa original permanece intacta.</p>
+        <button class="btn btn-primary" onclick="revReiniciar()">🔁 Repetir estas questões</button>
+        <a class="btn btn-outline" href="?p=historico" style="text-decoration:none;margin-left:8px">📋 Voltar ao Histórico</a>
+    </div>
+
+    <div id="rev-vazio" style="display:none;text-align:center;padding:30px;color:#888">
+        <p>🎉 Você não errou nenhuma questão nesta tentativa — não há o que revisar!</p>
+        <a class="btn btn-outline" href="?p=historico" style="text-decoration:none">📋 Voltar ao Histórico</a>
+    </div>
+</div>
+<script>
+const REV_SID = <?= $revSid ?>;
+let revRespondendo = false;
+async function revPost(d){ const fd=new FormData(); for(const k in d){ fd.append(k, d[k]); } const r=await fetch(window.location.pathname,{method:'POST',body:fd}); return r.json(); }
+async function revIniciar(){
+    const r = await revPost({acao:'rev_iniciar', sessao_id:REV_SID});
+    document.getElementById('rev-loading').style.display='none';
+    if(r.erro){ document.getElementById('rev-card').insertAdjacentHTML('beforeend','<p style="color:#c62828;text-align:center">'+r.erro+'</p>'); return; }
+    if(!r.total){ document.getElementById('rev-vazio').style.display='block'; return; }
+    document.getElementById('rev-quiz').style.display='block';
+    revProxima();
+}
+async function revProxima(){
+    revRespondendo=false;
+    document.getElementById('rev-feedback').style.display='none';
+    const r = await revPost({acao:'rev_proxima'});
+    if(r.skip){ return revProxima(); }
+    if(r.fim){
+        document.getElementById('rev-quiz').style.display='none';
+        document.getElementById('rev-fim').style.display='block';
+        const pct = r.total? Math.round(r.acertos/r.total*100):0;
+        document.getElementById('rev-fim-placar').innerHTML = '<strong>'+r.acertos+'/'+r.total+'</strong> ('+pct+'%) nesta rodada de treino.';
+        return;
+    }
+    const q=r.questao;
+    document.getElementById('rev-cat').textContent = q.categoria_nome||'';
+    document.getElementById('rev-pos').textContent = 'Questão '+r.pos+' de '+r.total;
+    document.getElementById('rev-placar').textContent = '✅ '+r.acertos+' acertos';
+    document.getElementById('rev-enunciado').textContent = q.enunciado||'';
+    const cont=document.getElementById('rev-opcoes'); cont.innerHTML='';
+    ['a','b','c','d','e'].filter(l=>q['opcao_'+l]).forEach(l=>{
+        const div=document.createElement('div'); div.className='opcao'; div.dataset.letra=l.toUpperCase();
+        div.onclick=()=>revResponder(l.toUpperCase(), div);
+        div.innerHTML='<div class="opcao-letra">'+l.toUpperCase()+'</div><div class="opcao-texto">'+escHtml(q['opcao_'+l])+'</div>';
+        cont.appendChild(div);
+    });
+}
+async function revResponder(letra, el){
+    if(revRespondendo) return; revRespondendo=true;
+    el.style.background='#e3f2fd'; el.style.borderColor='#1565c0';
+    const r = await revPost({acao:'rev_responder', resposta:letra});
+    if(r.erro){ await modalAlert(r.erro,'❌'); revRespondendo=false; return; }
+    document.querySelectorAll('#rev-opcoes .opcao').forEach(o=>{
+        const L=o.dataset.letra;
+        if(L===r.resposta_correta){ o.style.background='#e8f5e9'; o.style.borderColor='#43a047'; }
+        else if(L===r.resposta_usuario){ o.style.background='#ffebee'; o.style.borderColor='#e53935'; }
+        o.style.pointerEvents='none';
+    });
+    const head=document.getElementById('rev-fb-head');
+    if(r.acertou){ head.style.background='#e8f5e9'; head.style.color='#1a5c2e'; head.textContent='✅ Acertou!'; }
+    else { head.style.background='#ffebee'; head.style.color='#c62828'; head.textContent='❌ Ainda não. Veja a explicação e tente memorizar.'; }
+    document.getElementById('rev-correta').textContent = (r.resposta_correta==='*') ? (r.opcao_correta_texto||'Resposta livre') : (r.resposta_correta+') '+(r.opcao_correta_texto||''));
+    document.getElementById('rev-exp').textContent = r.explicacao||'';
+    const ref=document.getElementById('rev-ref');
+    ref.innerHTML = r.referencia_legal ? ('<strong>📌 Base legal:</strong> '+escHtml(r.referencia_legal)) : '';
+    document.getElementById('rev-feedback').style.display='block';
+}
+async function revReiniciar(){
+    document.getElementById('rev-fim').style.display='none';
+    document.getElementById('rev-loading').style.display='block';
+    await revIniciar();
+}
+window.addEventListener('load', revIniciar);
+</script>
 
 <?php elseif ($page === 'leis' && isAprovado()): // ── LEIS ──
 $leisDir  = __DIR__ . '/legislacao/';
