@@ -942,6 +942,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // ── Admin: resumo de origens por militar (IPs/cidades distintos) ──
+    // Destaca militares que acessaram de várias cidades/IPs (possível compartilhamento de conta).
+    if ($acao === 'listar_origens' && isAdmin()) {
+        $db = getDB();
+        $rows = $db->query(
+            "SELECT a.militar_id, m.nome_guerra, m.matricula, a.ip,
+                    COUNT(*) AS n, MAX(a.criado_em) AS ult
+               FROM atividades a JOIN militares m ON m.id = a.militar_id
+              WHERE a.ip IS NOT NULL AND a.ip <> ''
+           GROUP BY a.militar_id, a.ip
+           ORDER BY a.militar_id, n DESC"
+        )->fetchAll();
+        $orcamento = 8;
+        $porMilitar = [];
+        foreach ($rows as $r) {
+            $mid = (int)$r['militar_id'];
+            $g = resolverGeoIp($r['ip'], false);
+            if ($g === null && $orcamento > 0) { $g = resolverGeoIp($r['ip'], true); $orcamento--; }
+            $local = geoLabel($g);
+            $cidade = $g['cidade'] ?? '';
+            if (!isset($porMilitar[$mid])) {
+                $porMilitar[$mid] = ['militar_id'=>$mid, 'nome_guerra'=>$r['nome_guerra'],
+                    'matricula'=>$r['matricula'], 'ips'=>[], 'cidades'=>[]];
+            }
+            $porMilitar[$mid]['ips'][] = ['ip'=>$r['ip'], 'local'=>$local,
+                'isp'=>$g['isp'] ?? '', 'n'=>(int)$r['n'], 'ult'=>$r['ult']];
+            if ($cidade !== '' && $cidade !== null) $porMilitar[$mid]['cidades'][$cidade] = true;
+        }
+        $lista = [];
+        foreach ($porMilitar as $pm) {
+            $pm['qtd_ips'] = count($pm['ips']);
+            $pm['cidades'] = array_keys($pm['cidades']);
+            $pm['qtd_cidades'] = count($pm['cidades']);
+            $pm['alerta'] = ($pm['qtd_cidades'] >= 2); // acessou de 2+ cidades distintas
+            $lista[] = $pm;
+        }
+        // Alertados primeiro, depois por nº de IPs desc.
+        usort($lista, function($a,$b){
+            if ($a['alerta'] !== $b['alerta']) return $a['alerta'] ? -1 : 1;
+            return $b['qtd_ips'] <=> $a['qtd_ips'];
+        });
+        echo json_encode(['ok' => true, 'origens' => $lista]);
+        exit;
+    }
+
     // ── Admin: listar militares online (ativos nos últimos 10 min) ──
     if ($acao === 'listar_online' && isAdmin()) {
         $db = getDB();
@@ -1861,8 +1906,10 @@ window.addEventListener('unhandledrejection', function(e) {
             </label>
             <button class="btn-aprovar" onclick="carregarAtividades()" style="font-size:.75rem;padding:5px 10px">🔄 Atualizar</button>
             <button class="btn-aprovar" onclick="exportarAtividades()" style="font-size:.75rem;padding:5px 10px;background:#eef7f0;color:#1a5c2e;border:1px solid #c8e6c9">⬇️ Exportar CSV</button>
+            <button class="btn-aprovar" onclick="toggleOrigens()" style="font-size:.75rem;padding:5px 10px;background:#fff3e0;color:#8a4b00;border:1px solid #ffcc80">🌍 Origens por militar</button>
             <span id="ativ-status" style="margin-left:auto;font-size:.72rem;color:#aaa"></span>
         </div>
+        <div id="ativ-origens" style="display:none;margin-bottom:14px"></div>
         <div id="ativ-list"><p style="color:#888;text-align:center;padding:20px">Selecione um militar ou veja todos.</p></div>
     </div>
 
@@ -3101,6 +3148,42 @@ function exportarAtividades() {
         data_fim: (document.getElementById('ativ-fim')||{}).value || ''
     });
     window.location.href = window.location.pathname + '?' + params.toString();
+}
+// ── Resumo de origens por militar (IPs/cidades distintos) ────
+async function toggleOrigens() {
+    const div = document.getElementById('ativ-origens');
+    if (!div) return;
+    if (div.style.display !== 'none') { div.style.display = 'none'; return; }
+    div.style.display = '';
+    div.innerHTML = '<p style="color:#888;text-align:center;padding:14px">Analisando origens…</p>';
+    const resp = await postRaw({ acao:'listar_origens' });
+    if (!resp.ok) { div.innerHTML = '<p style="color:#c62828;text-align:center;padding:14px">Erro ao carregar origens.</p>'; return; }
+    const lista = resp.origens || [];
+    if (lista.length === 0) { div.innerHTML = '<p style="color:#888;text-align:center;padding:14px">Sem dados de origem.</p>'; return; }
+    const alertados = lista.filter(o => o.alerta).length;
+    let html = '<div style="border:1px solid #eee;border-radius:10px;padding:12px;background:#fafafa">';
+    html += '<div style="font-weight:700;color:#444;margin-bottom:8px">🌍 Origens por militar '
+          + '<span style="font-weight:400;color:#888;font-size:.8rem">— '+lista.length+' militar(es), '
+          + (alertados? '<span style="color:#c62828">⚠️ '+alertados+' com acesso de várias cidades</span>' : 'nenhum alerta')
+          + '</span></div>';
+    lista.forEach(o => {
+        const bg = o.alerta ? '#fff4f4' : '#fff';
+        const bd = o.alerta ? '#ffcdd2' : '#eee';
+        html += '<div style="border:1px solid '+bd+';background:'+bg+';border-radius:8px;padding:8px 10px;margin-bottom:6px">';
+        html += '<div style="font-weight:600;font-size:.85rem">'+(o.alerta?'⚠️ ':'')+escHtml(o.nome_guerra||'')+' <span style="color:#999;font-weight:400">('+escHtml(o.matricula||'')+')</span>'
+              + ' <span style="color:#888;font-weight:400;font-size:.78rem">— '+o.qtd_ips+' IP(s), '+o.qtd_cidades+' cidade(s)</span></div>';
+        html += '<div style="margin-top:4px">';
+        o.ips.forEach(x => {
+            html += '<div style="font-size:.76rem;color:#555;padding:2px 0">'
+                 + '<span style="font-family:monospace">'+escHtml(x.ip)+'</span>'
+                 + (x.local? ' — 📍 '+escHtml(x.local):'')
+                 + (x.isp? ' · '+escHtml(x.isp):'')
+                 + ' <span style="color:#aaa">('+x.n+' ev.'+(x.ult?', últ. '+escHtml(x.ult):'')+')</span></div>';
+        });
+        html += '</div></div>';
+    });
+    html += '</div>';
+    div.innerHTML = html;
 }
 // Auto-refresh a cada 5s enquanto a aba Atividades estiver ativa, o checkbox marcado
 // e sem filtro de período aplicado (para não sobrescrever consultas históricas).
